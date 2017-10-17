@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,18 +10,4 @@ public class LoadSceneOnClick : MonoBehaviour
     {
         SceneManager.LoadScene(sceneIndex);
     }
-=======
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class LoadSceneOnClick : MonoBehaviour
-{
-
-    public void LoadByIndex(int sceneIndex)
-    {
-        SceneManager.LoadScene(sceneIndex);
-    }
->>>>>>> b308f26e25419288c1f908ae159334fe73a95b34
 }
