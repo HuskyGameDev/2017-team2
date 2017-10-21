@@ -239,7 +239,12 @@ MonoBehaviour:
   exit: {fileID: 0}
   floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
   smallObjects:
-  - {fileID: 1585044887201500, guid: 91999ade39364054dac8a3191eda543d, type: 2}
+  - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
+  - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
+  - {fileID: 1091584642491018, guid: ce82bac22ebf1b744a06149f1aeef0ee, type: 2}
+  - {fileID: 1918449228515830, guid: e26c763fcece61c4db3697bce362bee0, type: 2}
+  - {fileID: 1417633470477086, guid: dd70455443956df49befea27bf8b4e25, type: 2}
+  - {fileID: 1460672538541834, guid: 6585b5c4c08738841a70b27cc96afd58, type: 2}
   largeObjects: []
   longObjects: []
 --- !u!114 &2074431841
