@@ -9,13 +9,13 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	//Stores a reference to the Rigidbody2D component required to use 2D Physics.
-	public Rigidbody2D rb2d;
+	private Rigidbody2D rb2d;
 
 	//Stores the position of the mouse
 	private Vector3 mouse_pos;
 
 	//Transform object for player
-	public Transform Player;
+	private Transform Player;
 
 	//Stores the position of the object
 	private Vector3 object_pos;
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
+
+		Player = GetComponent<Transform> ();
 	}
 
 	//Called every frame
