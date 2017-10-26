@@ -15,6 +15,7 @@ public class BuildFloor : MonoBehaviour {
     public int maxRooms = 6;
     public int startPosX = 0;
     public int startPosY = 0;
+    
     //represents a room to be created
     public class Room {
         public bool isExit;
