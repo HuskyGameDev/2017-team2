@@ -226,13 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f536c4e7b0687f54ab50fc385e6e6610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room:
-    isExit: 0
-    hasCharger: 0
-    doorNorth: 0
-    doorSouth: 0
-    doorWest: 0
-    doorEast: 0
   columns: 10
   rows: 10
   smallCount:
@@ -298,9 +291,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorNumber: 1
   floorColor: 0
-  lengthOfFloor: 5
-  heightOfFloor: 4
+  lengthOfFloor: 7
+  heightOfFloor: 5
   minRooms: 3
   maxRooms: 6
-  startPosX: 0
-  startPosY: 0
+  startPosX: 4
+  startPosY: 3

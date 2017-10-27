@@ -10,12 +10,12 @@ public class BuildFloor : MonoBehaviour {
     //Purple = eh
     public enum FloorColor { BLUE, RED, PURPLE }
     public FloorColor floorColor = FloorColor.BLUE;
-    public int lengthOfFloor = 5;
-    public int heightOfFloor = 4;
+    public int lengthOfFloor = 7;
+    public int heightOfFloor = 5;
     public int minRooms = 3;
     public int maxRooms = 6;
-    public int startPosX = 0;
-    public int startPosY = 0;
+    public int startPosX = 4;
+    public int startPosY = 3;
     //represents a room to be created
     [Serializable]
     public class Room {
