@@ -16,7 +16,7 @@ public class BoardManager : MonoBehaviour {
             maximum = max;
         }
     }
-
+    public BuildFloor.Room room;
     public int columns = 10;
     public int rows = 10;
     public Count smallCount = new Count(10, 20);
@@ -166,8 +166,8 @@ public class BoardManager : MonoBehaviour {
 
     }
 
-    public void SetupScene(int level) {
-
+    public void SetupScene(BuildFloor.Room room) {
+        this.room = room;
         BoardSetup();
         InitializeList();
 

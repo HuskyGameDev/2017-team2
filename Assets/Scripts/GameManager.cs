@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public BuildFloor floorScript;
     public BoardManager boardScript;
 
-    private int level = 3;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BoardManager>();
         InitGame();
 	}
-
+    /**
+     * Builds the next floor of the game and displays the starting room
+     */
     void InitGame() {
-
-        boardScript.SetupScene(level);
-
+        for (int i = 0; i < floorScript.lengthOfFloor; i++)
+            for (int j = 0; j < floorScript.heightOfFloor; j++)
+                if (floorScript.floor[i, j] != null)
+                    boardScript.SetupScene(floorScript.floor[i, j]);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -1,22 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System;
 
 public class BuildFloor : MonoBehaviour {
-   
+
+    public Room[,] floor;
     public int floorNumber = 1;
     //Blue = healy
     //Red = HARD
     //Purple = eh
     public enum FloorColor { BLUE, RED, PURPLE }
-    public FloorColor floorColor  = FloorColor.BLUE;
+    public FloorColor floorColor = FloorColor.BLUE;
     public int lengthOfFloor = 5;
     public int heightOfFloor = 4;
     public int minRooms = 3;
     public int maxRooms = 6;
     public int startPosX = 0;
     public int startPosY = 0;
-    
     //represents a room to be created
+    [Serializable]
     public class Room {
         public bool isExit;
         public bool hasCharger;
@@ -36,7 +38,7 @@ public class BuildFloor : MonoBehaviour {
             this.hasCharger = hasCharger;
         }
     }
-    
+
     public class Position {
         public int x;
         public int y;
@@ -46,23 +48,13 @@ public class BuildFloor : MonoBehaviour {
             y = posY;
         }
     }
-
-    public void buildRoom(Room room) {
-
+    public BuildFloor() {
+       floor = new Room[lengthOfFloor, heightOfFloor];
     }
-
-	// Use this for initialization
-	void Start () {
-        Room[,] floorMap = buildMap();
-        for (int i = 0; i < lengthOfFloor; i++)
-            for (int j = 0; j < heightOfFloor; j++) {
-                if (floorMap[i, j] != null)
-                    buildRoom(floorMap[i, j]);
-            }
-	}
-	
-    public Room[,] buildMap() {
-        Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
+    /**
+    * builds the layout of rooms in the floor
+    */
+    public void buildFloor() {
         System.Random random = new System.Random(Time.time.ToString().GetHashCode());
         Room start = new Room(false, startPosX, startPosY, false);
         floor[startPosX, startPosY] = start;
@@ -75,7 +67,7 @@ public class BuildFloor : MonoBehaviour {
                 floor[currPos.x, currPos.y].isExit = true;
                 break;
             }
-            currPos = (Position) viablePositions[random.Next() % viablePositions.Count];
+            currPos = (Position)viablePositions[random.Next() % viablePositions.Count];
             Room room = new Room(false, currPos, false);
             //Find doors
             if (currPos.x - 1 > -1) {
@@ -115,9 +107,13 @@ public class BuildFloor : MonoBehaviour {
                 }
             }
         }
-        return floor;
     }
-
+    /**
+     * returns an arraylist of the viable positions for a new room to be
+     *  spawned in off of the current position
+     * currPos - the current position in the floor
+     * floor - the current layout of the floor
+     */
     public ArrayList getViablePositions(Position currPos, Room[,] floor) {
         ArrayList viablePositions = new ArrayList();
         if (currPos.x - 1 > -1) {
@@ -138,8 +134,4 @@ public class BuildFloor : MonoBehaviour {
         }
         return viablePositions;
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
