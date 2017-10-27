@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
 
 public class BuildFloor : MonoBehaviour {
 
@@ -52,20 +53,18 @@ public class BuildFloor : MonoBehaviour {
     */
     public Room[,] buildFloor() {
         
-        System.Random random = new System.Random(Time.time.ToString().GetHashCode());
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
         Room start = new Room(false, startPosX, startPosY, false);
         floor[startPosX, startPosY] = start;
         Position currPos = start.pos;
-        int numRooms = random.Next() % (maxRooms - minRooms);
+        int numRooms = Random.Range(minRooms, maxRooms);
         for (int i = 0; i < numRooms; i++) {
             ArrayList viablePositions = getViablePositions(currPos, floor);
             //if there are no viable positions to be found
             if (viablePositions.Count == 0) {
-                floor[currPos.x, currPos.y].isExit = true;
                 break;
             }
-            currPos = (Position)viablePositions[random.Next() % viablePositions.Count];
+            currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
             Room room = new Room(false, currPos, false);
             //Find doors
             if (currPos.x - 1 > -1) {
@@ -96,16 +95,24 @@ public class BuildFloor : MonoBehaviour {
         }
         //set a room to have the charger
         if (floorColor == FloorColor.BLUE) {
-            while (true) {
-                int x = random.Next() % lengthOfFloor;
-                int y = random.Next() % heightOfFloor;
-                if (floor[x, y] != null) {
-                    floor[x, y].hasCharger = true;
-                    break;
-                }
+            floor = addCharger(floor);
+        }
+        //Defines the last room built as the exit 
+        floor[currPos.x, currPos.y].isExit = true;
+        return floor;
+    }
+    /**
+     * Adds a charger to the floor randomly
+     */
+    private Room[,] addCharger(Room[,] floor) {
+        while (true) {
+            int x = Random.Range(0, lengthOfFloor);
+            int y = Random.Range(0, heightOfFloor);
+            if (floor[x, y] != null) {
+                floor[x, y].hasCharger = true;
+                return floor;
             }
         }
-        return floor;
     }
     /**
      * returns an arraylist of the viable positions for a new room to be
