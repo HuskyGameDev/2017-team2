@@ -17,9 +17,11 @@ public class GameManager : MonoBehaviour {
      * Builds the next floor of the game and displays the starting room
      */
     void InitGame() {
+        // boardScript.SetupScene(null);
+        BuildFloor.Room[,] floor = floorScript.buildFloor();
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
-                if (floorScript.floor[i, j] != null)
-                    boardScript.SetupScene(floorScript.floor[i, j]);
+                if (floor[i, j] != null)
+                    boardScript.SetupScene(floor[i, j]);
     }
 }

@@ -4,7 +4,6 @@ using System;
 
 public class BuildFloor : MonoBehaviour {
 
-    public Room[,] floor;
     public int floorNumber = 1;
     //Blue = healy
     //Red = HARD
@@ -48,14 +47,13 @@ public class BuildFloor : MonoBehaviour {
             y = posY;
         }
     }
-    public BuildFloor() {
-       floor = new Room[lengthOfFloor, heightOfFloor];
-    }
     /**
     * builds the layout of rooms in the floor
     */
-    public void buildFloor() {
+    public Room[,] buildFloor() {
+        
         System.Random random = new System.Random(Time.time.ToString().GetHashCode());
+        Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
         Room start = new Room(false, startPosX, startPosY, false);
         floor[startPosX, startPosY] = start;
         Position currPos = start.pos;
@@ -107,6 +105,7 @@ public class BuildFloor : MonoBehaviour {
                 }
             }
         }
+        return floor;
     }
     /**
      * returns an arraylist of the viable positions for a new room to be
