@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour {
 	}
     //Should transition scene to load, generate a new floor, place U
     void nextFloor() {
-    //    boardScript.
+        floorScript.floorNumber++;
+        InitGame();
     }
     /**
      * Builds the next floor of the game and displays the starting room
      */
     void InitGame() {
-        print(roomLength);
         BuildFloor.Room[,] floor = floorScript.buildFloor(roomLength);
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
