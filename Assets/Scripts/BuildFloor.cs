@@ -13,8 +13,8 @@ public class BuildFloor : MonoBehaviour {
     public FloorColor floorColor = FloorColor.BLUE;
     public int lengthOfFloor = 7;
     public int heightOfFloor = 5;
-    public int minRooms = 3;
-    public int maxRooms = 6;
+    public int minRooms = 0;
+    public int maxRooms = 35;
     public int startPosX = 4;
     public int startPosY = 3;
     //represents a room to be created
@@ -23,10 +23,10 @@ public class BuildFloor : MonoBehaviour {
         public FloorColor color;
         public bool isExit;
         public bool hasCharger;
-        public bool doorNorth = false;
-        public bool doorSouth = false;
-        public bool doorWest = false;
-        public bool doorEast = false;
+        public int doorNorth = -1;
+        public int doorSouth = -1;
+        public int doorWest = -1;
+        public int doorEast = -1;
         public Position pos;
         public Room(bool isExit, int posX, int posY, bool hasCharger, FloorColor color) {
             this.color = color;
@@ -60,37 +60,41 @@ public class BuildFloor : MonoBehaviour {
         floor[startPosX, startPosY] = start;
         Position currPos = start.pos;
         int numRooms = Random.Range(minRooms, maxRooms);
-        for (int i = 0; i < numRooms; i++) {
+        for (int i = 1; i < numRooms; i++) {
             ArrayList viablePositions = getViablePositions(currPos, floor);
             Position lastPos = currPos;
             currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
             Room room;
-            if (floor[currPos.x, currPos.y] == null)
+            if (floor[currPos.x, currPos.y] == null) {
                 room = new Room(false, currPos, false, floorColor);
-            else
-                room = floor[currPos.x, currPos.y];
-            floor[currPos.x, currPos.y] = room;
-            //sets a door between rooms
+                floor[currPos.x, currPos.y] = room;
+            } 
+            else {
+                i--;
+            }
+            int doorNum = Random.Range(0, roomLength);
+            //sets a door between rooms at a position
             if (currPos.x != lastPos.x) {
                 if (currPos.x > lastPos.x) {
-                    floor[lastPos.x, lastPos.y].doorEast = true;
-                    floor[currPos.x, currPos.y].doorWest = true;
+                    floor[lastPos.x, lastPos.y].doorEast = doorNum;
+                    floor[currPos.x, currPos.y].doorWest = doorNum;
                 }
                 if (currPos.x < lastPos.x) {
-                    floor[lastPos.x, lastPos.y].doorWest = true;
-                    floor[currPos.x, currPos.y].doorEast = true;
+                    floor[lastPos.x, lastPos.y].doorWest = doorNum;
+                    floor[currPos.x, currPos.y].doorEast = doorNum;
                 }
             }
             if (currPos.y != lastPos.y) {
                 if (currPos.y > lastPos.y) {
-                    floor[lastPos.x, lastPos.y].doorNorth = true;
-                    floor[currPos.x, currPos.y].doorSouth = true;
+                    floor[lastPos.x, lastPos.y].doorNorth = doorNum;
+                    floor[currPos.x, currPos.y].doorSouth = doorNum;
                 }
                 if (currPos.y < lastPos.y) {
-                    floor[lastPos.x, lastPos.y].doorSouth = true;
-                    floor[currPos.x, currPos.y].doorSouth = true;
+                    floor[lastPos.x, lastPos.y].doorSouth = doorNum;
+                    floor[currPos.x, currPos.y].doorSouth = doorNum;
                 }
             }
+
         }
         //set a room to have the charger
         if (floorColor == FloorColor.BLUE) {
