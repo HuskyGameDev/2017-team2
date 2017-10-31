@@ -239,6 +239,7 @@ MonoBehaviour:
     maximum: 25
   exit: {fileID: 0}
   floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
+  door: {fileID: 0}
   smallObjects:
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
@@ -294,7 +295,7 @@ MonoBehaviour:
   floorColor: 0
   lengthOfFloor: 7
   heightOfFloor: 5
-  minRooms: 3
-  maxRooms: 6
+  minRooms: 7
+  maxRooms: 15
   startPosX: 4
   startPosY: 3
