@@ -17,21 +17,22 @@ public class BuildRoom : MonoBehaviour {
         }
     }
 
-    public int columns = 10;
-    public int rows = 10;
+    public int columns;
+    public int rows;
     public Count smallCount = new Count(10, 20);
     public Count largeCount = new Count(0, 3);
     public Count longCount = new Count(5, 10);
 
     public GameObject exit;
     public GameObject floor;
+    public GameObject door;
     public GameObject[] smallObjects;
     public GameObject[] largeObjects;
     public GameObject[] longObjects;
     public GameObject[] specialObjects;
 
-    private int dx;
-    private int dy;
+    private float dx;
+    private float dy;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -168,9 +169,14 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    public void SetupScene(BuildFloor.Room room) {
-        dx = room.pos.x * 10;
-        dy = room.pos.y * 10;
+    public void SetupScene(int roomLength, BuildFloor.Room room) {
+
+        columns = roomLength;
+        rows = roomLength;
+
+        dx = room.pos.x * 10.25f;
+        dy = room.pos.y * 10.25f;
+
         BoardSetup();
         InitializeList();
 

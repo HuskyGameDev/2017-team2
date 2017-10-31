@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
+  roomLength: 10
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0
