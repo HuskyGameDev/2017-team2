@@ -17,6 +17,37 @@ public class BuildRoom : MonoBehaviour {
         }
     }
 
+    private class Graph {
+
+        protected Vertex start;
+        protected Vertex end;
+
+        protected class Edge {
+            List<Vertex> nodes;
+
+            protected Edge(Vertex x, Vertex y) {
+                nodes = new List<Vertex> { x, y };
+            }
+
+            protected Vertex getNeighbor(Vertex v) {
+                return v.Equals(nodes[0]) ? (Vertex)nodes[1] : (Vertex)nodes[0];
+            }
+        }
+
+        protected class Vertex {
+            List<Edge> edges;
+
+            protected Vertex() {
+
+            }
+
+            protected void addEdge(Edge e) {
+                edges.Add(e);
+            }
+        }
+
+    }
+
     public int columns;
     public int rows;
     public Count smallCount = new Count(10, 20);
@@ -34,6 +65,8 @@ public class BuildRoom : MonoBehaviour {
     private float dx;
     private float dy;
 
+    private List<int> doorPos;
+
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private Vector3[,] totalPositions;
@@ -47,9 +80,11 @@ public class BuildRoom : MonoBehaviour {
 
             for (int y = 0; y < rows; y++) {
 
+                
                 Vector3 newPos = new Vector3(x, y, 0f);
                 gridPositions.Add(newPos);
                 totalPositions[x, y] = newPos;
+
 
             }
 
@@ -59,7 +94,7 @@ public class BuildRoom : MonoBehaviour {
 
     void BoardSetup() {
         boardHolder = new GameObject("Board").transform;
-        
+
         GameObject floorInstance = Instantiate(floor, new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
         floorInstance.transform.SetParent(boardHolder);
     }
@@ -123,7 +158,7 @@ public class BuildRoom : MonoBehaviour {
                 gridPositions.Remove(randomPos);
                 gridPositions.Remove(new Vector3(randomPos.x + 1, randomPos.y, randomPos.z));
             }
-            
+
             gridPositions.Remove(randomPos);
 
             GameObject choice = array[Random.Range(0, array.Length)];
@@ -169,19 +204,35 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
+    Boolean pathExists() {
+
+        Graph graph;
+
+        return false;
+
+    }
+
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         columns = roomLength;
         rows = roomLength;
 
+        if (room.doorNorth != -1) {
+
+        }
+
         dx = room.pos.x * 10.25f;
         dy = room.pos.y * 10.25f;
 
         BoardSetup();
-        InitializeList();
 
-        RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
-        RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
-        
+        do {
+
+            InitializeList();
+            RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
+            RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
+
+        } while (!pathExists());
+
     }
 }
