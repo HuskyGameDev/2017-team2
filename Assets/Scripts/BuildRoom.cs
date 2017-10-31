@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BoardManager : MonoBehaviour {
+public class BuildRoom : MonoBehaviour {
 
     [Serializable]
     public class Count {
@@ -16,6 +16,7 @@ public class BoardManager : MonoBehaviour {
             maximum = max;
         }
     }
+
     public int columns = 10;
     public int rows = 10;
     public Count smallCount = new Count(10, 20);
@@ -28,6 +29,9 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] largeObjects;
     public GameObject[] longObjects;
     public GameObject[] specialObjects;
+
+    private int dx;
+    private int dy;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -54,9 +58,8 @@ public class BoardManager : MonoBehaviour {
 
     void BoardSetup() {
         boardHolder = new GameObject("Board").transform;
-
-        GameObject preBoard = floor;
-        GameObject floorInstance = Instantiate(preBoard, new Vector3(5, 5, 0), Quaternion.identity) as GameObject;
+        
+        GameObject floorInstance = Instantiate(floor, new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
         floorInstance.transform.SetParent(boardHolder);
     }
 
@@ -76,7 +79,7 @@ public class BoardManager : MonoBehaviour {
 
             int randomIndex = RandomPosition();
             Vector3 randomPos = gridPositions[randomIndex];
-            Vector3 actualPos = new Vector3((randomPos.x)+0.5f, (randomPos.y)+0.5f, 0f);
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
 
             gridPositions.Remove(randomPos);
 
@@ -111,11 +114,11 @@ public class BoardManager : MonoBehaviour {
 
             Vector3 actualPos;
             if (rotDegrees % 180 == 0) {
-                actualPos = new Vector3((randomPos.x) + 0.5f, (randomPos.y) + 1f, 0f);
+                actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 1f + dy, 0f);
                 gridPositions.Remove(randomPos);
                 gridPositions.Remove(new Vector3(randomPos.x, randomPos.y + 1, randomPos.z));
             } else {
-                actualPos = new Vector3((randomPos.x) + 1f, (randomPos.y) + 0.5f, 0f);
+                actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 0.5f + dy, 0f);
                 gridPositions.Remove(randomPos);
                 gridPositions.Remove(new Vector3(randomPos.x + 1, randomPos.y, randomPos.z));
             }
@@ -136,7 +139,7 @@ public class BoardManager : MonoBehaviour {
         for (int i = 0; i < count; i++) {
             int randomIndex = RandomPosition();
             Vector3 randomPos = gridPositions[randomIndex];
-            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f, (randomPos.y) + 0.5f, 0f);
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
 
             gridPositions.Remove(randomPos);
 
@@ -166,6 +169,8 @@ public class BoardManager : MonoBehaviour {
     }
 
     public void SetupScene(BuildFloor.Room room) {
+        dx = room.pos.x * 10;
+        dy = room.pos.y * 10;
         BoardSetup();
         InitializeList();
 
