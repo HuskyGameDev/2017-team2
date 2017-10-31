@@ -20,6 +20,7 @@ public class BuildFloor : MonoBehaviour {
     //represents a room to be created
     [Serializable]
     public class Room {
+        public FloorColor color;
         public bool isExit;
         public bool hasCharger;
         public bool doorNorth = false;
@@ -27,12 +28,14 @@ public class BuildFloor : MonoBehaviour {
         public bool doorWest = false;
         public bool doorEast = false;
         public Position pos;
-        public Room(bool isExit, int posX, int posY, bool hasCharger) {
+        public Room(bool isExit, int posX, int posY, bool hasCharger, FloorColor color) {
+            this.color = color;
             this.isExit = isExit;
             pos = new Position(posX, posY);
             this.hasCharger = hasCharger;
         }
-        public Room(bool isExit, Position pos, bool hasCharger) {
+        public Room(bool isExit, Position pos, bool hasCharger, FloorColor color) {
+            this.color = color; 
             this.isExit = isExit;
             this.pos = pos;
             this.hasCharger = hasCharger;
@@ -52,9 +55,8 @@ public class BuildFloor : MonoBehaviour {
     * builds the layout of rooms in the floor
     */
     public Room[,] buildFloor() {
-        
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
-        Room start = new Room(false, startPosX, startPosY, false);
+        Room start = new Room(false, startPosX, startPosY, false, floorColor);
         floor[startPosX, startPosY] = start;
         Position currPos = start.pos;
         int numRooms = Random.Range(minRooms, maxRooms);
@@ -64,31 +66,28 @@ public class BuildFloor : MonoBehaviour {
             if (viablePositions.Count == 0) {
                 break;
             }
+            Position lastPos = currPos;
             currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
-            Room room = new Room(false, currPos, false);
-            //Find doors
-            if (currPos.x - 1 > -1) {
-                if (floor[currPos.x - 1, currPos.y] != null) {
+            Room room = new Room(false, currPos, false, floorColor);
+            //sets a door between rooms
+            if (currPos.x != lastPos.x) {
+                if (currPos.x > lastPos.x) {
+                    floor[lastPos.x, lastPos.y].doorEast = true;
                     room.doorWest = true;
-                    floor[currPos.x - 1, currPos.y].doorEast = true;
                 }
-            }
-            if (currPos.y - 1 > -1) {
-                if (floor[currPos.x, currPos.y - 1] != null) {
-                    room.doorNorth = true;
-                    floor[currPos.x - 1, currPos.y].doorSouth = true;
-                }
-            }
-            if (currPos.x + 1 < lengthOfFloor) {
-                if (floor[currPos.x + 1, currPos.y] != null) {
+                if (currPos.x < lastPos.x) {
+                    floor[lastPos.x, lastPos.y].doorWest = true;
                     room.doorEast = true;
-                    floor[currPos.x + 1, currPos.y].doorWest = true;
                 }
             }
-            if (currPos.y + 1 < heightOfFloor) {
-                if (floor[currPos.x, currPos.y + 1] != null) {
+            if (currPos.y != lastPos.y) {
+                if (currPos.y > lastPos.y) {
+                    floor[lastPos.x, lastPos.y].doorNorth = true;
                     room.doorSouth = true;
-                    floor[currPos.x, currPos.y + 1].doorNorth = true;
+                }
+                if (currPos.y < lastPos.y) {
+                    floor[lastPos.x, lastPos.y].doorSouth = true;
+                    room.doorSouth = true;
                 }
             }
             floor[currPos.x, currPos.y] = room;
@@ -99,6 +98,9 @@ public class BuildFloor : MonoBehaviour {
         }
         //Defines the last room built as the exit 
         floor[currPos.x, currPos.y].isExit = true;
+        //Sets the next floors start position to the exit
+        startPosX = currPos.x;
+        startPosY = currPos.y;
         return floor;
     }
     /**
@@ -108,7 +110,8 @@ public class BuildFloor : MonoBehaviour {
         while (true) {
             int x = Random.Range(0, lengthOfFloor);
             int y = Random.Range(0, heightOfFloor);
-            if (floor[x, y] != null) {
+            //if room exists and it's not the starting room
+            if (floor[x, y] != null && x != startPosX && y != startPosY) {
                 floor[x, y].hasCharger = true;
                 return floor;
             }
@@ -123,19 +126,19 @@ public class BuildFloor : MonoBehaviour {
     public ArrayList getViablePositions(Position currPos, Room[,] floor) {
         ArrayList viablePositions = new ArrayList();
         if (currPos.x - 1 > -1) {
-            if (floor[currPos.x - 1, currPos.y] != null)
+            if (floor[currPos.x - 1, currPos.y] == null)
                 viablePositions.Add(new Position(currPos.x - 1, currPos.y));
         }
         if (currPos.y - 1 > -1) {
-            if (floor[currPos.x, currPos.y - 1] != null)
+            if (floor[currPos.x, currPos.y - 1] == null)
                 viablePositions.Add(new Position(currPos.x, currPos.y - 1));
         }
         if (currPos.x + 1 < lengthOfFloor) {
-            if (floor[currPos.x + 1, currPos.y] != null)
+            if (floor[currPos.x + 1, currPos.y] == null)
                 viablePositions.Add(new Position(currPos.x + 1, currPos.y));
         }
         if (currPos.y + 1 < heightOfFloor) {
-            if (floor[currPos.x, currPos.y + 1] != null)
+            if (floor[currPos.x, currPos.y + 1] == null)
                 viablePositions.Add(new Position(currPos.x, currPos.y + 1));
         }
         return viablePositions;

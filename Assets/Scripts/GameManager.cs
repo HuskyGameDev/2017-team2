@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     public BuildFloor floorScript;
-    public BoardManager boardScript;
+    public BuildRoom boardScript;
 
     // Use this for initialization
     void Start () {
         floorScript = GetComponent<BuildFloor>();
-        boardScript = GetComponent<BoardManager>();
+        boardScript = GetComponent<BuildRoom>();
         InitGame();
 	}
     //Should transition scene to load, generate a new floor, place U
