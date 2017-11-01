@@ -6,18 +6,31 @@ using Random = UnityEngine.Random;
 public class BuildFloor : MonoBehaviour {
 
     public int floorNumber = 1;
-    //Blue = healy
-    //Red = HARD
-    //Purple = eh
+    // Specific floor colors for the first 20 floors, STORY mode
+    private FloorColor[] twenty = new FloorColor[] { FloorColor.BLUE, FloorColor.BLUE, FloorColor.BLUE, FloorColor.PURPLE, FloorColor.BLUE,
+                                                     FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.BLUE, FloorColor.RED,
+                                                     FloorColor.BLUE, FloorColor.PURPLE, FloorColor.RED, FloorColor.BLUE, FloorColor.PURPLE,
+                                                     FloorColor.RED, FloorColor.PURPLE, FloorColor.BLUE, FloorColor.RED, FloorColor.RED };
+    /**
+     * Color dictating enemy color, material color, song?, difficulty,
+     *  whether or not there's a healing station
+     * Blue = moderate + healing machine
+     * Red = HARD
+     * Purple = harder
+     */
     public enum FloorColor { BLUE, RED, PURPLE }
-    public FloorColor floorColor = FloorColor.BLUE;
+    public FloorColor floorColor;
     public int lengthOfFloor = 7;
     public int heightOfFloor = 5;
     public int minRooms = 0;
     public int maxRooms = 35;
-    public int startPosX = 4;
-    public int startPosY = 3;
-    //represents a room to be created
+    public int startPosX = 4; //equal to start position of NEXT floor after build
+    public int startPosY = 3; //as above
+    /**
+     * Represents a room to be created
+     * doorX - position of door, -1 if none
+     * pos - postion of room in floor
+     */
     [Serializable]
     public class Room {
         public FloorColor color;
@@ -41,7 +54,10 @@ public class BuildFloor : MonoBehaviour {
             this.hasCharger = hasCharger;
         }
     }
-
+    /**
+     * Represents a position in the floor
+     * x and y - coordinates
+     */
     public class Position {
         public int x;
         public int y;
@@ -55,6 +71,7 @@ public class BuildFloor : MonoBehaviour {
     * builds the layout of rooms in the floor
     */
     public Room[,] buildFloor(int roomLength) {
+        floorColor = floorNumber < 21 ? twenty[floorNumber - 1] : randomColor();
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
         Room start = new Room(false, startPosX, startPosY, false, floorColor);
         floor[startPosX, startPosY] = start;
@@ -62,13 +79,16 @@ public class BuildFloor : MonoBehaviour {
         int numRooms = Random.Range(minRooms, maxRooms);
         for (int i = 1; i < numRooms; i++) {
             ArrayList viablePositions = getViablePositions(currPos, floor);
+            //hold last position to build doors
             Position lastPos = currPos;
             currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
             Room room;
+            //if new room to create
             if (floor[currPos.x, currPos.y] == null) {
                 room = new Room(false, currPos, false, floorColor);
                 floor[currPos.x, currPos.y] = room;
             } 
+            //if room already existed
             else {
                 i--;
             }
@@ -106,6 +126,24 @@ public class BuildFloor : MonoBehaviour {
         startPosX = currPos.x;
         startPosY = currPos.y;
         return floor;
+    }
+    /**
+     * Returns a random floor color
+     * currently returns : 1/6 blue
+     *                     2/6 purple
+     *                     3/6 red
+     * could be tweaked to modify difficulty if desired
+     */
+    private FloorColor randomColor() {
+        FloorColor result;
+        int i = Random.Range(0, 5);
+        if (i == 0)
+            result = FloorColor.BLUE;
+        else if (i <= 2)
+            result = FloorColor.PURPLE;
+        else
+            result = FloorColor.RED;
+        return result;
     }
     /**
      * Adds a charger to the floor randomly
