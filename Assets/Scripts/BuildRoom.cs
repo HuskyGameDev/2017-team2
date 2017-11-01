@@ -21,6 +21,8 @@ public class BuildRoom : MonoBehaviour {
 
         protected Vertex start;
         protected Vertex end;
+        protected List<Vertex> vertices;
+        protected List<Edge> edges;
 
         protected class Edge {
             List<Vertex> nodes;
@@ -29,21 +31,27 @@ public class BuildRoom : MonoBehaviour {
                 nodes = new List<Vertex> { x, y };
             }
 
-            protected Vertex getNeighbor(Vertex v) {
+            protected Vertex GetNeighbor(Vertex v) {
                 return v.Equals(nodes[0]) ? (Vertex)nodes[1] : (Vertex)nodes[0];
             }
         }
 
         protected class Vertex {
             List<Edge> edges;
+            String id;
 
-            protected Vertex() {
-
+            protected Vertex(int x, int y) {
+                id = x + " " + y;
+                edges = new List<Edge>();
             }
 
-            protected void addEdge(Edge e) {
+            protected void AddEdge(Edge e) {
                 edges.Add(e);
             }
+        }
+
+        public Graph() {
+
         }
 
     }
@@ -70,6 +78,7 @@ public class BuildRoom : MonoBehaviour {
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private Vector3[,] totalPositions;
+    private Boolean[,] available;
 
     void InitializeList() {
 
@@ -79,12 +88,11 @@ public class BuildRoom : MonoBehaviour {
         for (int x = 0; x < columns; x++) {
 
             for (int y = 0; y < rows; y++) {
-
                 
                 Vector3 newPos = new Vector3(x, y, 0f);
                 gridPositions.Add(newPos);
                 totalPositions[x, y] = newPos;
-
+                available[x, y] = true;
 
             }
 
@@ -118,6 +126,7 @@ public class BuildRoom : MonoBehaviour {
             Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
 
             gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
 
             GameObject choice = array[Random.Range(0, array.Length)];
             Instantiate(choice, actualPos, rotation);
@@ -153,10 +162,14 @@ public class BuildRoom : MonoBehaviour {
                 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 1f + dy, 0f);
                 gridPositions.Remove(randomPos);
                 gridPositions.Remove(new Vector3(randomPos.x, randomPos.y + 1, randomPos.z));
+                available[(int)randomPos.x, (int)randomPos.y] = false;
+                available[(int)randomPos.x, (int)randomPos.y + 1] = false;
             } else {
                 actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 0.5f + dy, 0f);
                 gridPositions.Remove(randomPos);
                 gridPositions.Remove(new Vector3(randomPos.x + 1, randomPos.y, randomPos.z));
+                available[(int)randomPos.x, (int)randomPos.y] = false;
+                available[(int)randomPos.x + 1, (int)randomPos.y] = false;
             }
 
             gridPositions.Remove(randomPos);
@@ -204,11 +217,15 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
+    Graph constructGraph() {
+        Graph graph = new Graph();
+    }
+
     Boolean pathExists() {
 
-        Graph graph;
+        Graph graph = constructGraph();
 
-        return false;
+        return true;
 
     }
 
