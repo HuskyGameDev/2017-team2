@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /*
  * Christina Anderson
@@ -70,4 +71,24 @@ public class PlayerController : MonoBehaviour {
 		//Change position of player
 		rb2d.MovePosition (rb2d.position + speed * movement * Time.fixedDeltaTime);
 	}
+
+    /*
+    // This method is called when the player's HP is reduced to 0
+    void gameOver()
+    {
+        if (life <= 0)
+        {
+            // May remove next 2 lines
+            // Forces the player's position to be set at the center of the screen
+            object_pos.x = 0;
+            object_pos.y = 0;
+
+            // Forces the player to face
+            mouse_pos.x = 0;
+            mouse_pos.y = -10;
+
+            SceneManager.LoadScene(2);
+        }
+    }
+    */
 }
