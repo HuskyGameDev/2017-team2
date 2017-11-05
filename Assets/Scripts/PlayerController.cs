@@ -68,9 +68,9 @@ public class PlayerController : MonoBehaviour
     private int ableToShoot = 0;
 
     // Object for slashing
-    public GameObject arcPrefab;
     private int wait = 10;
     private bool attacking;
+    public Collider2D meleeAttack;
 
 
     // Use this for initialization
@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
         // Set speed of bullet
         bulletSpeed = 20;
 
+        // Set melee attack stuff
+        meleeAttack.enabled = false;
         attacking = false;
     }
 
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
         {
             attacking = true;
-            arcPrefab.SetActive(true);
+            meleeAttack.enabled = true;
         }
 
         if (attacking)
@@ -192,14 +194,14 @@ public class PlayerController : MonoBehaviour
 
             if (wait > 0)
             {
-                arcPrefab.transform.Translate(object_pos);
+               
                 wait--;
             }
 
             else
             {
                 attacking = false;
-                arcPrefab.SetActive(false);
+                meleeAttack.enabled = false;
                 wait = 10;
             }
         }
