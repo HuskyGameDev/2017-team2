@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	public float speedMax;
+	private float speedMax;
 	public float speed = 2f;
 
-	public float xMax;
-	public float yMax;
-	public float xMin;
-	public float yMin;
+	private float xMax;
+	private float yMax;
+	private float xMin;
+	private float yMin;
 
 	private float x;
 	private float y;
@@ -25,6 +25,16 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
+
+		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
+
+
+		xMax = screenMax.x;
+		xMin = screenMin.x;
+		yMax = screenMax.y;
+		yMin = screenMin.y;
+		speedMax = speed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -71,11 +81,11 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		print ("Found you!");
-
 		if (other.gameObject.CompareTag ("Player")) {
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
+		} else if (other.gameObject.CompareTag ("Object")) {
+			speedMax *= -1;
 		}
 	}
 
