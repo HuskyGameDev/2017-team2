@@ -129,9 +129,21 @@ public class BuildRoom : MonoBehaviour {
             for (int y = 0; y < rows; y++) {
 
                 Vector3 newPos = new Vector3(x, y, 0f);
-                gridPositions.Add(newPos);
                 totalPositions[x, y] = newPos;
-                available[x, y] = true;
+                
+                bool doorCheck = true;
+                foreach (Vector3 door in doorPos) {
+                    if (newPos.Equals(door)) {
+                        doorCheck = false;
+                    }
+                }
+
+                // print(doorCheck);
+
+                if (doorCheck) {
+                    gridPositions.Add(newPos);
+                    available[x, y] = true;
+                }
 
             }
 
@@ -188,12 +200,12 @@ public class BuildRoom : MonoBehaviour {
                 do {
                     randomIndex = RandomPosition();
                     randomPos = gridPositions[randomIndex];
-                } while (randomPos.y >= rows - 1);
+                } while (randomPos.y >= rows - 1 || !available[(int)randomPos.x, (int)randomPos.y + 1]);
             } else {
                 do {
                     randomIndex = RandomPosition();
                     randomPos = gridPositions[randomIndex];
-                } while (randomPos.x >= columns - 1);
+                } while (randomPos.x >= columns - 1 || !available[(int)randomPos.x + 1, (int)randomPos.y]);
             }
 
             Vector3 actualPos;
@@ -313,10 +325,6 @@ public class BuildRoom : MonoBehaviour {
 
         Boolean path = true;
 
-        foreach (Vector3 door in doorPos) {
-            print(door.x + ", " + door.y);
-        }
-
         foreach (Vector3 door1 in doorPos) {
             foreach (Vector3 door2 in doorPos) {
 
@@ -364,9 +372,6 @@ public class BuildRoom : MonoBehaviour {
 
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
-        columns = roomLength;
-        rows = roomLength;
-
         doorPos = new List<Vector3>();
 
         if (room.doorNorth != -1) {
@@ -390,8 +395,13 @@ public class BuildRoom : MonoBehaviour {
         do {
 
             InitializeList();
+            
             RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
             RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
+
+            foreach (Vector3 door in doorPos) {
+                available[(int)door.x, (int)door.y] = true;
+            }
 
         } while (!pathExists());
 
