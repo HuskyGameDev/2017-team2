@@ -3,42 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddToCount : MonoBehaviour {
+/*
+ * Andrew Stanley
+ * created single method to update the player's score based on what enemy was defeated
+ * Created additional text variables to update end game messages
+ */
+ 
+public class AddToCount : PlayerController {
 
-    public int score;
-    public int floor;
     public Text scoreText;
     public Text floorText;
-   
+
+    //public int endScore;
+    //public int endFloor;
+    //public Text endScoreText;
+    //public Text endFloorText;
+
     void Start () {
         score = 0;
-        floor = 0;
-        SetScoreText();
+        floor = 1;
+
+        setScoreText();
         setFloorText();
 	}
 	
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.E))
+        // Update the player's progress, both score and floors cleared
+        updateProgress();
+        //endScore = score;
+        //endFloor = floor;
+     }
+
+    void updateProgress()
+    {
+        // Player defeated a small enemy
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            score = score + 10;
-            SetScoreText();
+            score += 100;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        // Player defeated a medium enemy
+        if (Input.GetKeyDown(KeyCode.N))
         {
-            floor = floor + 1;
+            score += 250;
+        }
+
+        // Player defeated a large enemy
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            score += 500;
+        }
+
+        // Player cleared a floor
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            floor += 1;
+            score += 1000;
             setFloorText();
         }
 
-     }
+        // Update text displayed to show player's progress
+        setScoreText();
+    }
 
-    void SetScoreText()
+    void setScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
+        //endScoreText.text = "Your final score was " + endScore.ToString();
     }
 
     void setFloorText()
     {
         floorText.text = "Floor: " + floor.ToString();
+        //endFloorText.text = "You completed " + endFloor.ToString() + " floor(s)";
     }
 }

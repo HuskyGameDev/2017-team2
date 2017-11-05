@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 847558612}
   - component: {fileID: 847558611}
   m_Layer: 5
-  m_Name: score
+  m_Name: endScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,7 +652,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Your score was '
+  m_Text: Score
 --- !u!222 &847558612
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 926458684}
   - component: {fileID: 926458686}
   - component: {fileID: 926458685}
+  - component: {fileID: 926458687}
   m_Layer: 5
   m_Name: gameOverScreen
   m_TagString: Untagged
@@ -733,6 +734,27 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 926458683}
+--- !u!114 &926458687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 926458683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c1849d0262c6d140bfcf7e9d85ecbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
+  Player: {fileID: 0}
+  life: 0
+  score: 0
+  floor: 0
+  scoreText: {fileID: 0}
+  floorText: {fileID: 0}
+  lifeText: {fileID: 0}
+  endScoreText: {fileID: 847558611}
+  endFloorText: {fileID: 1076784187}
 --- !u!1 &1076784185
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +766,7 @@ GameObject:
   - component: {fileID: 1076784188}
   - component: {fileID: 1076784187}
   m_Layer: 5
-  m_Name: floorsComplete
+  m_Name: endFloors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,7 +822,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You completed 1 floor(s)
+  m_Text: Floors
 --- !u!222 &1076784188
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 /*
  * Christina Anderson
  * Main controller for player behavior. Currently, it allows the player to move the sprite around and follows mouse direction
+ */
+
+/*
+ * Andrew Stanley
+ * Added implementation for the player to take damage and die
  */
 
 public class PlayerController : MonoBehaviour {
@@ -25,15 +32,20 @@ public class PlayerController : MonoBehaviour {
 	private float angle;
 
 	//stores amount of life character has
-	private float life;
+	public int life;
 
-	public float speed;
+    //stores the player's current score
+    public int score;
+
+    // stores the floor the player is currently on
+    public int floor;
+
+	private float speed;
 
 	// Use this for initialization
 	void Start()
 	{
-		life = 100;
-
+        speed = 5;
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
@@ -70,25 +82,6 @@ public class PlayerController : MonoBehaviour {
 
 		//Change position of player
 		rb2d.MovePosition (rb2d.position + speed * movement * Time.fixedDeltaTime);
+
 	}
-
-    /*
-    // This method is called when the player's HP is reduced to 0
-    void gameOver()
-    {
-        if (life <= 0)
-        {
-            // May remove next 2 lines
-            // Forces the player's position to be set at the center of the screen
-            object_pos.x = 0;
-            object_pos.y = 0;
-
-            // Forces the player to face
-            mouse_pos.x = 0;
-            mouse_pos.y = -10;
-
-            SceneManager.LoadScene(2);
-        }
-    }
-    */
 }
