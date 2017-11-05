@@ -237,9 +237,11 @@ MonoBehaviour:
   longCount:
     minimum: 5
     maximum: 25
-  exit: {fileID: 0}
+  exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
   floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
-  door: {fileID: 0}
+  door: {fileID: 1414110871066774, guid: d1d1f575af0d0f743874ac81895a777d, type: 2}
+  wall: {fileID: 1896600267040646, guid: 1a2eec28731b8a84f8e262ed0c849cb1, type: 2}
+  cornerWall: {fileID: 1742665170266142, guid: b3c39e6dbb173cc458aaca17250bd69c, type: 2}
   smallObjects:
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}

@@ -19,73 +19,39 @@ public class BuildRoom : MonoBehaviour {
 
     private class Graph {
 
-        private Vertex start;
-        private Vertex end;
-        private List<Vertex> vertices;
-        private Vertex[,] vertArray;
+        protected Vertex start;
+        protected Vertex end;
+        protected List<Vertex> vertices;
+        protected List<Edge> edges;
 
-        public class Vertex{
-            List<Vertex> neighbors;
-            public int x;
-            public int y;
+        protected class Edge {
+            List<Vertex> nodes;
 
-            public Vertex(int x_, int y_) {
-                x = x_;
-                y = y_;
-
-                neighbors = new List<Vertex>();
+            protected Edge(Vertex x, Vertex y) {
+                nodes = new List<Vertex> { x, y };
             }
 
-            public List<Vertex> Neighbors() {
-                return neighbors;
-            }
-
-            public void AddNeighbor(Vertex v) {
-                neighbors.Add(v);
+            protected Vertex GetNeighbor(Vertex v) {
+                return v.Equals(nodes[0]) ? (Vertex)nodes[1] : (Vertex)nodes[0];
             }
         }
 
-        public Graph(Boolean[,] a, int r, int c) {
+        protected class Vertex {
+            List<Edge> edges;
+            String id;
 
-            vertices = new List<Vertex>();
-            vertArray = new Vertex[r, c];
-
-            for (int i = 0; i < r; i++) {
-                for (int j = 0; j < c; j++) {
-                    if (a[i, j]) {
-                        Vertex v = new Vertex(i, j);
-                        vertices.Add(v);
-                        vertArray[i, j] = v;
-                    }
-                }
+            protected Vertex(int x, int y) {
+                id = x + " " + y;
+                edges = new List<Edge>();
             }
 
-            foreach (Vertex v in vertices) {
-                if (v.y != c-1 && a[v.x, v.y + 1]) {
-                    Vertex north = vertArray[v.x, v.y + 1];
-                    v.AddNeighbor(north);
-                }
-                if (v.y != 0 && a[v.x, v.y - 1]) {
-                    Vertex south = vertArray[v.x, v.y - 1];
-                    v.AddNeighbor(south);
-                }
-                if (v.x != r-1 && a[v.x + 1, v.y]) {
-                    Vertex east = vertArray[v.x + 1, v.y];
-                    v.AddNeighbor(east);
-                }
-                if (v.x != 0 && a[v.x - 1, v.y]) {
-                    Vertex west = vertArray[v.x - 1, v.y];
-                    v.AddNeighbor(west);
-                }
+            protected void AddEdge(Edge e) {
+                edges.Add(e);
             }
         }
 
-        public List<Vertex> Vertices() {
-            return vertices;
-        }
+        public Graph() {
 
-        public Vertex[,] VertArray() {
-            return vertArray;
         }
 
     }
@@ -99,6 +65,8 @@ public class BuildRoom : MonoBehaviour {
     public GameObject exit;
     public GameObject floor;
     public GameObject door;
+    public GameObject wall;
+    public GameObject cornerWall;
     public GameObject[] smallObjects;
     public GameObject[] largeObjects;
     public GameObject[] longObjects;
@@ -107,7 +75,7 @@ public class BuildRoom : MonoBehaviour {
     private float dx;
     private float dy;
 
-    private List<Vector3> doorPos;
+    private List<int> doorPos;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -118,7 +86,7 @@ public class BuildRoom : MonoBehaviour {
 
         gridPositions.Clear();
         totalPositions = new Vector3[columns, rows];
-        available = new Boolean[columns, rows];
+        available = new Boolean[columns, rows]; //didn't compile until I added this
 
         for (int x = 0; x < columns; x++) {
 
@@ -252,85 +220,16 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    Graph.Vertex findMin(List<Graph.Vertex> l, Vector3 s) {
-        int min = int.MaxValue;
-        Graph.Vertex minVertex = l[0];
-
-        foreach (Graph.Vertex v in l) {
-            if (System.Math.Abs((int)s.x - v.x) + System.Math.Abs((int)s.y - v.y) < min) {
-                min = System.Math.Abs((int)s.x - v.x) + System.Math.Abs((int)s.y - v.y);
-                minVertex = v;
-            }
-        }
-
-        return minVertex;
-    }
-
-    Boolean pathExists(Vector3 source, Vector3 target) {
-
-        Graph graph = new Graph(available, rows, columns);
-
-        List<Graph.Vertex> list = new List<Graph.Vertex>();
-
-        int[,] dist = new int[rows, columns];
-        Graph.Vertex[,] prev = new Graph.Vertex[rows, columns];
-
-        foreach (Graph.Vertex v in graph.Vertices()) {
-            dist[v.x, v.y] = int.MaxValue;
-            prev[v.x, v.y] = null;
-            list.Add(v);
-        }
-
-        dist[(int)source.x, (int)source.y] = 0;
-
-        while (list.Count != 0) {
-            Graph.Vertex u = findMin(list, source);
-
-            list.Remove(u);
-
-            if (u.x == (int)target.x && u.y == (int)target.y) {
-                return true;
-            }
-
-            foreach (Graph.Vertex n in u.Neighbors()) {
-                int alternative = dist[u.x, u.y] + 1;
-                if (alternative < dist[n.x, n.y]) {
-                    dist[n.x, n.y] = alternative;
-                    prev[n.x, n.y] = u;
-                }
-            }
-        }
-
-        return false;
-
+    Graph constructGraph() {
+        Graph graph = new Graph();
+        return graph;
     }
 
     Boolean pathExists() {
 
-        Boolean path = true;
+        Graph graph = constructGraph();
 
-        foreach (Vector3 door in doorPos) {
-            print(door.x + ", " + door.y);
-        }
-
-        foreach (Vector3 door1 in doorPos) {
-            foreach (Vector3 door2 in doorPos) {
-                
-                if (door1.Equals(door2)) {
-                    continue;
-                } else {
-                    if (!pathExists(door1, door2)) {
-                        path = false;
-                        break;
-                    }
-                }
-            }
-            if (!path) {
-                break;
-            }
-        }
-
-        return path;
+        return true;
 
     }
 
@@ -339,19 +238,8 @@ public class BuildRoom : MonoBehaviour {
         columns = roomLength;
         rows = roomLength;
 
-        doorPos = new List<Vector3>();
-
         if (room.doorNorth != -1) {
-            doorPos.Add(new Vector3(room.doorNorth, rows - 1, 0f));
-        }
-        if (room.doorEast != -1) {
-            doorPos.Add(new Vector3(columns - 1, room.doorEast, 0f));
-        }
-        if (room.doorSouth != -1) {
-            doorPos.Add(new Vector3(room.doorSouth, 0, 0f));
-        }
-        if (room.doorWest != -1) {
-            doorPos.Add(new Vector3(0, room.doorWest, 0f));
+
         }
 
         dx = room.pos.x * 10.25f;
@@ -367,5 +255,30 @@ public class BuildRoom : MonoBehaviour {
 
         } while (!pathExists());
 
+        buildWalls(room);
+
+    }
+    void buildWalls(BuildFloor.Room room) {
+        for (int i = 0; i < rows; i++) {
+            if (room.doorWest != i)
+                Instantiate(wall, new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
+            else
+                Instantiate(door, new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
+            if (room.doorEast != i)
+                Instantiate(wall, new Vector3(dx + 10.0625f, dy + i + .5f, 0), Quaternion.identity);
+        }
+        Quaternion rotation = Quaternion.AngleAxis(90, Vector3.back);
+        for (int i = 0; i < columns; i++) {
+            if (room.doorNorth != i)
+                Instantiate(wall, new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
+            else
+                Instantiate(door, new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
+            if (room.doorSouth != i)
+                Instantiate(wall, new Vector3(dx + i + .5f, dy - .0625f, 0), rotation);
+        }
+        Instantiate(cornerWall, new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall, new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall, new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall, new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity);
     }
 }
