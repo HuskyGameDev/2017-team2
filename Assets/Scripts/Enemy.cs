@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	public float speedMax;
+	public float speed = 2f;
 
 	public float xMax;
 	public float yMax;
@@ -16,10 +17,14 @@ public class Enemy : MonoBehaviour {
 	private float time;
 
 	private Rigidbody2D rb2d;
+	private CircleCollider2D circleCollider;
+	private GameObject player;
+	private Transform player_pos;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
+		circleCollider = GetComponent<CircleCollider2D> ();
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -28,6 +33,13 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (player == null)
+			MoveAtRandom ();
+		else
+			Chase (player_pos);
+	}
+
+	void MoveAtRandom() {
 		time += Time.deltaTime;
 
 		if (transform.localPosition.x > xMax) {
@@ -55,5 +67,23 @@ public class Enemy : MonoBehaviour {
 		}
 
 		transform.localPosition = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+	}
+
+	void OnTriggerEnter2D (Collider2D other) {
+
+		print ("Found you!");
+
+		if (other.gameObject.CompareTag ("Player")) {
+			player = other.gameObject;
+			player_pos = player.GetComponent<Transform> ();
+		}
+	}
+
+	void Chase(Transform obj_pos) {
+
+
+		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+
+
 	}
 }
