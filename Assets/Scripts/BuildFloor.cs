@@ -26,6 +26,7 @@ public class BuildFloor : MonoBehaviour {
     public int maxRooms = 35;
     public int startPosX = 4; //equal to start position of NEXT floor after build
     public int startPosY = 3; //as above
+    public int numEnemies;
     /**
      * Represents a room to be created
      * doorX - position of door, -1 if none
@@ -40,6 +41,9 @@ public class BuildFloor : MonoBehaviour {
         public int doorSouth = -1;
         public int doorWest = -1;
         public int doorEast = -1;
+        public int littleEnemies;
+        public int averageEnemies;
+        public int bigEnemies;
         public Position pos;
         public Room(bool isExit, int posX, int posY, bool hasCharger, FloorColor color) {
             this.color = color;
@@ -82,10 +86,10 @@ public class BuildFloor : MonoBehaviour {
             //hold last position to build doors
             Position lastPos = currPos;
             currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
-            Room room;
             //if new room to create
             if (floor[currPos.x, currPos.y] == null) {
-                room = new Room(false, currPos, false, floorColor);
+                Room room = new Room(false, currPos, false, floorColor);
+                room = setEnemies(room);
                 floor[currPos.x, currPos.y] = room;
             } 
             //if room already existed
@@ -126,6 +130,14 @@ public class BuildFloor : MonoBehaviour {
         startPosX = currPos.x;
         startPosY = currPos.y;
         return floor;
+    }
+    private Room setEnemies(Room room) {
+        int roomType = Random.Range(0, 17);
+        if (roomType > 0 && roomType < 4) ; //Little enemies only
+     //       room.littleEnemies = Random.Range()
+
+
+        return room;
     }
     /**
      * Returns a random floor color
