@@ -50,7 +50,7 @@ public class BuildRoom : MonoBehaviour {
             }
         }
 
-        public Graph() {
+        public Graph(Boolean[,] a) {
 
         }
 
@@ -73,7 +73,7 @@ public class BuildRoom : MonoBehaviour {
     private float dx;
     private float dy;
 
-    private List<int> doorPos;
+    private List<Vector3> doorPos;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -84,6 +84,7 @@ public class BuildRoom : MonoBehaviour {
 
         gridPositions.Clear();
         totalPositions = new Vector3[columns, rows];
+        available = new Boolean[columns, rows];
 
         for (int x = 0; x < columns; x++) {
 
@@ -217,25 +218,72 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
+    /*
+
     Graph constructGraph() {
-        Graph graph = new Graph();
+        Graph graph = new Graph(available);
+        return graph;
+    }
+
+    Boolean pathExists(Vector3 source, Vector3 target) {
+
+        int[,] dist = new int[rows, columns];
+        Vector3[,] dist = new Vector3[rows, columns];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                dist[i, j] = int.MaxValue;
+            }
+        }
+
+
     }
 
     Boolean pathExists() {
 
-        Graph graph = constructGraph();
+        Boolean path = true;
 
-        return true;
+        foreach (Vector3 door1 in doorPos) {
+            foreach (Vector3 door2 in doorPos) {
+                
+                if (door1.Equals(door2)) {
+                    continue;
+                } else {
+                    if (!pathExists(door1, door2)) {
+                        path = false;
+                        break;
+                    }
+                }
+            }
+            if (!path) {
+                break;
+            }
+        }
+
+        return path;
 
     }
+
+    */
 
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         columns = roomLength;
         rows = roomLength;
 
-        if (room.doorNorth != -1) {
+        doorPos = new List<Vector3>();
 
+        if (room.doorNorth != -1) {
+            doorPos.Add(new Vector3(room.doorNorth, rows - 1, 0f));
+        }
+        if (room.doorEast != -1) {
+            doorPos.Add(new Vector3(columns - 1, room.doorNorth, 0f));
+        }
+        if (room.doorSouth != -1) {
+            doorPos.Add(new Vector3(room.doorSouth, 0, 0f));
+        }
+        if (room.doorWest != -1) {
+            doorPos.Add(new Vector3(0, room.doorWest, 0f));
         }
 
         dx = room.pos.x * 10.25f;
@@ -243,13 +291,13 @@ public class BuildRoom : MonoBehaviour {
 
         BoardSetup();
 
-        do {
+        //do {
 
             InitializeList();
             RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
             RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
 
-        } while (!pathExists());
+        //} while (!pathExists());
 
     }
 }
