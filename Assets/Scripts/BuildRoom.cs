@@ -84,6 +84,7 @@ public class BuildRoom : MonoBehaviour {
 
         gridPositions.Clear();
         totalPositions = new Vector3[columns, rows];
+        available = new Boolean[columns, rows]; //didn't compile until I added this
 
         for (int x = 0; x < columns; x++) {
 
@@ -219,6 +220,7 @@ public class BuildRoom : MonoBehaviour {
 
     Graph constructGraph() {
         Graph graph = new Graph();
+        return graph;
     }
 
     Boolean pathExists() {
