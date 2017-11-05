@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * Christina Anderson
  * Codey Walker
  * Main controller for player behavior. Currently, it allows the player to move the sprite around and follows mouse direction
- * Added gun functions to this script - Codey
+ * Added gun and melee attack functions to this script - Codey
  */
 
 
@@ -15,6 +15,7 @@ struct bulletStruct
 {
     private GameObject bullet;
     private Vector3 pos;
+    private Collider2D bulletAtk;
 
 
     public void setObj(GameObject newBullet)
@@ -35,6 +36,23 @@ struct bulletStruct
     public Vector3 getPos()
     {
         return pos;
+    }
+
+    public void setColliderVar(Collider2D col)
+    {
+        bulletAtk = col;
+    }
+    public void setCollider(bool set)
+    {
+        if(set)
+        {
+            bulletAtk.enabled = true;
+        }
+
+        else
+        {
+            bulletAtk.enabled = false;
+        }
     }
 }
 
@@ -66,6 +84,7 @@ public class PlayerController : MonoBehaviour
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
+    public Collider2D bulletAttack;
 
     // Object for slashing
     private int wait = 10;
@@ -80,9 +99,11 @@ public class PlayerController : MonoBehaviour
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
+        Player = GetComponent<Transform>();
 
         // Set speed of bullet
         bulletSpeed = 20;
+        bulletAttack.enabled = false;
 
         // Set melee attack stuff
         meleeAttack.enabled = false;
@@ -142,6 +163,8 @@ public class PlayerController : MonoBehaviour
                 Vector3 pos = (Input.mousePosition - sp).normalized;
                 newBullet.setPos(pos);
                 newBullet.setObj(bullet);
+                newBullet.setColliderVar(bulletAttack);
+                newBullet.setCollider(true);
                 bullets.Add(newBullet);
                 ableToShoot++;
             }
@@ -167,6 +190,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
+                bulletAttack.enabled = true;
             }
 
             Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);

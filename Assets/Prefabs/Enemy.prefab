@@ -230,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMax: 0
+  speed: 2
   xMax: 0
   yMax: 0
   xMin: 0
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMax: 0
+  speed: 2
   xMax: 0
   yMax: 0
   xMin: 0
@@ -262,6 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMax: 0
+  speed: 2
   xMax: 1
   yMax: 0
   xMin: -1
@@ -278,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMax: 0
+  speed: 2
   xMax: 0
   yMax: 0
   xMin: 0

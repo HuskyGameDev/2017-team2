@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour {
 	private float y;
 	private float time;
 
+    private int health;
+
 	private Rigidbody2D rb2d;
 	private CircleCollider2D circleCollider;
 	private GameObject player;
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour {
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
+
+        health = 50;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -37,6 +41,12 @@ public class Enemy : MonoBehaviour {
 			MoveAtRandom ();
 		else
 			Chase (player_pos);
+
+        if (health < 0)
+        {
+            Destroy(gameObject);
+            print("RIP");
+        }
 	}
 
 	void MoveAtRandom() {
@@ -71,7 +81,6 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		print ("Found you!");
 
 		if (other.gameObject.CompareTag ("Player")) {
 			player = other.gameObject;
@@ -86,4 +95,9 @@ public class Enemy : MonoBehaviour {
 
 
 	}
+
+    void Hit(int dmg)
+    {
+        health -= dmg;
+    }
 }

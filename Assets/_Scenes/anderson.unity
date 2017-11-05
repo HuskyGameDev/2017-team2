@@ -179,6 +179,12 @@ Prefab:
       propertyPath: m_UseAutoMass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114308791505004404, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1501066236266358, guid: 56a153b5d6ee6e44fa0fc3e0da622baa,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 58978289859256594, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
@@ -839,6 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1162962973}
+  player: {fileID: 1924908360}
 --- !u!4 &1006905117
 Transform:
   m_ObjectHideFlags: 0
