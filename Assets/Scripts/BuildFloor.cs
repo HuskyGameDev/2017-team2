@@ -111,7 +111,7 @@ public class BuildFloor : MonoBehaviour {
                 }
                 if (currPos.y < lastPos.y) {
                     floor[lastPos.x, lastPos.y].doorSouth = doorNum;
-                    floor[currPos.x, currPos.y].doorSouth = doorNum;
+                    floor[currPos.x, currPos.y].doorNorth = doorNum;
                 }
             }
 
