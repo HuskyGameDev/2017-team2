@@ -17,79 +17,6 @@ public class BuildRoom : MonoBehaviour {
         }
     }
 
-    private class Graph {
-
-        private Vertex start;
-        private Vertex end;
-        private List<Vertex> vertices;
-        private Vertex[,] vertArray;
-
-        public class Vertex {
-            List<Vertex> neighbors;
-            public int x;
-            public int y;
-
-            public Vertex(int x_, int y_) {
-                x = x_;
-                y = y_;
-
-                neighbors = new List<Vertex>();
-            }
-
-            public List<Vertex> Neighbors() {
-                return neighbors;
-            }
-
-            public void AddNeighbor(Vertex v) {
-                neighbors.Add(v);
-            }
-        }
-
-        public Graph(Boolean[,] a, int r, int c) {
-
-            vertices = new List<Vertex>();
-            vertArray = new Vertex[r, c];
-
-            for (int i = 0; i < r; i++) {
-                for (int j = 0; j < c; j++) {
-                    if (a[i, j]) {
-                        Vertex v = new Vertex(i, j);
-                        vertices.Add(v);
-                        vertArray[i, j] = v;
-                    }
-                }
-            }
-
-            foreach (Vertex v in vertices) {
-                if (v.y != c - 1 && a[v.x, v.y + 1]) {
-                    Vertex north = vertArray[v.x, v.y + 1];
-                    v.AddNeighbor(north);
-                }
-                if (v.y != 0 && a[v.x, v.y - 1]) {
-                    Vertex south = vertArray[v.x, v.y - 1];
-                    v.AddNeighbor(south);
-                }
-                if (v.x != r - 1 && a[v.x + 1, v.y]) {
-                    Vertex east = vertArray[v.x + 1, v.y];
-                    v.AddNeighbor(east);
-                }
-                if (v.x != 0 && a[v.x - 1, v.y]) {
-                    Vertex west = vertArray[v.x - 1, v.y];
-                    v.AddNeighbor(west);
-                }
-            }
-        }
-
-        public List<Vertex> Vertices() {
-            return vertices;
-        }
-
-        public Vertex[,] VertArray() {
-            return vertArray;
-        }
-
-    }
-
     public int columns;
     public int rows;
     public Count smallCount = new Count(10, 20);
@@ -107,6 +34,8 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] largeObjects;
     public GameObject[] longObjects;
     public GameObject[] specialObjects;
+
+    private List<GameObject> gameObjects;
 
     private float dx;
     private float dy;
@@ -152,10 +81,17 @@ public class BuildRoom : MonoBehaviour {
     }
 
     void BoardSetup() {
+        gameObjects = new List<GameObject>();
         boardHolder = new GameObject("Board").transform;
 
         GameObject floorInstance = Instantiate(floor, new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
         floorInstance.transform.SetParent(boardHolder);
+    }
+
+    private void DestroyAllObjects() {
+        foreach (GameObject go in gameObjects) {
+            Destroy(go);
+        }
     }
 
     int RandomPosition() {
@@ -180,7 +116,7 @@ public class BuildRoom : MonoBehaviour {
             available[(int)randomPos.x, (int)randomPos.y] = false;
 
             GameObject choice = array[Random.Range(0, array.Length)];
-            Instantiate(choice, actualPos, rotation);
+            gameObjects.Add(Instantiate(choice, actualPos, rotation));
 
         }
 
@@ -200,12 +136,12 @@ public class BuildRoom : MonoBehaviour {
                 do {
                     randomIndex = RandomPosition();
                     randomPos = gridPositions[randomIndex];
-                } while (randomPos.y >= rows - 1 || !available[(int)randomPos.x, (int)randomPos.y + 1]);
+                } while (!(randomPos.y < rows - 1 && available[(int)randomPos.x, (int)randomPos.y + 1]));
             } else {
                 do {
                     randomIndex = RandomPosition();
                     randomPos = gridPositions[randomIndex];
-                } while (randomPos.x >= columns - 1 || !available[(int)randomPos.x + 1, (int)randomPos.y]);
+                } while (!(randomPos.x < columns - 1 && available[(int)randomPos.x + 1, (int)randomPos.y]));
             }
 
             Vector3 actualPos;
@@ -226,7 +162,7 @@ public class BuildRoom : MonoBehaviour {
             gridPositions.Remove(randomPos);
 
             GameObject choice = array[Random.Range(0, array.Length)];
-            Instantiate(choice, actualPos, rotation);
+            gameObjects.Add(Instantiate(choice, actualPos, rotation));
 
         }
 
@@ -244,7 +180,7 @@ public class BuildRoom : MonoBehaviour {
             gridPositions.Remove(randomPos);
 
             GameObject choice = array[Random.Range(0, array.Length)];
-            Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back));
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back)));
 
         }
 
@@ -262,87 +198,61 @@ public class BuildRoom : MonoBehaviour {
             gridPositions.Remove(randomPos);
 
             GameObject choice = array[Random.Range(0, array.Length)];
-            Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back));
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back)));
 
         }
-
-    }
-
-    Graph.Vertex findMin(List<Graph.Vertex> l, Vector3 s) {
-        int min = int.MaxValue;
-        Graph.Vertex minVertex = l[0];
-
-        foreach (Graph.Vertex v in l) {
-            if (System.Math.Abs((int)s.x - v.x) + System.Math.Abs((int)s.y - v.y) < min) {
-                min = System.Math.Abs((int)s.x - v.x) + System.Math.Abs((int)s.y - v.y);
-                minVertex = v;
-            }
-        }
-
-        return minVertex;
-    }
-
-    Boolean pathExists(Vector3 source, Vector3 target) {
-
-        Graph graph = new Graph(available, rows, columns);
-
-        List<Graph.Vertex> list = new List<Graph.Vertex>();
-
-        int[,] dist = new int[rows, columns];
-        Graph.Vertex[,] prev = new Graph.Vertex[rows, columns];
-
-        foreach (Graph.Vertex v in graph.Vertices()) {
-            dist[v.x, v.y] = int.MaxValue;
-            prev[v.x, v.y] = null;
-            list.Add(v);
-        }
-
-        dist[(int)source.x, (int)source.y] = 0;
-
-        while (list.Count != 0) {
-            Graph.Vertex u = findMin(list, source);
-
-            list.Remove(u);
-
-            if (u.x == (int)target.x && u.y == (int)target.y) {
-                return true;
-            }
-
-            foreach (Graph.Vertex n in u.Neighbors()) {
-                int alternative = dist[u.x, u.y] + 1;
-                if (alternative < dist[n.x, n.y]) {
-                    dist[n.x, n.y] = alternative;
-                    prev[n.x, n.y] = u;
-                }
-            }
-        }
-
-        return false;
 
     }
 
     Boolean pathExists() {
+        
+        List<Vector3> closed = new List<Vector3>();
+        List<Vector3> open = new List<Vector3>();
+        List<Vector3> fringe = new List<Vector3>();
 
-        Boolean path = true;
+        Boolean[,] test = new Boolean[columns, rows];
 
-        foreach (Vector3 door1 in doorPos) {
-            foreach (Vector3 door2 in doorPos) {
+        open.Add(doorPos[0]);
 
-                if (door1.Equals(door2)) {
-                    continue;
-                } else {
-                    if (!pathExists(door1, door2)) {
-                        path = false;
-                        break;
-                    }
+        while (open.Count > 0) {
+            foreach ( Vector3 v in open ) {
+                closed.Add(v);
+                test[(int)v.x, (int)v.y] = true;
+
+                Vector3 n = new Vector3(v.x, v.y + 1, 0f);
+                if (n.y < rows && available[(int)n.x, (int)n.y] && !closed.Contains(n) && !open.Contains(n) && !fringe.Contains(n)) {
+                    fringe.Add(n);
+                }
+
+                Vector3 e = new Vector3(v.x + 1, v.y, 0f);
+                if (e.x < columns && available[(int)e.x, (int)e.y] && !closed.Contains(e) && !open.Contains(e) && !fringe.Contains(e)) {
+                    fringe.Add(e);
+                }
+
+                Vector3 s = new Vector3(v.x, v.y - 1, 0f);
+                if (s.y >= 0 && available[(int)s.x, (int)s.y] && !closed.Contains(s) && !open.Contains(s) && !fringe.Contains(s)) {
+                    fringe.Add(s);
+                }
+
+                Vector3 w = new Vector3(v.x - 1, v.y, 0f);
+                if (w.x >= 0 && available[(int)w.x, (int)w.y] && !closed.Contains(w) && !open.Contains(w) && !fringe.Contains(w)) {
+                    fringe.Add(w);
                 }
             }
-            if (!path) {
-                break;
+            open.Clear();
+            foreach (Vector3 f in fringe) {
+                open.Add(f);
+            }
+            fringe.Clear();
+        }
+
+        foreach (Vector3 door in doorPos) {
+            if (!closed.Contains(door)) {
+                return false;
             }
         }
 
-        return path;
+        return true;
 
     }
 
@@ -391,11 +301,12 @@ public class BuildRoom : MonoBehaviour {
         dy = room.pos.y * 10.25f;
 
         BoardSetup();
-
         do {
 
+            DestroyAllObjects();
+
             InitializeList();
-            
+
             RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
             RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
 
@@ -406,6 +317,5 @@ public class BuildRoom : MonoBehaviour {
         } while (!pathExists());
 
         buildWalls(room);
-
     }
 }
