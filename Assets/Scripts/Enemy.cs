@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	private float speedMax;
+	protected float speedMax;
 	public float speed = 2f;
 
-	private float xMax;
-	private float yMax;
-	private float xMin;
-	private float yMin;
+	protected float xMax;
+	protected float yMax;
+	protected float xMin;
+	protected float yMin;
 
-	private float x;
-	private float y;
-	private float time;
+	protected float x;
+	protected float y;
+	protected float time;
+	protected float angle;
 
-	private Rigidbody2D rb2d;
-	private CircleCollider2D circleCollider;
-	private GameObject player;
-	private Transform player_pos;
+	protected Rigidbody2D rb2d;
+	protected CircleCollider2D circleCollider;
+	protected GameObject player;
+	protected Transform player_pos;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +50,7 @@ public class Enemy : MonoBehaviour {
 			Chase (player_pos);
 	}
 
-	void MoveAtRandom() {
+	protected virtual void MoveAtRandom() {
 		time += Time.deltaTime;
 
 		if (transform.localPosition.x > xMax) {
@@ -84,12 +85,10 @@ public class Enemy : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Player")) {
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
-		} else if (other.gameObject.CompareTag ("Object")) {
-			speedMax *= -1;
 		}
 	}
 
-	void Chase(Transform obj_pos) {
+	protected virtual void Chase(Transform obj_pos) {
 
 
 		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
