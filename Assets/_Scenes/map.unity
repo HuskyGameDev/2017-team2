@@ -229,17 +229,19 @@ MonoBehaviour:
   columns: 10
   rows: 10
   smallCount:
-    minimum: 10
-    maximum: 50
+    minimum: 3
+    maximum: 10
   largeCount:
     minimum: 0
     maximum: 3
   longCount:
-    minimum: 5
-    maximum: 25
-  exit: {fileID: 0}
+    minimum: 2
+    maximum: 5
+  exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
   floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
-  door: {fileID: 0}
+  door: {fileID: 1414110871066774, guid: d1d1f575af0d0f743874ac81895a777d, type: 2}
+  wall: {fileID: 1896600267040646, guid: 1a2eec28731b8a84f8e262ed0c849cb1, type: 2}
+  cornerWall: {fileID: 1742665170266142, guid: b3c39e6dbb173cc458aaca17250bd69c, type: 2}
   smallObjects:
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
@@ -267,6 +269,7 @@ MonoBehaviour:
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
   roomLength: 10
+  isEndless: 0
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0
@@ -291,11 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dde9e1f9f914344e94179bc8a3c53b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorNumber: 1
+  floorNumber: 0
   floorColor: 0
   lengthOfFloor: 7
   heightOfFloor: 5
-  minRooms: 7
-  maxRooms: 15
+  minRooms: 10
+  maxRooms: 20
   startPosX: 4
   startPosY: 3
+  numEnemies: 0
