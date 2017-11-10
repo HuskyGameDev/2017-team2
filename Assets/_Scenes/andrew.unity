@@ -615,7 +615,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
   Player: {fileID: 0}
-  life: 0
+  life: 100
+  lifeText: {fileID: 426417293}
   score: 0
   floor: 0
   scoreText: {fileID: 156801554}
@@ -940,7 +941,6 @@ GameObject:
   - component: {fileID: 1184658059}
   - component: {fileID: 1277936198}
   - component: {fileID: 1184658058}
-  - component: {fileID: 1184658057}
   - component: {fileID: 1184658056}
   m_Layer: 0
   m_Name: Player
@@ -975,25 +975,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1184658057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1184658055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c1849d0262c6d140bfcf7e9d85ecbb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2d: {fileID: 0}
-  Player: {fileID: 1184658060}
-  life: 0
-  score: 0
-  floor: 0
-  scoreText: {fileID: 0}
-  floorText: {fileID: 0}
-  lifeText: {fileID: 426417293}
 --- !u!114 &1184658058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,7 +989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2d: {fileID: 1277936198}
   Player: {fileID: 1184658060}
-  life: 0
+  life: 100
+  lifeText: {fileID: 426417293}
   score: 0
   floor: 0
 --- !u!212 &1184658059

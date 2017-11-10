@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour {
 	//stores amount of life character has
 	public int life;
 
+    // shows on-screen how much HP the player has
+    public Text lifeText;
+
     //stores the player's current score
     public int score;
 
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 	void Start()
 	{
         speed = 5;
+        life = 100;
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
@@ -82,6 +86,62 @@ public class PlayerController : MonoBehaviour {
 
 		//Change position of player
 		rb2d.MovePosition (rb2d.position + speed * movement * Time.fixedDeltaTime);
+        UpdateHP();
+    }
+    
+    void UpdateHP()
+    {
+        // For testing purposes, the player's life can be controlled using keys to simulate being healed and damaged by each of the three enemy types
+        // Player is hit by a small enemy
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            life -= 5;
+        }
 
-	}
+        // Player is hit by medium-sized enemy or its bullet 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            life -= 10;
+        }
+
+        // Player is hit by large enemy or its beam
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            life -= 25;
+        }
+
+        // Player steps on/near a healing tile
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (100 - life <= 50)
+            {
+                life = 100;
+            }
+            // else clause makes sure player can't have more than 100 HP
+            else
+            {
+                life += 50;
+            }
+        }
+
+        SetLifeText();
+
+        // check for death
+        if (life <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    void SetLifeText()
+    {
+        lifeText.text = "HP: " + life.ToString();
+    }
+
+    // This method is called when the player's HP is reduced to 0
+    void GameOver()
+    {
+        SceneManager.LoadScene(2);
+    }
+
 }

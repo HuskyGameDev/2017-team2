@@ -14,27 +14,20 @@ public class AddToCount : PlayerController {
     public Text scoreText;
     public Text floorText;
 
-    //public int endScore;
-    //public int endFloor;
-    //public Text endScoreText;
-    //public Text endFloorText;
-
     void Start () {
         score = 0;
         floor = 1;
 
-        setScoreText();
-        setFloorText();
+        SetScoreText();
+        SetFloorText();
 	}
 	
 	void Update () {
         // Update the player's progress, both score and floors cleared
-        updateProgress();
-        //endScore = score;
-        //endFloor = floor;
+        UpdateProgress();
      }
 
-    void updateProgress()
+    void UpdateProgress()
     {
         // Player defeated a small enemy
         if (Input.GetKeyDown(KeyCode.K))
@@ -59,22 +52,40 @@ public class AddToCount : PlayerController {
         {
             floor += 1;
             score += 1000;
-            setFloorText();
+            SetFloorText();
         }
 
         // Update text displayed to show player's progress
-        setScoreText();
+        SetScoreText();
     }
 
-    void setScoreText()
+    void SetScoreText()
     {
-        scoreText.text = "Score: " + score.ToString();
-        //endScoreText.text = "Your final score was " + endScore.ToString();
+        //scoreText.text = "Score: " + score.ToString();
+        
+        if (life > 0)
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+        else
+        {
+            scoreText.text = "Your final score was " + score.ToString();
+        }
+        
     }
 
-    void setFloorText()
+    void SetFloorText()
     {
-        floorText.text = "Floor: " + floor.ToString();
-        //endFloorText.text = "You completed " + endFloor.ToString() + " floor(s)";
+        //floorText.text = "Floor: " + floor.ToString();
+        
+        if (life > 0)
+        {
+            floorText.text = "Floor: " + floor.ToString();
+        }
+        else
+        {
+            floorText.text = "You completed " + floor.ToString() + " floor(s)";
+        }
+        
     }
 }
