@@ -26,14 +26,22 @@ public class BuildRoom : MonoBehaviour {
     public GameObject exit;
     public GameObject floor;
     public GameObject door;
+    public GameObject charger;
 
     public GameObject wall;
     public GameObject cornerWall;
 
-    public GameObject[] smallObjects;
-    public GameObject[] largeObjects;
-    public GameObject[] longObjects;
-    public GameObject[] specialObjects;
+    public GameObject[] smallBlue;
+    public GameObject[] smallPurple;
+    public GameObject[] smallRed;
+
+    public GameObject[] longBlue;
+    public GameObject[] longPurple;
+    public GameObject[] longRed;
+
+    public GameObject[] largeBlue;
+    public GameObject[] largePurple;
+    public GameObject[] largeRed;
 
     private List<GameObject> gameObjects;
 
@@ -100,7 +108,7 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void RandomlyLayoutSmall(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutSmall(GameObject[] array, Vector3[,] avail, int min, int max) {
 
         int count = Random.Range(min, max);
 
@@ -122,7 +130,7 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void RandomlyLayoutLong(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutLong(GameObject[] array, Vector3[,] avail, int min, int max) {
 
         int count = Random.Range(min, max);
 
@@ -168,7 +176,7 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void RandomlyLayoutLarge(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutLarge(GameObject[] array, Vector3[,] avail, int min, int max) {
 
         int count = Random.Range(min, max);
 
@@ -185,30 +193,12 @@ public class BuildRoom : MonoBehaviour {
         }
 
     }
-    //Should this exist?
-    void RandomlyLayoutSpecial(GameObject[] array, Vector3[,] avail, int min, int max) {
-
-        int count = Random.Range(min, max);
-
-        for (int i = 0; i < count; i++) {
-            int randomIndex = RandomPosition();
-            Vector3 randomPos = gridPositions[randomIndex];
-            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f, (randomPos.y) + 0.5f, 0f);
-
-            gridPositions.Remove(randomPos);
-
-            GameObject choice = array[Random.Range(0, array.Length)];
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back)));
-
-        }
-
-    }
 
     /**
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special open door with light
      */
-    private void RandomlyLayoutExit(Vector3[,] avail) {
+    private void LayoutExit(Vector3[,] avail) {
 
     }
 
@@ -383,11 +373,11 @@ public class BuildRoom : MonoBehaviour {
 
             InitializeList();
 
-            RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
-            RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
+            LayoutLong(longBlue, totalPositions, longCount.minimum, longCount.maximum);
+            LayoutSmall(smallBlue, totalPositions, smallCount.minimum, smallCount.maximum);
 
             if (room.isExit)
-                RandomlyLayoutExit(totalPositions);
+                LayoutExit(totalPositions);
             if (room.hasCharger)
                 RandomlyLayoutCharger(totalPositions);
             if (room.isEntrance)
