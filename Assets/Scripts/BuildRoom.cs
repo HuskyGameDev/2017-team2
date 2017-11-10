@@ -96,7 +96,7 @@ public class BuildRoom : MonoBehaviour {
 
     int RandomPosition() {
 
-        return Random.Range(0, gridPositions.Count);
+        return Random.Range(0, gridPositions.Count - 1);
 
     }
 
