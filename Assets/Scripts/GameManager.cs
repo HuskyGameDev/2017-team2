@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour {
      * -Could be hard coded or random
      */
     void buildFinalFloor() {
-        BuildFloor.Room finalRoom = new BuildFloor.Room(false, 0, 0, false, BuildFloor.FloorColor.BLUE);
+        BuildFloor.Room finalRoom = new BuildFloor.Room(0, 0, false, BuildFloor.FloorColor.BLUE);
         finalRoom.doorEast = roomLength / 2;
         boardScript.SetupScene(roomLength, finalRoom);
     }

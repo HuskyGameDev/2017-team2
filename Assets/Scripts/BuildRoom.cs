@@ -185,7 +185,7 @@ public class BuildRoom : MonoBehaviour {
         }
 
     }
-
+    //Should this exist?
     void RandomlyLayoutSpecial(GameObject[] array, Vector3[,] avail, int min, int max) {
 
         int count = Random.Range(min, max);
@@ -201,6 +201,30 @@ public class BuildRoom : MonoBehaviour {
             gameObjects.Add(Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back)));
 
         }
+
+    }
+
+    /**
+     * Place the exit (Stairs) in the room
+     *  -if floor color is grey, load exit as special open door with light
+     */
+    private void RandomlyLayoutExit(Vector3[,] avail) {
+
+    }
+
+    /**
+     * Place the charger in the room
+     * 
+     */
+    private void RandomlyLayoutCharger(Vector3[,] avail) {
+
+    }
+
+    /**
+     * Place U in the room
+     * 
+     */
+    private void RandomlyLayoutPlayer(Vector3[,] avail) {
 
     }
 
@@ -280,6 +304,58 @@ public class BuildRoom : MonoBehaviour {
         Instantiate(cornerWall, new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity);
     }
 
+    /**
+     * Sets the number of enemies in a room
+     * currently returns : 1/20 no enemies
+     *                     3/20 Little Enemies
+     *                     5/20 Average Enemies
+     *                     1/20 Big Enemies
+     *                     2/20 Big and Little Enemies
+     *                     5/20 Average and Little Enemies
+     *                     3/20 All Enemy types
+     * Floor Color : Blue = x1 enemies
+     *               Purple = x1.66 enemies
+     *               Red = x2.5 enemies
+     * could be tweaked to modify difficulty if desired
+     */
+    private BuildFloor.Room setEnemies(BuildFloor.Room room) {
+        int littleEnemies = 0, averageEnemies = 0, bigEnemies = 0;
+        int roomType = Random.Range(0, 19);
+        if (roomType > 0 && roomType < 4)  //Little enemies only
+            littleEnemies = Random.Range(10, 20);
+        else if (roomType > 3 && roomType < 9) //Avg enemies only
+            averageEnemies = Random.Range(4, 9);
+        else if (roomType == 9) //Big enemies only
+            bigEnemies = Random.Range(1, 3);
+        else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
+            bigEnemies = Random.Range(1, 2);
+            littleEnemies = Random.Range(7, 16);
+        } else if (roomType > 11 && roomType < 17) { //Avg and Little enemies only
+            averageEnemies = Random.Range(3, 6);
+            littleEnemies = Random.Range(5, 12);
+        } else if (roomType > 16) { //All enemy types
+            averageEnemies = Random.Range(2, 5);
+            littleEnemies = Random.Range(4, 13);
+            bigEnemies = 1;
+        }
+        if (room.color == BuildFloor.FloorColor.PURPLE) { //moderate increase in enemy number
+            averageEnemies = averageEnemies * 5 / 3;
+            littleEnemies = littleEnemies * 5 / 3;
+            bigEnemies = bigEnemies * 5 / 3;
+        }
+        if (room.color == BuildFloor.FloorColor.RED) { //large increase in enemy number
+            averageEnemies = averageEnemies * 5 / 2;
+            littleEnemies = littleEnemies * 5 / 2;
+            bigEnemies = bigEnemies * 5 / 2;
+        }
+        if (room.color == BuildFloor.FloorColor.GREY) { //no enemies
+            averageEnemies = 0;
+            littleEnemies = 0;
+            bigEnemies = 0;
+        }
+        return room;
+    }
+
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         doorPos = new List<Vector3>();
@@ -309,6 +385,14 @@ public class BuildRoom : MonoBehaviour {
 
             RandomlyLayoutLong(longObjects, totalPositions, longCount.minimum, longCount.maximum);
             RandomlyLayoutSmall(smallObjects, totalPositions, smallCount.minimum, smallCount.maximum);
+
+            if (room.isExit)
+                RandomlyLayoutExit(totalPositions);
+            if (room.hasCharger)
+                RandomlyLayoutCharger(totalPositions);
+            if (room.isEntrance)
+                RandomlyLayoutPlayer(totalPositions);
+
 
             foreach (Vector3 door in doorPos) {
                 available[(int)door.x, (int)door.y] = true;
