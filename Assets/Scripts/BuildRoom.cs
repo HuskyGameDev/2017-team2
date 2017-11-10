@@ -43,6 +43,12 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] largePurple;
     public GameObject[] largeRed;
 
+    public GameObject[] specialBlue;
+    public GameObject[] specialPurple;
+    public GameObject[] specialRed;
+
+
+
     private List<GameObject> gameObjects;
 
     private float dx;
