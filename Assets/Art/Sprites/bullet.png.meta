@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 150460c2d9eb7bc42b6023fdc20ee0db
-timeCreated: 1509064730
-=======
-guid: ee3dd487c99b4aa47887f21c4bcf3ff8
-timeCreated: 1509486289
->>>>>>> menu
+guid: 7eeacf20df67a9444bbb5555e8a63707
+timeCreated: 1509487265
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -50,15 +45,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-<<<<<<< HEAD
-<<<<<<< HEAD
-  spritePixelsToUnits: 200
-=======
   spritePixelsToUnits: 100
->>>>>>> menu
-=======
-  spritePixelsToUnits: 195.122
->>>>>>> 026a597d4c50b165ec847c08c74758e5bf46152e
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -76,33 +63,6 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-<<<<<<< HEAD
-  - buildTarget: Standalone
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: iPhone
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-=======
->>>>>>> menu
   spriteSheet:
     serializedVersion: 2
     sprites: []
