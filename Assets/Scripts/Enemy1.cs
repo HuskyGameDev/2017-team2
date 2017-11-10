@@ -41,7 +41,7 @@ public class Enemy1 : Enemy {
 
 	}
 
-	protected override void Chase(Transform obj_pos) {
+	protected override void Chase() {
 
 		time += Time.deltaTime;
 

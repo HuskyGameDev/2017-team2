@@ -46,8 +46,9 @@ public class Enemy : MonoBehaviour {
 
 		if (player == null)
 			MoveAtRandom ();
-		else
-			Chase (player_pos);
+		else {
+			Chase ();	
+		}
 	}
 
 	protected virtual void MoveAtRandom() {
@@ -90,7 +91,11 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	protected virtual void Chase(Transform obj_pos) {
+	void OnCollisionEnter2D (Collision2D other) {
+		speed = 0.0f;
+	}
+
+	protected virtual void Chase() {
 
 
 		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
