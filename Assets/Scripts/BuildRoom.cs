@@ -25,11 +25,13 @@ public class BuildRoom : MonoBehaviour {
 
     public GameObject exit;
     public GameObject floor;
-    public GameObject door;
     public GameObject charger;
 
-    public GameObject wall;
-    public GameObject cornerWall;
+    //Indices for each colored wall and corner 
+    private const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
+    public GameObject[] wall; //Holds all wall types, access by color above
+    public GameObject[] cornerWall; //Holds all corner types, access by color above
+    public GameObject[] door;
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -277,27 +279,35 @@ public class BuildRoom : MonoBehaviour {
     }
 
     void buildWalls(BuildFloor.Room room) {
+        int color = 0;
+        if (room.color == BuildFloor.FloorColor.BLUE)
+            color = BLUE;
+        if (room.color == BuildFloor.FloorColor.PURPLE)
+            color = PURPLE;
+        if (room.color == BuildFloor.FloorColor.RED)
+            color = RED;
+
         for (int i = 0; i < rows; i++) {
             if (room.doorWest != i)
-                Instantiate(wall, new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
+                Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
             else
-                Instantiate(door, new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
+                Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
             if (room.doorEast != i)
-                Instantiate(wall, new Vector3(dx + 10.0625f, dy + i + .5f, 0), Quaternion.identity);
+                Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), Quaternion.identity);
         }
         Quaternion rotation = Quaternion.AngleAxis(90, Vector3.back);
         for (int i = 0; i < columns; i++) {
             if (room.doorNorth != i)
-                Instantiate(wall, new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
+                Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
             else
-                Instantiate(door, new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
+                Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
             if (room.doorSouth != i)
-                Instantiate(wall, new Vector3(dx + i + .5f, dy - .0625f, 0), rotation);
+                Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), rotation);
         }
-        Instantiate(cornerWall, new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall, new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall, new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall, new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity);
     }
 
     /**
