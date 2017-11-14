@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public BuildFloor floorScript;
     public BuildRoom boardScript;
     public int roomLength;
+    public int numFloors;
     public bool isEndless;
 
     // Use this for initialization
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour {
     //Should transition scene to load, generate a new floor
     void nextFloor() {
         //loads the final floor if it's the end of story mode, increments floor
-        if (++floorScript.floorNumber == 21 && !isEndless)
+        if (++floorScript.floorNumber == numFloors + 1 && !isEndless)
             buildFinalFloor();
         else
             buildFloor();
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour {
      * -Could be hard coded or random
      */
     void buildFinalFloor() {
-        BuildFloor.Room finalRoom = new BuildFloor.Room(0, 0, false, BuildFloor.FloorColor.BLUE);
+        BuildFloor.Room finalRoom = new BuildFloor.Room(0, 0, false, BuildFloor.FloorColor.GREY);
         finalRoom.doorEast = roomLength / 2;
         boardScript.SetupScene(roomLength, finalRoom);
     }

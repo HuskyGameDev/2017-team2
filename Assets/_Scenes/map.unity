@@ -244,10 +244,12 @@ MonoBehaviour:
   - {fileID: 1440629923792200, guid: d5de8a0c2014c4242a845e28c28f96f3, type: 2}
   - {fileID: 1396741786450860, guid: 443e3c4c93669064eb000cb8ef8169aa, type: 2}
   - {fileID: 1029412631702660, guid: c7e2a68574c675645b390463d44fd055, type: 2}
+  - {fileID: 1719665453028258, guid: fb1cb967a09e410458b77171852ff59c, type: 2}
   cornerWall:
   - {fileID: 1338027362503060, guid: 9c1f9cbe920573d4dbaa2c8d73f47f3f, type: 2}
   - {fileID: 1128078457307948, guid: c85280778564b2e4aadb54b33776f652, type: 2}
   - {fileID: 1551747987314794, guid: 3e33abd3a04dabb428bee1445b43d19c, type: 2}
+  - {fileID: 1512653800973138, guid: 9708e6798efaae547b7b8b6425100a4a, type: 2}
   door:
   - {fileID: 1709638493399140, guid: edabdff36babe9e4b9211d9772e65951, type: 2}
   - {fileID: 1066078336116302, guid: 2fdd67943ed9f06428cae6f77d7834d9, type: 2}
@@ -271,7 +273,8 @@ MonoBehaviour:
   - {fileID: 1788770410756790, guid: 2f0616729b4f69141a4d5d1202604064, type: 2}
   largePurple:
   - {fileID: 1963495448383378, guid: 27cde7979bc689e44a493b0542652d38, type: 2}
-  largeRed: []
+  largeRed:
+  - {fileID: 1564177830452636, guid: 873403536a2c2ec488789e1f1638cb57, type: 2}
   specialBlue: []
   specialPurple:
   - {fileID: 1705383130788840, guid: a4d292cec73569547bd12c444062aa4c, type: 2}
@@ -291,6 +294,7 @@ MonoBehaviour:
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
   roomLength: 10
+  numFloors: 20
   isEndless: 0
 --- !u!4 &2074431842
 Transform:
