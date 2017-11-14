@@ -24,7 +24,6 @@ public class BuildRoom : MonoBehaviour {
     public Count longCount = new Count(5, 10);
 
     public GameObject exit;
-    public GameObject floor;
     public GameObject charger;
 
     //Indices for each colored wall and corner 
@@ -32,6 +31,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] wall; //Holds all wall types, access by color above
     public GameObject[] cornerWall; //Holds all corner types, access by color above
     public GameObject[] door;
+    public GameObject[] floor;
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -75,7 +75,7 @@ public class BuildRoom : MonoBehaviour {
 
                 Vector3 newPos = new Vector3(x, y, 0f);
                 totalPositions[x, y] = newPos;
-                
+
                 bool doorCheck = true;
                 foreach (Vector3 door in doorPos) {
                     if (newPos.Equals(door)) {
@@ -227,7 +227,7 @@ public class BuildRoom : MonoBehaviour {
     }
 
     Boolean pathExists() {
-        
+
         List<Vector3> closed = new List<Vector3>();
         List<Vector3> open = new List<Vector3>();
         List<Vector3> fringe = new List<Vector3>();
@@ -237,7 +237,7 @@ public class BuildRoom : MonoBehaviour {
         open.Add(doorPos[0]);
 
         while (open.Count > 0) {
-            foreach ( Vector3 v in open ) {
+            foreach (Vector3 v in open) {
                 closed.Add(v);
                 test[(int)v.x, (int)v.y] = true;
 
@@ -280,34 +280,52 @@ public class BuildRoom : MonoBehaviour {
 
     void buildWalls(BuildFloor.Room room) {
         int color = 0;
-        if (room.color == BuildFloor.FloorColor.BLUE)
+        if (room.color == BuildFloor.FloorColor.BLUE) {
             color = BLUE;
-        if (room.color == BuildFloor.FloorColor.PURPLE)
+        }
+        if (room.color == BuildFloor.FloorColor.PURPLE) {
             color = PURPLE;
-        if (room.color == BuildFloor.FloorColor.RED)
+        }
+        if (room.color == BuildFloor.FloorColor.RED) {
             color = RED;
+        }
+
+        Quaternion eastRotation = Quaternion.identity;
+        Quaternion westRotation = Quaternion.AngleAxis(180, Vector3.back);
+        Quaternion southRotation = Quaternion.AngleAxis(90, Vector3.back);
+        Quaternion northRotation = Quaternion.AngleAxis(270, Vector3.back);
 
         for (int i = 0; i < rows; i++) {
-            if (room.doorWest != i)
-                Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
-            else
-                Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), Quaternion.identity);
-            if (room.doorEast != i)
-                Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), Quaternion.identity);
+            if (room.doorWest != i) {
+                // Left
+                Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+            } else {
+                // Left
+                Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+            }
+            if (room.doorEast != i) {
+                // Right
+                Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation);
+            }
         }
-        Quaternion rotation = Quaternion.AngleAxis(90, Vector3.back);
+
         for (int i = 0; i < columns; i++) {
-            if (room.doorNorth != i)
-                Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
-            else
-                Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), rotation);
-            if (room.doorSouth != i)
-                Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), rotation);
+            if (room.doorNorth != i) {
+                // Top
+                Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+            } else {
+                // Top
+                Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+            }
+            if (room.doorSouth != i) {
+                // Bottom
+                Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), southRotation);
+            }
         }
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.identity);
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity);
+        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.AngleAxis(180, Vector3.back)); // Bottom Left
+        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.AngleAxis(90, Vector3.back)); // Bottom Right
+        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.AngleAxis(270, Vector3.back)); // Top Left
+        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity); // Top Right
     }
 
     /**
@@ -324,16 +342,21 @@ public class BuildRoom : MonoBehaviour {
      *               Red = x2.5 enemies
      * could be tweaked to modify difficulty if desired
      */
+
     private BuildFloor.Room setEnemies(BuildFloor.Room room) {
-        int littleEnemies = 0, averageEnemies = 0, bigEnemies = 0;
+        int littleEnemies = 0;
+        int averageEnemies = 0;
+        int bigEnemies = 0;
+
         int roomType = Random.Range(0, 19);
-        if (roomType > 0 && roomType < 4)  //Little enemies only
+
+        if (roomType > 0 && roomType < 4) { //Little enemies only
             littleEnemies = Random.Range(10, 20);
-        else if (roomType > 3 && roomType < 9) //Avg enemies only
+        } else if (roomType > 3 && roomType < 9) { //Avg enemies only
             averageEnemies = Random.Range(4, 9);
-        else if (roomType == 9) //Big enemies only
+        } else if (roomType == 9) { //Big enemies only
             bigEnemies = Random.Range(1, 3);
-        else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
+        } else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
             bigEnemies = Random.Range(1, 2);
             littleEnemies = Random.Range(7, 16);
         } else if (roomType > 11 && roomType < 17) { //Avg and Little enemies only
@@ -344,6 +367,7 @@ public class BuildRoom : MonoBehaviour {
             littleEnemies = Random.Range(4, 13);
             bigEnemies = 1;
         }
+
         if (room.color == BuildFloor.FloorColor.PURPLE) { //moderate increase in enemy number
             averageEnemies = averageEnemies * 5 / 3;
             littleEnemies = littleEnemies * 5 / 3;
@@ -359,6 +383,7 @@ public class BuildRoom : MonoBehaviour {
             littleEnemies = 0;
             bigEnemies = 0;
         }
+
         return room;
     }
 
