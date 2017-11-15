@@ -3,42 +3,88 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AddToCount : MonoBehaviour {
+/*
+ * Andrew Stanley
+ * created single method to update the player's score based on what enemy was defeated
+ * Created additional text variables to update end game messages
+ */
+ 
+public class AddToCount : PlayerController {
 
-    public int score;
-    public int floor;
     public Text scoreText;
     public Text floorText;
-   
+
     void Start () {
-        score = 0;
-        floor = 0;
         SetScoreText();
-        setFloorText();
+        SetFloorText();
 	}
 	
 	void Update () {
+        // Update the player's progress, both score and floors cleared
+        UpdateProgress();
+     }
+
+    void UpdateProgress()
+    {
+        // Player defeated a small enemy
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            score += 100;
+        }
+
+        // Player defeated a medium enemy
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            score += 250;
+        }
+
+        // Player defeated a large enemy
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            score += 500;
+        }
+
+        // Player cleared a floor
         if (Input.GetKeyDown(KeyCode.E))
         {
-            score = score + 10;
-            SetScoreText();
+            floor += 1;
+            score += 1000;
+            SetFloorText();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            floor = floor + 1;
-            setFloorText();
-        }
-
-     }
+        // Update text displayed to show player's progress
+        SetScoreText();
+    }
 
     void SetScoreText()
     {
-        scoreText.text = "Score: " + score.ToString();
+        //scoreText.text = "Score: " + score.ToString();
+        
+        if (life <= 0)
+        {
+            scoreText.text = "Your final score was " + score.ToString();
+        }
+        else
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+        
+        
     }
 
-    void setFloorText()
+    void SetFloorText()
     {
-        floorText.text = "Floor: " + floor.ToString();
+        //floorText.text = "Floor: " + floor.ToString();
+        
+        if (life <= 0)
+        {
+            floorText.text = "You completed " + floor.ToString() + " floor(s)"; 
+        }
+        else
+        {
+            floorText.text = "Floor: " + floor.ToString();
+        }
+        
+        
     }
 }

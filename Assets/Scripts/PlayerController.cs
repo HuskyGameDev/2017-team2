@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,8 +11,6 @@ using System.Collections.Generic;
  * Added gun and melee attack functions to this script - Codey
  */
 
-
-/* Structure for storing a bullet with the mouse position at the time the bullet is created */
 struct bulletStruct
 {
     private GameObject bullet;
@@ -82,6 +82,9 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
 
+        score = 0;
+        floor = 1;
+
         // Set speed of bullet
         bulletSpeed = 20;
         //bulletAttack.enabled = false;
@@ -123,6 +126,8 @@ public class PlayerController : MonoBehaviour
 
         //Change position of player
         rb2d.MovePosition(rb2d.position + speed * movement * Time.fixedDeltaTime);
+
+        UpdateHP();
 
         /* Call methods to handle shooting and slashing */
         shoot();
@@ -214,5 +219,60 @@ public class PlayerController : MonoBehaviour
                 wait = 10;
             }
         }
+    }
+
+    void UpdateHP()
+    {
+        // For testing purposes, the player's life can be controlled using keys to simulate being healed and damaged by each of the three enemy types
+        // Player is hit by a small enemy
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            life -= 5;
+        }
+
+        // Player is hit by medium-sized enemy or its bullet 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            life -= 10;
+        }
+
+        // Player is hit by large enemy or its beam
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            life -= 25;
+        }
+
+        // Player steps on/near a healing tile
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (100 - life <= 50)
+            {
+                life = 100;
+            }
+            // else clause makes sure player can't have more than 100 HP
+            else
+            {
+                life += 50;
+            }
+        }
+
+        SetLifeText();
+
+        // check for death
+        if (life <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    void SetLifeText()
+    {
+        lifeText.text = "HP: " + life.ToString();
+    }
+
+    // This method is called when the player's HP is reduced to 0
+    void GameOver()
+    {
+        SceneManager.LoadScene(2);
     }
 }
