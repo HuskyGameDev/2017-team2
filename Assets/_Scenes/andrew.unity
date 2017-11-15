@@ -614,11 +614,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
-  Player: {fileID: 0}
+  Player: {fileID: 1184658060}
   life: 100
-  lifeText: {fileID: 426417293}
   score: 0
   floor: 1
+  lifeText: {fileID: 426417293}
+  speed: 0
+  bulletPrefab: {fileID: 0}
+  meleeAttack: {fileID: 0}
   scoreText: {fileID: 156801554}
   floorText: {fileID: 1661163403}
 --- !u!114 &1006905115
@@ -649,6 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1162962973}
+  player: {fileID: 1184658055}
 --- !u!4 &1006905117
 Transform:
   m_ObjectHideFlags: 0
@@ -990,9 +994,12 @@ MonoBehaviour:
   rb2d: {fileID: 1277936198}
   Player: {fileID: 1184658060}
   life: 100
-  lifeText: {fileID: 426417293}
   score: 0
-  floor: 0
+  floor: 1
+  lifeText: {fileID: 426417293}
+  speed: 5
+  bulletPrefab: {fileID: 0}
+  meleeAttack: {fileID: 0}
 --- !u!212 &1184658059
 SpriteRenderer:
   m_ObjectHideFlags: 0

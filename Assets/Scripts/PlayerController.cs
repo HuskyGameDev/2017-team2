@@ -57,7 +57,11 @@ public class PlayerController : MonoBehaviour
     private float angle;
 
     //stores amount of life character has
-    private float life;
+    public float life;
+
+    public int score;
+    public int floor;
+    public Text lifeText;
 
     public float speed;
 
