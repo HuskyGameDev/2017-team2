@@ -229,16 +229,15 @@ MonoBehaviour:
   columns: 10
   rows: 10
   smallCount:
-    minimum: 3
-    maximum: 10
+    minimum: 2
+    maximum: 9
   largeCount:
     minimum: 0
-    maximum: 3
+    maximum: 2
   longCount:
-    minimum: 2
+    minimum: 1
     maximum: 5
   exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
-  floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
   charger: {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
   wall:
   - {fileID: 1440629923792200, guid: d5de8a0c2014c4242a845e28c28f96f3, type: 2}
@@ -254,6 +253,10 @@ MonoBehaviour:
   - {fileID: 1709638493399140, guid: edabdff36babe9e4b9211d9772e65951, type: 2}
   - {fileID: 1066078336116302, guid: 2fdd67943ed9f06428cae6f77d7834d9, type: 2}
   - {fileID: 1964925961597512, guid: 8dda8f8139c3c8546aa8b45b3895e701, type: 2}
+  floor:
+  - {fileID: 1572342799553972, guid: 569e30a0e97db664c8b940eb573adf5f, type: 2}
+  - {fileID: 1117119940692598, guid: 2598af3914e393343b9248722a1554ce, type: 2}
+  - {fileID: 1037340786115698, guid: d479b72e8df6607429b9c18f0af7f33e, type: 2}
   smallBlue:
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
@@ -275,7 +278,8 @@ MonoBehaviour:
   - {fileID: 1963495448383378, guid: 27cde7979bc689e44a493b0542652d38, type: 2}
   largeRed:
   - {fileID: 1564177830452636, guid: 873403536a2c2ec488789e1f1638cb57, type: 2}
-  specialBlue: []
+  specialBlue:
+  - {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
   specialPurple:
   - {fileID: 1705383130788840, guid: a4d292cec73569547bd12c444062aa4c, type: 2}
   specialRed:

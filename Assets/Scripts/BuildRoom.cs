@@ -28,10 +28,10 @@ public class BuildRoom : MonoBehaviour {
 
     //Indices for each colored wall and corner 
     private const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
-    public GameObject[] wall; //Holds all wall types, access by color above
-    public GameObject[] cornerWall; //Holds all corner types, access by color above
-    public GameObject[] door;
-    public GameObject[] floor;
+    public GameObject[] wall; // Holds all wall types, access by color above
+    public GameObject[] cornerWall; // Holds all corner types, access by color above
+    public GameObject[] door; // Holds all corner types, access by color above
+    public GameObject[] floor; // Holds all corner types, access by color above
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -50,6 +50,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
 
 
+    private int color;
 
     private List<GameObject> gameObjects;
 
@@ -60,13 +61,11 @@ public class BuildRoom : MonoBehaviour {
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
-    private Vector3[,] totalPositions;
     private Boolean[,] available;
 
     void InitializeList() {
 
         gridPositions.Clear();
-        totalPositions = new Vector3[columns, rows];
         available = new Boolean[columns, rows];
 
         for (int x = 0; x < columns; x++) {
@@ -74,7 +73,6 @@ public class BuildRoom : MonoBehaviour {
             for (int y = 0; y < rows; y++) {
 
                 Vector3 newPos = new Vector3(x, y, 0f);
-                totalPositions[x, y] = newPos;
 
                 bool doorCheck = true;
                 foreach (Vector3 door in doorPos) {
@@ -100,7 +98,7 @@ public class BuildRoom : MonoBehaviour {
         gameObjects = new List<GameObject>();
         boardHolder = new GameObject("Board").transform;
 
-        GameObject floorInstance = Instantiate(floor, new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
+        GameObject floorInstance = Instantiate(floor[color], new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
         floorInstance.transform.SetParent(boardHolder);
     }
 
@@ -116,7 +114,7 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void LayoutSmall(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutSmall(GameObject[] array, int min, int max) {
 
         int count = Random.Range(min, max);
 
@@ -138,7 +136,7 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void LayoutLong(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutLong(GameObject[] array, int min, int max) {
 
         int count = Random.Range(min, max);
 
@@ -184,21 +182,145 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    void LayoutLarge(GameObject[] array, Vector3[,] avail, int min, int max) {
+    void LayoutLarge(GameObject[] array, int min, int max) {
 
         int count = Random.Range(min, max);
 
         for (int i = 0; i < count; i++) {
-            int randomIndex = RandomPosition();
-            Vector3 randomPos = gridPositions[randomIndex];
-            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+            float rotDegrees = Random.Range(0, 3) * 90f;
+            Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+
+            int randomIndex;
+            Vector3 randomPos;
+            if (rotDegrees % 180 == 0) {
+                do {
+                    randomIndex = RandomPosition();
+                    randomPos = gridPositions[randomIndex];
+                } while (!LargeClear(randomPos, true));
+            } else {
+                do {
+                    randomIndex = RandomPosition();
+                    randomPos = gridPositions[randomIndex];
+                } while (!LargeClear(randomPos, false));
+            }
+
+            Vector3 actualPos;
+            if (rotDegrees % 180 == 0) {
+                actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 1.5f + dy, 0f);
+
+                for (int x = (int)randomPos.x; x <= (int)randomPos.x + 1; x++) {
+                    for (int y = (int)randomPos.y; y <= (int)randomPos.y + 2; y++) {
+                        gridPositions.Remove(new Vector3(x, y, randomPos.z));
+                        available[x, y] = false;
+                    }
+                }
+
+            } else {
+                actualPos = new Vector3((randomPos.x) + 1.5f + dx, (randomPos.y) + 1f + dy, 0f);
+
+                for (int x = (int)randomPos.x; x <= (int)randomPos.x + 2; x++) {
+                    for (int y = (int)randomPos.y; y <= (int)randomPos.y + 1; y++) {
+                        gridPositions.Remove(new Vector3(x, y, randomPos.z));
+                        available[x, y] = false;
+                    }
+                }
+            }
 
             gridPositions.Remove(randomPos);
 
             GameObject choice = array[Random.Range(0, array.Length)];
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.AngleAxis(90f * Random.Range(0, 3), Vector3.back)));
+            gameObjects.Add(Instantiate(choice, actualPos, rotation));
 
         }
+
+    }
+
+    Boolean LargeClear(Vector3 pos, Boolean vert) {
+        // pos is bottom left corner of object
+        if (vert) {
+            if (pos.y > rows - 3 || pos.x > columns - 2) {
+                return false;
+            }
+
+            for (int x = (int)pos.x; x <= (int)pos.x + 1; x++) {
+                for (int y = (int)pos.y; y <= (int)pos.y + 2; y++) {
+                    if (!available[x, y]) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        } else {
+            if (pos.y > rows - 2 || pos.x > columns - 3) {
+                return false;
+            }
+
+            for (int x = (int)pos.x; x <= (int)pos.x + 2; x++) {
+                for (int y = (int)pos.y; y <= (int)pos.y + 1; y++) {
+                    if (!available[x, y]) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
+
+    /**
+     * Place the charger in the room
+     * 
+     */
+    private void RandomlyLayoutCharger(GameObject[] array) {
+        float rotDegrees = Random.Range(0, 3) * 90f;
+        Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+
+        int randomIndex;
+        Vector3 randomPos;
+        do {
+            randomIndex = RandomPosition();
+            randomPos = gridPositions[randomIndex];
+            print(randomPos.ToString());
+        } while (!SpecialClear(randomPos));
+
+        Vector3 actualPos;
+        actualPos = new Vector3((randomPos.x) + 1.5f + dx, (randomPos.y) + 1.5f + dy, 0f);
+
+        for (int x = (int)randomPos.x; x <= (int)randomPos.x + 2; x++) {
+            for (int y = (int)randomPos.y; y <= (int)randomPos.y + 2; y++) {
+                gridPositions.Remove(new Vector3(x, y, randomPos.z));
+                available[x, y] = false;
+            }
+        }
+
+        GameObject choice = array[Random.Range(0, array.Length)];
+        gameObjects.Add(Instantiate(choice, actualPos, rotation));
+
+    }
+
+    Boolean SpecialClear(Vector3 pos) {
+        // pos is bottom left corner of object
+        if (pos.y > rows - 3 || pos.x > columns - 3) {
+            return false;
+        }
+
+        for (int x = (int)pos.x; x <= (int)pos.x + 2; x++) {
+            for (int y = (int)pos.y; y <= (int)pos.y + 2; y++) {
+                if (!available[x, y]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Place U in the room
+     * 
+     */
+    private void RandomlyLayoutPlayer(Vector3[,] avail) {
 
     }
 
@@ -210,21 +332,6 @@ public class BuildRoom : MonoBehaviour {
 
     }
 
-    /**
-     * Place the charger in the room
-     * 
-     */
-    private void RandomlyLayoutCharger(Vector3[,] avail) {
-
-    }
-
-    /**
-     * Place U in the room
-     * 
-     */
-    private void RandomlyLayoutPlayer(Vector3[,] avail) {
-
-    }
 
     Boolean pathExists() {
 
@@ -279,16 +386,6 @@ public class BuildRoom : MonoBehaviour {
     }
 
     void buildWalls(BuildFloor.Room room) {
-        int color = 0;
-        if (room.color == BuildFloor.FloorColor.BLUE) {
-            color = BLUE;
-        }
-        if (room.color == BuildFloor.FloorColor.PURPLE) {
-            color = PURPLE;
-        }
-        if (room.color == BuildFloor.FloorColor.RED) {
-            color = RED;
-        }
 
         Quaternion eastRotation = Quaternion.identity;
         Quaternion westRotation = Quaternion.AngleAxis(180, Vector3.back);
@@ -390,6 +487,42 @@ public class BuildRoom : MonoBehaviour {
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         doorPos = new List<Vector3>();
+        GameObject[] smalls;
+        GameObject[] longs;
+        GameObject[] larges;
+        GameObject[] specials;
+
+        if (room.color == BuildFloor.FloorColor.BLUE) {
+            color = BLUE;
+        } else if (room.color == BuildFloor.FloorColor.PURPLE) {
+            color = PURPLE;
+        } else if (room.color == BuildFloor.FloorColor.RED) {
+            color = RED;
+        }
+
+        color = PURPLE;
+
+        if (color == BLUE) {
+            smalls = smallBlue;
+            longs = longBlue;
+            larges = largeBlue;
+            specials = specialBlue;
+        } else if (color == PURPLE) {
+            smalls = smallPurple;
+            longs = longPurple;
+            larges = largePurple;
+            specials = specialPurple;
+        } else if (color == RED) {
+            smalls = smallRed;
+            longs = longRed;
+            larges = largeRed;
+            specials = specialRed;
+        } else {
+            smalls = smallRed;
+            longs = longRed;
+            larges = largeRed;
+            specials = specialRed;
+        }
 
         if (room.doorNorth != -1) {
             doorPos.Add(new Vector3(room.doorNorth, rows - 1, 0f));
@@ -414,16 +547,20 @@ public class BuildRoom : MonoBehaviour {
 
             InitializeList();
 
-            LayoutLong(longBlue, totalPositions, longCount.minimum, longCount.maximum);
-            LayoutSmall(smallBlue, totalPositions, smallCount.minimum, smallCount.maximum);
+            if (room.hasCharger) {
+                RandomlyLayoutCharger(specials);
+            }
 
-            if (room.isExit)
-                LayoutExit(totalPositions);
-            if (room.hasCharger)
-                RandomlyLayoutCharger(totalPositions);
-            if (room.isEntrance)
-                RandomlyLayoutPlayer(totalPositions);
+            LayoutLarge(larges, largeCount.minimum, largeCount.maximum);
+            LayoutLong(longs, longCount.minimum, longCount.maximum);
+            LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
+            if (room.isExit) {
+                // LayoutExit();
+            }
+            if (room.isEntrance) {
+                // RandomlyLayoutPlayer();
+            }
 
             foreach (Vector3 door in doorPos) {
                 available[(int)door.x, (int)door.y] = true;
