@@ -15,9 +15,6 @@ public class AddToCount : PlayerController {
     public Text floorText;
 
     void Start () {
-        score = 0;
-        floor = 1;
-
         SetScoreText();
         SetFloorText();
 	}
@@ -63,14 +60,15 @@ public class AddToCount : PlayerController {
     {
         //scoreText.text = "Score: " + score.ToString();
         
-        if (life > 0)
-        {
-            scoreText.text = "Score: " + score.ToString();
-        }
-        else
+        if (life <= 0)
         {
             scoreText.text = "Your final score was " + score.ToString();
         }
+        else
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+        
         
     }
 
@@ -78,14 +76,15 @@ public class AddToCount : PlayerController {
     {
         //floorText.text = "Floor: " + floor.ToString();
         
-        if (life > 0)
+        if (life <= 0)
         {
-            floorText.text = "Floor: " + floor.ToString();
+            floorText.text = "You completed " + floor.ToString() + " floor(s)"; 
         }
         else
         {
-            floorText.text = "You completed " + floor.ToString() + " floor(s)";
+            floorText.text = "Floor: " + floor.ToString();
         }
+        
         
     }
 }

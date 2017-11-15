@@ -618,7 +618,7 @@ MonoBehaviour:
   life: 100
   lifeText: {fileID: 426417293}
   score: 0
-  floor: 0
+  floor: 1
   scoreText: {fileID: 156801554}
   floorText: {fileID: 1661163403}
 --- !u!114 &1006905115
@@ -1106,11 +1106,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3ae501c2bb832b64a97544eec2a0b38f, type: 3}
-    m_FontSize: 48
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 48
+    m_MaxSize: 72
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1504,7 +1504,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3ae501c2bb832b64a97544eec2a0b38f, type: 3}
-    m_FontSize: 48
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour {
 	{
         speed = 5;
         life = 100;
+        floor = 1;
+        score = 0;
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D> ();
 	}
