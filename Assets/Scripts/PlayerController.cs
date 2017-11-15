@@ -17,7 +17,6 @@ struct bulletStruct
     private Vector3 pos;
     private Collider2D bulletAtk;
 
-
     public void setObj(GameObject newBullet)
     {
         bullet = newBullet;
@@ -36,23 +35,6 @@ struct bulletStruct
     public Vector3 getPos()
     {
         return pos;
-    }
-
-    public void setColliderVar(Collider2D col)
-    {
-        bulletAtk = col;
-    }
-    public void setCollider(bool set)
-    {
-        if(set)
-        {
-            bulletAtk.enabled = true;
-        }
-
-        else
-        {
-            bulletAtk.enabled = false;
-        }
     }
 }
 
@@ -84,7 +66,6 @@ public class PlayerController : MonoBehaviour
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
-    public Collider2D bulletAttack;
 
     // Object for slashing
     private int wait = 10;
@@ -103,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         // Set speed of bullet
         bulletSpeed = 20;
-        bulletAttack.enabled = false;
+        //bulletAttack.enabled = false;
 
         // Set melee attack stuff
         meleeAttack.enabled = false;
@@ -159,12 +140,13 @@ public class PlayerController : MonoBehaviour
             {
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.AddComponent<BoxCollider2D>();
+                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
+                bullet.AddComponent<bulletAttack>();
                 Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
                 Vector3 pos = (Input.mousePosition - sp).normalized;
                 newBullet.setPos(pos);
                 newBullet.setObj(bullet);
-                newBullet.setColliderVar(bulletAttack);
-                newBullet.setCollider(true);
                 bullets.Add(newBullet);
                 ableToShoot++;
             }
@@ -184,22 +166,25 @@ public class PlayerController : MonoBehaviour
         // For every bullet on screen move towards the mouse position it was shot at
         for (int i = 0; i < bullets.Count; i++)
         {
+
             GameObject movingBullet = bullets[i].getObj();
 
             if (movingBullet != null)
             {
 
                 movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
-                bulletAttack.enabled = true;
-            }
+                // bullets[i].setCollider(true);
 
-            Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
 
-            // Remove bullet if off screen
-            if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0)
-            {
-                DestroyObject(movingBullet);
-                bullets.Remove(bullets[i]);
+
+                Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
+
+                // Remove bullet if off screen
+                if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0)
+                {
+                    DestroyObject(movingBullet);
+                    bullets.Remove(bullets[i]);
+                }
             }
         }
     }

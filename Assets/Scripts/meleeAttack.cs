@@ -8,6 +8,8 @@ public class meleeAttack : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+
+       
         if (col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
             print("kapow");
