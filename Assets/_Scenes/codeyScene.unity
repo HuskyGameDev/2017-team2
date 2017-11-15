@@ -1146,6 +1146,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
+--- !u!95 &1234045388
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1234045386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c5482f3748171c4f8da0cadc6eba632, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1234045391 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4835058896083014, guid: be241fb72e093974fae97d7a0e3c06e4,
@@ -1337,11 +1354,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4835058896083014, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4835058896083014, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4835058896083014, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
       propertyPath: m_LocalScale.z
