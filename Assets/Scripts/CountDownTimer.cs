@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour {
 
@@ -10,12 +11,12 @@ public class CountDownTimer : MonoBehaviour {
     public Text timerText;
     public int seconds;
     public int minutes;
-    public float miliseconds;
+    public float milliseconds;
 
 	// Use this for initialization
 	void Start () {
         time = 120.0f;
-        miliseconds = 0;
+        milliseconds = 0;
         minutes = 0;
         seconds = 0;
 	}
@@ -27,19 +28,25 @@ public class CountDownTimer : MonoBehaviour {
         minutes = (int)time / 60;
         seconds = (int) time % 60;
 
-        if(miliseconds <= 0)
+        if(milliseconds <= 0)
         {
-            miliseconds = 99;
+            milliseconds = 99;
         }
 
-        miliseconds =  time % 1;
-        miliseconds = miliseconds * 100;
+        milliseconds =  time % 1;
+        milliseconds = milliseconds * 100;
         SetCountText();
+
+        // If time runs out, end the game
+        if (minutes <= 0 && seconds <= 0 && milliseconds <= 0)
+        {
+            SceneManager.LoadScene(2);
+        }
 	}
 
     void SetCountText()
     {
-        timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + miliseconds.ToString("00");
+        timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
     }
 
 }

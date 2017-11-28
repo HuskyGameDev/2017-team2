@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,14 +11,11 @@ using System.Collections.Generic;
  * Added gun and melee attack functions to this script - Codey
  */
 
-
-/* Structure for storing a bullet with the mouse position at the time the bullet is created */
 struct bulletStruct
 {
     private GameObject bullet;
     private Vector3 pos;
     private Collider2D bulletAtk;
-
 
     public void setObj(GameObject newBullet)
     {
@@ -36,23 +35,6 @@ struct bulletStruct
     public Vector3 getPos()
     {
         return pos;
-    }
-
-    public void setColliderVar(Collider2D col)
-    {
-        bulletAtk = col;
-    }
-    public void setCollider(bool set)
-    {
-        if(set)
-        {
-            bulletAtk.enabled = true;
-        }
-
-        else
-        {
-            bulletAtk.enabled = false;
-        }
     }
 }
 
@@ -75,7 +57,11 @@ public class PlayerController : MonoBehaviour
     private float angle;
 
     //stores amount of life character has
-    private float life;
+    public float life;
+
+    public int score;
+    public int floor;
+    public Text lifeText;
 
     public float speed;
 
@@ -84,7 +70,6 @@ public class PlayerController : MonoBehaviour
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
-    public Collider2D bulletAttack;
 
     // Object for slashing
     private int wait = 10;
@@ -101,9 +86,12 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
 
+        score = 0;
+        floor = 1;
+
         // Set speed of bullet
         bulletSpeed = 20;
-        bulletAttack.enabled = false;
+        //bulletAttack.enabled = false;
 
         // Set melee attack stuff
         meleeAttack.enabled = false;
@@ -143,6 +131,8 @@ public class PlayerController : MonoBehaviour
         //Change position of player
         rb2d.MovePosition(rb2d.position + speed * movement * Time.fixedDeltaTime);
 
+        UpdateHP();
+
         /* Call methods to handle shooting and slashing */
         shoot();
         slash();
@@ -159,12 +149,13 @@ public class PlayerController : MonoBehaviour
             {
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                bullet.AddComponent<BoxCollider2D>();
+                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
+                bullet.AddComponent<bulletAttack>();
                 Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
                 Vector3 pos = (Input.mousePosition - sp).normalized;
                 newBullet.setPos(pos);
                 newBullet.setObj(bullet);
-                newBullet.setColliderVar(bulletAttack);
-                newBullet.setCollider(true);
                 bullets.Add(newBullet);
                 ableToShoot++;
             }
@@ -184,22 +175,25 @@ public class PlayerController : MonoBehaviour
         // For every bullet on screen move towards the mouse position it was shot at
         for (int i = 0; i < bullets.Count; i++)
         {
+
             GameObject movingBullet = bullets[i].getObj();
 
             if (movingBullet != null)
             {
 
                 movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
-                bulletAttack.enabled = true;
-            }
+                // bullets[i].setCollider(true);
 
-            Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
 
-            // Remove bullet if off screen
-            if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0)
-            {
-                DestroyObject(movingBullet);
-                bullets.Remove(bullets[i]);
+
+                Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
+
+                // Remove bullet if off screen
+                if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0)
+                {
+                    DestroyObject(movingBullet);
+                    bullets.Remove(bullets[i]);
+                }
             }
         }
     }
@@ -229,5 +223,60 @@ public class PlayerController : MonoBehaviour
                 wait = 10;
             }
         }
+    }
+
+    void UpdateHP()
+    {
+        // For testing purposes, the player's life can be controlled using keys to simulate being healed and damaged by each of the three enemy types
+        // Player is hit by a small enemy
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            life -= 5;
+        }
+
+        // Player is hit by medium-sized enemy or its bullet 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            life -= 10;
+        }
+
+        // Player is hit by large enemy or its beam
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            life -= 25;
+        }
+
+        // Player steps on/near a healing tile
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if (100 - life <= 50)
+            {
+                life = 100;
+            }
+            // else clause makes sure player can't have more than 100 HP
+            else
+            {
+                life += 50;
+            }
+        }
+
+        SetLifeText();
+
+        // check for death
+        if (life <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    void SetLifeText()
+    {
+        lifeText.text = "HP: " + life.ToString();
+    }
+
+    // This method is called when the player's HP is reduced to 0
+    void GameOver()
+    {
+        SceneManager.LoadScene(2);
     }
 }
