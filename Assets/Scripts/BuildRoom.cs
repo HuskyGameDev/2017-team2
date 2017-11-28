@@ -42,18 +42,22 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
     public GameObject[] smallRed;
+    public GameObject[] smallGrey;
 
     public GameObject[] longBlue;
     public GameObject[] longPurple;
     public GameObject[] longRed;
+    public GameObject[] longGrey;
 
     public GameObject[] largeBlue;
     public GameObject[] largePurple;
     public GameObject[] largeRed;
+    public GameObject[] largeGrey;
 
     public GameObject[] specialBlue;
     public GameObject[] specialPurple;
     public GameObject[] specialRed;
+    public GameObject[] specialGrey;
 
 
     private int color;
@@ -535,10 +539,10 @@ public class BuildRoom : MonoBehaviour {
             larges = largeRed;
             specials = specialRed;
         } else {
-            smalls = smallRed;
-            longs = longRed;
-            larges = largeRed;
-            specials = specialRed;
+            smalls = smallGrey;
+            longs = longGrey;
+            larges = largeGrey;
+            specials = specialGrey;
         }
 
         if (room.doorNorth != -1) {
