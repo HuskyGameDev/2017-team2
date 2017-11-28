@@ -27,9 +27,11 @@ public class GameManager : MonoBehaviour {
      * -Could be hard coded or random
      */
     void buildFinalFloor() {
-        BuildFloor.Room finalRoom = new BuildFloor.Room(0, 0, false, BuildFloor.FloorColor.GREY);
-        finalRoom.doorEast = roomLength / 2;
-        boardScript.SetupScene(roomLength, finalRoom);
+        BuildFloor.Room[,] floor = floorScript.buildFinalFloor(roomLength);
+        for (int i = 0; i < floorScript.lengthOfFloor; i++)
+            for (int j = 0; j < floorScript.heightOfFloor; j++)
+                if (floor[i, j] != null)
+                    boardScript.SetupScene(roomLength, floor[i, j]);
     }
     /**
      * Called to initiate the game after player presses play
