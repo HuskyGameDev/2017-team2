@@ -24,6 +24,12 @@ public class BuildRoom : MonoBehaviour {
     public Count longCount = new Count(5, 10);
 
     public GameObject exit;
+    public GameObject player;
+
+    public GameObject smallEnemy;
+    public GameObject mediumEnemy;
+    public GameObject largeEnemy;
+
     public GameObject charger;
 
     //Indices for each colored wall and corner 
