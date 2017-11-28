@@ -238,6 +238,11 @@ MonoBehaviour:
     minimum: 1
     maximum: 5
   exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
+  player: {fileID: 1684290372393072, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
+  smallEnemy: {fileID: 1996890249224798, guid: c833bb7c8087c0a40a95003a6c91848b, type: 2}
+  mediumEnemy: {fileID: 1160694717813378, guid: 9a0de385d7ad27048a98292e591ee63d,
+    type: 2}
+  largeEnemy: {fileID: 1348668865171328, guid: 87fca8ed9c5aacd4ca677a2fb020a522, type: 2}
   charger: {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
   wall:
   - {fileID: 1440629923792200, guid: d5de8a0c2014c4242a845e28c28f96f3, type: 2}

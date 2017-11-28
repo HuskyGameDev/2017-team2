@@ -287,7 +287,6 @@ public class BuildRoom : MonoBehaviour {
         do {
             randomIndex = RandomPosition();
             randomPos = gridPositions[randomIndex];
-            print(randomPos.ToString());
         } while (!SpecialClear(randomPos));
 
         Vector3 actualPos;
@@ -326,8 +325,20 @@ public class BuildRoom : MonoBehaviour {
      * Place U in the room
      * 
      */
-    private void RandomlyLayoutPlayer(Vector3[,] avail) {
+    private void LayoutPlayer() {
+        int randomIndex;
+        Vector3 randomPos;
 
+        randomIndex = RandomPosition();
+        randomPos = gridPositions[randomIndex];
+
+        Vector3 actualPos;
+        actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+        
+        gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
+        available[(int)randomPos.x, (int)randomPos.y] = false;
+        
+        gameObjects.Add(Instantiate(player, actualPos, Quaternion.identity));
     }
 
     /**
@@ -565,7 +576,7 @@ public class BuildRoom : MonoBehaviour {
                 // LayoutExit();
             }
             if (room.isEntrance) {
-                // RandomlyLayoutPlayer();
+                LayoutPlayer();
             }
 
             foreach (Vector3 door in doorPos) {
