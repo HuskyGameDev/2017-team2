@@ -229,32 +229,61 @@ MonoBehaviour:
   columns: 10
   rows: 10
   smallCount:
-    minimum: 3
-    maximum: 10
+    minimum: 2
+    maximum: 9
   largeCount:
     minimum: 0
-    maximum: 3
+    maximum: 2
   longCount:
-    minimum: 2
+    minimum: 1
     maximum: 5
   exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
-  floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
-  door: {fileID: 1414110871066774, guid: d1d1f575af0d0f743874ac81895a777d, type: 2}
-  wall: {fileID: 1896600267040646, guid: 1a2eec28731b8a84f8e262ed0c849cb1, type: 2}
-  cornerWall: {fileID: 1742665170266142, guid: b3c39e6dbb173cc458aaca17250bd69c, type: 2}
-  smallObjects:
-  - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
+  charger: {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
+  wall:
+  - {fileID: 1440629923792200, guid: d5de8a0c2014c4242a845e28c28f96f3, type: 2}
+  - {fileID: 1396741786450860, guid: 443e3c4c93669064eb000cb8ef8169aa, type: 2}
+  - {fileID: 1029412631702660, guid: c7e2a68574c675645b390463d44fd055, type: 2}
+  - {fileID: 1719665453028258, guid: fb1cb967a09e410458b77171852ff59c, type: 2}
+  cornerWall:
+  - {fileID: 1338027362503060, guid: 9c1f9cbe920573d4dbaa2c8d73f47f3f, type: 2}
+  - {fileID: 1128078457307948, guid: c85280778564b2e4aadb54b33776f652, type: 2}
+  - {fileID: 1551747987314794, guid: 3e33abd3a04dabb428bee1445b43d19c, type: 2}
+  - {fileID: 1512653800973138, guid: 9708e6798efaae547b7b8b6425100a4a, type: 2}
+  door:
+  - {fileID: 1709638493399140, guid: edabdff36babe9e4b9211d9772e65951, type: 2}
+  - {fileID: 1066078336116302, guid: 2fdd67943ed9f06428cae6f77d7834d9, type: 2}
+  - {fileID: 1964925961597512, guid: 8dda8f8139c3c8546aa8b45b3895e701, type: 2}
+  floor:
+  - {fileID: 1572342799553972, guid: 569e30a0e97db664c8b940eb573adf5f, type: 2}
+  - {fileID: 1117119940692598, guid: 2598af3914e393343b9248722a1554ce, type: 2}
+  - {fileID: 1037340786115698, guid: d479b72e8df6607429b9c18f0af7f33e, type: 2}
+  smallBlue:
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
-  - {fileID: 1091584642491018, guid: ce82bac22ebf1b744a06149f1aeef0ee, type: 2}
+  - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
+  smallPurple:
   - {fileID: 1918449228515830, guid: e26c763fcece61c4db3697bce362bee0, type: 2}
+  - {fileID: 1091584642491018, guid: ce82bac22ebf1b744a06149f1aeef0ee, type: 2}
+  smallRed:
   - {fileID: 1417633470477086, guid: dd70455443956df49befea27bf8b4e25, type: 2}
   - {fileID: 1460672538541834, guid: 6585b5c4c08738841a70b27cc96afd58, type: 2}
-  largeObjects: []
-  longObjects:
+  longBlue:
   - {fileID: 1883021560258702, guid: 19f3953e800387a4aae89da0aadd1175, type: 2}
-  - {fileID: 1993770767266878, guid: 3b9dfb7b34baa8d4cb346784034b10bb, type: 2}
+  longPurple:
   - {fileID: 1957893615934554, guid: 5d485e680e07e7343aabdc7284bb83b3, type: 2}
-  specialObjects: []
+  longRed:
+  - {fileID: 1993770767266878, guid: 3b9dfb7b34baa8d4cb346784034b10bb, type: 2}
+  largeBlue:
+  - {fileID: 1788770410756790, guid: 2f0616729b4f69141a4d5d1202604064, type: 2}
+  largePurple:
+  - {fileID: 1963495448383378, guid: 27cde7979bc689e44a493b0542652d38, type: 2}
+  largeRed:
+  - {fileID: 1564177830452636, guid: 873403536a2c2ec488789e1f1638cb57, type: 2}
+  specialBlue:
+  - {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
+  specialPurple:
+  - {fileID: 1705383130788840, guid: a4d292cec73569547bd12c444062aa4c, type: 2}
+  specialRed:
+  - {fileID: 1760989381857644, guid: 6faa8b577d8087d40998f89d7ddecdd5, type: 2}
 --- !u!114 &2074431841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +298,7 @@ MonoBehaviour:
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
   roomLength: 10
+  numFloors: 20
   isEndless: 0
 --- !u!4 &2074431842
 Transform:
