@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
     void SetLifeText()
     {
-        lifeText.text = "HP: " + life.ToString();
+       // lifeText.text = "HP: " + life.ToString();
     }
 
     // This method is called when the player's HP is reduced to 0

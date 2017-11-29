@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -258,10 +258,12 @@ MonoBehaviour:
   - {fileID: 1709638493399140, guid: edabdff36babe9e4b9211d9772e65951, type: 2}
   - {fileID: 1066078336116302, guid: 2fdd67943ed9f06428cae6f77d7834d9, type: 2}
   - {fileID: 1964925961597512, guid: 8dda8f8139c3c8546aa8b45b3895e701, type: 2}
+  - {fileID: 1816540001267626, guid: b28fa4dbfbad5a14e941955e1ef42164, type: 2}
   floor:
   - {fileID: 1572342799553972, guid: 569e30a0e97db664c8b940eb573adf5f, type: 2}
   - {fileID: 1117119940692598, guid: 2598af3914e393343b9248722a1554ce, type: 2}
   - {fileID: 1037340786115698, guid: d479b72e8df6607429b9c18f0af7f33e, type: 2}
+  - {fileID: 1949436545563150, guid: 7a9d1adca63281d47b867726f686f989, type: 2}
   smallBlue:
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
@@ -271,24 +273,33 @@ MonoBehaviour:
   smallRed:
   - {fileID: 1417633470477086, guid: dd70455443956df49befea27bf8b4e25, type: 2}
   - {fileID: 1460672538541834, guid: 6585b5c4c08738841a70b27cc96afd58, type: 2}
+  smallGrey:
+  - {fileID: 1424265738111058, guid: ade34b850ce63d049b2b6b2c9df61452, type: 2}
+  - {fileID: 1995248971374864, guid: 6325a10cd9b6d5d459fba5dd75afb44d, type: 2}
   longBlue:
   - {fileID: 1883021560258702, guid: 19f3953e800387a4aae89da0aadd1175, type: 2}
   longPurple:
   - {fileID: 1957893615934554, guid: 5d485e680e07e7343aabdc7284bb83b3, type: 2}
   longRed:
   - {fileID: 1993770767266878, guid: 3b9dfb7b34baa8d4cb346784034b10bb, type: 2}
+  longGrey:
+  - {fileID: 1486123456495020, guid: 542c3562d45bcd54c812cb4a927c3038, type: 2}
   largeBlue:
   - {fileID: 1788770410756790, guid: 2f0616729b4f69141a4d5d1202604064, type: 2}
   largePurple:
   - {fileID: 1963495448383378, guid: 27cde7979bc689e44a493b0542652d38, type: 2}
   largeRed:
   - {fileID: 1564177830452636, guid: 873403536a2c2ec488789e1f1638cb57, type: 2}
+  largeGrey:
+  - {fileID: 1147591949807190, guid: 699876314d3d6314d95d4566f6f46fa9, type: 2}
   specialBlue:
   - {fileID: 1220186827212010, guid: 4c12f5c305d236b4bb3cb08015cade6f, type: 2}
   specialPurple:
   - {fileID: 1705383130788840, guid: a4d292cec73569547bd12c444062aa4c, type: 2}
   specialRed:
   - {fileID: 1760989381857644, guid: 6faa8b577d8087d40998f89d7ddecdd5, type: 2}
+  specialGrey:
+  - {fileID: 1594472912240368, guid: 341fdd2eea9287048b0f2777cc5792f8, type: 2}
 --- !u!114 &2074431841
 MonoBehaviour:
   m_ObjectHideFlags: 0
