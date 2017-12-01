@@ -17,15 +17,19 @@ public class Enemy : MonoBehaviour {
 	protected float time;
 	protected float angle;
 
+	protected int health;
+
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
 	protected GameObject player;
 	protected Transform player_pos;
 
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
+
+		health = 50;
 
 		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -48,6 +52,11 @@ public class Enemy : MonoBehaviour {
 			MoveAtRandom ();
 		else {
 			Chase ();	
+		}
+
+		if (health < 0) {
+			Destroy(gameObject);
+			print ("RIP");
 		}
 	}
 
@@ -86,13 +95,10 @@ public class Enemy : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 
 		if (other.gameObject.CompareTag ("Player")) {
+			
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
 		}
-	}
-
-	void OnCollisionEnter2D (Collision2D other) {
-		speed = 0.0f;
 	}
 
 	protected virtual void Chase() {
@@ -103,5 +109,10 @@ public class Enemy : MonoBehaviour {
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
 
+	}
+
+	void Hit(int dmg)
+	{
+		health -= dmg;
 	}
 }
