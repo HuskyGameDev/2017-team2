@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        initGame();
+        initGame(20);
 	}
     //Should transition scene to load, generate a new floor
     void nextFloor() {
@@ -36,9 +36,10 @@ public class GameManager : MonoBehaviour {
     /**
      * Called to initiate the game after player presses play
      */
-    void initGame() {
+    void initGame(int numFloors) {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
+        this.numFloors = numFloors;
         nextFloor();
     }
     /**
