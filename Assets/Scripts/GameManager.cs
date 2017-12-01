@@ -6,13 +6,16 @@ public class GameManager : MonoBehaviour {
 
     public BuildFloor floorScript;
     public BuildRoom boardScript;
+    public CameraScript cameraScript;
+    public GameObject cam;
+    public GameObject player;
     public int roomLength;
     public int numFloors;
     public bool isEndless;
 
     // Use this for initialization
     void Start () {
-        initGame(20);
+        initGame();
 	}
     //Should transition scene to load, generate a new floor
     void nextFloor() {
@@ -36,11 +39,10 @@ public class GameManager : MonoBehaviour {
     /**
      * Called to initiate the game after player presses play
      */
-    void initGame(int numFloors) {
+    void initGame() {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
-        this.numFloors = numFloors;
-        nextFloor();
+        buildFloor();
     }
     /**
      * Builds the next floor of the game and displays the starting room

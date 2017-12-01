@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4883335259161202}
   - component: {fileID: 212266551127824112}
   - component: {fileID: 95998398000182414}
-  - component: {fileID: 61000033697377598}
+  - component: {fileID: 114893510753975514}
+  - component: {fileID: 50822734371135346}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -42,31 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61000033697377598
-BoxCollider2D:
+--- !u!50 &50822734371135346
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1348668865171328}
-  m_Enabled: 1
-  m_Density: 1
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2}
-  m_EdgeRadius: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!95 &95998398000182414
 Animator:
   serializedVersion: 3
@@ -84,6 +80,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114893510753975514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1348668865171328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a850db1438984f34db49599537daab21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMax: 0
+  speed: 2
+  xMax: 0
+  yMax: 0
+  xMin: 0
+  yMin: 0
 --- !u!212 &212266551127824112
 SpriteRenderer:
   m_ObjectHideFlags: 1
