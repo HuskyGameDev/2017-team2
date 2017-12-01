@@ -8,10 +8,8 @@ public class CameraScript : MonoBehaviour {
     public Vector3 offset;
     public bool isStarted;
 
-    void Start(GameObject player) {
-        this.player = player;
+    void Start() {
         offset = transform.position - player.transform.position;
-        isStarted = true;
     }
 
     void LateUpdate() {

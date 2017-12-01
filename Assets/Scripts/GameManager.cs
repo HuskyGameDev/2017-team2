@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 
     public BuildFloor floorScript;
     public BuildRoom boardScript;
-    public CameraScript cameraScript;
     public GameObject cam;
     public GameObject player;
     public int roomLength;
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
         buildFloor();
+        cam.GetComponent<CameraScript>().enabled = true;
     }
     /**
      * Builds the next floor of the game and displays the starting room
