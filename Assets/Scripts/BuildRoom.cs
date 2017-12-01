@@ -362,8 +362,8 @@ public class BuildRoom : MonoBehaviour {
         
         gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
         available[(int)randomPos.x, (int)randomPos.y] = false;
-        
-        gameObjects.Add(Instantiate(player, actualPos, Quaternion.identity));
+
+        player.transform.SetPositionAndRotation(actualPos, Quaternion.identity);
     }
 
     /**
@@ -668,9 +668,12 @@ public class BuildRoom : MonoBehaviour {
         dy = room.pos.y * 10.25f;
 
         BoardSetup();
+
         do {
 
             DestroyAllObjects();
+
+            BoardSetup();
 
             InitializeList();
 
