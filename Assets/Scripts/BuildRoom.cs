@@ -67,6 +67,10 @@ public class BuildRoom : MonoBehaviour {
     private float dx;
     private float dy;
 
+    private int smallEnemyCount;
+    private int mediumEnemyCount;
+    private int largeEnemyCount;
+
     private List<Vector3> doorPos;
 
     private Transform boardHolder;
@@ -278,6 +282,23 @@ public class BuildRoom : MonoBehaviour {
         }
     }
 
+    Boolean LargeEnemyClear(Vector3 pos) {
+        // pos is bottom left corner of object
+        if (pos.y > rows - 2 || pos.x > columns - 2) {
+            return false;
+        }
+
+        for (int x = (int)pos.x; x <= (int)pos.x + 1; x++) {
+            for (int y = (int)pos.y; y <= (int)pos.y + 1; y++) {
+                if (!available[x, y]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Place the charger in the room
      * 
@@ -461,48 +482,131 @@ public class BuildRoom : MonoBehaviour {
      * could be tweaked to modify difficulty if desired
      */
 
-    private BuildFloor.Room setEnemies(BuildFloor.Room room) {
-        int littleEnemies = 0;
-        int averageEnemies = 0;
-        int bigEnemies = 0;
+    void setEnemies() {
+        smallEnemyCount = 0;
+        mediumEnemyCount = 0;
+        largeEnemyCount = 0;
 
         int roomType = Random.Range(0, 19);
 
         if (roomType > 0 && roomType < 4) { //Little enemies only
-            littleEnemies = Random.Range(10, 20);
+            smallEnemyCount = Random.Range(10, 20);
         } else if (roomType > 3 && roomType < 9) { //Avg enemies only
-            averageEnemies = Random.Range(4, 9);
+            mediumEnemyCount = Random.Range(4, 9);
         } else if (roomType == 9) { //Big enemies only
-            bigEnemies = Random.Range(1, 3);
+            largeEnemyCount = Random.Range(1, 3);
         } else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
-            bigEnemies = Random.Range(1, 2);
-            littleEnemies = Random.Range(7, 16);
+            largeEnemyCount = Random.Range(1, 2);
+            smallEnemyCount = Random.Range(7, 16);
         } else if (roomType > 11 && roomType < 17) { //Avg and Little enemies only
-            averageEnemies = Random.Range(3, 6);
-            littleEnemies = Random.Range(5, 12);
+            mediumEnemyCount = Random.Range(3, 6);
+            smallEnemyCount = Random.Range(5, 12);
         } else if (roomType > 16) { //All enemy types
-            averageEnemies = Random.Range(2, 5);
-            littleEnemies = Random.Range(4, 13);
-            bigEnemies = 1;
+            mediumEnemyCount = Random.Range(2, 5);
+            smallEnemyCount = Random.Range(4, 13);
+            largeEnemyCount = 1;
         }
 
-        if (room.color == BuildFloor.FloorColor.PURPLE) { //moderate increase in enemy number
-            averageEnemies = averageEnemies * 5 / 3;
-            littleEnemies = littleEnemies * 5 / 3;
-            bigEnemies = bigEnemies * 5 / 3;
+        if (color == PURPLE) { //moderate increase in enemy number
+            mediumEnemyCount = mediumEnemyCount * 5 / 3;
+            smallEnemyCount = smallEnemyCount * 5 / 3;
+            largeEnemyCount = largeEnemyCount * 5 / 3;
         }
-        if (room.color == BuildFloor.FloorColor.RED) { //large increase in enemy number
-            averageEnemies = averageEnemies * 5 / 2;
-            littleEnemies = littleEnemies * 5 / 2;
-            bigEnemies = bigEnemies * 5 / 2;
+        if (color == RED) { //large increase in enemy number
+            mediumEnemyCount = mediumEnemyCount * 5 / 2;
+            smallEnemyCount = smallEnemyCount * 5 / 2;
+            largeEnemyCount = largeEnemyCount * 5 / 2;
         }
-        if (room.color == BuildFloor.FloorColor.GREY) { //no enemies
-            averageEnemies = 0;
-            littleEnemies = 0;
-            bigEnemies = 0;
-        }
+        if (color == GREY) { //no enemies
+            mediumEnemyCount = 0;
+            smallEnemyCount = 0;
+            largeEnemyCount = 0;
+        };
+    }
 
-        return room;
+    void LayoutSmallEnemies() {
+        for (int i = 0; i < smallEnemyCount;) {
+
+            int count = 0;
+            do {
+                count = Random.Range(1, 4);
+            } while (count > smallEnemyCount - i);
+
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+
+            Vector3 actualPos;
+
+            int countDec = count;
+
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+
+            i += count;
+
+        }
+    }
+
+    void LayoutMediumEnemies() {
+        for (int i = 0; i < mediumEnemyCount; i++) {
+
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+
+            GameObject choice = mediumEnemy;
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+
+        }
+    }
+
+    void LayoutLargeEnemies() {
+        for (int i = 0; i < largeEnemyCount; i++) {
+            int randomIndex;
+            Vector3 randomPos;
+            do {
+                randomIndex = RandomPosition();
+                randomPos = gridPositions[randomIndex];
+            } while (!LargeEnemyClear(randomPos));
+
+            Vector3 actualPos;
+            actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 1f + dy, 0f);
+
+            for (int x = (int)randomPos.x; x <= (int)randomPos.x + 1; x++) {
+                for (int y = (int)randomPos.y; y <= (int)randomPos.y + 1; y++) {
+                    gridPositions.Remove(new Vector3(x, y, randomPos.z));
+                    available[x, y] = false;
+                }
+            }
+
+            GameObject choice = largeEnemy;
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+
+        }
     }
 
     public void SetupScene(int roomLength, BuildFloor.Room room) {
@@ -519,9 +623,11 @@ public class BuildRoom : MonoBehaviour {
             color = PURPLE;
         } else if (room.color == BuildFloor.FloorColor.RED) {
             color = RED;
+        } else if (room.color == BuildFloor.FloorColor.GREY) {
+            color = GREY;
         }
 
-        color = PURPLE;
+        color = RED;
 
         if (color == BLUE) {
             smalls = smallBlue;
@@ -581,6 +687,11 @@ public class BuildRoom : MonoBehaviour {
             }
             if (room.isEntrance) {
                 LayoutPlayer();
+            } else {
+                setEnemies();
+                LayoutLargeEnemies();
+                LayoutMediumEnemies();
+                LayoutSmallEnemies();
             }
 
             foreach (Vector3 door in doorPos) {
