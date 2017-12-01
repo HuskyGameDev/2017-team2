@@ -9,11 +9,12 @@ public class CameraScript : MonoBehaviour {
     public bool isStarted;
 
     void Start() {
-        offset = transform.position - player.transform.position;
+        offset = transform.position - player.transform.position + new Vector3(-5, -5);
     }
 
     void LateUpdate() {
         if (isStarted)
             transform.position = player.transform.position + offset;
+
     }
 }

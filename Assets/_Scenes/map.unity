@@ -158,7 +158,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -375,9 +375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
-  cameraScript: {fileID: 0}
   cam: {fileID: 237235622}
-  player: {fileID: 0}
   roomLength: 10
   numFloors: 20
   isEndless: 0

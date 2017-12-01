@@ -50,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684290372393072}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
@@ -89,7 +89,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf791434b83922a478e4df216d42d98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
+  Player: {fileID: 0}
+  life: 0
+  score: 0
+  floor: 0
+  lifeText: {fileID: 0}
   speed: 5
+  bulletPrefab: {fileID: 0}
+  meleeAttack: {fileID: 0}
 --- !u!212 &212146073360406910
 SpriteRenderer:
   m_ObjectHideFlags: 1
