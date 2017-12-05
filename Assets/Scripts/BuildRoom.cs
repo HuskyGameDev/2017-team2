@@ -370,7 +370,7 @@ public class BuildRoom : MonoBehaviour {
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special open door with light
      */
-    private void LayoutExit(Vector3[,] avail) {
+    private void LayoutExit() {
 
     }
 
