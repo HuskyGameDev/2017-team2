@@ -627,7 +627,7 @@ public class BuildRoom : MonoBehaviour {
             color = GREY;
         }
 
-        color = RED;
+        color = BLUE;
 
         if (color == BLUE) {
             smalls = smallBlue;
@@ -686,7 +686,7 @@ public class BuildRoom : MonoBehaviour {
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
             if (room.isExit) {
-                // LayoutExit();
+                LayoutExit();
             }
             if (room.isEntrance) {
                 LayoutPlayer();
