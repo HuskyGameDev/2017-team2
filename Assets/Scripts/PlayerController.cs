@@ -191,21 +191,21 @@ public class PlayerController : MonoBehaviour
         {
             GameObject movingBullet = bullets[i].getObj();
 
-            if (movingBullet != null)
-            {
+			if (movingBullet != null && bulletAttack != null) {
 
-                movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
-                bulletAttack.enabled = true;
-            }
+				movingBullet.transform.Translate (bullets [i].getPos () * Time.deltaTime * bulletSpeed);
+				bulletAttack.enabled = true;
+           
 
-            Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
+				Vector3 bulletPos = Camera.main.WorldToScreenPoint (movingBullet.transform.position);
 
-            // Remove bullet if off screen
-            if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0)
-            {
-                DestroyObject(movingBullet);
-                bullets.Remove(bullets[i]);
-            }
+				// Remove bullet if off screen
+				if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
+					DestroyObject (movingBullet);
+					bullets.Remove (bullets [i]);
+				}
+			}
+				
         }
     }
 

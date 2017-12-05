@@ -80,5 +80,35 @@ public class Enemy1 : Enemy {
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
+
+		slash ();
+	}
+
+	private void slash()
+	{
+		float dist = Vector3.Distance (player_pos.position, transform.position);
+
+		if (dist < 2 && !attacking)
+		{
+			attacking = true;
+			meleeAttack.enabled = true;
+		}
+
+		if (attacking)
+		{
+
+			if (wait > 0)
+			{
+
+				wait--;
+			}
+
+			else
+			{
+				attacking = false;
+				meleeAttack.enabled = false;
+				wait = 10;
+			}
+		}
 	}
 }

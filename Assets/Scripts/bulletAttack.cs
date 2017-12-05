@@ -12,15 +12,19 @@ public class bulletAttack : MonoBehaviour {
 		if (shooter.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
 			print("Pew");
-            col.SendMessageUpwards("Hit", dmg);
+			col.SendMessageUpwards("Hit", dmg);
+			DestroyObject (transform.parent.gameObject);
         }
 
 		if (shooter.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player"))
 		{
 			print("Ouch!");
 			col.SendMessageUpwards("Hit", dmg);
+			DestroyObject (transform.parent.gameObject);
 		}
+			
     }
+
 
 
 }
