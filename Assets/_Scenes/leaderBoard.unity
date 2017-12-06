@@ -2443,6 +2443,7 @@ GameObject:
   - component: {fileID: 1179114268}
   - component: {fileID: 1179114271}
   - component: {fileID: 1179114270}
+  - component: {fileID: 1179114269}
   m_Layer: 5
   m_Name: leaderboard
   m_TagString: Untagged
@@ -2478,6 +2479,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 896, y: 672}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1179114269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1179114267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc684e24e3dd96e408fbbfb2371631b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  file: {fileID: 0}
 --- !u!114 &1179114270
 MonoBehaviour:
   m_ObjectHideFlags: 0
