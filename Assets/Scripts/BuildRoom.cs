@@ -72,6 +72,8 @@ public class BuildRoom : MonoBehaviour {
     private int largeEnemyCount;
 
     private List<Vector3> doorPos;
+    private Vector3 exitPos;
+    private bool placedExit;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -371,8 +373,22 @@ public class BuildRoom : MonoBehaviour {
      *  -if floor color is grey, load exit as special open door with light
      */
     private void LayoutExit() {
-
+        if (color != GREY) {
+            float rotDegrees = Random.Range(0, 3) * 90f;
+            Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+            exitPos = randomPos;
+            placedExit = true;
+            GameObject choice = exit;
+            gameObjects.Add(Instantiate(choice, actualPos, rotation));
+        }
+        //PAUL MERGING THE THING
     }
+
 
 
     Boolean pathExists() {
@@ -422,7 +438,8 @@ public class BuildRoom : MonoBehaviour {
                 return false;
             }
         }
-
+        if (placedExit && !closed.Contains(exitPos)) 
+            return false;
         return true;
 
     }
@@ -612,6 +629,7 @@ public class BuildRoom : MonoBehaviour {
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         doorPos = new List<Vector3>();
+        placedExit = false;
         GameObject[] smalls;
         GameObject[] longs;
         GameObject[] larges;
@@ -627,7 +645,7 @@ public class BuildRoom : MonoBehaviour {
             color = GREY;
         }
 
-        color = BLUE;
+        color = GREY;
 
         if (color == BLUE) {
             smalls = smallBlue;
@@ -685,9 +703,9 @@ public class BuildRoom : MonoBehaviour {
             LayoutLong(longs, longCount.minimum, longCount.maximum);
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
-            if (room.isExit) {
-                LayoutExit();
-            }
+         //  if (room.isExit) {
+           //   LayoutExit();
+            //}
             if (room.isEntrance) {
                 LayoutPlayer();
             } else {
