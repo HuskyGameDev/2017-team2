@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
-    public Collider2D bulletAttack;
+    //public Collider2D bulletAttack;
 
     // Object for slashing
     private int wait = 10;
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         // Set speed of bullet
         bulletSpeed = 20;
-        bulletAttack.enabled = false;
+        //bulletAttack.enabled = false;
 
         // Set melee attack stuff
         meleeAttack.enabled = false;
@@ -174,14 +174,18 @@ public class PlayerController : MonoBehaviour
             {
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
                 bullet.AddComponent<BoxCollider2D>();
                 bullet.GetComponent<BoxCollider2D>().isTrigger = true;
                 bullet.AddComponent<bulletAttack>();
+                bullet.GetComponent<bulletAttack>().shooter = Player.gameObject;
+
                 Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
                 Vector3 pos = (Input.mousePosition - sp).normalized;
+
                 newBullet.setPos(pos);
                 newBullet.setObj(bullet);
-                newBullet.setColliderVar(bulletAttack);
+                newBullet.setColliderVar(bullet.GetComponent<BoxCollider2D>());
                 newBullet.setCollider(true);
                 bullets.Add(newBullet);
                 ableToShoot++;
@@ -204,10 +208,10 @@ public class PlayerController : MonoBehaviour
         {
             GameObject movingBullet = bullets[i].getObj();
 
-			if (movingBullet != null && bulletAttack != null) {
+			if (movingBullet != null) {
 
 				movingBullet.transform.Translate (bullets [i].getPos () * Time.deltaTime * bulletSpeed);
-				bulletAttack.enabled = true;
+				//bulletAttack.enabled = true;
            
 
 				Vector3 bulletPos = Camera.main.WorldToScreenPoint (movingBullet.transform.position);
