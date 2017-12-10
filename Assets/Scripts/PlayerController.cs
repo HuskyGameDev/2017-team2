@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
+       
 
         // Set speed of bullet
         bulletSpeed = 20;
@@ -89,11 +90,14 @@ public class PlayerController : MonoBehaviour
         // Set melee attack stuff
         meleeAttack.enabled = false;
         attacking = false;
+
+       // anim.animation = U_Walking;
     }
 
     //Called every frame
     void Update()
     {
+         
         //Enter mouse mosition
         mouse_pos = Input.mousePosition;
         mouse_pos.z = -10;
@@ -109,7 +113,7 @@ public class PlayerController : MonoBehaviour
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
         //Rotate player
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
@@ -136,8 +140,9 @@ public class PlayerController : MonoBehaviour
         // Create a new bullet with the current mouse position
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (ableToShoot == 0)
+            if (ableToShoot == 0 && !attacking)
             {
+
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
                 bullet.AddComponent<BoxCollider2D>();
