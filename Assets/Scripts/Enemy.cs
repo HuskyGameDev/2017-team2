@@ -115,9 +115,4 @@ public class Enemy : MonoBehaviour {
 	{
 		health -= dmg;
 	}
-
-    void Hit(int dmg)
-    {
-        health -= dmg;
-    }
 }

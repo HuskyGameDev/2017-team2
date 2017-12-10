@@ -9,6 +9,9 @@ public class bulletAttack : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D col)
     {
+
+        print("PING");
+
 		if (shooter.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
 			print("Pew");
