@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class BuildFloor : MonoBehaviour {
 
-    public int floorNumber = 0;
+    public int floorNumber = 1;
     // Specific floor colors for the first 20 floors, STORY mode
     private FloorColor[] twenty = new FloorColor[] { FloorColor.BLUE, FloorColor.BLUE, FloorColor.BLUE, FloorColor.PURPLE, FloorColor.BLUE,
                                                      FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.BLUE, FloorColor.RED,

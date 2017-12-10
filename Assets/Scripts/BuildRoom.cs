@@ -24,6 +24,7 @@ public class BuildRoom : MonoBehaviour {
     public Count longCount = new Count(5, 10);
 
     public GameObject exit;
+    public GameObject finalExit;
     public GameObject player;
 
     public GameObject smallEnemy;
@@ -79,6 +80,9 @@ public class BuildRoom : MonoBehaviour {
     private List<Vector3> gridPositions = new List<Vector3>();
     private Boolean[,] available;
 
+    public List<GameObject> getList() {
+        return gameObjects;
+    }
     void InitializeList() {
 
         gridPositions.Clear();
@@ -115,6 +119,7 @@ public class BuildRoom : MonoBehaviour {
         boardHolder = new GameObject("Board").transform;
 
         GameObject floorInstance = Instantiate(floor[color], new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
+        gameObjects.Add(floorInstance);
         floorInstance.transform.SetParent(boardHolder);
     }
 
@@ -372,7 +377,7 @@ public class BuildRoom : MonoBehaviour {
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special open door with light
      */
-    private void LayoutExit() {
+    private void LayoutExit(BuildFloor.Room room) {
         if (color != GREY) {
             float rotDegrees = Random.Range(0, 3) * 90f;
             Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
@@ -383,10 +388,35 @@ public class BuildRoom : MonoBehaviour {
             available[(int)randomPos.x, (int)randomPos.y] = false;
             exitPos = randomPos;
             placedExit = true;
-            GameObject choice = exit;
-            gameObjects.Add(Instantiate(choice, actualPos, rotation));
+            GameObject obj = Instantiate(exit, actualPos, rotation);
+            obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
+            gameObjects.Add(obj);
         }
-        //PAUL MERGING THE THING
+        else {
+            Quaternion rotation = Quaternion.identity;
+            Vector3 vector = Vector3.zero;
+            if (room.doorWest == -1) {
+                rotation = Quaternion.AngleAxis(180, Vector3.back);
+                vector = new Vector3(dx - .0625f, dy + 5 + .5f, 0);
+                doorPos.Add(new Vector3(0, 5, 0f));
+            }
+            else if (room.doorEast == -1) {
+                rotation = Quaternion.identity;
+                vector = new Vector3(dx + 10.0625f, dy + 5 + .5f, 0);
+                doorPos.Add(new Vector3(columns - 1, 5, 0f));
+            }
+            else if (room.doorNorth == -1) {
+                rotation = Quaternion.AngleAxis(270, Vector3.back);
+                vector = new Vector3(dx + .5f + 5, dy + 10.0625f, 0);
+                doorPos.Add(new Vector3(5, rows - 1, 0f));
+            }
+            else if (room.doorSouth == -1) {
+                rotation = Quaternion.AngleAxis(90, Vector3.back);
+                vector = new Vector3(dx + 5 + .5f, dy - .0625f, 0);
+                doorPos.Add(new Vector3(5, 0, 0f));
+            }
+            Instantiate(finalExit, vector, rotation);
+        }
     }
 
 
@@ -438,7 +468,7 @@ public class BuildRoom : MonoBehaviour {
                 return false;
             }
         }
-        if (placedExit && !closed.Contains(exitPos)) 
+        if (placedExit && !closed.Contains(exitPos + new Vector3(1, 0)) && !closed.Contains(exitPos + new Vector3(0, 1)) && !closed.Contains(exitPos + new Vector3(-1, 0)) && !closed.Contains(exitPos + new Vector3(0, -1)))
             return false;
         return true;
 
@@ -454,34 +484,34 @@ public class BuildRoom : MonoBehaviour {
         for (int i = 0; i < rows; i++) {
             if (room.doorWest != i) {
                 // Left
-                Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
             } else {
                 // Left
-                Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                gameObjects.Add(Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
             }
             if (room.doorEast != i) {
                 // Right
-                Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation));
             }
         }
 
         for (int i = 0; i < columns; i++) {
             if (room.doorNorth != i) {
                 // Top
-                Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
             } else {
                 // Top
-                Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                gameObjects.Add(Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
             }
             if (room.doorSouth != i) {
                 // Bottom
-                Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), southRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), southRotation));
             }
         }
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.AngleAxis(180, Vector3.back)); // Bottom Left
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.AngleAxis(90, Vector3.back)); // Bottom Right
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.AngleAxis(270, Vector3.back)); // Top Left
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity); // Top Right
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.AngleAxis(180, Vector3.back))); // Bottom Left
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.AngleAxis(90, Vector3.back))); // Bottom Right
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.AngleAxis(270, Vector3.back))); // Top Left
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity)); // Top Right
     }
 
     /**
@@ -538,7 +568,7 @@ public class BuildRoom : MonoBehaviour {
             mediumEnemyCount = 0;
             smallEnemyCount = 0;
             largeEnemyCount = 0;
-        };
+        }
     }
 
     void LayoutSmallEnemies() {
@@ -645,8 +675,6 @@ public class BuildRoom : MonoBehaviour {
             color = GREY;
         }
 
-        color = GREY;
-
         if (color == BLUE) {
             smalls = smallBlue;
             longs = longBlue;
@@ -703,9 +731,10 @@ public class BuildRoom : MonoBehaviour {
             LayoutLong(longs, longCount.minimum, longCount.maximum);
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
-         //  if (room.isExit) {
-           //   LayoutExit();
-            //}
+            if (room.isExit) {
+                LayoutExit(room);
+            }
+
             if (room.isEntrance) {
                 LayoutPlayer();
             } else {

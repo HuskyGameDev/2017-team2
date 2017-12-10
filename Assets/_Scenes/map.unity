@@ -256,6 +256,16 @@ Prefab:
       propertyPath: m_Radius
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 50329573421743894, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.50265485
+      objectReference: {fileID: 0}
+    - target: {fileID: 114308791505004404, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
@@ -305,6 +315,7 @@ MonoBehaviour:
     minimum: 1
     maximum: 5
   exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
+  finalExit: {fileID: 1154949291673416, guid: dc0b599c1f9c13947a297f9513c31655, type: 2}
   player: {fileID: 1132409478}
   smallEnemy: {fileID: 1996890249224798, guid: c833bb7c8087c0a40a95003a6c91848b, type: 2}
   mediumEnemy: {fileID: 1160694717813378, guid: 9a0de385d7ad27048a98292e591ee63d,
@@ -408,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dde9e1f9f914344e94179bc8a3c53b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorNumber: 0
+  floorNumber: 1
   floorColor: 0
   lengthOfFloor: 7
   heightOfFloor: 5
