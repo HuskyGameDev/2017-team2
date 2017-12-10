@@ -1214,6 +1214,7 @@ MonoBehaviour:
   speed: 5
   bulletPrefab: {fileID: 1501066236266358, guid: 56a153b5d6ee6e44fa0fc3e0da622baa,
     type: 2}
+  bulletAnim: {fileID: 7400000, guid: 81fc46c8b4c531144ab12e917090b0e5, type: 2}
   meleeAttack: {fileID: 452498535}
 --- !u!4 &1234045391
 Transform:

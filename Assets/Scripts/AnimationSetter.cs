@@ -50,7 +50,7 @@ public class AnimationSetter : MonoBehaviour
         /* Melee Attack */
         if (Input.GetKeyDown(KeyCode.Mouse1)  && cd == 0)
         {
-            cd = 10;
+            cd = 20;
             anim.SetTrigger("UMelee");
             idleTime = 0;
         }
