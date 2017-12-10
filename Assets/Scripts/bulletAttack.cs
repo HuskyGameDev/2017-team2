@@ -5,23 +5,24 @@ using UnityEngine;
 public class bulletAttack : MonoBehaviour {
 
     public int dmg = 10;
+	public GameObject shooter;
 
-    private void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D col)
     {
- 
-        if (col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
+		if (shooter.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
-            print("Pew");
-            // Damage enemy
-            col.SendMessageUpwards("Hit", dmg);
-           
-           
+			print("Pew");
+			col.SendMessageUpwards("Hit", dmg);
+			DestroyObject (transform.parent.gameObject);
         }
 
-        if (col.isTrigger != true && !col.gameObject.CompareTag("Player"))
-        {
-            // Destroy bullet
-            Destroy(gameObject);
-        }
+		if (shooter.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player"))
+		{
+			print("Ouch!");
+			col.SendMessageUpwards("Hit", dmg);
+			DestroyObject (transform.parent.gameObject);
+		}
+			
     }
+
 }

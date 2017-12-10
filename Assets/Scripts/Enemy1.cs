@@ -2,30 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy1 : Enemy {
 
-	protected float speedMax;
-	public float speed = 2f;
+	// Object for slashing
+	private int wait = 10;
+	private bool attacking;
+	public Collider2D meleeAttack;
 
-	protected float xMax;
-	protected float yMax;
-	protected float xMin;
-	protected float yMin;
-
-	protected float x;
-	protected float y;
-	protected float time;
-	protected float angle;
-
-	protected int health;
-
-	protected Rigidbody2D rb2d;
-	protected CircleCollider2D circleCollider;
-	protected GameObject player;
-	protected Transform player_pos;
-
-	// Use this for initialization
-	protected virtual void Start () {
+	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
@@ -43,24 +27,13 @@ public class Enemy : MonoBehaviour {
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
+
+		// Set melee attack stuff
+		meleeAttack.enabled = false;
+		attacking = false;
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-		if (player == null)
-			MoveAtRandom ();
-		else {
-			Chase ();	
-		}
-
-		if (health < 0) {
-			Destroy(gameObject);
-			print ("RIP");
-		}
-	}
-
-	protected virtual void MoveAtRandom() {
+	protected override void MoveAtRandom() {
 		time += Time.deltaTime;
 
 		if (transform.localPosition.x > xMax) {
@@ -79,7 +52,7 @@ public class Enemy : MonoBehaviour {
 			y = Random.Range(0.0f, speedMax);
 			time = 0.0f; 
 		}
-
+			
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
 
@@ -89,35 +62,53 @@ public class Enemy : MonoBehaviour {
 			time = 0.0f;
 		}
 
-		transform.localPosition = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
-	}
+		Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
 
-	void OnTriggerEnter2D (Collider2D other) {
-
-		if (other.gameObject.CompareTag ("Player")) {
-			
-			player = other.gameObject;
-			player_pos = player.GetComponent<Transform> ();
+		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
+			transform.localPosition = movement;
 		}
+
 	}
 
-	protected virtual void Chase() {
+	protected override void Chase() {
 
+		time += Time.deltaTime;
 
-		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
+			transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+		}
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
 
+		slash ();
 	}
 
-	void Hit(int dmg)
+	private void slash()
 	{
-		health -= dmg;
-	}
+		float dist = Vector3.Distance (player_pos.position, transform.position);
 
-    void Hit(int dmg)
-    {
-        health -= dmg;
-    }
+		if (dist < 2 && !attacking)
+		{
+			attacking = true;
+			meleeAttack.enabled = true;
+		}
+
+		if (attacking)
+		{
+
+			if (wait > 0)
+			{
+
+				wait--;
+			}
+
+			else
+			{
+				attacking = false;
+				meleeAttack.enabled = false;
+				wait = 10;
+			}
+		}
+	}
 }
