@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     // Projectiles
     public GameObject bulletPrefab;
+    public AnimationClip bulletAnim;
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
@@ -105,6 +106,7 @@ public class PlayerController : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
+       
 
         score = 0;
         floor = 1;
@@ -116,6 +118,8 @@ public class PlayerController : MonoBehaviour
         // Set melee attack stuff
         meleeAttack.enabled = false;
         attacking = false;
+
+       // anim.animation = U_Walking;
     }
 
     //Called every frame
@@ -125,7 +129,6 @@ public class PlayerController : MonoBehaviour
 			Destroy(gameObject);
 			print ("RIP");
 		}
-		
         //Enter mouse mosition
         mouse_pos = Input.mousePosition;
         mouse_pos.z = -10;
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
         //Rotate player
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
@@ -170,8 +173,9 @@ public class PlayerController : MonoBehaviour
         // Create a new bullet with the current mouse position
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (ableToShoot == 0)
+            if (ableToShoot == 0 && !attacking)
             {
+
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
@@ -248,7 +252,7 @@ public class PlayerController : MonoBehaviour
             {
                 attacking = false;
                 meleeAttack.enabled = false;
-                wait = 10;
+                wait = 20;
             }
         }
     }

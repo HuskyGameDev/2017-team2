@@ -11,7 +11,6 @@ public class meleeAttack : MonoBehaviour {
     {
 		if (slasher.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
-            print("kapow");
             col.SendMessageUpwards("Hit", dmg);
         }
 

@@ -22,6 +22,11 @@ public class bulletAttack : MonoBehaviour {
                 DestroyObject(transform.gameObject);
             }
         }
+
+        if (isTriggered && (col.gameObject.CompareTag("Player") == false))
+        {
+            Destroy(gameObject);
+        }
     }
 
 }
