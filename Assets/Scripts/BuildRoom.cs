@@ -390,6 +390,7 @@ public class BuildRoom : MonoBehaviour {
             placedExit = true;
             GameObject obj = Instantiate(exit, actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
+            obj.GetComponent<Exit>().player = player;
             gameObjects.Add(obj);
         }
         else {
