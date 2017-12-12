@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour {
     public GameManager gm;
+    public GameObject player;
     void OnTriggerEnter2D(Collider2D collision) {
-        gm.nextFloor();
+        if (collision.gameObject == player)
+            gm.nextFloor();
     }
 
 }
