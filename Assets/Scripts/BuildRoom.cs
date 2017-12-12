@@ -24,6 +24,13 @@ public class BuildRoom : MonoBehaviour {
     public Count longCount = new Count(5, 10);
 
     public GameObject exit;
+    public GameObject finalExit;
+    public GameObject player;
+
+    public GameObject smallEnemy;
+    public GameObject mediumEnemy;
+    public GameObject largeEnemy;
+
     public GameObject charger;
 
     //Indices for each colored wall and corner 
@@ -36,18 +43,22 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
     public GameObject[] smallRed;
+    public GameObject[] smallGrey;
 
     public GameObject[] longBlue;
     public GameObject[] longPurple;
     public GameObject[] longRed;
+    public GameObject[] longGrey;
 
     public GameObject[] largeBlue;
     public GameObject[] largePurple;
     public GameObject[] largeRed;
+    public GameObject[] largeGrey;
 
     public GameObject[] specialBlue;
     public GameObject[] specialPurple;
     public GameObject[] specialRed;
+    public GameObject[] specialGrey;
 
 
     private int color;
@@ -57,12 +68,21 @@ public class BuildRoom : MonoBehaviour {
     private float dx;
     private float dy;
 
+    private int smallEnemyCount;
+    private int mediumEnemyCount;
+    private int largeEnemyCount;
+
     private List<Vector3> doorPos;
+    private Vector3 exitPos;
+    private bool placedExit;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private Boolean[,] available;
 
+    public List<GameObject> getList() {
+        return gameObjects;
+    }
     void InitializeList() {
 
         gridPositions.Clear();
@@ -99,6 +119,7 @@ public class BuildRoom : MonoBehaviour {
         boardHolder = new GameObject("Board").transform;
 
         GameObject floorInstance = Instantiate(floor[color], new Vector3(5 + dx, 5 + dy, 0), Quaternion.identity) as GameObject;
+        gameObjects.Add(floorInstance);
         floorInstance.transform.SetParent(boardHolder);
     }
 
@@ -268,6 +289,23 @@ public class BuildRoom : MonoBehaviour {
         }
     }
 
+    Boolean LargeEnemyClear(Vector3 pos) {
+        // pos is bottom left corner of object
+        if (pos.y > rows - 2 || pos.x > columns - 2) {
+            return false;
+        }
+
+        for (int x = (int)pos.x; x <= (int)pos.x + 1; x++) {
+            for (int y = (int)pos.y; y <= (int)pos.y + 1; y++) {
+                if (!available[x, y]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Place the charger in the room
      * 
@@ -281,7 +319,6 @@ public class BuildRoom : MonoBehaviour {
         do {
             randomIndex = RandomPosition();
             randomPos = gridPositions[randomIndex];
-            print(randomPos.ToString());
         } while (!SpecialClear(randomPos));
 
         Vector3 actualPos;
@@ -320,17 +357,68 @@ public class BuildRoom : MonoBehaviour {
      * Place U in the room
      * 
      */
-    private void RandomlyLayoutPlayer(Vector3[,] avail) {
+    private void LayoutPlayer() {
+        int randomIndex;
+        Vector3 randomPos;
 
+        randomIndex = RandomPosition();
+        randomPos = gridPositions[randomIndex];
+
+        Vector3 actualPos;
+        actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+        
+        gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
+        available[(int)randomPos.x, (int)randomPos.y] = false;
+
+        player.transform.SetPositionAndRotation(actualPos, Quaternion.identity);
     }
 
     /**
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special open door with light
      */
-    private void LayoutExit(Vector3[,] avail) {
-
+    private void LayoutExit(BuildFloor.Room room) {
+        if (color != GREY) {
+            float rotDegrees = Random.Range(0, 3) * 90f;
+            Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+            exitPos = randomPos;
+            placedExit = true;
+            GameObject obj = Instantiate(exit, actualPos, rotation);
+            obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
+            gameObjects.Add(obj);
+        }
+        else {
+            Quaternion rotation = Quaternion.identity;
+            Vector3 vector = Vector3.zero;
+            if (room.doorWest == -1) {
+                rotation = Quaternion.AngleAxis(180, Vector3.back);
+                vector = new Vector3(dx - .0625f, dy + 5 + .5f, 0);
+                doorPos.Add(new Vector3(0, 5, 0f));
+            }
+            else if (room.doorEast == -1) {
+                rotation = Quaternion.identity;
+                vector = new Vector3(dx + 10.0625f, dy + 5 + .5f, 0);
+                doorPos.Add(new Vector3(columns - 1, 5, 0f));
+            }
+            else if (room.doorNorth == -1) {
+                rotation = Quaternion.AngleAxis(270, Vector3.back);
+                vector = new Vector3(dx + .5f + 5, dy + 10.0625f, 0);
+                doorPos.Add(new Vector3(5, rows - 1, 0f));
+            }
+            else if (room.doorSouth == -1) {
+                rotation = Quaternion.AngleAxis(90, Vector3.back);
+                vector = new Vector3(dx + 5 + .5f, dy - .0625f, 0);
+                doorPos.Add(new Vector3(5, 0, 0f));
+            }
+            Instantiate(finalExit, vector, rotation);
+        }
     }
+
 
 
     Boolean pathExists() {
@@ -380,7 +468,8 @@ public class BuildRoom : MonoBehaviour {
                 return false;
             }
         }
-
+        if (placedExit && !closed.Contains(exitPos + new Vector3(1, 0)) && !closed.Contains(exitPos + new Vector3(0, 1)) && !closed.Contains(exitPos + new Vector3(-1, 0)) && !closed.Contains(exitPos + new Vector3(0, -1)))
+            return false;
         return true;
 
     }
@@ -395,34 +484,34 @@ public class BuildRoom : MonoBehaviour {
         for (int i = 0; i < rows; i++) {
             if (room.doorWest != i) {
                 // Left
-                Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
             } else {
                 // Left
-                Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                gameObjects.Add(Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
             }
             if (room.doorEast != i) {
                 // Right
-                Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation));
             }
         }
 
         for (int i = 0; i < columns; i++) {
             if (room.doorNorth != i) {
                 // Top
-                Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
             } else {
                 // Top
-                Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                gameObjects.Add(Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
             }
             if (room.doorSouth != i) {
                 // Bottom
-                Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), southRotation);
+                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + i + .5f, dy - .0625f, 0), southRotation));
             }
         }
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.AngleAxis(180, Vector3.back)); // Bottom Left
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.AngleAxis(90, Vector3.back)); // Bottom Right
-        Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.AngleAxis(270, Vector3.back)); // Top Left
-        Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity); // Top Right
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy - .0625f, 0), Quaternion.AngleAxis(180, Vector3.back))); // Bottom Left
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy - .0625f, 0), Quaternion.AngleAxis(90, Vector3.back))); // Bottom Right
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx - .0625f, dy + 10.0625f, 0), Quaternion.AngleAxis(270, Vector3.back))); // Top Left
+        gameObjects.Add(Instantiate(cornerWall[color], new Vector3(dx + 10.0625f, dy + 10.0625f, 0), Quaternion.identity)); // Top Right
     }
 
     /**
@@ -440,53 +529,137 @@ public class BuildRoom : MonoBehaviour {
      * could be tweaked to modify difficulty if desired
      */
 
-    private BuildFloor.Room setEnemies(BuildFloor.Room room) {
-        int littleEnemies = 0;
-        int averageEnemies = 0;
-        int bigEnemies = 0;
+    void setEnemies() {
+        smallEnemyCount = 0;
+        mediumEnemyCount = 0;
+        largeEnemyCount = 0;
 
         int roomType = Random.Range(0, 19);
 
         if (roomType > 0 && roomType < 4) { //Little enemies only
-            littleEnemies = Random.Range(10, 20);
+            smallEnemyCount = Random.Range(10, 20);
         } else if (roomType > 3 && roomType < 9) { //Avg enemies only
-            averageEnemies = Random.Range(4, 9);
+            mediumEnemyCount = Random.Range(4, 9);
         } else if (roomType == 9) { //Big enemies only
-            bigEnemies = Random.Range(1, 3);
+            largeEnemyCount = Random.Range(1, 3);
         } else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
-            bigEnemies = Random.Range(1, 2);
-            littleEnemies = Random.Range(7, 16);
+            largeEnemyCount = Random.Range(1, 2);
+            smallEnemyCount = Random.Range(7, 16);
         } else if (roomType > 11 && roomType < 17) { //Avg and Little enemies only
-            averageEnemies = Random.Range(3, 6);
-            littleEnemies = Random.Range(5, 12);
+            mediumEnemyCount = Random.Range(3, 6);
+            smallEnemyCount = Random.Range(5, 12);
         } else if (roomType > 16) { //All enemy types
-            averageEnemies = Random.Range(2, 5);
-            littleEnemies = Random.Range(4, 13);
-            bigEnemies = 1;
+            mediumEnemyCount = Random.Range(2, 5);
+            smallEnemyCount = Random.Range(4, 13);
+            largeEnemyCount = 1;
         }
 
-        if (room.color == BuildFloor.FloorColor.PURPLE) { //moderate increase in enemy number
-            averageEnemies = averageEnemies * 5 / 3;
-            littleEnemies = littleEnemies * 5 / 3;
-            bigEnemies = bigEnemies * 5 / 3;
+        if (color == PURPLE) { //moderate increase in enemy number
+            mediumEnemyCount = mediumEnemyCount * 5 / 3;
+            smallEnemyCount = smallEnemyCount * 5 / 3;
+            largeEnemyCount = largeEnemyCount * 5 / 3;
         }
-        if (room.color == BuildFloor.FloorColor.RED) { //large increase in enemy number
-            averageEnemies = averageEnemies * 5 / 2;
-            littleEnemies = littleEnemies * 5 / 2;
-            bigEnemies = bigEnemies * 5 / 2;
+        if (color == RED) { //large increase in enemy number
+            mediumEnemyCount = mediumEnemyCount * 5 / 2;
+            smallEnemyCount = smallEnemyCount * 5 / 2;
+            largeEnemyCount = largeEnemyCount * 5 / 2;
         }
-        if (room.color == BuildFloor.FloorColor.GREY) { //no enemies
-            averageEnemies = 0;
-            littleEnemies = 0;
-            bigEnemies = 0;
+        if (color == GREY) { //no enemies
+            mediumEnemyCount = 0;
+            smallEnemyCount = 0;
+            largeEnemyCount = 0;
         }
+    }
 
-        return room;
+    void LayoutSmallEnemies() {
+        for (int i = 0; i < smallEnemyCount;) {
+
+            int count = 0;
+            do {
+                count = Random.Range(1, 4);
+            } while (count > smallEnemyCount - i);
+
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+
+            Vector3 actualPos;
+
+            int countDec = count;
+
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+            if (--countDec >= 0) {
+                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f);
+                GameObject choice = smallEnemy;
+                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            }
+
+            i += count;
+
+        }
+    }
+
+    void LayoutMediumEnemies() {
+        for (int i = 0; i < mediumEnemyCount; i++) {
+
+            int randomIndex = RandomPosition();
+            Vector3 randomPos = gridPositions[randomIndex];
+            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+
+            gridPositions.Remove(randomPos);
+            available[(int)randomPos.x, (int)randomPos.y] = false;
+
+            GameObject choice = mediumEnemy;
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+
+        }
+    }
+
+    void LayoutLargeEnemies() {
+        for (int i = 0; i < largeEnemyCount; i++) {
+            int randomIndex;
+            Vector3 randomPos;
+            do {
+                randomIndex = RandomPosition();
+                randomPos = gridPositions[randomIndex];
+            } while (!LargeEnemyClear(randomPos));
+
+            Vector3 actualPos;
+            actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 1f + dy, 0f);
+
+            for (int x = (int)randomPos.x; x <= (int)randomPos.x + 1; x++) {
+                for (int y = (int)randomPos.y; y <= (int)randomPos.y + 1; y++) {
+                    gridPositions.Remove(new Vector3(x, y, randomPos.z));
+                    available[x, y] = false;
+                }
+            }
+
+            GameObject choice = largeEnemy;
+            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+
+        }
     }
 
     public void SetupScene(int roomLength, BuildFloor.Room room) {
 
         doorPos = new List<Vector3>();
+        placedExit = false;
         GameObject[] smalls;
         GameObject[] longs;
         GameObject[] larges;
@@ -498,9 +671,9 @@ public class BuildRoom : MonoBehaviour {
             color = PURPLE;
         } else if (room.color == BuildFloor.FloorColor.RED) {
             color = RED;
+        } else if (room.color == BuildFloor.FloorColor.GREY) {
+            color = GREY;
         }
-
-        color = PURPLE;
 
         if (color == BLUE) {
             smalls = smallBlue;
@@ -518,10 +691,10 @@ public class BuildRoom : MonoBehaviour {
             larges = largeRed;
             specials = specialRed;
         } else {
-            smalls = smallRed;
-            longs = longRed;
-            larges = largeRed;
-            specials = specialRed;
+            smalls = smallGrey;
+            longs = longGrey;
+            larges = largeGrey;
+            specials = specialGrey;
         }
 
         if (room.doorNorth != -1) {
@@ -541,9 +714,12 @@ public class BuildRoom : MonoBehaviour {
         dy = room.pos.y * 10.25f;
 
         BoardSetup();
+
         do {
 
             DestroyAllObjects();
+
+            BoardSetup();
 
             InitializeList();
 
@@ -556,10 +732,16 @@ public class BuildRoom : MonoBehaviour {
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
             if (room.isExit) {
-                // LayoutExit();
+                //LayoutExit(room);
             }
+
             if (room.isEntrance) {
-                // RandomlyLayoutPlayer();
+                LayoutPlayer();
+            } else {
+                setEnemies();
+                LayoutLargeEnemies();
+                LayoutMediumEnemies();
+                LayoutSmallEnemies();
             }
 
             foreach (Vector3 door in doorPos) {
