@@ -145,6 +145,7 @@ MonoBehaviour:
   healthText: {fileID: 1836871707}
   speed: 0
   bulletPrefab: {fileID: 0}
+  bulletAnim: {fileID: 0}
   meleeAttack: {fileID: 0}
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
@@ -595,6 +596,33 @@ Prefab:
       propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: rb2d
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: bulletAnim
+      value: 
+      objectReference: {fileID: 7400000, guid: 81fc46c8b4c531144ab12e917090b0e5, type: 2}
+    - target: {fileID: 4096611928419294, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4096611928419294, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114912210624141848, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: slasher
+      value: 
+      objectReference: {fileID: 1494077015}
+    - target: {fileID: 1771575999197046, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
@@ -775,6 +803,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4096611928419294, guid: be241fb72e093974fae97d7a0e3c06e4,
     type: 2}
   m_PrefabInternal: {fileID: 1132409477}
+--- !u!95 &1494077017
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494077015}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c5482f3748171c4f8da0cadc6eba632, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1494077018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494077015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c71d43e2f199c24a8e7d83e8844f15b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1494077017}
+--- !u!114 &1494077019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494077015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 10
+  shooter: {fileID: 0}
 --- !u!1 &1760123411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1879883563}
   - component: {fileID: 1879883565}
-  - component: {fileID: 1879883564}
   m_Layer: 5
   m_Name: gamePanel
   m_TagString: Untagged
@@ -1218,33 +1287,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1879883564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1879883562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: be0d6a45537a1a64e9e6c4ce47a2d58a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &1879883565
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1419,7 +1461,6 @@ GameObject:
   - component: {fileID: 2074431841}
   - component: {fileID: 2074431840}
   - component: {fileID: 2074431843}
-  - component: {fileID: 2074431844}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
