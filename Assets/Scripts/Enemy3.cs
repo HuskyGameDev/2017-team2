@@ -20,11 +20,11 @@ public class Enemy3 : Enemy {
 		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
 
-		xMax = screenMax.x;
-		xMin = screenMin.x;
-		yMax = screenMax.y;
-		yMin = screenMin.y;
-		speedMax = speed / 30f;
+        xMax = transform.position.x + 10;
+        xMin = transform.position.x - 10;
+        yMax = transform.position.y + 10;
+        yMin = transform.position.y - 10;
+        speedMax = speed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
