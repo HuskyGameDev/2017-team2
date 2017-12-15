@@ -560,8 +560,8 @@ public class BuildRoom : MonoBehaviour {
             largeEnemyCount = 1;
         }
 
-        mediumEnemyCount /= 2;
-        smallEnemyCount /= 2;
+        mediumEnemyCount /= 4;
+        smallEnemyCount /= 4;
 
         if (color == PURPLE) { //moderate increase in enemy number
             mediumEnemyCount = mediumEnemyCount * 5 / 3;
