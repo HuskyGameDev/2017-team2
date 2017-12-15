@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class bulletAttack : MonoBehaviour {
 
-    public int dmg = 10;
+    public int dmg;
     public GameObject shooter;
 
     private void OnTriggerEnter2D(Collider2D col) {
