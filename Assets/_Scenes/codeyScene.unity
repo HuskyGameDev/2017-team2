@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 15
+  slasher: {fileID: 0}
 --- !u!58 &452498535
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -561,12 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a850db1438984f34db49599537daab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMax: 0.5
   speed: 2
-  xMax: 6
-  yMax: 4
-  xMin: -6
-  yMin: -4
 --- !u!212 &831781606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -742,8 +738,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e8e4bffdf962248ab2baa75fdcfc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
+  Player: {fileID: 0}
+  health: 0
   score: 0
   floor: 0
+  healthText: {fileID: 0}
+  speed: 0
+  bulletPrefab: {fileID: 0}
+  meleeAttack: {fileID: 0}
   scoreText: {fileID: 156801554}
   floorText: {fileID: 1661163403}
 --- !u!114 &1006905115
@@ -761,7 +764,7 @@ MonoBehaviour:
   timerText: {fileID: 999484488}
   seconds: 0
   minutes: 0
-  miliseconds: 0
+  milliseconds: 0
 --- !u!114 &1006905116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,6 +1167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
+  shooter: {fileID: 1234045386}
 --- !u!95 &1234045388
 Animator:
   serializedVersion: 3
@@ -1211,10 +1215,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
   Player: {fileID: 0}
+  health: 0
+  score: 0
+  floor: 0
+  healthText: {fileID: 0}
   speed: 5
   bulletPrefab: {fileID: 1501066236266358, guid: 56a153b5d6ee6e44fa0fc3e0da622baa,
     type: 2}
-  bulletAnim: {fileID: 7400000, guid: 81fc46c8b4c531144ab12e917090b0e5, type: 2}
   meleeAttack: {fileID: 452498535}
 --- !u!4 &1234045391
 Transform:
@@ -1724,20 +1731,38 @@ MonoBehaviour:
     minimum: 5
     maximum: 25
   exit: {fileID: 0}
-  floor: {fileID: 1352658589937296, guid: c6f350eb92be6ad4395a6b5d40fea0a0, type: 2}
-  door: {fileID: 0}
-  wall: {fileID: 0}
-  cornerWall: {fileID: 0}
-  smallObjects:
-  - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
-  - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
-  - {fileID: 1091584642491018, guid: ce82bac22ebf1b744a06149f1aeef0ee, type: 2}
-  - {fileID: 1918449228515830, guid: e26c763fcece61c4db3697bce362bee0, type: 2}
-  - {fileID: 1417633470477086, guid: dd70455443956df49befea27bf8b4e25, type: 2}
-  - {fileID: 1460672538541834, guid: 6585b5c4c08738841a70b27cc96afd58, type: 2}
-  largeObjects: []
-  longObjects: []
-  specialObjects: []
+  finalExit: {fileID: 0}
+  player: {fileID: 0}
+  smallEnemy: {fileID: 0}
+  mediumEnemy: {fileID: 0}
+  largeEnemy: {fileID: 0}
+  charger: {fileID: 0}
+  wall:
+  - {fileID: 0}
+  cornerWall:
+  - {fileID: 0}
+  door:
+  - {fileID: 0}
+  floor:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  smallBlue: []
+  smallPurple: []
+  smallRed: []
+  smallGrey: []
+  longBlue: []
+  longPurple: []
+  longRed: []
+  longGrey: []
+  largeBlue: []
+  largePurple: []
+  largeRed: []
+  largeGrey: []
+  specialBlue: []
+  specialPurple: []
+  specialRed: []
+  specialGrey: []
 --- !u!114 &2074431841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,7 +1776,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
+  cam: {fileID: 0}
   roomLength: 0
+  numFloors: 0
   isEndless: 0
 --- !u!4 &2074431842
 Transform:

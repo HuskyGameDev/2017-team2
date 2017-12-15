@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4080906981204154}
   - component: {fileID: 212014541744171334}
   - component: {fileID: 111541640714672724}
+  - component: {fileID: 95897771883996250}
   m_Layer: 0
   m_Name: playerBullet
   m_TagString: Untagged
@@ -41,6 +42,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95897771883996250
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501066236266358}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b0f1c6b15c387124db795c4c17be4a8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!111 &111541640714672724
 Animation:
   m_ObjectHideFlags: 1
@@ -52,6 +70,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 81fc46c8b4c531144ab12e917090b0e5, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 81fc46c8b4c531144ab12e917090b0e5, type: 2}
+  - {fileID: 7400000, guid: 4bb58ee3e83a1b2439864e868aa18c19, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0

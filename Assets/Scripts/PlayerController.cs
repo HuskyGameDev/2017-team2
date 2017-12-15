@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
 
     // Projectiles
     public GameObject bulletPrefab;
-    public AnimationClip bulletAnim;
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
