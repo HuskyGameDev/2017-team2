@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         //Change position of player
-        rb2d.MovePosition(rb2d.position + speed * movement * Time.fixedDeltaTime);
+        rb2d.position += speed * movement * Time.fixedDeltaTime;
 
         UpdateHP();
 
