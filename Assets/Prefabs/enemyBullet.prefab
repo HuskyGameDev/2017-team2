@@ -124,8 +124,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  dmg: 1
+  m_EditorClassIdentifier:
+  dmg: 2
   shooter: {fileID: 1443834167817138, guid: 9a0de385d7ad27048a98292e591ee63d, type: 2}
   hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!212 &212538781027862788

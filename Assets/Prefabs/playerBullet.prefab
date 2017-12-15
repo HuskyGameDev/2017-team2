@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212014541744171334}
   - component: {fileID: 111541640714672724}
   - component: {fileID: 95897771883996250}
+  - component: {fileID: 114083067173017000}
   m_Layer: 0
   m_Name: playerBullet
   m_TagString: Bullet
@@ -75,6 +76,19 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114083067173017000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501066236266358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 10
+  shooter: {fileID: 0}
 --- !u!212 &212014541744171334
 SpriteRenderer:
   m_ObjectHideFlags: 1

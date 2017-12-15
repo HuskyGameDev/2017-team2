@@ -332,6 +332,7 @@ public class BuildRoom : MonoBehaviour {
         }
 
         GameObject choice = array[Random.Range(0, array.Length)];
+        choice.GetComponent<ChargingStation>().player = player;
         gameObjects.Add(Instantiate(choice, actualPos, rotation));
 
     }
