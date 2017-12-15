@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public BuildFloor floorScript;
     public BuildRoom boardScript;
+    public AudioSource song;
     public GameObject cam;
     public int roomLength;
     public int numFloors;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour {
     void initGame() {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
+        song = GetComponent<AudioSource>();
+        song.Play();
         objects = new List<List<GameObject>>();
         buildFloor();
         cam.GetComponent<CameraScript>().isStarted = true;
