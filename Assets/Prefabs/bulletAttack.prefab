@@ -78,3 +78,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
+  shooter: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}

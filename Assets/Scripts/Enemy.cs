@@ -24,8 +24,11 @@ public class Enemy : MonoBehaviour {
 	protected GameObject player;
 	protected Transform player_pos;
 
-	// Use this for initialization
-	protected virtual void Start () {
+    protected AudioSource audioSource;
+    public AudioClip deathSound;
+
+    // Use this for initialization
+    protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
@@ -56,7 +59,8 @@ public class Enemy : MonoBehaviour {
 
 		if (health < 0) {
 			Destroy(gameObject);
-			print ("RIP");
+            audioSource.PlayOneShot(deathSound);
+            print ("RIP");
 		}
 	}
 
