@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour {
 		}
 
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle-90);
 
 		if (time > 1.0f) {
 			x = Random.Range(-speedMax, speedMax);

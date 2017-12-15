@@ -78,7 +78,7 @@ public class Enemy2 : Enemy {
         transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
 
         angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle+90);
 
         shoot();
     }
@@ -89,6 +89,8 @@ public class Enemy2 : Enemy {
         if (ableToShoot == 0) {
             bulletStruct newBullet = new bulletStruct();
             GameObject ebullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+            print("PING");
 
             print(EnemyTransform.ToString());
 

@@ -145,7 +145,6 @@ MonoBehaviour:
   healthText: {fileID: 1836871707}
   speed: 0
   bulletPrefab: {fileID: 0}
-  bulletAnim: {fileID: 0}
   meleeAttack: {fileID: 0}
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
@@ -844,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 10
-  shooter: {fileID: 0}
+  shooter: {fileID: 1494077015}
 --- !u!1 &1760123411
 GameObject:
   m_ObjectHideFlags: 0

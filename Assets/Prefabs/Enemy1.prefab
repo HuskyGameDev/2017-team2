@@ -20,8 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4272907586098254}
   - component: {fileID: 212999981080177064}
+  - component: {fileID: 50308853338799874}
   - component: {fileID: 60016903718389608}
   - component: {fileID: 58350539592773492}
+  - component: {fileID: 114604224457239874}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -73,6 +75,26 @@ Transform:
   m_Father: {fileID: 4272907586098254}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50308853338799874
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587803288785038}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 500
+  m_LinearDrag: 20
+  m_AngularDrag: 1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58216117876100090
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -370,6 +392,19 @@ PolygonCollider2D:
       - {x: 5.4, y: 0.089999996}
       - {x: 5.4, y: 0.11}
       - {x: 5.38, y: 0.12}
+--- !u!114 &114604224457239874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587803288785038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fde3b3aac4e2254f9eaf6054d63400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  meleeAttack: {fileID: 58216117876100090}
 --- !u!114 &114639944651411312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +447,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -469320331
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b48e69725c2d9b049a9344c3e09fd914, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
