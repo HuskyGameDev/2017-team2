@@ -17,8 +17,9 @@ public class bulletAttack : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
 
 
-        if (shooter.tag == col.gameObject.tag)
+        if (shooter.CompareTag("Player") && col.gameObject.CompareTag("Bullet"))
         {
+
             audioSource.PlayOneShot(hitSound);
         }
 
@@ -30,7 +31,7 @@ public class bulletAttack : MonoBehaviour {
 
             if (shooter.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player")) {
                 col.SendMessageUpwards("Hit", dmg);
-               // DestroyObject(transform.gameObject);
+                // DestroyObject(transform.gameObject);
             }
         }
     }
