@@ -23,7 +23,6 @@ public class BuildRoom : MonoBehaviour {
     public Count largeCount = new Count(0, 3);
     public Count longCount = new Count(5, 10);
 
-    public GameObject exit;
     public GameObject finalExit;
     public GameObject player;
 
@@ -39,6 +38,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] cornerWall; // Holds all corner types, access by color above
     public GameObject[] door; // Holds all corner types, access by color above
     public GameObject[] floor; // Holds all corner types, access by color above
+    public GameObject[] exits; // Holds all exits, access by color above
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -388,7 +388,7 @@ public class BuildRoom : MonoBehaviour {
             available[(int)randomPos.x, (int)randomPos.y] = false;
             exitPos = randomPos;
             placedExit = true;
-            GameObject obj = Instantiate(exit, actualPos, rotation);
+            GameObject obj = Instantiate(exits[color], actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
             gameObjects.Add(obj);
@@ -488,7 +488,9 @@ public class BuildRoom : MonoBehaviour {
                 gameObjects.Add(Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
             } else {
                 // Left
-                gameObjects.Add(Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
+                GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                go.GetComponent<DoorScript>().player = player;
+                gameObjects.Add(go);
             }
             if (room.doorEast != i) {
                 // Right
@@ -502,7 +504,9 @@ public class BuildRoom : MonoBehaviour {
                 gameObjects.Add(Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
             } else {
                 // Top
-                gameObjects.Add(Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
+                GameObject go = Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                go.GetComponent<DoorScript>().player = player;
+                gameObjects.Add(go);
             }
             if (room.doorSouth != i) {
                 // Bottom
@@ -554,6 +558,9 @@ public class BuildRoom : MonoBehaviour {
             smallEnemyCount = Random.Range(4, 13);
             largeEnemyCount = 1;
         }
+
+        mediumEnemyCount /= 2;
+        smallEnemyCount /= 2;
 
         if (color == PURPLE) { //moderate increase in enemy number
             mediumEnemyCount = mediumEnemyCount * 5 / 3;
@@ -733,7 +740,7 @@ public class BuildRoom : MonoBehaviour {
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
             if (room.isExit) {
-                //LayoutExit(room);
+                LayoutExit(room);
             }
 
             if (room.isEntrance) {

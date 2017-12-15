@@ -1489,7 +1489,6 @@ MonoBehaviour:
   longCount:
     minimum: 1
     maximum: 5
-  exit: {fileID: 1901749814541594, guid: 8db6cd58d5781a741a815e771ed46b98, type: 2}
   finalExit: {fileID: 1154949291673416, guid: dc0b599c1f9c13947a297f9513c31655, type: 2}
   player: {fileID: 1494077015}
   smallEnemy: {fileID: 1380226150802872, guid: 87fca8ed9c5aacd4ca677a2fb020a522, type: 2}
@@ -1517,6 +1516,10 @@ MonoBehaviour:
   - {fileID: 1117119940692598, guid: 2598af3914e393343b9248722a1554ce, type: 2}
   - {fileID: 1037340786115698, guid: d479b72e8df6607429b9c18f0af7f33e, type: 2}
   - {fileID: 1949436545563150, guid: 7a9d1adca63281d47b867726f686f989, type: 2}
+  exits:
+  - {fileID: 1623128156999972, guid: ec0be66fd44856b45b0c232ae4e1b955, type: 2}
+  - {fileID: 1959454287405712, guid: df250db7f0d9f5f45a3d60e55e7431d4, type: 2}
+  - {fileID: 1232303087558978, guid: ecca2f3efaf4af649907a6b4fdc5e6a8, type: 2}
   smallBlue:
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
