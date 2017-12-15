@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public AudioClip clip2;
     public AudioClip clip3;
     public GameObject cam;
+    public GameObject gameController;
     public int roomLength;
     public int numFloors;
     public bool isEndless;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
             buildFinalFloor();
         else
             buildFloor();
+        gameController.GetComponent<CountDownTimer>().time = 120;
     }
     private void destroyObjects() {
         foreach (List<GameObject> room in objects)

@@ -1746,7 +1746,11 @@ MonoBehaviour:
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
   song: {fileID: 0}
+  clip1: {fileID: 0}
+  clip2: {fileID: 0}
+  clip3: {fileID: 0}
   cam: {fileID: 237235622}
+  gameController: {fileID: 53205986}
   roomLength: 10
   numFloors: 20
   isEndless: 0
