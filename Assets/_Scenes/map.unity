@@ -1745,6 +1745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorScript: {fileID: 0}
   boardScript: {fileID: 0}
+  song: {fileID: 0}
   cam: {fileID: 237235622}
   roomLength: 10
   numFloors: 20
@@ -1792,7 +1793,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f633c93b9802ccd49a274f6ab0d901d8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
