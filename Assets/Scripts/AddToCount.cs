@@ -60,7 +60,7 @@ public class AddToCount : PlayerController {
     {
         //scoreText.text = "Score: " + score.ToString();
         
-        if (life <= 0)
+        if (health <= 0)
         {
             scoreText.text = "Your final score was " + score.ToString();
         }
@@ -76,7 +76,7 @@ public class AddToCount : PlayerController {
     {
         //floorText.text = "Floor: " + floor.ToString();
         
-        if (life <= 0)
+        if (health <= 0)
         {
             floorText.text = "You completed " + floor.ToString() + " floor(s)"; 
         }

@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class BuildFloor : MonoBehaviour {
 
-    public int floorNumber = 0;
+    public int floorNumber = 1;
     // Specific floor colors for the first 20 floors, STORY mode
     private FloorColor[] twenty = new FloorColor[] { FloorColor.BLUE, FloorColor.BLUE, FloorColor.BLUE, FloorColor.PURPLE, FloorColor.BLUE,
                                                      FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.PURPLE, FloorColor.BLUE, FloorColor.RED,
@@ -18,7 +18,7 @@ public class BuildFloor : MonoBehaviour {
      * Purple = harder
      * Red = HARD
      */
-    public enum FloorColor { BLUE, RED, PURPLE }
+    public enum FloorColor { BLUE, RED, PURPLE, GREY }
     public FloorColor floorColor;
     public int lengthOfFloor = 7;
     public int heightOfFloor = 5;
@@ -37,25 +37,20 @@ public class BuildFloor : MonoBehaviour {
     public class Room {
         public FloorColor color;
         public bool isEntrance = false;
-        public bool isExit;
+        public bool isExit = false;
         public bool hasCharger;
         public int doorNorth = -1;
         public int doorSouth = -1;
         public int doorWest = -1;
         public int doorEast = -1;
-        public int littleEnemies = 0;
-        public int averageEnemies = 0;
-        public int bigEnemies = 0;
         public Position pos;
-        public Room(bool isExit, int posX, int posY, bool hasCharger, FloorColor color) {
+        public Room(int posX, int posY, bool hasCharger, FloorColor color) {
             this.color = color;
-            this.isExit = isExit;
             pos = new Position(posX, posY);
             this.hasCharger = hasCharger;
         }
-        public Room(bool isExit, Position pos, bool hasCharger, FloorColor color) {
+        public Room(Position pos, bool hasCharger, FloorColor color) {
             this.color = color; 
-            this.isExit = isExit;
             this.pos = pos;
             this.hasCharger = hasCharger;
         }
@@ -79,7 +74,7 @@ public class BuildFloor : MonoBehaviour {
     public Room[,] buildFloor(int roomLength) {
         floorColor = floorNumber < 21 && floorNumber > 0 ? twenty[floorNumber - 1] : randomColor();
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
-        Room start = new Room(false, startPosX, startPosY, false, floorColor);
+        Room start = new Room(startPosX, startPosY, false, floorColor);
         start.isEntrance = true;
         floor[startPosX, startPosY] = start;
         Position currPos = start.pos;
@@ -91,8 +86,7 @@ public class BuildFloor : MonoBehaviour {
             currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
             //if new room to create
             if (floor[currPos.x, currPos.y] == null) {
-                Room room = new Room(false, currPos, false, floorColor);
-                room = setEnemies(room);
+                Room room = new Room(currPos, false, floorColor);
                 floor[currPos.x, currPos.y] = room;
             } 
             //if room already existed
@@ -135,51 +129,72 @@ public class BuildFloor : MonoBehaviour {
         return floor;
     }
     /**
-     * Sets the number of enemies in a room
-     * currently returns : 1/20 no enemies
-     *                     3/20 Little Enemies
-     *                     5/20 Average Enemies
-     *                     1/20 Big Enemies
-     *                     2/20 Big and Little Enemies
-     *                     5/20 Average and Little Enemies
-     *                     3/20 All Enemy types
-     * Floor Color : Blue = x1 enemies
-     *               Purple = x1.66 enemies
-     *               Red = x2.5 enemies
-     * could be tweaked to modify difficulty if desired
-     */
-    private Room setEnemies(Room room) {
-        int roomType = Random.Range(0, 19);
-        if (roomType > 0 && roomType < 4)  //Little enemies only
-            room.littleEnemies = Random.Range(10, 20);
-        else if (roomType > 3 && roomType < 9) //Avg enemies only
-            room.averageEnemies = Random.Range(4, 9);
-        else if (roomType == 9) //Big enemies only
-            room.bigEnemies = Random.Range(1, 3);
-        else if (roomType > 9 && roomType < 12) { //Big and Little enemies only
-            room.bigEnemies = Random.Range(1, 2);
-            room.littleEnemies = Random.Range(7, 16);
+    * builds the layout of rooms in the final floor
+    */
+    public Room[,] buildFinalFloor(int roomLength) {
+        floorColor = FloorColor.GREY;
+        Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
+        Room start = new Room(startPosX, startPosY, false, floorColor);
+        start.isEntrance = true;
+        floor[startPosX, startPosY] = start;
+        Position currPos = start.pos;
+        int numRooms = Random.Range(minRooms, maxRooms);
+        for (int i = 1; i < numRooms; i++) {
+            ArrayList viablePositions = getViablePositions(currPos, floor);
+            //hold last position to build doors
+            Position lastPos = currPos;
+            currPos = (Position)viablePositions[Random.Range(0, viablePositions.Count)];
+            //if new room to create
+            if (floor[currPos.x, currPos.y] == null) {
+                Room room = new Room(currPos, false, floorColor);
+                floor[currPos.x, currPos.y] = room;
+            }
+            //if room already existed
+            else {
+                i--;
+            }
+            int doorNum = Random.Range(0, roomLength);
+            //sets a door between rooms at a position
+            if (currPos.x != lastPos.x) {
+                if (currPos.x > lastPos.x) {
+                    floor[lastPos.x, lastPos.y].doorEast = doorNum;
+                    floor[currPos.x, currPos.y].doorWest = doorNum;
+                }
+                if (currPos.x < lastPos.x) {
+                    floor[lastPos.x, lastPos.y].doorWest = doorNum;
+                    floor[currPos.x, currPos.y].doorEast = doorNum;
+                }
+            }
+            if (currPos.y != lastPos.y) {
+                if (currPos.y > lastPos.y) {
+                    floor[lastPos.x, lastPos.y].doorNorth = doorNum;
+                    floor[currPos.x, currPos.y].doorSouth = doorNum;
+                }
+                if (currPos.y < lastPos.y) {
+                    floor[lastPos.x, lastPos.y].doorSouth = doorNum;
+                    floor[currPos.x, currPos.y].doorNorth = doorNum;
+                }
+            }
+
         }
-        else if (roomType > 11 && roomType < 17) { //Avg and Little enemies only
-            room.averageEnemies = Random.Range(3, 6);
-            room.littleEnemies = Random.Range(7, 16);
+        //Defines the last room built as the exit 
+        while (fullDoors(floor[currPos.x, currPos.y])) {
+            do {
+                currPos.x = Random.Range(0, lengthOfFloor);
+                currPos.y = Random.Range(0, lengthOfFloor);
+            } while (floor[currPos.x, currPos.y] == null);
         }
-        else if (roomType > 16) { //All enemy types
-            room.averageEnemies = Random.Range(2, 5);
-            room.littleEnemies = Random.Range(4, 13);
-            room.bigEnemies = 1;
-        }
-        if (floorColor == FloorColor.PURPLE) { //moderate increase in enemy number
-            room.averageEnemies = room.averageEnemies * 5 / 3;
-            room.littleEnemies = room.littleEnemies * 5 / 3;
-            room.bigEnemies = room.bigEnemies * 5 / 3;
-        }
-        if (floorColor == FloorColor.RED) { //large increase in enemy number
-            room.averageEnemies = room.averageEnemies * 5 / 2;
-            room.littleEnemies = room.littleEnemies * 5 / 2;
-            room.bigEnemies = room.bigEnemies * 5 / 2;
-        }
-        return room;
+        floor[currPos.x, currPos.y].isExit = true;
+        //Sets the next floors start position to the exit
+        startPosX = currPos.x;
+        startPosY = currPos.y;
+        return floor;
+    }
+    private Boolean fullDoors(Room room) {
+        Boolean result = false;
+        if (room.doorWest > -1 && room.doorEast > -1 && room.doorNorth > -1 && room.doorSouth > -1)
+            return true;
+        return result;
     }
     /**
      * Returns a random floor color

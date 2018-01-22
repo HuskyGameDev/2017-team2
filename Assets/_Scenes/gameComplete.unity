@@ -1212,6 +1212,9 @@ MonoBehaviour:
   - {fileID: 498966662}
   - {fileID: 2026076219}
   - {fileID: 1151195220}
+  newName: test
+  newScore: 0
+  newTime: 0
 --- !u!114 &298425046
 MonoBehaviour:
   m_ObjectHideFlags: 0

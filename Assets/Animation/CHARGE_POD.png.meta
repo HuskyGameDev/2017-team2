@@ -1,0 +1,623 @@
+fileFormatVersion: 2
+guid: be75cba9c22c0084fb04b3d955468ebb
+timeCreated: 1513303455
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: CHARGE_POD_0
+    21300002: CHARGE_POD_1
+    21300004: CHARGE_POD_2
+    21300006: CHARGE_POD_3
+    21300008: CHARGE_POD_4
+    21300010: CHARGE_POD_5
+    21300012: CHARGE_POD_6
+    21300014: CHARGE_POD_7
+    21300016: CHARGE_POD_8
+    21300018: CHARGE_POD_9
+    21300020: CHARGE_POD_10
+    21300022: CHARGE_POD_11
+    21300024: CHARGE_POD_12
+    21300026: CHARGE_POD_13
+    21300028: CHARGE_POD_14
+    21300030: CHARGE_POD_15
+    21300032: CHARGE_POD_16
+    21300034: CHARGE_POD_17
+    21300036: CHARGE_POD_18
+    21300038: CHARGE_POD_19
+    21300040: CHARGE_POD_20
+    21300042: CHARGE_POD_21
+    21300044: CHARGE_POD_22
+    21300046: CHARGE_POD_23
+    21300048: CHARGE_POD_24
+    21300050: CHARGE_POD_25
+    21300052: CHARGE_POD_26
+    21300054: CHARGE_POD_27
+    21300056: CHARGE_POD_28
+    21300058: CHARGE_POD_29
+    21300060: CHARGE_POD_30
+    21300062: CHARGE_POD_31
+    21300064: CHARGE_POD_32
+    21300066: CHARGE_POD_33
+    21300068: CHARGE_POD_34
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CHARGE_POD_0
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 3689
+        width: 1060
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_1
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 3689
+        width: 1066
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_2
+      rect:
+        serializedVersion: 2
+        x: 2467
+        y: 3689
+        width: 1067
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_3
+      rect:
+        serializedVersion: 2
+        x: 3668
+        y: 3689
+        width: 1072
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_4
+      rect:
+        serializedVersion: 2
+        x: 4868
+        y: 3689
+        width: 1073
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_5
+      rect:
+        serializedVersion: 2
+        x: 6063
+        y: 3689
+        width: 1075
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_6
+      rect:
+        serializedVersion: 2
+        x: 7264
+        y: 3689
+        width: 1075
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_7
+      rect:
+        serializedVersion: 2
+        x: 8467
+        y: 3689
+        width: 1078
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_8
+      rect:
+        serializedVersion: 2
+        x: 9661
+        y: 3689
+        width: 1075
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_9
+      rect:
+        serializedVersion: 2
+        x: 10861
+        y: 3689
+        width: 1076
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 2482
+        width: 1078
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_11
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 2482
+        width: 1079
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_12
+      rect:
+        serializedVersion: 2
+        x: 2485
+        y: 2482
+        width: 1079
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_13
+      rect:
+        serializedVersion: 2
+        x: 3684
+        y: 2482
+        width: 1081
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_14
+      rect:
+        serializedVersion: 2
+        x: 4887
+        y: 2482
+        width: 1080
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_15
+      rect:
+        serializedVersion: 2
+        x: 6080
+        y: 2482
+        width: 1080
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_16
+      rect:
+        serializedVersion: 2
+        x: 7282
+        y: 2482
+        width: 1081
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_17
+      rect:
+        serializedVersion: 2
+        x: 8483
+        y: 2482
+        width: 1081
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_18
+      rect:
+        serializedVersion: 2
+        x: 9680
+        y: 2482
+        width: 1080
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_19
+      rect:
+        serializedVersion: 2
+        x: 10881
+        y: 2482
+        width: 1084
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_20
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 1282
+        width: 1080
+        height: 1041
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_21
+      rect:
+        serializedVersion: 2
+        x: 1278
+        y: 1282
+        width: 1079
+        height: 1041
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_22
+      rect:
+        serializedVersion: 2
+        x: 2473
+        y: 1281
+        width: 1083
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_23
+      rect:
+        serializedVersion: 2
+        x: 3684
+        y: 1282
+        width: 1075
+        height: 1041
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_24
+      rect:
+        serializedVersion: 2
+        x: 4880
+        y: 1281
+        width: 1079
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_25
+      rect:
+        serializedVersion: 2
+        x: 6077
+        y: 1281
+        width: 1079
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_26
+      rect:
+        serializedVersion: 2
+        x: 7278
+        y: 1282
+        width: 1077
+        height: 1041
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_27
+      rect:
+        serializedVersion: 2
+        x: 8479
+        y: 1286
+        width: 1077
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_28
+      rect:
+        serializedVersion: 2
+        x: 9680
+        y: 1286
+        width: 1077
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_29
+      rect:
+        serializedVersion: 2
+        x: 10887
+        y: 1286
+        width: 1072
+        height: 1038
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_30
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 91
+        width: 1066
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_31
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 91
+        width: 1071
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_32
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 91
+        width: 1060
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_33
+      rect:
+        serializedVersion: 2
+        x: 3692
+        y: 91
+        width: 1065
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: CHARGE_POD_34
+      rect:
+        serializedVersion: 2
+        x: 4893
+        y: 91
+        width: 1060
+        height: 1037
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

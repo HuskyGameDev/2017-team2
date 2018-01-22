@@ -43,8 +43,9 @@ public class LeaderBoard : MonoBehaviour {
     // location of leaderboard text file
     static private string path = "Assets/leaderboard.txt";
 
-    // initialize Stream Reader
+    // initialize Stream Reader and StreamWriter
     StreamReader sR = new StreamReader(path);
+    StreamWriter sW = new StreamWriter(path);
 
 	// Use this for initialization
 	void Start () {
@@ -94,24 +95,47 @@ public class LeaderBoard : MonoBehaviour {
             // (do nothing)
         } else {
             // player's score was high enough to go on leaderboard
-            // delete last Entry
-            leaderboard[9].Name = "";
-            leaderboard[9].Score = 0;
-            leaderboard[9].Time = 0;
+            // overwrite last Entry with new Entry
+            leaderboard[9].Name = playerEntry.Name;
+            leaderboard[9].Score = playerEntry.Score;
+            leaderboard[9].Time = playerEntry.Time;
 
-            // use insertion sort to place new entry
-            for (int i = 0; i < leaderboard.Length; i++)
+            // temporary entry used for swapping data during sort
+            Entry tempEntry = new Entry("", 0, 0);
+
+            // move new entry up the leaderboard until it is in the correct spot
+            for (int i = leaderboard.Length; i >= 0; i--)
             {
-                if (playerEntry.Score > leaderboard[i].Score)
+                if (leaderboard[i].Score > leaderboard[i-1].Score)
                 {
+                    // put value to be replaced into temporary entry
+                    tempEntry.Name = leaderboard[i - 1].Name;
+                    tempEntry.Score = leaderboard[i - 1].Score;
+                    tempEntry.Time = leaderboard[i - 1].Time;
 
+                    // put new Entry into correct position
+                    leaderboard[i - 1].Name = leaderboard[i].Name;
+                    leaderboard[i - 1].Score = leaderboard[i].Score;
+                    leaderboard[i - 1].Time = leaderboard[i].Time;
+
+                    // put replaced Entry into correct position
+                    leaderboard[i].Name = tempEntry.Name;
+                    leaderboard[i].Score = tempEntry.Score;
+                    leaderboard[i].Time = tempEntry.Time;
                 }
             }
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+        /*
+        // begin writing new data to the text file
+        for (int i = 0; i < leaderboard.Length; i++)
+        {
+            sW.WriteLine(leaderboard[i].Name);
+            sW.WriteLine(leaderboard[i].Score.ToString());
+            sW.WriteLine(leaderboard[i].Time.ToString());
+        }
+
+        sW.Close();
+        */
 	}
 }

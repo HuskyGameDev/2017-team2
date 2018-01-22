@@ -4,24 +4,36 @@ using UnityEngine;
 
 public class bulletAttack : MonoBehaviour {
 
-    public int dmg = 10;
+    public int dmg;
+    public GameObject shooter;
+    private AudioSource audioSource;
+    public AudioClip hitSound;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    void Start()
     {
- 
-        if (col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D col) {
+
+
+        if (shooter.CompareTag("Player") && col.gameObject.CompareTag("Bullet"))
         {
-            print("Pew");
-            // Damage enemy
-            col.SendMessageUpwards("Hit", dmg);
-           
-           
+
+            audioSource.PlayOneShot(hitSound);
         }
 
-        if (col.isTrigger != true && !col.gameObject.CompareTag("Player"))
-        {
-            // Destroy bullet
-            Destroy(gameObject);
+        if (shooter != null) {
+            if (shooter.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy")) {
+                col.SendMessageUpwards("Hit", dmg);
+                DestroyObject(transform.gameObject);
+            }
+
+            if (shooter.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player")) {
+                col.SendMessageUpwards("Hit", dmg);
+                // DestroyObject(transform.gameObject);
+            }
         }
     }
+
 }

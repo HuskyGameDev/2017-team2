@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: bf791434b83922a478e4df216d42d98b
-timeCreated: 1509902672
+timeCreated: 1512936564
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rb2d: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - bulletPrefab: {fileID: 1501066236266358, guid: 56a153b5d6ee6e44fa0fc3e0da622baa,
+      type: 2}
+  - meleeAttack: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
