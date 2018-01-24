@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour
 {
-
-    public void LoadByIndex(int sceneIndex)
+    //Load game with a given number of floors
+    public void LoadByIndex(int numFloors)
     {
-        SceneManager.LoadScene(sceneIndex);
+        DataBetweenScenes.numFloors = numFloors;
+        SceneManager.LoadScene(1);
+    }
+    //Load game in endless mode
+    public void LoadEndless() {
+        DataBetweenScenes.isEndless = true;
+        SceneManager.LoadScene(1);
     }
 }

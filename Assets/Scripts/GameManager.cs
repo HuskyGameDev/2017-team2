@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour {
     public GameObject cam;
     public GameObject gameController;
     public int roomLength;
-    public int numFloors;
-    public bool isEndless;
     private List<List<GameObject>> objects;
 
     // Use this for initialization
@@ -26,7 +24,7 @@ public class GameManager : MonoBehaviour {
         destroyObjects();
         objects = new List<List<GameObject>>();
         //loads the final floor if it's the end of story mode, increments floor
-        if (++floorScript.floorNumber == numFloors + 1 && !isEndless)
+        if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless)
             buildFinalFloor();
         else
             buildFloor();
