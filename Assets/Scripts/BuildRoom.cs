@@ -60,6 +60,8 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
     public GameObject[] specialGrey;
 
+    private const int NORTH = 0, WEST = 1, SOUTH = 2, EAST = 3;
+    private int directionFinalDoor = 500; 
 
     private int color;
 
@@ -378,7 +380,7 @@ public class BuildRoom : MonoBehaviour {
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special open door with light
      */
-    private void LayoutExit(BuildFloor.Room room) {
+    private BuildFloor.Room LayoutExit(BuildFloor.Room room) {
         if (color != GREY) {
             float rotDegrees = Random.Range(0, 3) * 90f;
             Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
@@ -401,24 +403,33 @@ public class BuildRoom : MonoBehaviour {
                 rotation = Quaternion.AngleAxis(180, Vector3.back);
                 vector = new Vector3(dx - .0625f, dy + 5 + .5f, 0);
                 doorPos.Add(new Vector3(0, 5, 0f));
+                room.doorWest = 5;
+                directionFinalDoor = WEST;
             }
             else if (room.doorEast == -1) {
                 rotation = Quaternion.identity;
                 vector = new Vector3(dx + 10.0625f, dy + 5 + .5f, 0);
                 doorPos.Add(new Vector3(columns - 1, 5, 0f));
-            }
+                room.doorEast = 5;
+                directionFinalDoor = EAST;
+            } 
             else if (room.doorNorth == -1) {
                 rotation = Quaternion.AngleAxis(270, Vector3.back);
                 vector = new Vector3(dx + .5f + 5, dy + 10.0625f, 0);
                 doorPos.Add(new Vector3(5, rows - 1, 0f));
-            }
+                room.doorNorth = 5;
+                directionFinalDoor = NORTH;
+            } 
             else if (room.doorSouth == -1) {
                 rotation = Quaternion.AngleAxis(90, Vector3.back);
                 vector = new Vector3(dx + 5 + .5f, dy - .0625f, 0);
                 doorPos.Add(new Vector3(5, 0, 0f));
+                room.doorSouth = 5;
+                directionFinalDoor = SOUTH;
             }
             Instantiate(finalExit, vector, rotation);
         }
+        return room;
     }
 
 
@@ -741,7 +752,17 @@ public class BuildRoom : MonoBehaviour {
             LayoutSmall(smalls, smallCount.minimum, smallCount.maximum);
 
             if (room.isExit) {
-                LayoutExit(room);
+                //Should only trigger on a second pass to remove the previous attempt for the final door
+                if (directionFinalDoor == WEST)
+                    room.doorWest = -1;
+                if (directionFinalDoor == EAST)
+                    room.doorEast = -1;
+                if (directionFinalDoor == SOUTH)
+                    room.doorSouth = -1;
+                if (directionFinalDoor == NORTH)
+                    room.doorNorth = -1;
+                //Save the final door
+                room = LayoutExit(room);
             }
 
             if (room.isEntrance) {
