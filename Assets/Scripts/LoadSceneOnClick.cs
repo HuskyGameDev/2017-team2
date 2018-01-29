@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnClick : MonoBehaviour
 {
+    //For loading back into the menus
+    public void LoadMenu() {
+        SceneManager.LoadScene(0);
+    }
+    //For reloading the game with previous parameters
+    public void ReloadGame() {
+        SceneManager.LoadScene(1);
+    }
     //Load game with a given number of floors
     public void LoadByIndex(int numFloors)
     {
