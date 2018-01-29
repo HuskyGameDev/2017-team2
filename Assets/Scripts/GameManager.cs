@@ -86,4 +86,11 @@ public class GameManager : MonoBehaviour {
             song.clip = clip3;
         song.Play();
     }
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.F8))
+            nextFloor();
+        if (Input.GetKeyDown(KeyCode.F7))
+            for (int i = 0; i < 10; i++)
+                nextFloor();
+    }
 }
