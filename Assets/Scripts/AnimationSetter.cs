@@ -25,7 +25,7 @@ public class AnimationSetter : MonoBehaviour
     void Update () {
 
         /* Shooting */
-        if (Input.GetKey(KeyCode.Mouse0) && cd == 0)
+        if (Input.GetKey(KeyCode.Mouse0) || (Input.GetAxis("primaryAttack") > 0) && cd == 0)
         {
             
             anim.SetTrigger("UShoot");

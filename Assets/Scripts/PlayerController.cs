@@ -124,7 +124,13 @@ public class PlayerController : MonoBehaviour
     //Called every frame
     void Update()
     {
-		if (health < 0) {
+        // check if a Controller is plugged in
+        if (Input.GetJoystickNames().Length > 0)
+        {
+
+        }
+
+        if (health < 0) {
 			Destroy(gameObject);
 			print ("RIP");
 		}
@@ -161,16 +167,16 @@ public class PlayerController : MonoBehaviour
         UpdateHP();
 
         /* Call methods to handle shooting and slashing */
-        shoot();
-        slash();
+        Shoot();
+        Slash();
     }
 
     // Method used to handle shooting projectiles
-    private void shoot()
+    private void Shoot()
     {
 
         // Create a new bullet with the current mouse position
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) || Input.GetAxis("primaryAttack") > 0)
         {
             if (ableToShoot == 0 && !attacking)
             {
@@ -229,7 +235,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void slash()
+    private void Slash()
     {
 
         if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
