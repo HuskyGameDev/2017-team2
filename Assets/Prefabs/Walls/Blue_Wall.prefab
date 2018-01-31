@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4825398318461110}
   - component: {fileID: 212488576717118050}
   - component: {fileID: 61906535063503948}
+  - component: {fileID: 114936803085028650}
   m_Layer: 0
   m_Name: Blue_Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,6 +67,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.125, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114936803085028650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440629923792200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 0
+  shooter: {fileID: 1440629923792200}
+  hitSound: {fileID: 0}
 --- !u!212 &212488576717118050
 SpriteRenderer:
   m_ObjectHideFlags: 1

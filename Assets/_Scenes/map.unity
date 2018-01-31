@@ -146,6 +146,8 @@ MonoBehaviour:
   speed: 0
   bulletPrefab: {fileID: 0}
   meleeAttack: {fileID: 0}
+  bulletSound: {fileID: 0}
+  slashSound: {fileID: 0}
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
 --- !u!114 &53205988
@@ -875,6 +877,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1501066236266358, guid: 56a153b5d6ee6e44fa0fc3e0da622baa,
     type: 2}
   meleeAttack: {fileID: 922088542}
+  bulletSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
+  slashSound: {fileID: 8300000, guid: 402a70138d59e63488e2a7f6db55c64f, type: 3}
 --- !u!50 &1494077022
 Rigidbody2D:
   serializedVersion: 4

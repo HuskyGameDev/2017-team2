@@ -96,6 +96,9 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     public Collider2D meleeAttack;
 
+    public AudioClip bulletSound;
+    public AudioClip slashSound;
+
 
     // Use this for initialization
     void Start()
@@ -178,20 +181,19 @@ public class PlayerController : MonoBehaviour
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-                bullet.AddComponent<BoxCollider2D>();
-                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
-                bullet.AddComponent<bulletAttack>();
-                bullet.GetComponent<bulletAttack>().shooter = Player.gameObject;
-
                 Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
                 Vector3 pos = (Input.mousePosition - sp).normalized;
 
+                Input.GetAxisRaw()
                 newBullet.setPos(pos);
                 newBullet.setObj(bullet);
-                newBullet.setColliderVar(bullet.GetComponent<BoxCollider2D>());
+                newBullet.setColliderVar(bullet.GetComponent<CircleCollider2D>());
+                
                 newBullet.setCollider(true);
                 bullets.Add(newBullet);
                 ableToShoot++;
+
+                GetComponent<AudioSource>().PlayOneShot(bulletSound);
             }
         }
 
@@ -236,6 +238,9 @@ public class PlayerController : MonoBehaviour
         {
             attacking = true;
             meleeAttack.enabled = true;
+
+            GetComponent<AudioSource>().PlayOneShot(slashSound);
+
         }
 
         if (attacking)

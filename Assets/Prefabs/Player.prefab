@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 50764712979538716}
   - component: {fileID: 114534501254361720}
   - component: {fileID: 61910435170569738}
+  - component: {fileID: 114640959580881064}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -154,6 +155,18 @@ MonoBehaviour:
   speed: 5
   bulletPrefab: {fileID: 0}
   meleeAttack: {fileID: 58941655681328982}
+--- !u!114 &114640959580881064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771575999197046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cd0ed075a72ba459ee7850824f134a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114912210624141848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 15
   slasher: {fileID: 0}
+  hitSound: {fileID: 0}
+  missSound: {fileID: 0}
 --- !u!212 &212489914670911086
 SpriteRenderer:
   m_ObjectHideFlags: 1

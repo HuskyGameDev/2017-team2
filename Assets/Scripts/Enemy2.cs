@@ -90,23 +90,14 @@ public class Enemy2 : Enemy {
             bulletStruct newBullet = new bulletStruct();
             GameObject ebullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-            print("PING");
-
             print(EnemyTransform.ToString());
-
-            ebullet.AddComponent<BoxCollider2D>();
-            ebullet.GetComponent<BoxCollider2D>().isTrigger = true;
-            ebullet.AddComponent<bulletAttack>();
-            ebullet.GetComponent<bulletAttack>().shooter = EnemyTransform.gameObject;
-
-            print(ebullet.GetComponent<bulletAttack>().shooter);
 
             Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 pos = (Camera.main.WorldToScreenPoint(player_pos.position) - sp).normalized;
 
             newBullet.setPos(pos);
             newBullet.setObj(ebullet);
-            newBullet.setColliderVar(ebullet.GetComponent<BoxCollider2D>());
+            newBullet.setColliderVar(ebullet.GetComponent<CircleCollider2D>());
             newBullet.setCollider(true);
             bullets.Add(newBullet);
             ableToShoot++;
