@@ -502,6 +502,7 @@ public class BuildRoom : MonoBehaviour {
                 // Left
                 GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
                 go.GetComponent<DoorScript>().player = player;
+                go.GetComponent<DoorScript>().isClosed = true;
                 gameObjects.Add(go);
             }
             if (room.doorEast != i) {
@@ -518,6 +519,7 @@ public class BuildRoom : MonoBehaviour {
                 // Top
                 GameObject go = Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
                 go.GetComponent<DoorScript>().player = player;
+                go.GetComponent<DoorScript>().isClosed = true;
                 gameObjects.Add(go);
             }
             if (room.doorSouth != i) {
