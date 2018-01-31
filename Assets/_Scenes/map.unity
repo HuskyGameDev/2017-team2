@@ -571,8 +571,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 15
   slasher: {fileID: 1494077015}
-  hitSound: {fileID: 0}
-  missSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 402a70138d59e63488e2a7f6db55c64f, type: 3}
+  missSound: {fileID: 8300000, guid: 4cc96cf96d4af2b4e92057da472ec8aa, type: 3}
 --- !u!58 &922088542
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1752,8 +1752,6 @@ MonoBehaviour:
   cam: {fileID: 237235622}
   gameController: {fileID: 53205986}
   roomLength: 10
-  numFloors: 20
-  isEndless: 0
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,7 +1798,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -11,7 +11,7 @@ public class meleeAttack : MonoBehaviour {
 	public AudioClip missSound;
 
 	void Start() {
-		audioSource = GetComponent<AudioSource> ();
+		audioSource = slasher.GetComponent<AudioSource>();
 	}
 
     private void OnTriggerEnter2D(Collider2D col)
