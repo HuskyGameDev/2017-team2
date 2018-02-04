@@ -24,4 +24,8 @@ public class LoadSceneOnClick : MonoBehaviour
         DataBetweenScenes.isEndless = true;
         SceneManager.LoadScene(1);
     }
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.V) && Input.GetKeyDown(KeyCode.B) && Input.GetKeyDown(KeyCode.N))
+            DataBetweenScenes.devMode = true;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -44,8 +45,10 @@ public class GameManager : MonoBehaviour {
         BuildFloor.Room[,] floor = floorScript.buildFinalFloor(roomLength);
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
-                if (floor[i, j] != null)
+                if (floor[i, j] != null) {
+                    objects.Add(boardScript.getList());
                     boardScript.SetupScene(roomLength, floor[i, j]);
+                }
     }
     /**
      * Called to initiate the game after player presses play
@@ -87,10 +90,17 @@ public class GameManager : MonoBehaviour {
         song.Play();
     }
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F8))
-            nextFloor();
-        if (Input.GetKeyDown(KeyCode.F7))
-            for (int i = 0; i < 10; i++)
+        if (DataBetweenScenes.devMode) {
+            if (Input.GetKeyDown(KeyCode.F8))
                 nextFloor();
+            if (Input.GetKeyDown(KeyCode.F7))
+                for (int i = 0; i < 10; i++)
+                    nextFloor();
+            if (Input.GetKeyDown(KeyCode.F6)) {
+                floorScript.floorNumber = 0;
+                DataBetweenScenes.numFloors = 10;
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 }
