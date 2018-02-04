@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
     private bool attacking;
     public Collider2D meleeAttack;
 
+	private AudioSource audioSource;
+	private AudioClip bulletSound;
 
     // Use this for initialization
     void Start()
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
+		audioSource = GetComponent<AudioSource>();
        
 
         score = 0;
@@ -119,6 +122,9 @@ public class PlayerController : MonoBehaviour
         attacking = false;
 
        // anim.animation = U_Walking;
+
+		//Set bullet sound
+		bulletSound = Resources.Load("SFX/Plasma Gun") as AudioClip;
     }
 
     //Called every frame
@@ -171,10 +177,12 @@ public class PlayerController : MonoBehaviour
 
         // Create a new bullet with the current mouse position
         if (Input.GetKey(KeyCode.Mouse0))
-        {
+		{		
+			
             if (ableToShoot == 0 && !attacking)
             {
 
+				audioSource.PlayOneShot (bulletSound);
                 bulletStruct newBullet = new bulletStruct();
                 GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
@@ -193,6 +201,7 @@ public class PlayerController : MonoBehaviour
                 bullets.Add(newBullet);
                 ableToShoot++;
             }
+
         }
 
         // Used to limit the amount of bullets *Needs to update when animation implemented*
@@ -204,6 +213,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ableToShoot++;
+
         }
 
         // For every bullet on screen move towards the mouse position it was shot at
@@ -253,6 +263,7 @@ public class PlayerController : MonoBehaviour
                 meleeAttack.enabled = false;
                 wait = 20;
             }
+
         }
     }
 

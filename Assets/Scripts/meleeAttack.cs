@@ -16,11 +16,15 @@ public class meleeAttack : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-		if (slasher.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
+
+		if (slasher.CompareTag("Player") && col.gameObject.CompareTag("Enemy"))
         {
             col.SendMessageUpwards("Hit", dmg);
 			audioSource.PlayOneShot (hitSound);
         }
+		else if (slasher.CompareTag("Player")) {
+			audioSource.PlayOneShot(missSound);
+		}
 
 		if (slasher.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player"))
 		{
@@ -29,4 +33,5 @@ public class meleeAttack : MonoBehaviour {
 			audioSource.PlayOneShot (hitSound);
 		}
     }
+		
 }

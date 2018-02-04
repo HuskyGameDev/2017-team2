@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
         song = GetComponent<AudioSource>();
-        clip3 = Resources.Load("Music/Descension3") as AudioClip;
+        clip3 = c
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();

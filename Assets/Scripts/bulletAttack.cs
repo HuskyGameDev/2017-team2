@@ -6,22 +6,10 @@ public class bulletAttack : MonoBehaviour {
 
     public int dmg;
     public GameObject shooter;
-    private AudioSource audioSource;
-    public AudioClip hitSound;
-
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    private void OnTriggerEnter2D(Collider2D col) {
 
 
-        if (shooter.CompareTag("Player") && col.gameObject.CompareTag("Bullet"))
-        {
 
-            audioSource.PlayOneShot(hitSound);
-        }
+	private void OnTriggerEnter2D(Collider2D col) {
 
         if (shooter != null) {
             if (shooter.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy")) {
