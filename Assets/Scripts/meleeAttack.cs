@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class meleeAttack : MonoBehaviour {
 
+	private int isCol = 0;
     public int dmg = 15;
 	public GameObject slasher;
 	private AudioSource audioSource;
@@ -14,21 +15,26 @@ public class meleeAttack : MonoBehaviour {
 		audioSource = slasher.GetComponent<AudioSource>();
 	}
 
+	void Update() {
+		if (slasher.CompareTag("Player") && Input.GetKeyDown(KeyCode.Mouse1) && isCol == 0)
+		{
+			audioSource.PlayOneShot(missSound);
+		}
+	}
+
     private void OnTriggerEnter2D(Collider2D col)
     {
 
 		if (slasher.CompareTag("Player") && col.gameObject.CompareTag("Enemy"))
         {
+			isCol++;
             col.SendMessageUpwards("Hit", dmg);
 			audioSource.PlayOneShot (hitSound);
+			isCol--;
         }
-		else if (slasher.CompareTag("Player")) {
-			audioSource.PlayOneShot(missSound);
-		}
 
 		if (slasher.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player"))
 		{
-			print("Owwie!");
 			col.SendMessageUpwards("Hit", dmg);
 			audioSource.PlayOneShot (hitSound);
 		}
