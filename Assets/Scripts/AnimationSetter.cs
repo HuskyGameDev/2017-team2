@@ -25,7 +25,7 @@ public class AnimationSetter : MonoBehaviour
     void Update () {
 
         /* Shooting */
-        if (Input.GetKey(KeyCode.Mouse0) || (Input.GetAxis("primaryAttack") > 0) && cd == 0)
+        if (Input.GetKey(KeyCode.Mouse0) || (Input.GetAxis("primaryAtk") > 0) && cd == 0)
         {
             
             anim.SetTrigger("UShoot");
@@ -48,7 +48,7 @@ public class AnimationSetter : MonoBehaviour
         }
 
         /* Melee Attack */
-        if (Input.GetKeyDown(KeyCode.Mouse1)  && cd == 0)
+        if ((Input.GetKeyDown(KeyCode.Mouse1) || Input.GetAxis("secondaryAtk") == 1) && cd == 0)
         {
             cd = 20;
             anim.SetTrigger("UMelee");
@@ -67,8 +67,10 @@ public class AnimationSetter : MonoBehaviour
         }
 
         /* Walking vs Idle */
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || 
-                 Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow)) {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
+                 Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) ||
+                 Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0
+                 ) {
 
             idle = false;
             anim.SetTrigger("UWalk");

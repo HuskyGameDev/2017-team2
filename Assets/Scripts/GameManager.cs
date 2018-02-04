@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -13,11 +14,21 @@ public class GameManager : MonoBehaviour {
     public GameObject cam;
     public GameObject gameController;
     public int roomLength;
+    public Canvas canvas;
     private List<List<GameObject>> objects;
 
     // Use this for initialization
     void Start () {
         initGame();
+
+        /*
+        // if Controller detected, completely disable mouse input
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            GraphicRaycaster gRC = canvas.GetComponent("GraphicRaycaster") as GraphicRaycaster;
+            gRC.enabled = false;
+        }
+        */
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {

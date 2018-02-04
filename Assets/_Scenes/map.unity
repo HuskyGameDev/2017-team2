@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 295709082}
   - component: {fileID: 295709081}
   - component: {fileID: 295709080}
+  - component: {fileID: 295709083}
   m_Layer: 5
   m_Name: pauseBackground
   m_TagString: Untagged
@@ -377,6 +378,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295709078}
+--- !u!114 &295709083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295709078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 1760123411}
 --- !u!1 &804940624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,8 +1765,7 @@ MonoBehaviour:
   cam: {fileID: 237235622}
   gameController: {fileID: 53205986}
   roomLength: 10
-  numFloors: 20
-  isEndless: 0
+  canvas: {fileID: 1935052879}
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0

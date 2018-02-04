@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 101087358}
   - component: {fileID: 101087361}
   - component: {fileID: 101087362}
+  - component: {fileID: 101087363}
   m_Layer: 5
   m_Name: mainMenuPanel
   m_TagString: Untagged
@@ -302,6 +303,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 2145338793}
   selectedObject: {fileID: 1926329007}
+--- !u!114 &101087363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101087356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 1926329007}
 --- !u!1 &160884102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1502,7 @@ GameObject:
   - component: {fileID: 921385436}
   - component: {fileID: 921385435}
   - component: {fileID: 921385438}
+  - component: {fileID: 921385439}
   m_Layer: 5
   m_Name: controlPanel
   m_TagString: Untagged
@@ -1589,6 +1603,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 2145338793}
   selectedObject: {fileID: 1813089954}
+--- !u!114 &921385439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 921385433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 837303277}
 --- !u!1 &1066825252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2448,6 +2474,7 @@ GameObject:
   - component: {fileID: 1477047272}
   - component: {fileID: 1477047271}
   - component: {fileID: 1477047273}
+  - component: {fileID: 1477047274}
   m_Layer: 5
   m_Name: levelSelect
   m_TagString: Untagged
@@ -2523,6 +2550,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 0}
   selectedObject: {fileID: 0}
+--- !u!114 &1477047274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477047269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 714408406}
 --- !u!1 &1491574616
 GameObject:
   m_ObjectHideFlags: 0
@@ -4661,7 +4700,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1813089954}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &2145338794
