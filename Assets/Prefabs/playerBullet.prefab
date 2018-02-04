@@ -22,10 +22,10 @@ GameObject:
   - component: {fileID: 212014541744171334}
   - component: {fileID: 111541640714672724}
   - component: {fileID: 95897771883996250}
-  - component: {fileID: 114083067173017000}
   - component: {fileID: 114150610155984494}
   - component: {fileID: 58704050052465066}
   - component: {fileID: 50401365746808298}
+  - component: {fileID: 114105419701019730}
   m_Layer: 0
   m_Name: playerBullet
   m_TagString: Bullet
@@ -60,11 +60,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58704050052465066
 CircleCollider2D:
@@ -80,7 +80,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45999998
+  m_Radius: 0.5
 --- !u!95 &95897771883996250
 Animator:
   serializedVersion: 3
@@ -114,7 +114,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114083067173017000
+--- !u!114 &114105419701019730
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,12 +122,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501066236266358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d0fef49c479cf64db39804d845a4726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
-  shooter: {fileID: 0}
-  hitSound: {fileID: 8300000, guid: 402a70138d59e63488e2a7f6db55c64f, type: 3}
+  speed: 20
 --- !u!114 &114150610155984494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -169,8 +167,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -469320331
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: fc22a30022a84bf4c994a1e04e56ce71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

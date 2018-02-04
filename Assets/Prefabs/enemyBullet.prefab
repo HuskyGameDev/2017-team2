@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114024530395686218}
   - component: {fileID: 58549562544514994}
   - component: {fileID: 50761543561538334}
+  - component: {fileID: 114557693748160060}
   m_Layer: 0
   m_Name: enemyBullet
   m_TagString: EnemyBullet
@@ -89,11 +90,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58549562544514994
 CircleCollider2D:
@@ -109,7 +110,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.12499999
+  m_Radius: 0.5
 --- !u!61 &61428004718964714
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -178,6 +179,18 @@ MonoBehaviour:
   dmg: 2
   shooter: {fileID: 1443834167817138, guid: 9a0de385d7ad27048a98292e591ee63d, type: 2}
   hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
+--- !u!114 &114557693748160060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691409582893586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d0fef49c479cf64db39804d845a4726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
 --- !u!212 &212538781027862788
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -207,8 +220,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -681358013
-  m_SortingLayer: 2
+  m_SortingLayerID: -469320331
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7eeacf20df67a9444bbb5555e8a63707, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
