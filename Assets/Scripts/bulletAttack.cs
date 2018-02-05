@@ -13,7 +13,7 @@ public class bulletAttack : MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
     }
-
+    /*
     private void OnTriggerEnter2D(Collider2D col) {
 
 
@@ -35,5 +35,5 @@ public class bulletAttack : MonoBehaviour {
             }
         }
     }
-
+    */
 }

@@ -95,6 +95,10 @@ public class PlayerController : MonoBehaviour
     private int wait = 10;
     private bool attacking;
     public Collider2D meleeAttack;
+    public Transform bulletSpawn;
+
+    public AudioClip bulletSound;
+    public AudioClip slashSound;
 
 
     // Use this for initialization
@@ -174,24 +178,12 @@ public class PlayerController : MonoBehaviour
         {
             if (ableToShoot == 0 && !attacking)
             {
-
-                bulletStruct newBullet = new bulletStruct();
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-
-                bullet.AddComponent<BoxCollider2D>();
-                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
-                bullet.AddComponent<bulletAttack>();
-                bullet.GetComponent<bulletAttack>().shooter = Player.gameObject;
-
-                Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
-                Vector3 pos = (Input.mousePosition - sp).normalized;
-
-                newBullet.setPos(pos);
-                newBullet.setObj(bullet);
-                newBullet.setColliderVar(bullet.GetComponent<BoxCollider2D>());
-                newBullet.setCollider(true);
-                bullets.Add(newBullet);
+                
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+                
                 ableToShoot++;
+
+                GetComponent<AudioSource>().PlayOneShot(bulletSound);
             }
         }
 
@@ -206,27 +198,6 @@ public class PlayerController : MonoBehaviour
             ableToShoot++;
         }
 
-        // For every bullet on screen move towards the mouse position it was shot at
-        for (int i = 0; i < bullets.Count; i++)
-        {
-            GameObject movingBullet = bullets[i].getObj();
-
-			if (movingBullet != null) {
-
-				movingBullet.transform.Translate (bullets [i].getPos () * Time.deltaTime * bulletSpeed);
-				//bulletAttack.enabled = true;
-           
-
-				Vector3 bulletPos = Camera.main.WorldToScreenPoint (movingBullet.transform.position);
-
-				// Remove bullet if off screen
-				if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
-					DestroyObject (movingBullet);
-					bullets.Remove (bullets [i]);
-				}
-			}
-				
-        }
     }
 
     private void slash()
@@ -236,6 +207,9 @@ public class PlayerController : MonoBehaviour
         {
             attacking = true;
             meleeAttack.enabled = true;
+
+            GetComponent<AudioSource>().PlayOneShot(slashSound);
+
         }
 
         if (attacking)
