@@ -184,27 +184,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         }
         
-
-        /*
-        //Enter mouse mosition
-        mouse_pos = Input.mousePosition;
-        mouse_pos.z = -10;
-
-        //Enter player position
-        object_pos = Camera.main.WorldToScreenPoint(Player.position);
-
-        //Find different coordinates between mouse and player position
-        mouse_pos.x = mouse_pos.x - object_pos.x;
-        mouse_pos.y = mouse_pos.y - object_pos.y;
-
-        //Calculate angle between mouse and player position
-        angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-
-        //Rotate player
-        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
-        */
-        
-
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
         float moveVertical = 0;
