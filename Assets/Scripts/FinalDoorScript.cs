@@ -8,7 +8,9 @@ public class FinalDoorScript : MonoBehaviour {
     public bool isClosed;
 
     void OnTriggerEnter2D(Collider2D other) {
-        DataBetweenScenes.completedGame = true;
-        SceneManager.LoadScene(2);
+        if (other.gameObject == player) {
+            DataBetweenScenes.completedGame = true;
+            SceneManager.LoadScene(2);
+        }
     }
 }
