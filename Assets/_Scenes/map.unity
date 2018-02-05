@@ -381,7 +381,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295709078}
-<<<<<<< HEAD
 --- !u!1001 &708122334
 Prefab:
   m_ObjectHideFlags: 0
@@ -429,7 +428,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
-=======
 --- !u!114 &295709083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultButton: {fileID: 1760123411}
->>>>>>> controlSupport
 --- !u!1 &804940624
 GameObject:
   m_ObjectHideFlags: 0
