@@ -54,7 +54,7 @@ public class Enemy1 : Enemy {
 		}
 			
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
 		if (time > 1.0f) {
 			x = Random.Range(-speedMax, speedMax);
@@ -79,7 +79,7 @@ public class Enemy1 : Enemy {
 		}
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
 		slash ();
 	}
