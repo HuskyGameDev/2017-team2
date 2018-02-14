@@ -9,14 +9,15 @@ public class Enemy1 : Enemy {
 	private bool attacking;
 	public Collider2D meleeAttack;
 
-	protected override void Start() {
+	protected override void Start() 
+	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
 		health = 50;
 
-		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
-		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
+//		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+//		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
 
         xMax = transform.position.x + 10;
@@ -33,18 +34,22 @@ public class Enemy1 : Enemy {
 		attacking = false;
 	}
 
-	protected override void MoveAtRandom() {
+	protected override void MoveAtRandom() 
+	{
 		time += Time.deltaTime;
 
-		if (transform.localPosition.x > xMax) {
+		if (transform.localPosition.x > xMax) 
+		{
 			x = Random.Range(-speedMax, 0.0f);
 			time = 0.0f; 
 		}
-		if (transform.localPosition.x < xMin) {
+		if (transform.localPosition.x < xMin) 
+		{
 			x = Random.Range(0.0f, speedMax);
 			time = 0.0f; 
 		}
-		if (transform.localPosition.y > yMax) {
+		if (transform.localPosition.y > yMax) 
+		{
 			y = Random.Range(-speedMax, 0.0f);
 			time = 0.0f; 
 		}
@@ -56,7 +61,8 @@ public class Enemy1 : Enemy {
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
-		if (time > 1.0f) {
+		if (time > 1.0f) 
+		{
 			x = Random.Range(-speedMax, speedMax);
 			y = Random.Range(-speedMax, speedMax);
 			time = 0.0f;
@@ -64,13 +70,15 @@ public class Enemy1 : Enemy {
 
 		Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
 
-		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
+		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) 
+		{
 			transform.localPosition = movement;
 		}
 
 	}
 
-	protected override void Chase() {
+	protected override void Chase() 
+	{
 
 		time += Time.deltaTime;
 
@@ -99,7 +107,6 @@ public class Enemy1 : Enemy {
 
 			if (wait > 0)
 			{
-
 				wait--;
 			}
 
@@ -107,7 +114,7 @@ public class Enemy1 : Enemy {
 			{
 				attacking = false;
 				meleeAttack.enabled = false;
-				wait = 10;
+				wait = 100;
 			}
 		}
 	}
