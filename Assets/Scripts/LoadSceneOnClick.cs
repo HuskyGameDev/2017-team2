@@ -16,6 +16,7 @@ public class LoadSceneOnClick : MonoBehaviour
     //Load game with a given number of floors
     public void LoadByIndex(int numFloors)
     {
+        DataBetweenScenes.isEndless = false;
         DataBetweenScenes.numFloors = numFloors;
         SceneManager.LoadScene(1);
     }

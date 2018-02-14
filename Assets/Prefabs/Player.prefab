@@ -317,8 +317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 15
   slasher: {fileID: 1771575999197046}
-  hitSound: {fileID: 0}
-  missSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 402a70138d59e63488e2a7f6db55c64f, type: 3}
+  missSound: {fileID: 8300000, guid: 4cc96cf96d4af2b4e92057da472ec8aa, type: 3}
 --- !u!212 &212489914670911086
 SpriteRenderer:
   m_ObjectHideFlags: 1
