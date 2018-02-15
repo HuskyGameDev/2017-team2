@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip slashSound;
 
 	private AudioSource audioSource;
-	private AudioClip bulletSound;
+	//private AudioClip bulletSound;
 
     // Use this for initialization
     void Start()

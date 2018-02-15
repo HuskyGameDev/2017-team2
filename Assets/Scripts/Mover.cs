@@ -9,7 +9,6 @@ public class Mover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        print("Running!");
         GetComponent<Rigidbody2D>().velocity = -transform.up * speed;
     }
 }

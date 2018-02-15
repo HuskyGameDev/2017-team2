@@ -9,9 +9,9 @@ public class bulletAttack : MonoBehaviour {
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
     }
-
+    /*
 	private void OnTriggerEnter2D(Collider2D col) {
 
         if (shooter != null) {

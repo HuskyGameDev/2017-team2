@@ -21,7 +21,7 @@ public class meleeAttack : MonoBehaviour {
 			audioSource.PlayOneShot(missSound);
 		}
 	}
-
+    /*
     private void OnTriggerEnter2D(Collider2D col)
     {
 
@@ -39,5 +39,5 @@ public class meleeAttack : MonoBehaviour {
 			audioSource.PlayOneShot (hitSound);
 		}
     }
-		
+	*/
 }
