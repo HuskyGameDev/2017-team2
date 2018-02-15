@@ -24,9 +24,6 @@ public class meleeAttack : MonoBehaviour {
 		}
         */
 	}
-
-    //This was removed in favor of a consolidated collision script called CollisionDetection
-    /*
     private void OnTriggerEnter2D(Collider2D col)
     {
 
@@ -44,5 +41,4 @@ public class meleeAttack : MonoBehaviour {
 			audioSource.PlayOneShot (hitSound);
 		}
     }
-	*/
 }
