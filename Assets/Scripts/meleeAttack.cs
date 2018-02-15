@@ -16,11 +16,16 @@ public class meleeAttack : MonoBehaviour {
 	}
 
 	void Update() {
+        //currently triggers on player attempts to swing sword while swinging sword. Commented out until fixed
+        /*
 		if (slasher.CompareTag("Player") && Input.GetKeyDown(KeyCode.Mouse1) && isCol == 0)
 		{
 			audioSource.PlayOneShot(missSound);
 		}
+        */
 	}
+
+    //This was removed in favor of a consolidated collision script called CollisionDetection
     /*
     private void OnTriggerEnter2D(Collider2D col)
     {

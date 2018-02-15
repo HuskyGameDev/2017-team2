@@ -11,6 +11,7 @@ public class bulletAttack : MonoBehaviour {
     {
         //audioSource = GetComponent<AudioSource>();
     }
+    //This was removed in favor of a consolidated collision script called CollisionDetection
     /*
 	private void OnTriggerEnter2D(Collider2D col) {
 
