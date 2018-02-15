@@ -61,7 +61,6 @@ public class Enemy : MonoBehaviour {
 		if (health < 0) {
 			Destroy(gameObject);
             audioSource.PlayOneShot(deathSound);
-            print ("RIP");
 		}
 	}
 
