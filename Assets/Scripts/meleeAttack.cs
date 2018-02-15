@@ -27,7 +27,7 @@ public class meleeAttack : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col)
     {
 
-		if (slasher.CompareTag("Player") && col.gameObject.CompareTag("Enemy"))
+		if (slasher.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
 			isCol++;
             col.SendMessageUpwards("Hit", dmg);

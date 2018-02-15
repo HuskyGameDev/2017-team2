@@ -442,6 +442,21 @@ Prefab:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1836871707}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Mass
+      value: 0.5410608
+      objectReference: {fileID: 0}
+    - target: {fileID: 58365349617086968, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 58941655681328982, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
