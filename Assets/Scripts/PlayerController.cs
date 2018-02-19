@@ -65,6 +65,9 @@ public class PlayerController : MonoBehaviour
     // boolean to determine if there is currently a controller
     private bool gamePad;
 
+    // float to determine when to check if there is a controller connected or not
+    private int checkControl = 180;
+
     //Stores a reference to the Rigidbody2D component required to use 2D Physics.
     public Rigidbody2D rb2d;
 
@@ -72,7 +75,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 mouse_pos;
 
     // stores direction of the right stick for aiming purposes
-    private Vector3 rStick;
+    private Vector2 rStick;
 
     //Transform object for player
     public Transform Player;
@@ -108,10 +111,13 @@ public class PlayerController : MonoBehaviour
     public AudioClip bulletSound;
     public AudioClip slashSound;
 
+	private AudioSource audioSource;
+	//private AudioClip bulletSound;
 
     // Use this for initialization
     void Start()
     {
+        /*
         controllers = Input.GetJoystickNames();
         if (controllers.Length > 0)
         {
@@ -127,12 +133,15 @@ public class PlayerController : MonoBehaviour
                 gamePad = false;
             }
         }
+        */
 
         health = 100;
+        controllers = Input.GetJoystickNames();
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
+		audioSource = GetComponent<AudioSource>();
        
 
         score = 0;
@@ -147,6 +156,9 @@ public class PlayerController : MonoBehaviour
         attacking = false;
 
        // anim.animation = U_Walking;
+
+		//Set bullet sound
+		bulletSound = Resources.Load("SFX/Plasma Gun") as AudioClip;
     }
 
     //Called every frame
@@ -157,17 +169,46 @@ public class PlayerController : MonoBehaviour
 			print ("RIP");
 		}
 
+        // Check for controller in update by counting the number of frames
+        checkControl++;   
+
+        if (checkControl >= 180)
+        {
+            print("Controller check");
+            // update the Joystick Names array
+            controllers = Input.GetJoystickNames();
+            if (controllers.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(controllers[0]))
+                {
+                    print("Controller connected");
+                    gamePad = true;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    print("No controller");
+                    gamePad = false;
+                    Cursor.visible = true;
+                }
+            }
+
+            checkControl = 0;
+        }
         
+
         if (gamePad == true)
         {
-            rStick.z = -10;
             rStick.x = Input.GetAxis("rStickX");
             rStick.y = Input.GetAxis("rStickY");
 
-            angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
+            if (rStick.magnitude > 0.1f)
+            {
+                angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
 
-            //Rotate player
-            transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+                //Rotate player
+                transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+            }
 
         } else {
             //Enter mouse mosition
@@ -211,20 +252,40 @@ public class PlayerController : MonoBehaviour
     // Method used to handle shooting projectiles
     private void Shoot()
     {
-
-        // Create a new bullet with the current mouse position
-        if (Input.GetKey(KeyCode.Mouse0) || Input.GetAxis("primaryAtk") == 1)
+        if (gamePad)
         {
-            if (ableToShoot == 0 && !attacking)
+            if (Input.GetAxis("primaryAtk") == 1)
             {
-                
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
-                
-                ableToShoot++;
+                if (ableToShoot == 0 && !attacking)
+                {
 
-                GetComponent<AudioSource>().PlayOneShot(bulletSound);
+                    GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+
+                    ableToShoot++;
+
+                    GetComponent<AudioSource>().PlayOneShot(bulletSound);
+                }
             }
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                if (ableToShoot == 0 && !attacking)
+                {
+
+                    GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+
+                    ableToShoot++;
+
+                    GetComponent<AudioSource>().PlayOneShot(bulletSound);
+                }
+            }
+
+        }
+
+        // Create a new bullet with the current mouse position
+        
 
         // Used to limit the amount of bullets *Needs to update when animation implemented*
         if (ableToShoot == 0 || ableToShoot == 10)
@@ -235,21 +296,36 @@ public class PlayerController : MonoBehaviour
         else
         {
             ableToShoot++;
+
         }
 
     }
 
     private void Slash()
     {
-
-        if ((Input.GetKeyDown(KeyCode.Mouse1) || Input.GetAxis("secondaryAtk") == 1) && !attacking)
+        if (gamePad)
         {
-            attacking = true;
-            meleeAttack.enabled = true;
+            if (Input.GetAxis("secondaryAtk") == 1 && !attacking)
+            {
+                attacking = true;
+                meleeAttack.enabled = true;
 
-            GetComponent<AudioSource>().PlayOneShot(slashSound);
+                GetComponent<AudioSource>().PlayOneShot(slashSound);
 
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
+            {
+                attacking = true;
+                meleeAttack.enabled = true;
+
+                GetComponent<AudioSource>().PlayOneShot(slashSound);
+
+            }
+        }
+        
 
         if (attacking)
         {
@@ -266,6 +342,7 @@ public class PlayerController : MonoBehaviour
                 meleeAttack.enabled = false;
                 wait = 20;
             }
+
         }
     }
 

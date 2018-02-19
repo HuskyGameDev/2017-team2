@@ -15,21 +15,12 @@ public class GameManager : MonoBehaviour {
     public GameObject cam;
     public GameObject gameController;
     public int roomLength;
-    public Canvas canvas;
     private List<List<GameObject>> objects;
 
     // Use this for initialization
     void Start () {
         initGame();
-
-        /*
-        // if Controller detected, completely disable mouse input
-        if (Input.GetJoystickNames().Length > 0)
-        {
-            GraphicRaycaster gRC = canvas.GetComponent("GraphicRaycaster") as GraphicRaycaster;
-            gRC.enabled = false;
-        }
-        */
+        
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
@@ -68,7 +59,7 @@ public class GameManager : MonoBehaviour {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
         song = GetComponent<AudioSource>();
-        clip3 = Resources.Load("Music/Descension3") as AudioClip;
+		clip3 = Resources.Load("Music/Descension3") as AudioClip;
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();
