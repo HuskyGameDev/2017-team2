@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4219774673496434}
   - component: {fileID: 212060132218459430}
+  - component: {fileID: 114860360071088114}
   m_Layer: 0
   m_Name: Purple_Corner
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,6 +41,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114860360071088114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1128078457307948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmg: 0
+  shooter: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!212 &212060132218459430
 SpriteRenderer:
   m_ObjectHideFlags: 1

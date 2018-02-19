@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1443834167817138}
   m_IsPrefabParent: 1
+--- !u!1 &1285553804060704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4954455743924554}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1443834167817138
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,7 +38,6 @@ GameObject:
   - component: {fileID: 50674123478991914}
   - component: {fileID: 58216318027394978}
   - component: {fileID: 60573127620029426}
-  - component: {fileID: 114274166011235546}
   - component: {fileID: 114988140603538004}
   - component: {fileID: 82020979984194250}
   m_Layer: 0
@@ -42,8 +56,22 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4954455743924554}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4954455743924554
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285553804060704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.57, y: -2.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4627289948047990}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &50674123478991914
@@ -64,7 +92,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &58216318027394978
 CircleCollider2D:
@@ -295,20 +323,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114274166011235546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1443834167817138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a341fbb54e4de142afd99ebec027305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dmg: 1
-  shooter: {fileID: 1443834167817138}
-  hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!114 &114988140603538004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,6 +339,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1691409582893586, guid: fddf03220d1480c499cd79ebbdc54a85,
     type: 2}
   EnemyTransform: {fileID: 4627289948047990}
+  bulletSpawn: {fileID: 4954455743924554}
 --- !u!212 &212116654755166586
 SpriteRenderer:
   m_ObjectHideFlags: 1

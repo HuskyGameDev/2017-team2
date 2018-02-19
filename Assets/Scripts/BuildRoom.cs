@@ -60,7 +60,6 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
     public GameObject[] specialGrey;
 
-
     private int color;
 
     private List<GameObject> gameObjects;
@@ -376,7 +375,7 @@ public class BuildRoom : MonoBehaviour {
 
     /**
      * Place the exit (Stairs) in the room
-     *  -if floor color is grey, load exit as special open door with light
+     *  -if floor color is grey, load exit as special double door
      */
     private void LayoutExit(BuildFloor.Room room) {
         if (color != GREY) {
@@ -394,30 +393,35 @@ public class BuildRoom : MonoBehaviour {
             obj.GetComponent<Exit>().player = player;
             gameObjects.Add(obj);
         }
-        else {
+        else { //place final door on the North or West wall
             Quaternion rotation = Quaternion.identity;
             Vector3 vector = Vector3.zero;
-            if (room.doorWest == -1) {
+            if (room.finalDoor == BuildFloor.Direction.WEST) {
                 rotation = Quaternion.AngleAxis(180, Vector3.back);
-                vector = new Vector3(dx - .0625f, dy + 5 + .5f, 0);
-                doorPos.Add(new Vector3(0, 5, 0f));
+                vector = new Vector3(dx - .0625f, dy + 6, 0);
+                room.doorWest = 5;
             }
-            else if (room.doorEast == -1) {
-                rotation = Quaternion.identity;
-                vector = new Vector3(dx + 10.0625f, dy + 5 + .5f, 0);
-                doorPos.Add(new Vector3(columns - 1, 5, 0f));
-            }
-            else if (room.doorNorth == -1) {
+            //       else if (room.finalDoor == BuildFloor.Direction.EAST) {
+            //        rotation = Quaternion.identity;
+            //        vector = new Vector3(dx + 10.0625f, dy + 5 + .5f, 0);
+            //         doorPos.Add(new Vector3(columns - 1, 5, 0f));
+            //        room.doorEast = 5;
+            //   }
+            else if (room.finalDoor == BuildFloor.Direction.NORTH) { 
                 rotation = Quaternion.AngleAxis(270, Vector3.back);
-                vector = new Vector3(dx + .5f + 5, dy + 10.0625f, 0);
-                doorPos.Add(new Vector3(5, rows - 1, 0f));
+                vector = new Vector3(dx + 6, dy + 10.0625f, 0);
+                room.doorNorth = 5;
             }
-            else if (room.doorSouth == -1) {
-                rotation = Quaternion.AngleAxis(90, Vector3.back);
-                vector = new Vector3(dx + 5 + .5f, dy - .0625f, 0);
-                doorPos.Add(new Vector3(5, 0, 0f));
-            }
-            Instantiate(finalExit, vector, rotation);
+            //     else if (room.finalDoor == BuildFloor.Direction.SOUTH) {
+            //      rotation = Quaternion.AngleAxis(90, Vector3.back);
+            //     vector = new Vector3(dx + 5 + .5f, dy - .0625f, 0);
+            //     doorPos.Add(new Vector3(5, 0, 0f));
+            //      room.doorSouth = 5;
+            //    }
+            GameObject go = Instantiate(finalExit, vector, rotation);
+            go.GetComponent<FinalDoorScript>().player = player;
+            go.GetComponent<FinalDoorScript>().isClosed = true;
+            gameObjects.Add(go);
         }
     }
 
@@ -482,32 +486,48 @@ public class BuildRoom : MonoBehaviour {
         Quaternion westRotation = Quaternion.AngleAxis(180, Vector3.back);
         Quaternion southRotation = Quaternion.AngleAxis(90, Vector3.back);
         Quaternion northRotation = Quaternion.AngleAxis(270, Vector3.back);
-
+        bool isDoubleDoor = false;
         for (int i = 0; i < rows; i++) {
             if (room.doorWest != i) {
                 // Left
-                gameObjects.Add(Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
+                if (!isDoubleDoor)
+                    gameObjects.Add(Instantiate(wall[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation));
+                if (isDoubleDoor)
+                    isDoubleDoor = false;
             } else {
                 // Left
-                GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
-                go.GetComponent<DoorScript>().player = player;
-                gameObjects.Add(go);
+                if (color == GREY && room.isExit && room.finalDoor == BuildFloor.Direction.WEST)
+                    isDoubleDoor = true;
+                else {
+                    GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                    go.GetComponent<DoorScript>().player = player;
+                    go.GetComponent<DoorScript>().isClosed = true;
+                    gameObjects.Add(go);
+                }
             }
             if (room.doorEast != i) {
                 // Right
                 gameObjects.Add(Instantiate(wall[color], new Vector3(dx + 10.0625f, dy + i + .5f, 0), eastRotation));
-            }
+            } 
         }
 
         for (int i = 0; i < columns; i++) {
             if (room.doorNorth != i) {
                 // Top
-                gameObjects.Add(Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
+                if (!isDoubleDoor)
+                    gameObjects.Add(Instantiate(wall[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation));
+                if (isDoubleDoor)
+                    isDoubleDoor = false;
             } else {
                 // Top
-                GameObject go = Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
-                go.GetComponent<DoorScript>().player = player;
-                gameObjects.Add(go);
+                if (color == GREY && room.isExit && room.finalDoor == BuildFloor.Direction.NORTH)
+                    isDoubleDoor = true;
+                else {
+                    GameObject go = Instantiate(door[color], new Vector3(dx + .5f + i, dy + 10.0625f, 0), northRotation);
+                    go.GetComponent<DoorScript>().player = player;
+                    go.GetComponent<DoorScript>().isClosed = true;
+                    gameObjects.Add(go);
+                }
             }
             if (room.doorSouth != i) {
                 // Bottom
@@ -718,6 +738,13 @@ public class BuildRoom : MonoBehaviour {
         if (room.doorWest != -1) {
             doorPos.Add(new Vector3(0, room.doorWest, 0f));
         }
+        if (room.finalDoor == BuildFloor.Direction.WEST) {
+            doorPos.Add(new Vector3(0, 5, 0f));
+            doorPos.Add(new Vector3(0, 6, 0f));
+        } else if (room.finalDoor == BuildFloor.Direction.NORTH) {
+            doorPos.Add(new Vector3(5, rows - 1, 0f));
+            doorPos.Add(new Vector3(6, rows - 1, 0f));
+        }
 
         dx = room.pos.x * 10.25f;
         dy = room.pos.y * 10.25f;
@@ -743,7 +770,6 @@ public class BuildRoom : MonoBehaviour {
             if (room.isExit) {
                 LayoutExit(room);
             }
-
             if (room.isEntrance) {
                 LayoutPlayer();
             } else {

@@ -19,6 +19,7 @@ public class BuildFloor : MonoBehaviour {
      * Red = HARD
      */
     public enum FloorColor { BLUE, RED, PURPLE, GREY }
+    public enum Direction { NORTH, SOUTH, EAST, WEST }
     public FloorColor floorColor;
     public int lengthOfFloor = 7;
     public int heightOfFloor = 5;
@@ -39,6 +40,7 @@ public class BuildFloor : MonoBehaviour {
         public bool isEntrance = false;
         public bool isExit = false;
         public bool hasCharger;
+        public Direction finalDoor;
         public int doorNorth = -1;
         public int doorSouth = -1;
         public int doorWest = -1;
@@ -72,7 +74,7 @@ public class BuildFloor : MonoBehaviour {
     * builds the layout of rooms in the floor
     */
     public Room[,] buildFloor(int roomLength) {
-        floorColor = floorNumber < 21 && floorNumber > 0 ? twenty[floorNumber - 1] : randomColor();
+        floorColor = floorNumber < 21 && floorNumber > 0  && !DataBetweenScenes.isEndless ? twenty[floorNumber - 1] : randomColor();
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
         Room start = new Room(startPosX, startPosY, false, floorColor);
         start.isEntrance = true;
@@ -121,7 +123,7 @@ public class BuildFloor : MonoBehaviour {
         if (floorColor == FloorColor.BLUE) {
             floor = addCharger(floor);
         }
-        //Defines the last room built as the exit 
+        //Defines the last room built as the exit
         floor[currPos.x, currPos.y].isExit = true;
         //Sets the next floors start position to the exit
         startPosX = currPos.x;
@@ -178,40 +180,39 @@ public class BuildFloor : MonoBehaviour {
 
         }
         //Defines the last room built as the exit 
-        while (fullDoors(floor[currPos.x, currPos.y])) {
-            do {
-                currPos.x = Random.Range(0, lengthOfFloor);
-                currPos.y = Random.Range(0, lengthOfFloor);
-            } while (floor[currPos.x, currPos.y] == null);
-        }
         floor[currPos.x, currPos.y].isExit = true;
+        if (currPos.x == 0 || floor[currPos.x - 1, currPos.y] == null)
+            floor[currPos.x, currPos.y].finalDoor = Direction.WEST;
+        // else if (floor[currPos.x + 1, currPos.y] == null
+        // floor[currPos.x, currPos.y].finalDoor = Direction.EAST;
+        else if (currPos.y == heightOfFloor - 1 || floor[currPos.x, currPos.y + 1] == null)
+            floor[currPos.x, currPos.y].finalDoor = Direction.NORTH;
+        // else if (floor[currPos.x, currPos.y - 1] == null)
+        // floor[currPos.x, currPos.y].finalDoor = Direction.SOUTH;
+        else { //if final room was surrounded by other rooms, remake floor 
+            return buildFinalFloor(roomLength);
+        }
         //Sets the next floors start position to the exit
         startPosX = currPos.x;
         startPosY = currPos.y;
         return floor;
     }
-    private Boolean fullDoors(Room room) {
-        Boolean result = false;
-        if (room.doorWest > -1 && room.doorEast > -1 && room.doorNorth > -1 && room.doorSouth > -1)
-            return true;
-        return result;
-    }
     /**
      * Returns a random floor color
-     * currently returns : 1/6 blue
+     * currently returns : 3/6 blue
      *                     2/6 purple
-     *                     3/6 red
+     *                     1/6 red
      * could be tweaked to modify difficulty if desired
      */
     private FloorColor randomColor() {
         FloorColor result;
         int i = Random.Range(0, 5);
         if (i == 0)
-            result = FloorColor.BLUE;
+            result = FloorColor.RED;
         else if (i <= 2)
             result = FloorColor.PURPLE;
         else
-            result = FloorColor.RED;
+            result = FloorColor.BLUE;
         return result;
     }
     /**

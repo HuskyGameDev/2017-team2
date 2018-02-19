@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -13,20 +15,19 @@ public class GameManager : MonoBehaviour {
     public GameObject cam;
     public GameObject gameController;
     public int roomLength;
-    public int numFloors;
-    public bool isEndless;
     private List<List<GameObject>> objects;
 
     // Use this for initialization
     void Start () {
         initGame();
+        
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
         destroyObjects();
         objects = new List<List<GameObject>>();
         //loads the final floor if it's the end of story mode, increments floor
-        if (++floorScript.floorNumber == numFloors + 1 && !isEndless)
+        if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless)
             buildFinalFloor();
         else
             buildFloor();
@@ -46,8 +47,10 @@ public class GameManager : MonoBehaviour {
         BuildFloor.Room[,] floor = floorScript.buildFinalFloor(roomLength);
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
-                if (floor[i, j] != null)
+                if (floor[i, j] != null) {
+                    objects.Add(boardScript.getList());
                     boardScript.SetupScene(roomLength, floor[i, j]);
+                }
     }
     /**
      * Called to initiate the game after player presses play
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
         song = GetComponent<AudioSource>();
-        clip3 = Resources.Load("Music/Descension3") as AudioClip;
+		clip3 = Resources.Load("Music/Descension3") as AudioClip;
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();
@@ -87,5 +90,19 @@ public class GameManager : MonoBehaviour {
         else if (color == BuildFloor.FloorColor.RED)
             song.clip = clip3;
         song.Play();
+    }
+    void Update() {
+        if (DataBetweenScenes.devMode) {
+            if (Input.GetKeyDown(KeyCode.F8))
+                nextFloor();
+            if (Input.GetKeyDown(KeyCode.F7))
+                for (int i = 0; i < 10; i++)
+                    nextFloor();
+            if (Input.GetKeyDown(KeyCode.F6)) {
+                floorScript.floorNumber = 0;
+                DataBetweenScenes.numFloors = 10;
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 }
