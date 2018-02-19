@@ -9,6 +9,7 @@ using System.Collections.Generic;
  * Codey Walker
  * Main controller for player behavior. Currently, it allows the player to move the sprite around and follows mouse direction
  * Added gun and melee attack functions to this script - Codey
+ * Added controller support to player actions (movement, attacking, aiming) - Andrew S
  */
 
 
@@ -115,25 +116,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        /*
-        controllers = Input.GetJoystickNames();
-        if (controllers.Length > 0)
-        {
-            if (!string.IsNullOrEmpty(controllers[0]))
-            {
-                print("Controller connected");
-                gamePad = true;
-                Cursor.visible = false;
-            }
-            else
-            {
-                print("No controller");
-                gamePad = false;
-            }
-        }
-        */
-
-        health = 100;
+        health = 0;
         controllers = Input.GetJoystickNames();
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
@@ -168,20 +151,17 @@ public class PlayerController : MonoBehaviour
 
         if (checkControl >= 180)
         {
-            print("Controller check");
             // update the Joystick Names array
             controllers = Input.GetJoystickNames();
             if (controllers.Length > 0)
             {
                 if (!string.IsNullOrEmpty(controllers[0]))
                 {
-                    print("Controller connected");
                     gamePad = true;
                     Cursor.visible = false;
                 }
                 else
                 {
-                    print("No controller");
                     gamePad = false;
                     Cursor.visible = true;
                 }
@@ -198,9 +178,10 @@ public class PlayerController : MonoBehaviour
 
             if (rStick.magnitude > 0.1f)
             {
+                // get new angle of the player based on position of the right analog stick
                 angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
 
-                //Rotate player
+                // Rotate player based on angle, also keep player rotated in new direction until it is changed again
                 transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
             }
 
