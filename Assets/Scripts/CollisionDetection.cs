@@ -8,7 +8,9 @@ public class CollisionDetection : MonoBehaviour {
 
     // Use this for initialization
     private void OnCollisionEnter2D(Collision2D collision) {
-
+        if (this.gameObject.tag == "Enemy") {
+            transform.Rotate(0, 0, 180);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider) {

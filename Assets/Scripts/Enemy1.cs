@@ -8,6 +8,8 @@ public class Enemy1 : Enemy {
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
+    private Vector2 movement2;
+    private float rot = 0;
 
 	protected override void Start() 
 	{
@@ -32,10 +34,13 @@ public class Enemy1 : Enemy {
 		// Set melee attack stuff
 		meleeAttack.enabled = false;
 		attacking = false;
-	}
+
+        movement2 = Vector2.up*100;
+    }
 
 	protected override void MoveAtRandom() 
 	{
+        /*
 		time += Time.deltaTime;
 
 		if (transform.localPosition.x > xMax) 
@@ -68,14 +73,31 @@ public class Enemy1 : Enemy {
 			time = 0.0f;
 		}
 
-		Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
+        */
+        rot += Random.Range(-1f, 1f);
+        if (rot > 3) {
+            rot = 3;
+        } else if (rot < -3) {
+            rot = -3;
+        }
+        transform.Rotate(new Vector3(0, 0, rot));
+        movement2 = -transform.up * 100;
+        GetComponent<Rigidbody2D>().AddForce(movement2);
+        //transform.rotation = Quaternion.FromToRotation(Vector3.down, GetComponent<Rigidbody2D>().velocity);
 
+        Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
+
+        /*
 		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) 
 		{
-			transform.localPosition = movement;
-		}
+        */
+            
+        //transform.localPosition = movement;
+        /*
+    }
+    */
 
-	}
+    }
 
 	protected override void Chase() 
 	{
@@ -83,8 +105,9 @@ public class Enemy1 : Enemy {
 		time += Time.deltaTime;
 
 		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
-			transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-		}
+            GetComponent<Rigidbody2D>().position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+            //transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+        }
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
