@@ -12,5 +12,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/map.unity
     guid: 1f626b85691fef94ab40a51b8a8b03a2
   - enabled: 1
+    path: Assets/_Scenes/gameComplete.unity
+    guid: ea13f342c21e5ba4cb4f1e2baa934cc2
+  - enabled: 0
     path: Assets/_Scenes/andrew(gameOver).unity
     guid: 08cf4302f74741b449b180c6b349a477
