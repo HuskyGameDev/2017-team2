@@ -137,7 +137,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         */
-
+        if (DataBetweenScenes.isEndless) {
+            Destroy(lives[0]);
+            Destroy(lives[1]);
+            Destroy(lives[2]);
+            lives[0] = null;
+            lives[1] = null;
+            lives[2] = null;
+        }
         health = 100;
         controllers = Input.GetJoystickNames();
 
