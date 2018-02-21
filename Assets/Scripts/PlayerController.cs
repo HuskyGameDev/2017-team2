@@ -62,6 +62,9 @@ public class PlayerController : MonoBehaviour
     // string array used to see if there is currently a controller plugged in
     private string[] controllers;
 
+    //Store life objects
+    public GameObject[] lives;
+
     // boolean to determine if there is currently a controller
     private bool gamePad;
 
@@ -164,11 +167,6 @@ public class PlayerController : MonoBehaviour
     //Called every frame
     void Update()
     {
-        if (health < 0) {
-			Destroy(gameObject);
-			print ("RIP");
-		}
-
         // Check for controller in update by counting the number of frames
         checkControl++;   
 
@@ -386,7 +384,23 @@ public class PlayerController : MonoBehaviour
         // check for death
         if (health <= 0)
         {
-            GameOver();
+            if (lives[0] != null) {
+                Destroy(lives[0]);
+                lives[0] = null;
+                health = 100;
+            }
+            else if (lives[1] != null) {
+                Destroy(lives[1]);
+                lives[1] = null;
+                health = 100;
+            }
+            else if (lives[2] != null) {
+                Destroy(lives[2]);
+                lives[2] = null;
+                health = 100;
+            }
+            else
+                GameOver();
         }
     }
 
