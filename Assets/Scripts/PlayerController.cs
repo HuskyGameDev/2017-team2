@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
     // string array used to see if there is currently a controller plugged in
     private string[] controllers;
 
+    public GameManager gameManager;
+
     //Store life objects
     public GameObject[] lives;
 
@@ -395,16 +397,19 @@ public class PlayerController : MonoBehaviour
                 Destroy(lives[0]);
                 lives[0] = null;
                 health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
             }
             else if (lives[1] != null) {
                 Destroy(lives[1]);
                 lives[1] = null;
                 health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
             }
             else if (lives[2] != null) {
                 Destroy(lives[2]);
                 lives[2] = null;
                 health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
             }
             else
                 GameOver();

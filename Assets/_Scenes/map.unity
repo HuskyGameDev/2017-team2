@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e8e4bffdf962248ab2baa75fdcfc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   lives: []
   rb2d: {fileID: 0}
   Player: {fileID: 1494077016}
@@ -488,6 +489,11 @@ Prefab:
       propertyPath: lives.Array.data[2]
       value: 
       objectReference: {fileID: 2078968829}
+    - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 2074431841}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0

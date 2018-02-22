@@ -60,6 +60,8 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
     public GameObject[] specialGrey;
 
+    private Vector3 startingPos;
+
     private int color;
 
     private List<GameObject> gameObjects;
@@ -81,6 +83,9 @@ public class BuildRoom : MonoBehaviour {
 
     public List<GameObject> getList() {
         return gameObjects;
+    }
+    public Vector3 getStartingPos() {
+        return startingPos;
     }
     void InitializeList() {
 
@@ -366,7 +371,9 @@ public class BuildRoom : MonoBehaviour {
 
         Vector3 actualPos;
         actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
-        
+
+        startingPos = actualPos;
+
         gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
         available[(int)randomPos.x, (int)randomPos.y] = false;
 
