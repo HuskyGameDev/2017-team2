@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 58350539592773492}
   - component: {fileID: 114604224457239874}
   - component: {fileID: 82283589020179852}
+  - component: {fileID: 114587273935860412}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -87,7 +88,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 500
+  m_Mass: 10
   m_LinearDrag: 20
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -138,10 +139,10 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -3.27}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.49569902, y: 0.7021505}
     oldSize: {x: 16, y: 16}
     newSize: {x: 16, y: 16}
     adaptiveTilingThreshold: 0.5
@@ -473,6 +474,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114587273935860412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587803288785038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cd0ed075a72ba459ee7850824f134a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114604224457239874
 MonoBehaviour:
   m_ObjectHideFlags: 1

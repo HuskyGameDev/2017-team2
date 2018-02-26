@@ -40,40 +40,7 @@ public class Enemy1 : Enemy {
 
 	protected override void MoveAtRandom() 
 	{
-        /*
-		time += Time.deltaTime;
 
-		if (transform.localPosition.x > xMax) 
-		{
-			x = Random.Range(-speedMax, 0.0f);
-			time = 0.0f; 
-		}
-		if (transform.localPosition.x < xMin) 
-		{
-			x = Random.Range(0.0f, speedMax);
-			time = 0.0f; 
-		}
-		if (transform.localPosition.y > yMax) 
-		{
-			y = Random.Range(-speedMax, 0.0f);
-			time = 0.0f; 
-		}
-		if (transform.localPosition.y < yMin) {
-			y = Random.Range(0.0f, speedMax);
-			time = 0.0f; 
-		}
-			
-		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
-
-		if (time > 1.0f) 
-		{
-			x = Random.Range(-speedMax, speedMax);
-			y = Random.Range(-speedMax, speedMax);
-			time = 0.0f;
-		}
-
-        */
         rot += Random.Range(-1f, 1f);
         if (rot > 3) {
             rot = 3;
@@ -81,21 +48,10 @@ public class Enemy1 : Enemy {
             rot = -3;
         }
         transform.Rotate(new Vector3(0, 0, rot));
-        movement2 = -transform.up * 100;
+        movement2 = -transform.up * 300;
         GetComponent<Rigidbody2D>().AddForce(movement2);
-        //transform.rotation = Quaternion.FromToRotation(Vector3.down, GetComponent<Rigidbody2D>().velocity);
 
         Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
-
-        /*
-		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) 
-		{
-        */
-            
-        //transform.localPosition = movement;
-        /*
-    }
-    */
 
     }
 
