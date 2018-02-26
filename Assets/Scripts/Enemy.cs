@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour {
     protected AudioSource audioSource;
     public AudioClip deathSound;
 
+    private int attention = 0;
+
     // Use this for initialization
     protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -52,16 +54,18 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player == null)
-			MoveAtRandom ();
-		else {
-			Chase ();	
+        if (player == null || attention == 0)
+            MoveAtRandom();
+        else  {
+			Chase ();
 		}
 
 		if (health < 0) {
 			Destroy(gameObject);
             audioSource.PlayOneShot(deathSound);
 		}
+        if (attention > 0)
+            attention--;
 	}
 
 	protected virtual void MoveAtRandom() {
@@ -99,9 +103,9 @@ public class Enemy : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 
 		if (other.gameObject.CompareTag ("Player")) {
-			
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
+            attention = 200;
 		}
 	}
 
