@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
 	protected float angle;
 
 	protected int health;
+	protected int totalHealth;
 
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
@@ -27,6 +28,8 @@ public class Enemy : MonoBehaviour {
     protected AudioSource audioSource;
     public AudioClip deathSound;
 
+	public GameObject healthBar;
+
     // Use this for initialization
     protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour {
 		audioSource = GetComponent<AudioSource> ();
 
 		health = 50;
+		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -58,7 +62,7 @@ public class Enemy : MonoBehaviour {
 			Chase ();	
 		}
 
-		if (health < 0) {
+		if (health <= 0) {
 			Destroy(gameObject);
             audioSource.PlayOneShot(deathSound);
             print ("RIP");
@@ -119,5 +123,8 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
+		if (health > 0)
+			healthBar.SetActive (true);
+		healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
 	}
 }
