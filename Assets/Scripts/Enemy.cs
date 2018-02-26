@@ -102,12 +102,19 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player")) {
+		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
             attention = 200;
 		}
 	}
+
+    //Should detect if the enemy can see the player currently or not
+    bool hasLOS(Collider2D other) {
+        bool canSee = true;
+
+        return canSee;
+    }
 
 	protected virtual void Chase() {
 
