@@ -16,6 +16,7 @@ public class LoadSceneOnClick : MonoBehaviour
     //Load game with a given number of floors
     public void LoadByIndex(int numFloors)
     {
+        DataBetweenScenes.isEndless = false;
         DataBetweenScenes.numFloors = numFloors;
         SceneManager.LoadScene(1);
     }
@@ -23,5 +24,9 @@ public class LoadSceneOnClick : MonoBehaviour
     public void LoadEndless() {
         DataBetweenScenes.isEndless = true;
         SceneManager.LoadScene(1);
+    }
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.V) && Input.GetKeyDown(KeyCode.B) && Input.GetKeyDown(KeyCode.N))
+            DataBetweenScenes.devMode = true;
     }
 }

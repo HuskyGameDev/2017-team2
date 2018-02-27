@@ -60,7 +60,7 @@ public class Enemy1 : Enemy {
 		}
 			
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
 		if (time > 1.0f) 
 		{
@@ -87,8 +87,8 @@ public class Enemy1 : Enemy {
 			transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
 		}
 
-		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg + 90;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
 		slash ();
 	}

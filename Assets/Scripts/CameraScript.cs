@@ -8,8 +8,9 @@ public class CameraScript : MonoBehaviour {
     public Vector3 offset;
     public bool isStarted;
 
+    //Was at one point -4.2, -5. No idea why
     void Start() {
-        offset = transform.position - player.transform.position + new Vector3(-4.2f, -5);
+        offset = transform.position - player.transform.position + new Vector3(-5, -5);
     }
 
     void LateUpdate() {
