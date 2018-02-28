@@ -151,6 +151,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 0}
   bulletSound: {fileID: 0}
   slashSound: {fileID: 0}
+  hasKey: 0
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
 --- !u!114 &53205988
@@ -1852,6 +1853,8 @@ MonoBehaviour:
   - {fileID: 1760989381857644, guid: 6faa8b577d8087d40998f89d7ddecdd5, type: 2}
   specialGrey:
   - {fileID: 1594472912240368, guid: 341fdd2eea9287048b0f2777cc5792f8, type: 2}
+  key: {fileID: 1933745972975348, guid: a0e2547859ab65943b11b1acbdbbf718, type: 2}
+  locc: {fileID: 1132647553520552, guid: a9f8a78f330e4e843a5c3bf3da8b5aab, type: 2}
 --- !u!114 &2074431841
 MonoBehaviour:
   m_ObjectHideFlags: 0

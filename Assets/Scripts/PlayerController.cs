@@ -117,7 +117,10 @@ public class PlayerController : MonoBehaviour
     public AudioClip slashSound;
 
 	private AudioSource audioSource;
-	//private AudioClip bulletSound;
+    //private AudioClip bulletSound;
+
+    // if the player has the key for the level
+    public bool hasKey;
 
     // Use this for initialization
     void Start()

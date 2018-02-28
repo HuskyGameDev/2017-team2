@@ -81,6 +81,9 @@ public class BuildRoom : MonoBehaviour {
     private List<Vector3> gridPositions = new List<Vector3>();
     private Boolean[,] available;
 
+    public GameObject key;
+    public GameObject locc; //lock is a keyword, don't judge me
+
     public List<GameObject> getList() {
         return gameObjects;
     }
@@ -399,6 +402,7 @@ public class BuildRoom : MonoBehaviour {
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
             gameObjects.Add(obj);
+            gameObjects.Add(Instantiate(locc, actualPos, rotation));
         }
         else { //place final door on the North or West wall
             Quaternion rotation = Quaternion.identity;
