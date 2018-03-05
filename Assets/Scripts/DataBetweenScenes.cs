@@ -7,4 +7,5 @@ public class DataBetweenScenes {
     public static bool isEndless = false;
     public static bool completedGame = false;
     public static bool devMode = false;
+    public static bool godMode = false;
 }

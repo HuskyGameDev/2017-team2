@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public GameObject gameController;
     public int roomLength;
     private List<List<GameObject>> objects;
+    public GameObject player;
 
     // Use this for initialization
     void Start () {
@@ -105,6 +106,11 @@ public class GameManager : MonoBehaviour {
                 DataBetweenScenes.numFloors = 10;
                 SceneManager.LoadScene(1);
             }
+            if (Input.GetKeyDown(KeyCode.F5)) {
+                DataBetweenScenes.godMode = true;
+            }
         }
+        if (DataBetweenScenes.godMode)
+            player.GetComponent<PlayerController>().health = 100;
     }
 }

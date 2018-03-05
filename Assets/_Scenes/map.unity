@@ -1880,6 +1880,7 @@ MonoBehaviour:
   cam: {fileID: 237235622}
   gameController: {fileID: 53205986}
   roomLength: 10
+  player: {fileID: 1494077015}
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0
