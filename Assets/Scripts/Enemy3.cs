@@ -44,6 +44,7 @@ public class Enemy3 : Enemy {
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
+		healthBar.SendMessage ("Position", angle);
 
 		slash ();
 	}

@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour {
 
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle-90);
+		healthBar.SendMessage ("Position", angle);
 
 		if (time > 1.0f) {
 			x = Random.Range(-speedMax, speedMax);
@@ -117,6 +118,7 @@ public class Enemy : MonoBehaviour {
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
+		healthBar.SendMessage ("Position", angle);
 
 	}
 

@@ -42,7 +42,6 @@ public class Enemy2 : Enemy {
     // Projectiles
     public GameObject bulletPrefab;
     public Transform EnemyTransform;
-    public Transform bulletSpawn;
 
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
@@ -81,18 +80,37 @@ public class Enemy2 : Enemy {
 
         angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle+90);
+		healthBar.SendMessage ("Position", angle);
 
         shoot();
     }
-
 
     // Method used to handle shooting projectiles
     private void shoot() {
         // Create a new bullet with the current mouse position
         if (ableToShoot == 0) {
-            //bulletStruct newBullet = new bulletStruct();
-            GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+            bulletStruct newBullet = new bulletStruct();
+            GameObject ebullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
+            print("PING");
+
+            print(EnemyTransform.ToString());
+
+            ebullet.AddComponent<BoxCollider2D>();
+            ebullet.GetComponent<BoxCollider2D>().isTrigger = true;
+            ebullet.AddComponent<bulletAttack>();
+            ebullet.GetComponent<bulletAttack>().shooter = EnemyTransform.gameObject;
+
+            print(ebullet.GetComponent<bulletAttack>().shooter);
+
+            Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 pos = (Camera.main.WorldToScreenPoint(player_pos.position) - sp).normalized;
+
+            newBullet.setPos(pos);
+            newBullet.setObj(ebullet);
+            newBullet.setColliderVar(ebullet.GetComponent<BoxCollider2D>());
+            newBullet.setCollider(true);
+            bullets.Add(newBullet);
             ableToShoot++;
         }
 
@@ -103,5 +121,23 @@ public class Enemy2 : Enemy {
             ableToShoot++;
         }
 
+        // For every bullet on screen move towards the mouse position it was shot at
+        for (int i = 0; i < bullets.Count; i++) {
+            GameObject movingBullet = bullets[i].getObj();
+
+            if (movingBullet != null) {
+
+                movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
+
+
+                Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
+
+                // Remove bullet if off screen
+                if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
+                    DestroyObject(movingBullet);
+                    bullets.Remove(bullets[i]);
+                }
+            }
+        }
     }
 }

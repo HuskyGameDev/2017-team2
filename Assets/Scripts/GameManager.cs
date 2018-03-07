@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,21 +13,11 @@ public class GameManager : MonoBehaviour {
     public GameObject cam;
     public GameObject gameController;
     public int roomLength;
-    public Canvas canvas;
     private List<List<GameObject>> objects;
 
     // Use this for initialization
     void Start () {
         initGame();
-
-        /*
-        // if Controller detected, completely disable mouse input
-        if (Input.GetJoystickNames().Length > 0)
-        {
-            GraphicRaycaster gRC = canvas.GetComponent("GraphicRaycaster") as GraphicRaycaster;
-            gRC.enabled = false;
-        }
-        */
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
@@ -56,10 +44,8 @@ public class GameManager : MonoBehaviour {
         BuildFloor.Room[,] floor = floorScript.buildFinalFloor(roomLength);
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
-                if (floor[i, j] != null) {
-                    objects.Add(boardScript.getList());
+                if (floor[i, j] != null)
                     boardScript.SetupScene(roomLength, floor[i, j]);
-                }
     }
     /**
      * Called to initiate the game after player presses play
@@ -101,17 +87,10 @@ public class GameManager : MonoBehaviour {
         song.Play();
     }
     void Update() {
-        if (DataBetweenScenes.devMode) {
-            if (Input.GetKeyDown(KeyCode.F8))
+        if (Input.GetKeyDown(KeyCode.F8))
+            nextFloor();
+        if (Input.GetKeyDown(KeyCode.F7))
+            for (int i = 0; i < 10; i++)
                 nextFloor();
-            if (Input.GetKeyDown(KeyCode.F7))
-                for (int i = 0; i < 10; i++)
-                    nextFloor();
-            if (Input.GetKeyDown(KeyCode.F6)) {
-                floorScript.floorNumber = 0;
-                DataBetweenScenes.numFloors = 10;
-                SceneManager.LoadScene(1);
-            }
-        }
     }
 }

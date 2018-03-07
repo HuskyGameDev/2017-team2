@@ -7,10 +7,7 @@ public class bulletAttack : MonoBehaviour {
     public int dmg;
     public GameObject shooter;
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+
 
 	private void OnTriggerEnter2D(Collider2D col) {
 
@@ -26,5 +23,5 @@ public class bulletAttack : MonoBehaviour {
             }
         }
     }
-    */
+
 }

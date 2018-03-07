@@ -59,20 +59,12 @@ struct bulletStruct
 
 public class PlayerController : MonoBehaviour
 {
-    // string array used to see if there is currently a controller plugged in
-    private string[] controllers;
-
-    // boolean to determine if there is currently a controller
-    private bool gamePad;
 
     //Stores a reference to the Rigidbody2D component required to use 2D Physics.
     public Rigidbody2D rb2d;
 
     //Stores the position of the mouse
     private Vector3 mouse_pos;
-
-    // stores direction of the right stick for aiming purposes
-    private Vector3 rStick;
 
     //Transform object for player
     public Transform Player;
@@ -103,10 +95,6 @@ public class PlayerController : MonoBehaviour
     private int wait = 10;
     private bool attacking;
     public Collider2D meleeAttack;
-    public Transform bulletSpawn;
-
-    public AudioClip bulletSound;
-    public AudioClip slashSound;
 
 	private AudioSource audioSource;
 	private AudioClip bulletSound;
@@ -114,22 +102,6 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        controllers = Input.GetJoystickNames();
-        if (controllers.Length > 0)
-        {
-            if (!string.IsNullOrEmpty(controllers[0]))
-            {
-                print("Controller connected");
-                gamePad = true;
-                Cursor.visible = false;
-            }
-            else
-            {
-                print("No controller");
-                gamePad = false;
-            }
-        }
-
         health = 100;
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
@@ -158,42 +130,27 @@ public class PlayerController : MonoBehaviour
     //Called every frame
     void Update()
     {
-        if (health < 0) {
+		if (health < 0) {
 			Destroy(gameObject);
 			print ("RIP");
 		}
+        //Enter mouse mosition
+        mouse_pos = Input.mousePosition;
+        mouse_pos.z = -10;
 
-        
-        if (gamePad == true)
-        {
-            rStick.z = -10;
-            rStick.x = Input.GetAxis("rStickX");
-            rStick.y = Input.GetAxis("rStickY");
+        //Enter player position
+        object_pos = Camera.main.WorldToScreenPoint(Player.position);
 
-            angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
+        //Find different coordinates between mouse and player position
+        mouse_pos.x = mouse_pos.x - object_pos.x;
+        mouse_pos.y = mouse_pos.y - object_pos.y;
 
-            //Rotate player
-            transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        //Calculate angle between mouse and player position
+        angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
 
-        } else {
-            //Enter mouse mosition
-            mouse_pos = Input.mousePosition;
-            mouse_pos.z = -10;
+        //Rotate player
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
-            //Enter player position
-            object_pos = Camera.main.WorldToScreenPoint(Player.position);
-
-            //Find different coordinates between mouse and player position
-            mouse_pos.x = mouse_pos.x - object_pos.x;
-            mouse_pos.y = mouse_pos.y - object_pos.y;
-
-            //Calculate angle between mouse and player position
-            angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
-
-            //Rotate player
-            transform.rotation = Quaternion.Euler(0, 0, angle + 90);
-        }
-        
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
         float moveVertical = 0;
@@ -210,25 +167,39 @@ public class PlayerController : MonoBehaviour
         UpdateHP();
 
         /* Call methods to handle shooting and slashing */
-        Shoot();
-        Slash();
+        shoot();
+        slash();
     }
 
     // Method used to handle shooting projectiles
-    private void Shoot()
+    private void shoot()
     {
 
         // Create a new bullet with the current mouse position
-        if (Input.GetKey(KeyCode.Mouse0) || Input.GetAxis("primaryAtk") == 1)
-        {
+        if (Input.GetKey(KeyCode.Mouse0))
+		{		
+			
             if (ableToShoot == 0 && !attacking)
             {
-                
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
-                
-                ableToShoot++;
 
-                GetComponent<AudioSource>().PlayOneShot(bulletSound);
+				audioSource.PlayOneShot (bulletSound);
+                bulletStruct newBullet = new bulletStruct();
+                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+                bullet.AddComponent<BoxCollider2D>();
+                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
+                bullet.AddComponent<bulletAttack>();
+                bullet.GetComponent<bulletAttack>().shooter = Player.gameObject;
+
+                Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
+                Vector3 pos = (Input.mousePosition - sp).normalized;
+
+                newBullet.setPos(pos);
+                newBullet.setObj(bullet);
+                newBullet.setColliderVar(bullet.GetComponent<BoxCollider2D>());
+                newBullet.setCollider(true);
+                bullets.Add(newBullet);
+                ableToShoot++;
             }
 
         }
@@ -245,18 +216,36 @@ public class PlayerController : MonoBehaviour
 
         }
 
+        // For every bullet on screen move towards the mouse position it was shot at
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            GameObject movingBullet = bullets[i].getObj();
+
+			if (movingBullet != null) {
+
+				movingBullet.transform.Translate (bullets [i].getPos () * Time.deltaTime * bulletSpeed);
+				//bulletAttack.enabled = true;
+           
+
+				Vector3 bulletPos = Camera.main.WorldToScreenPoint (movingBullet.transform.position);
+
+				// Remove bullet if off screen
+				if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
+					DestroyObject (movingBullet);
+					bullets.Remove (bullets [i]);
+				}
+			}
+				
+        }
     }
 
-    private void Slash()
+    private void slash()
     {
 
-        if ((Input.GetKeyDown(KeyCode.Mouse1) || Input.GetAxis("secondaryAtk") == 1) && !attacking)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
         {
             attacking = true;
             meleeAttack.enabled = true;
-
-            GetComponent<AudioSource>().PlayOneShot(slashSound);
-
         }
 
         if (attacking)
