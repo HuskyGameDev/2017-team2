@@ -18,6 +18,7 @@ public class ScrollingCredits : MonoBehaviour {
     // Use this for initialization
     void Start () {
         start = Time.time;
+        menuButton.gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
