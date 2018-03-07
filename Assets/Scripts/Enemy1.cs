@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// BIG GUNS
 public class Enemy1 : Enemy {
 
 	// Object for slashing
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
+
     private Vector2 movement2;
     private float rot = 0;
 
@@ -20,7 +22,6 @@ public class Enemy1 : Enemy {
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
-
 
         xMax = transform.position.x + 10;
         xMin = transform.position.x - 10;
@@ -38,8 +39,7 @@ public class Enemy1 : Enemy {
         movement2 = Vector2.up*100;
     }
 
-	protected override void MoveAtRandom() 
-	{
+	protected override void MoveAtRandom() {
 
         rot += Random.Range(-1f, 1f);
         if (rot > 3) {
@@ -51,7 +51,7 @@ public class Enemy1 : Enemy {
         movement2 = -transform.up * 300;
         GetComponent<Rigidbody2D>().AddForce(movement2);
 
-        Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
+        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
 
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// SHOOTER
 public class Enemy2 : Enemy {
 
     // Projectiles
@@ -14,7 +15,6 @@ public class Enemy2 : Enemy {
     private int ableToShoot = 0;
 
     private Vector2 movement2;
-
     private float rot = 0;
 
     // Use this for initialization
@@ -28,7 +28,6 @@ public class Enemy2 : Enemy {
 
 //        Vector3 screenMax = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.nearClipPlane));
 //        Vector3 screenMin = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-
 
         xMax = transform.position.x + 10;
         xMin = transform.position.x - 10;
@@ -44,6 +43,7 @@ public class Enemy2 : Enemy {
     }
 
     protected override void MoveAtRandom() {
+
         rot += Random.Range(-1f, 1f);
         if (rot > 3) {
             rot = 3;
