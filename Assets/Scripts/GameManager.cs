@@ -85,12 +85,18 @@ public class GameManager : MonoBehaviour {
                         color = floor[i, j].color;
                 }
         AudioClip temp = song.clip;
-        if (color == BuildFloor.FloorColor.BLUE)
+        if (color == BuildFloor.FloorColor.BLUE) { 
             song.clip = clip1;
-        else if (color == BuildFloor.FloorColor.PURPLE)
+            song.volume = 1f;
+        }
+        else if (color == BuildFloor.FloorColor.PURPLE) {
             song.clip = clip2;
-        else if (color == BuildFloor.FloorColor.RED)
+            song.volume = 1f;
+        } 
+        else if (color == BuildFloor.FloorColor.RED) {
             song.clip = clip3;
+            song.volume = .56f;
+        }
         if (temp == null || !temp.Equals(song.clip))
             song.Play();
     }
