@@ -22,7 +22,7 @@ public class Enemy2 : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 
-        health = 50;
+        health = 160;
 
         EnemyTransform = GetComponent<Transform>();
 

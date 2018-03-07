@@ -151,7 +151,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 0}
   bulletSound: {fileID: 0}
   slashSound: {fileID: 0}
-  hasKey: 0
+  hasKey: 1
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
 --- !u!114 &53205988
@@ -260,7 +260,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -498,7 +498,7 @@ Prefab:
     - target: {fileID: 114912210624141848, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: dmg
-      value: 75
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
