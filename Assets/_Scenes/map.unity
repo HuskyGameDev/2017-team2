@@ -381,6 +381,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 295709078}
+--- !u!114 &295709083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295709078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultButton: {fileID: 1760123411}
 --- !u!1001 &708122334
 Prefab:
   m_ObjectHideFlags: 0
@@ -425,21 +437,14 @@ Prefab:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1836871707}
+    - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: health
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &295709083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 295709078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultButton: {fileID: 1760123411}
 --- !u!1 &804940624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,7 +1503,6 @@ MonoBehaviour:
   cam: {fileID: 237235622}
   gameController: {fileID: 53205986}
   roomLength: 10
-  canvas: {fileID: 1935052879}
 --- !u!4 &2074431842
 Transform:
   m_ObjectHideFlags: 0
