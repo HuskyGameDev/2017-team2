@@ -75,7 +75,9 @@ public class BuildRoom : MonoBehaviour {
 
     private List<Vector3> doorPos;
     private Vector3 exitPos;
+    private Vector3 keyPos;
     private bool placedExit;
+    private bool placedKey;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -384,6 +386,23 @@ public class BuildRoom : MonoBehaviour {
     }
 
     /**
+    * Place the key in the room
+    */
+    private void LayoutKey(BuildFloor.Room room) {
+        float rotDegrees = Random.Range(0, 3) * 90f;
+        Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+        int randomIndex = RandomPosition();
+        Vector3 randomPos = gridPositions[randomIndex];
+        Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+        gridPositions.Remove(randomPos);
+        available[(int)randomPos.x, (int)randomPos.y] = false;
+        keyPos = randomPos;
+        placedKey = true;
+        GameObject obj = Instantiate(key, actualPos, rotation);
+        gameObjects.Add(obj);
+    }
+
+    /**
      * Place the exit (Stairs) in the room
      *  -if floor color is grey, load exit as special double door
      */
@@ -402,7 +421,8 @@ public class BuildRoom : MonoBehaviour {
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
             gameObjects.Add(obj);
-            gameObjects.Add(Instantiate(locc, actualPos, rotation));
+            if (!DataBetweenScenes.isEndless)
+                gameObjects.Add(Instantiate(locc, actualPos, rotation));
         }
         else { //place final door on the North or West wall
             Quaternion rotation = Quaternion.identity;
@@ -486,6 +506,8 @@ public class BuildRoom : MonoBehaviour {
             }
         }
         if (placedExit && !closed.Contains(exitPos + new Vector3(1, 0)) && !closed.Contains(exitPos + new Vector3(0, 1)) && !closed.Contains(exitPos + new Vector3(-1, 0)) && !closed.Contains(exitPos + new Vector3(0, -1)))
+            return false;
+        else if (placedKey && !closed.Contains(keyPos + new Vector3(1, 0)) && !closed.Contains(keyPos + new Vector3(0, 1)) && !closed.Contains(keyPos + new Vector3(-1, 0)) && !closed.Contains(keyPos + new Vector3(0, -1)))
             return false;
         return true;
 
@@ -783,6 +805,9 @@ public class BuildRoom : MonoBehaviour {
 
             if (room.isExit) {
                 LayoutExit(room);
+            }
+            if (room.hasKey) {
+                LayoutKey(room);
             }
             if (room.isEntrance) {
                 LayoutPlayer();

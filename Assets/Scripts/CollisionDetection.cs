@@ -16,7 +16,6 @@ public class CollisionDetection : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collider) {
         //Handle the Lock
         if (this.gameObject.tag == "Lock" && !collider.isTrigger && collider.gameObject.tag == "Player") {
-            print("Yup");
             if (collider.gameObject.GetComponent<PlayerController>().hasKey) {
                 Destroy(this.gameObject);
                 collider.gameObject.GetComponent<PlayerController>().hasKey = false;
