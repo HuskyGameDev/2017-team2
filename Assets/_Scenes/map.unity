@@ -459,6 +459,11 @@ Prefab:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1836871707}
+    - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: health
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: m_Mass
