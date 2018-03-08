@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 58627157195089356}
   - component: {fileID: 114191145349404612}
   - component: {fileID: 82774919983224040}
+  - component: {fileID: 114339855288727316}
   - component: {fileID: 114219180725047908}
   m_Layer: 0
   m_Name: Enemy3
@@ -266,6 +267,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RoomSize: 0
+--- !u!114 &114339855288727316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380226150802872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cd0ed075a72ba459ee7850824f134a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114428999078780778
 MonoBehaviour:
   m_ObjectHideFlags: 1
