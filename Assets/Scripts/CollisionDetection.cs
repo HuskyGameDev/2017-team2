@@ -9,7 +9,11 @@ public class CollisionDetection : MonoBehaviour {
     // Use this for initialization
     private void OnCollisionEnter2D(Collision2D collision) {
         if (this.gameObject.tag == "Enemy") {
-            transform.Rotate(0, 0, 180);
+            if (Random.Range(0f, 1f) < 0.5) {
+                transform.Rotate(0, 0, 70);
+            } else {
+                transform.Rotate(0, 0, -70);
+            }
         }
     }
 
