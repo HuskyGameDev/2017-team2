@@ -60,6 +60,8 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
     public GameObject[] specialGrey;
 
+    private Vector3 startingPos;
+
     private int color;
 
     private List<GameObject> gameObjects;
@@ -81,6 +83,9 @@ public class BuildRoom : MonoBehaviour {
 
     public List<GameObject> getList() {
         return gameObjects;
+    }
+    public Vector3 getStartingPos() {
+        return startingPos;
     }
     void InitializeList() {
 
@@ -366,7 +371,9 @@ public class BuildRoom : MonoBehaviour {
 
         Vector3 actualPos;
         actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
-        
+
+        startingPos = actualPos;
+
         gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
         available[(int)randomPos.x, (int)randomPos.y] = false;
 
@@ -499,10 +506,13 @@ public class BuildRoom : MonoBehaviour {
                 if (color == GREY && room.isExit && room.finalDoor == BuildFloor.Direction.WEST)
                     isDoubleDoor = true;
                 else {
-                    GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                    GameObject par = Instantiate(new GameObject(), new Vector3(dx - .0625f, dy + i, 0), westRotation);
+                    GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + 0.5f, 0), westRotation);
+                    go.transform.parent = par.transform;
                     go.GetComponent<DoorScript>().player = player;
                     go.GetComponent<DoorScript>().isClosed = true;
                     gameObjects.Add(go);
+                    gameObjects.Add(par);
                 }
             }
             if (room.doorEast != i) {

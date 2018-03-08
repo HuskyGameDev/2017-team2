@@ -74,7 +74,7 @@ public class BuildFloor : MonoBehaviour {
     * builds the layout of rooms in the floor
     */
     public Room[,] buildFloor(int roomLength) {
-        floorColor = floorNumber < 21 && floorNumber > 0 ? twenty[floorNumber - 1] : randomColor();
+        floorColor = floorNumber < 21 && floorNumber > 0  && !DataBetweenScenes.isEndless ? twenty[floorNumber - 1] : randomColor();
         Room[,] floor = new Room[lengthOfFloor, heightOfFloor];
         Room start = new Room(startPosX, startPosY, false, floorColor);
         start.isEntrance = true;
@@ -199,20 +199,20 @@ public class BuildFloor : MonoBehaviour {
     }
     /**
      * Returns a random floor color
-     * currently returns : 1/6 blue
+     * currently returns : 3/6 blue
      *                     2/6 purple
-     *                     3/6 red
+     *                     1/6 red
      * could be tweaked to modify difficulty if desired
      */
     private FloorColor randomColor() {
         FloorColor result;
         int i = Random.Range(0, 5);
         if (i == 0)
-            result = FloorColor.BLUE;
+            result = FloorColor.RED;
         else if (i <= 2)
             result = FloorColor.PURPLE;
         else
-            result = FloorColor.RED;
+            result = FloorColor.BLUE;
         return result;
     }
     /**

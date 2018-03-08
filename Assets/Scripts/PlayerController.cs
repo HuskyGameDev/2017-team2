@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
     // string array used to see if there is currently a controller plugged in
     private string[] controllers;
 
+    public GameManager gameManager;
+
+    //Store life objects
+    public GameObject[] lives;
+
     // boolean to determine if there is currently a controller
     private bool gamePad;
 
@@ -112,16 +117,27 @@ public class PlayerController : MonoBehaviour
     public AudioClip bulletSound;
     public AudioClip slashSound;
 
+	private AudioSource audioSource;
+	//private AudioClip bulletSound;
 
     // Use this for initialization
     void Start()
     {
-        health = 0;
+        if (DataBetweenScenes.isEndless) {
+            Destroy(lives[0]);
+            Destroy(lives[1]);
+            Destroy(lives[2]);
+            lives[0] = null;
+            lives[1] = null;
+            lives[2] = null;
+        }
+        health = 100;
         controllers = Input.GetJoystickNames();
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
+		audioSource = GetComponent<AudioSource>();
        
 
         score = 0;
@@ -136,16 +152,14 @@ public class PlayerController : MonoBehaviour
         attacking = false;
 
        // anim.animation = U_Walking;
+
+		//Set bullet sound
+		bulletSound = Resources.Load("SFX/Plasma Gun") as AudioClip;
     }
 
     //Called every frame
     void Update()
     {
-        if (health < 0) {
-			Destroy(gameObject);
-			print ("RIP");
-		}
-
         // Check for controller in update by counting the number of frames
         checkControl++;   
 
@@ -256,6 +270,7 @@ public class PlayerController : MonoBehaviour
                     GetComponent<AudioSource>().PlayOneShot(bulletSound);
                 }
             }
+
         }
 
         // Create a new bullet with the current mouse position
@@ -270,6 +285,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             ableToShoot++;
+
         }
 
     }
@@ -315,6 +331,7 @@ public class PlayerController : MonoBehaviour
                 meleeAttack.enabled = false;
                 wait = 20;
             }
+
         }
     }
 
@@ -358,7 +375,26 @@ public class PlayerController : MonoBehaviour
         // check for death
         if (health <= 0)
         {
-            GameOver();
+            if (lives[0] != null) {
+                Destroy(lives[0]);
+                lives[0] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else if (lives[1] != null) {
+                Destroy(lives[1]);
+                lives[1] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else if (lives[2] != null) {
+                Destroy(lives[2]);
+                lives[2] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else
+                GameOver();
         }
     }
 

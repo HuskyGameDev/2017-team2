@@ -59,10 +59,11 @@ public class GameManager : MonoBehaviour {
         floorScript = GetComponent<BuildFloor>();
         boardScript = GetComponent<BuildRoom>();
         song = GetComponent<AudioSource>();
-        clip3 = Resources.Load("Music/Descension3") as AudioClip;
+		clip3 = Resources.Load("Music/Descension3") as AudioClip;
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();
+        song.loop = true;
         objects = new List<List<GameObject>>();
         buildFloor();
         cam.GetComponent<CameraScript>().isStarted = true;
@@ -74,7 +75,6 @@ public class GameManager : MonoBehaviour {
     void buildFloor() {
         BuildFloor.Room[,] floor = floorScript.buildFloor(roomLength);
         BuildFloor.FloorColor color = BuildFloor.FloorColor.GREY;
-        song.Stop();
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
                 if (floor[i, j] != null) {
@@ -83,13 +83,15 @@ public class GameManager : MonoBehaviour {
                     if (color == BuildFloor.FloorColor.GREY)
                         color = floor[i, j].color;
                 }
+        AudioClip temp = song.clip;
         if (color == BuildFloor.FloorColor.BLUE)
             song.clip = clip1;
         else if (color == BuildFloor.FloorColor.PURPLE)
             song.clip = clip2;
         else if (color == BuildFloor.FloorColor.RED)
             song.clip = clip3;
-        song.Play();
+        if (temp == null || !temp.Equals(song.clip))
+            song.Play();
     }
     void Update() {
         if (DataBetweenScenes.devMode) {

@@ -27,15 +27,18 @@ public class Enemy : MonoBehaviour {
     protected AudioSource audioSource;
     public AudioClip deathSound;
 
+    private int attention = 0;
+
     // Use this for initialization
     protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
+		audioSource = GetComponent<AudioSource> ();
 
 		health = 50;
 
-		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
-		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
+//		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+//		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
 
 		xMax = transform.position.x + 10;
@@ -51,17 +54,18 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player == null)
-			MoveAtRandom ();
-		else {
-			Chase ();	
+        if (player == null || attention == 0)
+            MoveAtRandom();
+        else  {
+			Chase ();
 		}
 
 		if (health < 0) {
 			Destroy(gameObject);
             audioSource.PlayOneShot(deathSound);
-            print ("RIP");
 		}
+        if (attention > 0)
+            attention--;
 	}
 
 	protected virtual void MoveAtRandom() {
@@ -98,12 +102,19 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player")) {
-			
+		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
+            attention = 200;
 		}
 	}
+
+    //Should detect if the enemy can see the player currently or not
+    bool hasLOS(Collider2D other) {
+        bool canSee = true;
+
+        return canSee;
+    }
 
 	protected virtual void Chase() {
 
