@@ -19,6 +19,7 @@ public class CollisionDetection : MonoBehaviour {
             if (collider.gameObject.GetComponent<PlayerController>().hasKey) {
                 Destroy(this.gameObject);
                 collider.gameObject.GetComponent<PlayerController>().hasKey = false;
+                collider.gameObject.GetComponent<PlayerController>().gameManager.boardScript.exit.GetComponent<BoxCollider2D>().enabled = true;
             }
             
         }

@@ -85,6 +85,7 @@ public class BuildRoom : MonoBehaviour {
 
     public GameObject key;
     public GameObject locc; //lock is a keyword, don't judge me
+    public GameObject exit;
 
     public List<GameObject> getList() {
         return gameObjects;
@@ -420,6 +421,8 @@ public class BuildRoom : MonoBehaviour {
             GameObject obj = Instantiate(exits[color], actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
+            obj.GetComponent<BoxCollider2D>().enabled = false;
+            exit = obj;
             gameObjects.Add(obj);
             if (!DataBetweenScenes.isEndless)
                 gameObjects.Add(Instantiate(locc, actualPos, rotation));
