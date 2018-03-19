@@ -1892,6 +1892,10 @@ MonoBehaviour:
   - {fileID: 1623128156999972, guid: ec0be66fd44856b45b0c232ae4e1b955, type: 2}
   - {fileID: 1959454287405712, guid: df250db7f0d9f5f45a3d60e55e7431d4, type: 2}
   - {fileID: 1232303087558978, guid: ecca2f3efaf4af649907a6b4fdc5e6a8, type: 2}
+  locks:
+  - {fileID: 1235568350134784, guid: 6cee492ef69bb7443acac6ff826462bd, type: 2}
+  - {fileID: 1680984815659038, guid: 0f5aa1af15458a04ab8f124e42bd3bdb, type: 2}
+  - {fileID: 1980171571406470, guid: 1ee0a50e2a09098469810e429f00eb85, type: 2}
   smallBlue:
   - {fileID: 1128418706823938, guid: 41e7128a1c3035a4498839cefe37dc76, type: 2}
   - {fileID: 1281546021964002, guid: cb7ba9b694b557b4c8b1b13d0be98a49, type: 2}
@@ -1929,7 +1933,7 @@ MonoBehaviour:
   specialGrey:
   - {fileID: 1594472912240368, guid: 341fdd2eea9287048b0f2777cc5792f8, type: 2}
   key: {fileID: 1933745972975348, guid: a0e2547859ab65943b11b1acbdbbf718, type: 2}
-  locc: {fileID: 1132647553520552, guid: a9f8a78f330e4e843a5c3bf3da8b5aab, type: 2}
+  exit: {fileID: 0}
 --- !u!114 &2074431841
 MonoBehaviour:
   m_ObjectHideFlags: 0

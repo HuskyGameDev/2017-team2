@@ -39,6 +39,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] door; // Holds all corner types, access by color above
     public GameObject[] floor; // Holds all corner types, access by color above
     public GameObject[] exits; // Holds all exits, access by color above
+    public GameObject[] locks; // Holds all locks, access by color above
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -84,7 +85,6 @@ public class BuildRoom : MonoBehaviour {
     private Boolean[,] available;
 
     public GameObject key;
-    public GameObject locc; //lock is a keyword, don't judge me
     public GameObject exit;
 
     public List<GameObject> getList() {
@@ -425,7 +425,7 @@ public class BuildRoom : MonoBehaviour {
             exit = obj;
             gameObjects.Add(obj);
             if (!DataBetweenScenes.isEndless)
-                gameObjects.Add(Instantiate(locc, actualPos, rotation));
+                gameObjects.Add(Instantiate(locks[color], actualPos, rotation));
         }
         else { //place final door on the North or West wall
             Quaternion rotation = Quaternion.identity;
