@@ -10,109 +10,97 @@ public class LeaderBoard : MonoBehaviour {
     {
         public string Name { get; set; }
         public int Score { get; set; }
-        public float Time { get; set; }
-        public Entry(string name, int score, float time)
+        public float Floor { get; set; }
+        public Entry(string name, int score, int floor)
         {
             Name = name;
             Score = score;
-            Time = time;
+            Floor = floor;
         }
     }
 
     Entry[] leaderboard = new Entry[10];
 
-    // variables used to properly format the time when displayed on the leaderboard
-    private int minutes = 59;
-    private int seconds = 59;
-    private int mSeconds = 999;
-    private string[] formatTime = new string[10];
-
     // variable to take player's input from an InputField
-    // InputField iFieldName;
+    InputField iFieldName;
 
     // arrays to print values from virtual leaderboard to screen
     public Text[] names = new Text[10];
     public Text[] scores = new Text[10];
-    public Text[] times = new Text[10];
+    public Text[] floors = new Text[10];
 
     // variables that store the passed in values of the player's final score and time
-    public string newName = "test";
-    public int newScore = 17500;
-    public float newTime = 277;
+    string newName;
+    int newScore;
+    int newFloor;
 
-    // location of leaderboard text file
-    static private string path = "Assets/leaderboard.txt";
-
-    // initialize Stream Reader and StreamWriter
-    StreamReader sR = new StreamReader(path);
+    // location of leaderboard text files
+    string path1 = "Assets/leaderboard.txt";
+    string path2 = "Assets/new_leaderboard.txt";
 
 	// Use this for initialization
 	void Start () {
 
+        //newName =
+        //newScore =
+        //newFloor = 
+
+        // initialize Stream Reader and StreamWriter
+        StreamReader sR = new StreamReader(path1);
+
         // read the file until there is nothing left to read
-		while (!sR.EndOfStream)
+        while (!sR.EndOfStream)
         {            
             // fill the virtual leaderboard with the data from the text file
             for (int i = 0; i < leaderboard.Length; i++)
             {
                 string eName = sR.ReadLine();
                 int eScore = int.Parse(sR.ReadLine());
-                float eTime = float.Parse(sR.ReadLine());
-                leaderboard[i] = new Entry(eName, eScore, eTime);
+                int eFloor = int.Parse(sR.ReadLine());
+                leaderboard[i] = new Entry(eName, eScore, eFloor);
             }
         }
 
         sR.Close();
 
         // get name from InputField and create a new Entry
-        Entry playerEntry = new Entry(newName, newScore, newTime);
+        Entry playerEntry = new Entry(newName, newScore, newFloor);
 
         // check to see if the new entry's score is high enough to go on the leaderboared
-        if (playerEntry.Score < leaderboard[9].Score)
+        if (playerEntry.Score > leaderboard[9].Score)
         {
-            
-        } else {
             // player's score was high enough to go on leaderboard
             // overwrite last Entry with new Entry
             leaderboard[9].Name = playerEntry.Name;
             leaderboard[9].Score = playerEntry.Score;
-            leaderboard[9].Time = playerEntry.Time;
+            leaderboard[9].Floor = playerEntry.Floor;
 
             // temporary entry used for swapping data during sort
             Entry tempEntry = new Entry("", 0, 0);
 
             // move new entry up the leaderboard until it is in the correct spot
-            for (int i = leaderboard.Length; i >= 0; i--)
+            for (int i = leaderboard.Length - 1; i >= 1; i--)
             {
-                if (leaderboard[i].Score > leaderboard[i-1].Score)
+                if (leaderboard[i].Score > leaderboard[i - 1].Score)
                 {
                     // put value to be replaced into temporary entry
                     tempEntry.Name = leaderboard[i - 1].Name;
                     tempEntry.Score = leaderboard[i - 1].Score;
-                    tempEntry.Time = leaderboard[i - 1].Time;
+                    tempEntry.Floor = leaderboard[i - 1].Floor;
 
                     // put new Entry into correct position
                     leaderboard[i - 1].Name = leaderboard[i].Name;
                     leaderboard[i - 1].Score = leaderboard[i].Score;
-                    leaderboard[i - 1].Time = leaderboard[i].Time;
+                    leaderboard[i - 1].Floor = leaderboard[i].Floor;
 
                     // put replaced Entry into correct position
                     leaderboard[i].Name = tempEntry.Name;
                     leaderboard[i].Score = tempEntry.Score;
-                    leaderboard[i].Time = tempEntry.Time;
+                    leaderboard[i].Floor = tempEntry.Floor;
                 }
             }
-        }
-
-        // format times so that they can be read more easily on leaderboard
-        for (int i = 0; i < leaderboard.Length; i++)
-        {
-            // determine minutes, seconds, milliseconds from time values
-            minutes = (int)leaderboard[i].Time / 60;
-            seconds = (int)leaderboard[i].Time % 60;
-            mSeconds = (int)leaderboard[i].Time % 1;
-
-            formatTime[i] = System.String.Format("{0:00}:{1:00}.{2:000}", minutes, seconds, mSeconds);
+        } else {
+            
         }
 
         // fill the textboxes on the leaderboard with the data in the virtual leaderboard
@@ -120,21 +108,23 @@ public class LeaderBoard : MonoBehaviour {
         {
             names[i].text = leaderboard[i].Name;
             scores[i].text = leaderboard[i].Score.ToString();
-            times[i].text = formatTime[i];
+            floors[i].text = leaderboard[i].Floor.ToString();
         }
-
-        StreamWriter sW = new StreamWriter(path);
-
         
+        StreamWriter sW = new StreamWriter(path1, false);
+
         // begin writing new data to the text file
         for (int i = 0; i < leaderboard.Length; i++)
         {
             sW.WriteLine(leaderboard[i].Name);
             sW.WriteLine(leaderboard[i].Score.ToString());
-            sW.WriteLine(leaderboard[i].Time.ToString());
+            sW.WriteLine(leaderboard[i].Floor.ToString());
         }
         
 
         sW.Close();
+
+        // Fails here. Perhaps because path1 no longer exists
+        //UnityEditor.FileUtil.ReplaceFile("Assets/new_leaderboard.txt", "Assets/leaderboard.txt");
     }
 }

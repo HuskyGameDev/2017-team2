@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 26782477}
   - component: {fileID: 26782476}
   m_Layer: 5
-  m_Name: time7
+  m_Name: floor7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &26782477
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 58455097}
   - component: {fileID: 58455096}
   m_Layer: 5
-  m_Name: times
+  m_Name: floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &138927790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -942,7 +942,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &278546426
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 298425046}
   - component: {fileID: 298425045}
   m_Layer: 5
-  m_Name: leaderboard
+  m_Name: endlessLeaderboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   - {fileID: 138927789}
   - {fileID: 278546425}
   - {fileID: 2012693311}
-  times:
+  floors:
   - {fileID: 317806227}
   - {fileID: 973840438}
   - {fileID: 2084640557}
@@ -1039,9 +1039,6 @@ MonoBehaviour:
   - {fileID: 498966662}
   - {fileID: 2026076219}
   - {fileID: 1151195220}
-  newName: test
-  newScore: 0
-  newTime: 0
 --- !u!114 &298425046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,7 +1083,7 @@ GameObject:
   - component: {fileID: 317806228}
   - component: {fileID: 317806227}
   m_Layer: 5
-  m_Name: time1
+  m_Name: floor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1142,7 +1139,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &317806228
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1242,7 +1239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &322035993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1438,7 +1435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1606,7 +1603,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &425860818
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1928,7 +1925,7 @@ GameObject:
   - component: {fileID: 498966663}
   - component: {fileID: 498966662}
   m_Layer: 5
-  m_Name: time8
+  m_Name: floor8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1984,7 +1981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &498966663
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2621,7 +2618,7 @@ GameObject:
   - component: {fileID: 728607782}
   - component: {fileID: 728607781}
   m_Layer: 5
-  m_Name: time6
+  m_Name: floor6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2677,7 +2674,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &728607782
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3273,7 +3270,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &865100561
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3364,7 +3361,7 @@ GameObject:
   - component: {fileID: 952445893}
   - component: {fileID: 952445892}
   m_Layer: 5
-  m_Name: time4
+  m_Name: floor4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3420,7 +3417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &952445893
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3438,7 +3435,7 @@ GameObject:
   - component: {fileID: 973840439}
   - component: {fileID: 973840438}
   m_Layer: 5
-  m_Name: time2
+  m_Name: floor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3494,7 +3491,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &973840439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3642,7 +3639,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &982353880
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3910,7 +3907,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -10, y: -325}
+  m_AnchoredPosition: {x: -10, y: -335}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1079583559
@@ -3939,7 +3936,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 72
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -4446,7 +4443,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
@@ -4505,7 +4513,7 @@ GameObject:
   - component: {fileID: 1151195221}
   - component: {fileID: 1151195220}
   m_Layer: 5
-  m_Name: time10
+  m_Name: floor10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4561,7 +4569,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &1151195221
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4674,7 +4682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -325}
+  m_AnchoredPosition: {x: 450, y: -335}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1187907391
@@ -4703,7 +4711,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 72
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -4801,7 +4809,7 @@ GameObject:
   - component: {fileID: 1208753098}
   - component: {fileID: 1208753097}
   m_Layer: 5
-  m_Name: time5
+  m_Name: floor5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4857,7 +4865,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &1208753098
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5005,7 +5013,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &1262892387
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5325,7 +5333,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &1413566932
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5422,7 +5430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1512454180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5544,7 +5552,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &1527076846
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5562,7 +5570,7 @@ GameObject:
   - component: {fileID: 1544865830}
   - component: {fileID: 1544865829}
   m_Layer: 5
-  m_Name: time
+  m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5583,7 +5591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1500, y: -325}
+  m_AnchoredPosition: {x: 1500, y: -335}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544865829
@@ -5612,13 +5620,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 72
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: TIME
+  m_Text: FLOORS
 --- !u!222 &1544865830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6026,7 +6034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 200, y: -325}
+  m_AnchoredPosition: {x: 200, y: -335}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655461933
@@ -6055,7 +6063,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 72
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -6361,7 +6369,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &1828808873
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6569,7 +6577,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 9999999
+  m_Text: 99999
 --- !u!222 &2012693312
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6661,7 +6669,7 @@ GameObject:
   - component: {fileID: 2026076220}
   - component: {fileID: 2026076219}
   m_Layer: 5
-  m_Name: time9
+  m_Name: floor9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6717,7 +6725,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &2026076220
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6809,7 +6817,7 @@ GameObject:
   - component: {fileID: 2084640558}
   - component: {fileID: 2084640557}
   m_Layer: 5
-  m_Name: time3
+  m_Name: floor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6865,7 +6873,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 59:59.99
+  m_Text: 99
 --- !u!222 &2084640558
 CanvasRenderer:
   m_ObjectHideFlags: 0
