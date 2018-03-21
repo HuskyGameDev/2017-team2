@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Big Enemies - Big Guns
+
 public class Enemy1 : Enemy {
 
 	// Object for slashing
@@ -97,4 +99,9 @@ public class Enemy1 : Enemy {
 			}
 		}
 	}
+    
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 10;
+    }
 }

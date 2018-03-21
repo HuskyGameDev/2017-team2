@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Small Enemies - Ankle Biter
+
 public class Enemy3 : Enemy {
 
 	// Object for slashing
@@ -74,4 +76,9 @@ public class Enemy3 : Enemy {
 			}
 		}
 	}
+
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 2;
+    }
 }

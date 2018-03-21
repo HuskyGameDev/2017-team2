@@ -118,5 +118,6 @@ public class GameManager : MonoBehaviour {
         }
         if (DataBetweenScenes.godMode)
             player.GetComponent<PlayerController>().health = 100;
+        Debug.Log(player.GetComponent<PlayerController>().points);
     }
 }
