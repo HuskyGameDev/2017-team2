@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
         destroyObjects();
+        player.GetComponent<PlayerController>().points += 10; //complete floor bonus
         objects = new List<List<GameObject>>();
         //loads the final floor if it's the end of story mode, increments floor
         if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless)

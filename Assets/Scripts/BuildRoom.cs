@@ -421,7 +421,8 @@ public class BuildRoom : MonoBehaviour {
             GameObject obj = Instantiate(exits[color], actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
-            obj.GetComponent<BoxCollider2D>().enabled = false;
+            if (!DataBetweenScenes.isEndless)
+                obj.GetComponent<BoxCollider2D>().enabled = false;
             exit = obj;
             gameObjects.Add(obj);
             if (!DataBetweenScenes.isEndless)
