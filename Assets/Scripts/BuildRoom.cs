@@ -33,7 +33,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject charger;
 
     //Indices for each colored wall and corner 
-    private const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
+    public const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
     public GameObject[] wall; // Holds all wall types, access by color above
     public GameObject[] cornerWall; // Holds all corner types, access by color above
     public GameObject[] door; // Holds all corner types, access by color above
@@ -63,7 +63,7 @@ public class BuildRoom : MonoBehaviour {
 
     private Vector3 startingPos;
 
-    private int color;
+    public int color;
 
     private List<GameObject> gameObjects;
 

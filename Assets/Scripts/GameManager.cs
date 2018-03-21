@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour {
     public void nextFloor() {
         destroyObjects();
         player.GetComponent<PlayerController>().points += 10; //complete floor bonus
+        if (boardScript.color == BuildRoom.PURPLE) ;
+        //dosometing();
+        else if (boardScript.color == BuildRoom.RED) ;
+            //dosometingelse();
         objects = new List<List<GameObject>>();
         //loads the final floor if it's the end of story mode, increments floor
         if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless)
