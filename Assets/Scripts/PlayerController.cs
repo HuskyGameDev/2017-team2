@@ -413,6 +413,7 @@ public class PlayerController : MonoBehaviour
     // This method is called when the player's HP is reduced to 0
     void GameOver()
     {
+        DataBetweenScenes.points = points;
         SceneManager.LoadScene(2);
     }
 	void Hit(int dmg)

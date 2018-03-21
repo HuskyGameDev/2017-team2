@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour {
         }
         if (temp == null || !temp.Equals(song.clip))
             song.Play();
+        DataBetweenScenes.floorLastOn = floorScript.floorNumber;
     }
     void Update() {
         if (DataBetweenScenes.devMode) {
