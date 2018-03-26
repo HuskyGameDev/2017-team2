@@ -123,8 +123,5 @@ public class LeaderBoard : MonoBehaviour {
         
 
         sW.Close();
-
-        // Fails here. Perhaps because path1 no longer exists
-        //UnityEditor.FileUtil.ReplaceFile("Assets/new_leaderboard.txt", "Assets/leaderboard.txt");
     }
 }
