@@ -344,6 +344,7 @@ public class PlayerController : MonoBehaviour
 
     void UpdateHP()
     {
+        /*
         // For testing purposes, the player's health can be controlled using keys to simulate being healed and damaged by each of the three enemy types
         // Player is hit by a small enemy
         if (Input.GetKeyDown(KeyCode.L))
@@ -375,7 +376,8 @@ public class PlayerController : MonoBehaviour
             {
                 health += 50;
             }
-        }
+            
+        }*/
 
         SetHealthText();
 

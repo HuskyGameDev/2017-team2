@@ -654,42 +654,50 @@ public class BuildRoom : MonoBehaviour {
             gridPositions.Remove(randomPos);
             available[(int)randomPos.x, (int)randomPos.y] = false;
 
-            Vector3 actualPos;
-
             int countDec = count;
 
             if (--countDec >= 0) {
-                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f);
-                GameObject choice = smallEnemy;
-                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-                go.GetComponent<Enemy>().player = player;
-                gameObjects.Add(go);
+                gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f), enemyType.SMALL));
             }
             if (--countDec >= 0) {
-                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f);
-                GameObject choice = smallEnemy;
-                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-                go.GetComponent<Enemy>().player = player;
-                gameObjects.Add(go);
+                gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f), enemyType.SMALL));
             }
             if (--countDec >= 0) {
-                actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f);
-                GameObject choice = smallEnemy;
-                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-                go.GetComponent<Enemy>().player = player;
-                gameObjects.Add(go);
+                gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f), enemyType.SMALL));
             }
             if (--countDec >= 0) {
-                actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f);
-                GameObject choice = smallEnemy;
-                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-                go.GetComponent<Enemy>().player = player;
-                gameObjects.Add(go);
+                gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f), enemyType.SMALL));
             }
 
             i += count;
 
         }
+    }
+   
+    //To select which kind of enemy
+    enum enemyType { LARGE, MEDIUM, SMALL }
+
+    //Spawn an enemy at a position and return that enemy
+    GameObject instantiateEnemy(Vector3 actualPos, enemyType type) {
+        GameObject choice = smallEnemy;
+        if (type == enemyType.LARGE)
+            choice = largeEnemy;
+        else if (type == enemyType.MEDIUM)
+            choice = mediumEnemy;
+        GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+        if (color == PURPLE) {
+            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                if (cc.isTrigger) {
+                    cc.radius *= 1.25f;
+                }
+        } else if (color == RED) {
+            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                if (cc.isTrigger) {
+                    cc.radius *= 1.5f;
+                }
+        }
+        go.GetComponent<Enemy>().player = player;
+        return go;
     }
 
     void LayoutMediumEnemies() {
@@ -697,15 +705,11 @@ public class BuildRoom : MonoBehaviour {
 
             int randomIndex = RandomPosition();
             Vector3 randomPos = gridPositions[randomIndex];
-            Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
 
             gridPositions.Remove(randomPos);
             available[(int)randomPos.x, (int)randomPos.y] = false;
 
-            GameObject choice = mediumEnemy;
-            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-            go.GetComponent<Enemy>().player = player;
-            gameObjects.Add(go);
+            gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f), enemyType.MEDIUM));
 
         }
     }
@@ -719,9 +723,6 @@ public class BuildRoom : MonoBehaviour {
                 randomPos = gridPositions[randomIndex];
             } while (!LargeEnemyClear(randomPos));
 
-            Vector3 actualPos;
-            actualPos = new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 1f + dy, 0f);
-
             for (int x = (int)randomPos.x; x <= (int)randomPos.x + 1; x++) {
                 for (int y = (int)randomPos.y; y <= (int)randomPos.y + 1; y++) {
                     gridPositions.Remove(new Vector3(x, y, randomPos.z));
@@ -729,10 +730,7 @@ public class BuildRoom : MonoBehaviour {
                 }
             }
 
-            GameObject choice = largeEnemy;
-            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-            go.GetComponent<Enemy>().player = player;
-            gameObjects.Add(go);
+            gameObjects.Add(instantiateEnemy(new Vector3((randomPos.x) + 1f + dx, (randomPos.y) + 1f + dy, 0f), enemyType.LARGE));
 
         }
     }
