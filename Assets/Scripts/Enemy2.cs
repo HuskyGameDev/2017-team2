@@ -2,42 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Medium Enemies - Al Roboto
+
 public class Enemy2 : Enemy {
-
-    /* Structure for storing a bullet with the mouse position at the time the bullet is created */
-    struct bulletStruct {
-        private GameObject bullet;
-        private Vector3 pos;
-        private Collider2D bulletAtk;
-
-
-        public void setObj(GameObject newBullet) {
-            bullet = newBullet;
-        }
-
-        public void setPos(Vector3 newPos) {
-            pos = newPos;
-        }
-
-        public GameObject getObj() {
-            return bullet;
-        }
-
-        public Vector3 getPos() {
-            return pos;
-        }
-
-        public void setColliderVar(Collider2D col) {
-            bulletAtk = col;
-        }
-        public void setCollider(bool set) {
-            if (set) {
-                bulletAtk.enabled = true;
-            } else {
-                bulletAtk.enabled = false;
-            }
-        }
-    }
 
     // Projectiles
     public GameObject bulletPrefab;
@@ -48,12 +15,16 @@ public class Enemy2 : Enemy {
     private float bulletSpeed;
     private int ableToShoot = 0;
 
+    private Vector2 movement2;
+
+    private float rot = 0;
+
     // Use this for initialization
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 
-        health = 50;
+        health = 160;
 
         EnemyTransform = GetComponent<Transform>();
 
@@ -74,6 +45,21 @@ public class Enemy2 : Enemy {
         bulletSpeed = 20;
     }
 
+    protected override void MoveAtRandom() {
+        rot += Random.Range(-1f, 1f);
+        if (rot > 3) {
+            rot = 3;
+        } else if (rot < -3) {
+            rot = -3;
+        }
+        transform.Rotate(new Vector3(0, 0, rot));
+        movement2 = -transform.up * 300;
+        GetComponent<Rigidbody2D>().AddForce(movement2);
+
+        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+
+    }
+
     protected override void Chase() {
 
         transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
@@ -89,7 +75,6 @@ public class Enemy2 : Enemy {
     private void shoot() {
         // Create a new bullet with the current mouse position
         if (ableToShoot == 0) {
-            //bulletStruct newBullet = new bulletStruct();
             GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
             ableToShoot++;
@@ -102,5 +87,10 @@ public class Enemy2 : Enemy {
             ableToShoot++;
         }
 
+    }
+
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 5;
     }
 }

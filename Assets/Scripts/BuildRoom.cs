@@ -33,12 +33,13 @@ public class BuildRoom : MonoBehaviour {
     public GameObject charger;
 
     //Indices for each colored wall and corner 
-    private const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
+    public const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
     public GameObject[] wall; // Holds all wall types, access by color above
     public GameObject[] cornerWall; // Holds all corner types, access by color above
     public GameObject[] door; // Holds all corner types, access by color above
     public GameObject[] floor; // Holds all corner types, access by color above
     public GameObject[] exits; // Holds all exits, access by color above
+    public GameObject[] locks; // Holds all locks, access by color above
 
     public GameObject[] smallBlue;
     public GameObject[] smallPurple;
@@ -60,7 +61,9 @@ public class BuildRoom : MonoBehaviour {
     public GameObject[] specialRed;
     public GameObject[] specialGrey;
 
-    private int color;
+    private Vector3 startingPos;
+
+    public int color;
 
     private List<GameObject> gameObjects;
 
@@ -73,14 +76,22 @@ public class BuildRoom : MonoBehaviour {
 
     private List<Vector3> doorPos;
     private Vector3 exitPos;
+    private Vector3 keyPos;
     private bool placedExit;
+    private bool placedKey;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
     private Boolean[,] available;
 
+    public GameObject key;
+    public GameObject exit;
+
     public List<GameObject> getList() {
         return gameObjects;
+    }
+    public Vector3 getStartingPos() {
+        return startingPos;
     }
     void InitializeList() {
 
@@ -366,11 +377,30 @@ public class BuildRoom : MonoBehaviour {
 
         Vector3 actualPos;
         actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
-        
+
+        startingPos = actualPos;
+
         gridPositions.Remove(new Vector3(randomPos.x, randomPos.y, randomPos.z));
         available[(int)randomPos.x, (int)randomPos.y] = false;
 
         player.transform.SetPositionAndRotation(actualPos, Quaternion.identity);
+    }
+
+    /**
+    * Place the key in the room
+    */
+    private void LayoutKey(BuildFloor.Room room) {
+        float rotDegrees = Random.Range(0, 3) * 90f;
+        Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
+        int randomIndex = RandomPosition();
+        Vector3 randomPos = gridPositions[randomIndex];
+        Vector3 actualPos = new Vector3((randomPos.x) + 0.5f + dx, (randomPos.y) + 0.5f + dy, 0f);
+        gridPositions.Remove(randomPos);
+        available[(int)randomPos.x, (int)randomPos.y] = false;
+        keyPos = randomPos;
+        placedKey = true;
+        GameObject obj = Instantiate(key, actualPos, rotation);
+        gameObjects.Add(obj);
     }
 
     /**
@@ -391,7 +421,12 @@ public class BuildRoom : MonoBehaviour {
             GameObject obj = Instantiate(exits[color], actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
+            if (!DataBetweenScenes.isEndless)
+                obj.GetComponent<BoxCollider2D>().enabled = false;
+            exit = obj;
             gameObjects.Add(obj);
+            if (!DataBetweenScenes.isEndless)
+                gameObjects.Add(Instantiate(locks[color], actualPos, rotation));
         }
         else { //place final door on the North or West wall
             Quaternion rotation = Quaternion.identity;
@@ -476,6 +511,8 @@ public class BuildRoom : MonoBehaviour {
         }
         if (placedExit && !closed.Contains(exitPos + new Vector3(1, 0)) && !closed.Contains(exitPos + new Vector3(0, 1)) && !closed.Contains(exitPos + new Vector3(-1, 0)) && !closed.Contains(exitPos + new Vector3(0, -1)))
             return false;
+        else if (placedKey && !closed.Contains(keyPos + new Vector3(1, 0)) && !closed.Contains(keyPos + new Vector3(0, 1)) && !closed.Contains(keyPos + new Vector3(-1, 0)) && !closed.Contains(keyPos + new Vector3(0, -1)))
+            return false;
         return true;
 
     }
@@ -499,10 +536,13 @@ public class BuildRoom : MonoBehaviour {
                 if (color == GREY && room.isExit && room.finalDoor == BuildFloor.Direction.WEST)
                     isDoubleDoor = true;
                 else {
-                    GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + .5f, 0), westRotation);
+                    GameObject par = Instantiate(new GameObject(), new Vector3(dx - .0625f, dy + i, 0), westRotation);
+                    GameObject go = Instantiate(door[color], new Vector3(dx - .0625f, dy + i + 0.5f, 0), westRotation);
+                    go.transform.parent = par.transform;
                     go.GetComponent<DoorScript>().player = player;
                     go.GetComponent<DoorScript>().isClosed = true;
                     gameObjects.Add(go);
+                    gameObjects.Add(par);
                 }
             }
             if (room.doorEast != i) {
@@ -621,22 +661,30 @@ public class BuildRoom : MonoBehaviour {
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
 
             i += count;
@@ -655,7 +703,9 @@ public class BuildRoom : MonoBehaviour {
             available[(int)randomPos.x, (int)randomPos.y] = false;
 
             GameObject choice = mediumEnemy;
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+            go.GetComponent<Enemy>().player = player;
+            gameObjects.Add(go);
 
         }
     }
@@ -680,7 +730,9 @@ public class BuildRoom : MonoBehaviour {
             }
 
             GameObject choice = largeEnemy;
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+            go.GetComponent<Enemy>().player = player;
+            gameObjects.Add(go);
 
         }
     }
@@ -769,6 +821,9 @@ public class BuildRoom : MonoBehaviour {
 
             if (room.isExit) {
                 LayoutExit(room);
+            }
+            if (room.hasKey) {
+                LayoutKey(room);
             }
             if (room.isEntrance) {
                 LayoutPlayer();

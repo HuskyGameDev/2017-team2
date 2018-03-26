@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Wall
   - EnemyBullet
+  - Lock
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -53,4 +55,7 @@ TagManager:
     locked: 0
   - name: Units
     uniqueID: 3825646965
+    locked: 0
+  - name: UI
+    uniqueID: 1183401687
     locked: 0

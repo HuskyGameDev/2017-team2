@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     public GameObject gameController;
     public int roomLength;
     private List<List<GameObject>> objects;
+    public GameObject player;
 
     // Use this for initialization
     void Start () {
@@ -24,14 +25,42 @@ public class GameManager : MonoBehaviour {
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
+        float time = gameController.GetComponent<CountDownTimer>().time; //grab this first thing
+
         destroyObjects();
+        awardPoints(time);
         objects = new List<List<GameObject>>();
         //loads the final floor if it's the end of story mode, increments floor
-        if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless)
+        if (++floorScript.floorNumber == DataBetweenScenes.numFloors + 1 && !DataBetweenScenes.isEndless) {
+            gameController.GetComponent<CountDownTimer>().timerText.enabled = false;
             buildFinalFloor();
-        else
+        }
+        else {
             buildFloor();
-        gameController.GetComponent<CountDownTimer>().time = 120;
+            gameController.GetComponent<CountDownTimer>().time = 120;
+        }
+    }
+    private void awardPoints(float time) {
+        if (time > 90) {
+            if (boardScript.color == BuildRoom.PURPLE)
+                player.GetComponent<PlayerController>().points += 70;
+            else if (boardScript.color == BuildRoom.RED)
+                player.GetComponent<PlayerController>().points += 80;
+            else if (boardScript.color == BuildRoom.BLUE)
+                player.GetComponent<PlayerController>().points += 60;
+        } else if (time > 60) {
+            if (boardScript.color == BuildRoom.PURPLE)
+                player.GetComponent<PlayerController>().points += 40;
+            else if (boardScript.color == BuildRoom.RED)
+                player.GetComponent<PlayerController>().points += 45;
+            else if (boardScript.color == BuildRoom.BLUE)
+                player.GetComponent<PlayerController>().points += 35;
+        } else if (time > 30)
+            if (boardScript.color != BuildRoom.GREY)
+                player.GetComponent<PlayerController>().points += 20;
+            else
+            if (boardScript.color != BuildRoom.GREY)
+                player.GetComponent<PlayerController>().points += 10;
     }
     private void destroyObjects() {
         foreach (List<GameObject> room in objects)
@@ -63,6 +92,7 @@ public class GameManager : MonoBehaviour {
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();
+        song.loop = true;
         objects = new List<List<GameObject>>();
         buildFloor();
         cam.GetComponent<CameraScript>().isStarted = true;
@@ -74,7 +104,6 @@ public class GameManager : MonoBehaviour {
     void buildFloor() {
         BuildFloor.Room[,] floor = floorScript.buildFloor(roomLength);
         BuildFloor.FloorColor color = BuildFloor.FloorColor.GREY;
-        song.Stop();
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
                 if (floor[i, j] != null) {
@@ -83,13 +112,22 @@ public class GameManager : MonoBehaviour {
                     if (color == BuildFloor.FloorColor.GREY)
                         color = floor[i, j].color;
                 }
-        if (color == BuildFloor.FloorColor.BLUE)
+        AudioClip temp = song.clip;
+        if (color == BuildFloor.FloorColor.BLUE) { 
             song.clip = clip1;
-        else if (color == BuildFloor.FloorColor.PURPLE)
+            song.volume = 1f;
+        }
+        else if (color == BuildFloor.FloorColor.PURPLE) {
             song.clip = clip2;
-        else if (color == BuildFloor.FloorColor.RED)
+            song.volume = 1f;
+        } 
+        else if (color == BuildFloor.FloorColor.RED) {
             song.clip = clip3;
-        song.Play();
+            song.volume = .56f;
+        }
+        if (temp == null || !temp.Equals(song.clip))
+            song.Play();
+        DataBetweenScenes.floorLastOn = floorScript.floorNumber;
     }
     void Update() {
         if (DataBetweenScenes.devMode) {
@@ -103,6 +141,11 @@ public class GameManager : MonoBehaviour {
                 DataBetweenScenes.numFloors = 10;
                 SceneManager.LoadScene(1);
             }
+            if (Input.GetKeyDown(KeyCode.F5)) {
+                DataBetweenScenes.godMode = true;
+            }
         }
+        if (DataBetweenScenes.godMode)
+            player.GetComponent<PlayerController>().health = 100;
     }
 }

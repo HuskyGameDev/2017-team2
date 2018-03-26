@@ -23,30 +23,30 @@ public class CountDownTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (time > 0) {
+            time -= Time.deltaTime;
+            if (time < 0)
+                time = 0;
+            minutes = (int)time / 60;
+            seconds = (int)time % 60;
 
-        time -= Time.deltaTime;
-        minutes = (int)time / 60;
-        seconds = (int) time % 60;
+            if (milliseconds <= 0) {
+                milliseconds = 99;
+            }
 
-        if(milliseconds <= 0)
-        {
-            milliseconds = 99;
-        }
-
-        milliseconds =  time % 1;
-        milliseconds = milliseconds * 100;
-        SetCountText();
-
-        // If time runs out, end the game
-        if (minutes <= 0 && seconds <= 0 && milliseconds <= 0)
-        {
-            SceneManager.LoadScene(2);
+            milliseconds = time % 1;
+            milliseconds = milliseconds * 100;
+            if (milliseconds > 99)
+                milliseconds = 0;
+            SetCountText();
         }
 	}
 
     void SetCountText()
     {
         timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00") + ":" + milliseconds.ToString("00");
+        if (time == 0)
+            timerText.color = Color.red;
     }
 
 }

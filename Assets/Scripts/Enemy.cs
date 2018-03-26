@@ -21,11 +21,13 @@ public class Enemy : MonoBehaviour {
 
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
-	protected GameObject player;
+	public GameObject player;
 	protected Transform player_pos;
 
     protected AudioSource audioSource;
     public AudioClip deathSound;
+
+    private int attention = 0;
 
     // Use this for initialization
     protected virtual void Start () {
@@ -52,16 +54,13 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (player == null)
-			MoveAtRandom ();
-		else {
-			Chase ();	
+        if (attention == 0)
+            MoveAtRandom();
+        else  {
+			Chase ();
 		}
-
-		if (health < 0) {
-			Destroy(gameObject);
-            audioSource.PlayOneShot(deathSound);
-		}
+        if (attention > 0)
+            attention--;
 	}
 
 	protected virtual void MoveAtRandom() {
@@ -98,12 +97,18 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player")) {
-			
-			player = other.gameObject;
+		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
 			player_pos = player.GetComponent<Transform> ();
+            attention = 200;
 		}
 	}
+
+    //Should detect if the enemy can see the player currently or not
+    bool hasLOS(Collider2D other) {
+        bool canSee = true;
+
+        return canSee;
+    }
 
 	protected virtual void Chase() {
 
@@ -118,5 +123,12 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-	}
+        if (health <= 0) 
+            Die();
+    }
+    //Should be overridden by each enemy that inherits to handle awarding of points
+    public virtual void Die() {
+        Destroy(gameObject);
+        //audioSource.PlayOneShot(deathSound);
+    }
 }

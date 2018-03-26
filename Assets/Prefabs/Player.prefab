@@ -267,7 +267,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 10
   shooter: {fileID: 1771575999197046}
-  hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!114 &114534501254361720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,6 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf791434b83922a478e4df216d42d98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  lives: []
   rb2d: {fileID: 0}
   Player: {fileID: 4096611928419294}
   health: 0
@@ -292,6 +293,7 @@ MonoBehaviour:
   bulletSpawn: {fileID: 4702231553581916}
   bulletSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
   slashSound: {fileID: 8300000, guid: 402a70138d59e63488e2a7f6db55c64f, type: 3}
+  hasKey: 1
 --- !u!114 &114808828962847294
 MonoBehaviour:
   m_ObjectHideFlags: 1

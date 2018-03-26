@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc684e24e3dd96e408fbbfb2371631b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   names:
   - {fileID: 796908396}
   - {fileID: 1210920352}
@@ -1314,6 +1315,7 @@ MonoBehaviour:
   msg3: {fileID: 1743666874}
   msg4: {fileID: 2119941869}
   menuButton: {fileID: 1867709419}
+  start: 0
 --- !u!1 &399338434
 GameObject:
   m_ObjectHideFlags: 0
