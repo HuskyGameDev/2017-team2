@@ -7,8 +7,12 @@ public class bulletAttack : MonoBehaviour {
     public int dmg;
     public GameObject shooter;
 
-
-
+    void Start()
+    {
+        //audioSource = GetComponent<AudioSource>();
+    }
+    //This was removed in favor of a consolidated collision script called CollisionDetection
+    /*
 	private void OnTriggerEnter2D(Collider2D col) {
 
         if (shooter != null) {
@@ -23,5 +27,5 @@ public class bulletAttack : MonoBehaviour {
             }
         }
     }
-
+    */
 }

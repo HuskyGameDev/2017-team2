@@ -16,16 +16,18 @@ public class meleeAttack : MonoBehaviour {
 	}
 
 	void Update() {
+        //currently triggers on player attempts to swing sword while swinging sword. Commented out until fixed
+        /*
 		if (slasher.CompareTag("Player") && Input.GetKeyDown(KeyCode.Mouse1) && isCol == 0)
 		{
 			audioSource.PlayOneShot(missSound);
 		}
+        */
 	}
-
     private void OnTriggerEnter2D(Collider2D col)
     {
 
-		if (slasher.CompareTag("Player") && col.gameObject.CompareTag("Enemy"))
+		if (slasher.CompareTag("Player") && col.isTrigger != true && col.gameObject.CompareTag("Enemy"))
         {
 			isCol++;
             col.SendMessageUpwards("Hit", dmg);
@@ -39,5 +41,4 @@ public class meleeAttack : MonoBehaviour {
 			audioSource.PlayOneShot (hitSound);
 		}
     }
-		
 }

@@ -9,10 +9,6 @@ public class EnemyHealthBar : MonoBehaviour {
 	float fillSize;
 	float fillPos;
 	SpriteRenderer fillRend;
-	float x;
-	float y;
-	float h;
-
 
 	void Awake(){
 		rotation = transform.rotation;
@@ -20,15 +16,13 @@ public class EnemyHealthBar : MonoBehaviour {
 		fillSize = fill.localScale.x;
 		fillPos = fill.localPosition.x;
 		fillRend = fill.GetComponent<SpriteRenderer> ();
-		x = transform.localPosition.x;
-		y = transform.localPosition.y;
-		h = Mathf.Sqrt (Mathf.Pow (x, 2) + Mathf.Pow (y, 2));
 	}
 
 	public void Damage(float health) {
 		fill.localScale = new Vector3 (health, fill.localScale.y, fill.localScale.z);
 		fill.localPosition = new Vector3 (-((1 - health) / 2), fill.localPosition.y, fill.localPosition.z);
 
+		//-((1.0f - health) / 2.0f)
 		if (health <= 0.5f && health > 0.15f) {
 			fillRend.color = Color.yellow;
 		} else if (health > 0.5f) {
@@ -39,16 +33,7 @@ public class EnemyHealthBar : MonoBehaviour {
 	}
 	
 	void Update () {
-
 		transform.rotation = Quaternion.Euler(0.0f, 0.0f, this.transform.parent.rotation.z * -1.0f);
-	
-	}
-
-	public void Position(float angle) {
-		float newX;
-		float newY;
-
-		print (x + ", " + y + ", " + h + ", " + angle);
 	}
 }
 

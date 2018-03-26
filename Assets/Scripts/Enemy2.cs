@@ -4,55 +4,25 @@ using UnityEngine;
 
 public class Enemy2 : Enemy {
 
-    /* Structure for storing a bullet with the mouse position at the time the bullet is created */
-    struct bulletStruct {
-        private GameObject bullet;
-        private Vector3 pos;
-        private Collider2D bulletAtk;
-
-
-        public void setObj(GameObject newBullet) {
-            bullet = newBullet;
-        }
-
-        public void setPos(Vector3 newPos) {
-            pos = newPos;
-        }
-
-        public GameObject getObj() {
-            return bullet;
-        }
-
-        public Vector3 getPos() {
-            return pos;
-        }
-
-        public void setColliderVar(Collider2D col) {
-            bulletAtk = col;
-        }
-        public void setCollider(bool set) {
-            if (set) {
-                bulletAtk.enabled = true;
-            } else {
-                bulletAtk.enabled = false;
-            }
-        }
-    }
-
     // Projectiles
     public GameObject bulletPrefab;
     public Transform EnemyTransform;
+    public Transform bulletSpawn;
 
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
+
+    private Vector2 movement2;
+
+    private float rot = 0;
 
     // Use this for initialization
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 
-        health = 50;
+        health = 160;
 		totalHealth = health;
 
         EnemyTransform = GetComponent<Transform>();
@@ -74,43 +44,38 @@ public class Enemy2 : Enemy {
         bulletSpeed = 20;
     }
 
+    protected override void MoveAtRandom() {
+        rot += Random.Range(-1f, 1f);
+        if (rot > 3) {
+            rot = 3;
+        } else if (rot < -3) {
+            rot = -3;
+        }
+        transform.Rotate(new Vector3(0, 0, rot));
+        movement2 = -transform.up * 300;
+        GetComponent<Rigidbody2D>().AddForce(movement2);
+
+        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+
+    }
+
     protected override void Chase() {
 
         transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
 
         angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle+90);
-		healthBar.SendMessage ("Position", angle);
 
         shoot();
     }
+
 
     // Method used to handle shooting projectiles
     private void shoot() {
         // Create a new bullet with the current mouse position
         if (ableToShoot == 0) {
-            bulletStruct newBullet = new bulletStruct();
-            GameObject ebullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
-            print("PING");
-
-            print(EnemyTransform.ToString());
-
-            ebullet.AddComponent<BoxCollider2D>();
-            ebullet.GetComponent<BoxCollider2D>().isTrigger = true;
-            ebullet.AddComponent<bulletAttack>();
-            ebullet.GetComponent<bulletAttack>().shooter = EnemyTransform.gameObject;
-
-            print(ebullet.GetComponent<bulletAttack>().shooter);
-
-            Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 pos = (Camera.main.WorldToScreenPoint(player_pos.position) - sp).normalized;
-
-            newBullet.setPos(pos);
-            newBullet.setObj(ebullet);
-            newBullet.setColliderVar(ebullet.GetComponent<BoxCollider2D>());
-            newBullet.setCollider(true);
-            bullets.Add(newBullet);
             ableToShoot++;
         }
 
@@ -121,23 +86,5 @@ public class Enemy2 : Enemy {
             ableToShoot++;
         }
 
-        // For every bullet on screen move towards the mouse position it was shot at
-        for (int i = 0; i < bullets.Count; i++) {
-            GameObject movingBullet = bullets[i].getObj();
-
-            if (movingBullet != null) {
-
-                movingBullet.transform.Translate(bullets[i].getPos() * Time.deltaTime * bulletSpeed);
-
-
-                Vector3 bulletPos = Camera.main.WorldToScreenPoint(movingBullet.transform.position);
-
-                // Remove bullet if off screen
-                if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
-                    DestroyObject(movingBullet);
-                    bullets.Remove(bullets[i]);
-                }
-            }
-        }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
  * Codey Walker
  * Main controller for player behavior. Currently, it allows the player to move the sprite around and follows mouse direction
  * Added gun and melee attack functions to this script - Codey
+ * Added controller support to player actions (movement, attacking, aiming) - Andrew S
  */
 
 
@@ -59,12 +60,28 @@ struct bulletStruct
 
 public class PlayerController : MonoBehaviour
 {
+    // string array used to see if there is currently a controller plugged in
+    private string[] controllers;
+
+    public GameManager gameManager;
+
+    //Store life objects
+    public GameObject[] lives;
+
+    // boolean to determine if there is currently a controller
+    private bool gamePad;
+
+    // float to determine when to check if there is a controller connected or not
+    private int checkControl = 180;
 
     //Stores a reference to the Rigidbody2D component required to use 2D Physics.
     public Rigidbody2D rb2d;
 
     //Stores the position of the mouse
     private Vector3 mouse_pos;
+
+    // stores direction of the right stick for aiming purposes
+    private Vector2 rStick;
 
     //Transform object for player
     public Transform Player;
@@ -95,14 +112,30 @@ public class PlayerController : MonoBehaviour
     private int wait = 10;
     private bool attacking;
     public Collider2D meleeAttack;
+    public Transform bulletSpawn;
+
+    public AudioClip bulletSound;
+    public AudioClip slashSound;
 
 	private AudioSource audioSource;
-	private AudioClip bulletSound;
+    //private AudioClip bulletSound;
+
+    // if the player has the key for the level
+    public bool hasKey;
 
     // Use this for initialization
     void Start()
     {
+        if (DataBetweenScenes.isEndless) {
+            Destroy(lives[0]);
+            Destroy(lives[1]);
+            Destroy(lives[2]);
+            lives[0] = null;
+            lives[1] = null;
+            lives[2] = null;
+        }
         health = 100;
+        controllers = Input.GetJoystickNames();
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
@@ -130,27 +163,64 @@ public class PlayerController : MonoBehaviour
     //Called every frame
     void Update()
     {
-		if (health < 0) {
-			Destroy(gameObject);
-			print ("RIP");
-		}
-        //Enter mouse mosition
-        mouse_pos = Input.mousePosition;
-        mouse_pos.z = -10;
+        // Check for controller in update by counting the number of frames
+        checkControl++;   
 
-        //Enter player position
-        object_pos = Camera.main.WorldToScreenPoint(Player.position);
+        if (checkControl >= 180)
+        {
+            // update the Joystick Names array
+            controllers = Input.GetJoystickNames();
+            if (controllers.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(controllers[0]))
+                {
+                    gamePad = true;
+                    Cursor.visible = false;
+                }
+                else
+                {
+                    gamePad = false;
+                    Cursor.visible = true;
+                }
+            }
 
-        //Find different coordinates between mouse and player position
-        mouse_pos.x = mouse_pos.x - object_pos.x;
-        mouse_pos.y = mouse_pos.y - object_pos.y;
+            checkControl = 0;
+        }
+        
 
-        //Calculate angle between mouse and player position
-        angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+        if (gamePad == true)
+        {
+            rStick.x = Input.GetAxis("rStickX");
+            rStick.y = Input.GetAxis("rStickY");
 
-        //Rotate player
-        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+            if (rStick.magnitude > 0.1f)
+            {
+                // get new angle of the player based on position of the right analog stick
+                angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
 
+                // Rotate player based on angle, also keep player rotated in new direction until it is changed again
+                transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+            }
+
+        } else {
+            //Enter mouse mosition
+            mouse_pos = Input.mousePosition;
+            mouse_pos.z = -10;
+
+            //Enter player position
+            object_pos = Camera.main.WorldToScreenPoint(Player.position);
+
+            //Find different coordinates between mouse and player position
+            mouse_pos.x = mouse_pos.x - object_pos.x;
+            mouse_pos.y = mouse_pos.y - object_pos.y;
+
+            //Calculate angle between mouse and player position
+            angle = Mathf.Atan2(mouse_pos.y, mouse_pos.x) * Mathf.Rad2Deg;
+
+            //Rotate player
+            transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        }
+        
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
         float moveVertical = 0;
@@ -167,42 +237,47 @@ public class PlayerController : MonoBehaviour
         UpdateHP();
 
         /* Call methods to handle shooting and slashing */
-        shoot();
-        slash();
+        Shoot();
+        Slash();
     }
 
     // Method used to handle shooting projectiles
-    private void shoot()
+    private void Shoot()
     {
-
-        // Create a new bullet with the current mouse position
-        if (Input.GetKey(KeyCode.Mouse0))
-		{		
-			
-            if (ableToShoot == 0 && !attacking)
+        if (gamePad)
+        {
+            if (Input.GetAxis("primaryAtk") == 1)
             {
+                if (ableToShoot == 0 && !attacking)
+                {
 
-				audioSource.PlayOneShot (bulletSound);
-                bulletStruct newBullet = new bulletStruct();
-                GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                    GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
-                bullet.AddComponent<BoxCollider2D>();
-                bullet.GetComponent<BoxCollider2D>().isTrigger = true;
-                bullet.AddComponent<bulletAttack>();
-                bullet.GetComponent<bulletAttack>().shooter = Player.gameObject;
+                    ableToShoot++;
 
-                Vector3 sp = Camera.main.WorldToScreenPoint(transform.position);
-                Vector3 pos = (Input.mousePosition - sp).normalized;
+                    GetComponent<AudioSource>().PlayOneShot(bulletSound);
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                if (ableToShoot == 0 && !attacking)
+                {
 
-                newBullet.setPos(pos);
-                newBullet.setObj(bullet);
-                newBullet.setColliderVar(bullet.GetComponent<BoxCollider2D>());
-                newBullet.setCollider(true);
-                bullets.Add(newBullet);
-                ableToShoot++;
+                    GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+
+                    ableToShoot++;
+
+                    GetComponent<AudioSource>().PlayOneShot(bulletSound);
+                }
             }
 
         }
+
+        // Create a new bullet with the current mouse position
+        
 
         // Used to limit the amount of bullets *Needs to update when animation implemented*
         if (ableToShoot == 0 || ableToShoot == 10)
@@ -216,37 +291,33 @@ public class PlayerController : MonoBehaviour
 
         }
 
-        // For every bullet on screen move towards the mouse position it was shot at
-        for (int i = 0; i < bullets.Count; i++)
-        {
-            GameObject movingBullet = bullets[i].getObj();
-
-			if (movingBullet != null) {
-
-				movingBullet.transform.Translate (bullets [i].getPos () * Time.deltaTime * bulletSpeed);
-				//bulletAttack.enabled = true;
-           
-
-				Vector3 bulletPos = Camera.main.WorldToScreenPoint (movingBullet.transform.position);
-
-				// Remove bullet if off screen
-				if (bulletPos.y >= Screen.height || bulletPos.y <= 0 || bulletPos.x >= Screen.width || bulletPos.x <= 0) {
-					DestroyObject (movingBullet);
-					bullets.Remove (bullets [i]);
-				}
-			}
-				
-        }
     }
 
-    private void slash()
+    private void Slash()
     {
-
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
+        if (gamePad)
         {
-            attacking = true;
-            meleeAttack.enabled = true;
+            if (Input.GetAxis("secondaryAtk") == 1 && !attacking)
+            {
+                attacking = true;
+                meleeAttack.enabled = true;
+
+                GetComponent<AudioSource>().PlayOneShot(slashSound);
+
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
+            {
+                attacking = true;
+                meleeAttack.enabled = true;
+
+                GetComponent<AudioSource>().PlayOneShot(slashSound);
+
+            }
+        }
+        
 
         if (attacking)
         {
@@ -307,7 +378,26 @@ public class PlayerController : MonoBehaviour
         // check for death
         if (health <= 0)
         {
-            GameOver();
+            if (lives[0] != null) {
+                Destroy(lives[0]);
+                lives[0] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else if (lives[1] != null) {
+                Destroy(lives[1]);
+                lives[1] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else if (lives[2] != null) {
+                Destroy(lives[2]);
+                lives[2] = null;
+                health = 100;
+                gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
+            }
+            else
+                GameOver();
         }
     }
 

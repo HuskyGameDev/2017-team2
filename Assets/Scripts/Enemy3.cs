@@ -15,7 +15,7 @@ public class Enemy3 : Enemy {
 		circleCollider = GetComponent<CircleCollider2D> ();
         audioSource = GetComponent<AudioSource>();
 
-        health = 50;
+        health = 80;
 		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
@@ -44,7 +44,6 @@ public class Enemy3 : Enemy {
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);
-		healthBar.SendMessage ("Position", angle);
 
 		slash ();
 	}

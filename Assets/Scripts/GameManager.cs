@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,10 +16,12 @@ public class GameManager : MonoBehaviour {
     public GameObject gameController;
     public int roomLength;
     private List<List<GameObject>> objects;
+    public GameObject player;
 
     // Use this for initialization
     void Start () {
         initGame();
+        
 	}
     //Should transition scene to load, generate a new floor
     public void nextFloor() {
@@ -44,8 +48,10 @@ public class GameManager : MonoBehaviour {
         BuildFloor.Room[,] floor = floorScript.buildFinalFloor(roomLength);
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
-                if (floor[i, j] != null)
+                if (floor[i, j] != null) {
+                    objects.Add(boardScript.getList());
                     boardScript.SetupScene(roomLength, floor[i, j]);
+                }
     }
     /**
      * Called to initiate the game after player presses play
@@ -58,6 +64,7 @@ public class GameManager : MonoBehaviour {
         clip2 = Resources.Load("Music/Descension2") as AudioClip;
         clip1 = Resources.Load("Music/Descension1") as AudioClip;
         song.Play();
+        song.loop = true;
         objects = new List<List<GameObject>>();
         buildFloor();
         cam.GetComponent<CameraScript>().isStarted = true;
@@ -69,7 +76,6 @@ public class GameManager : MonoBehaviour {
     void buildFloor() {
         BuildFloor.Room[,] floor = floorScript.buildFloor(roomLength);
         BuildFloor.FloorColor color = BuildFloor.FloorColor.GREY;
-        song.Stop();
         for (int i = 0; i < floorScript.lengthOfFloor; i++)
             for (int j = 0; j < floorScript.heightOfFloor; j++)
                 if (floor[i, j] != null) {
@@ -78,19 +84,39 @@ public class GameManager : MonoBehaviour {
                     if (color == BuildFloor.FloorColor.GREY)
                         color = floor[i, j].color;
                 }
-        if (color == BuildFloor.FloorColor.BLUE)
+        AudioClip temp = song.clip;
+        if (color == BuildFloor.FloorColor.BLUE) { 
             song.clip = clip1;
-        else if (color == BuildFloor.FloorColor.PURPLE)
+            song.volume = 1f;
+        }
+        else if (color == BuildFloor.FloorColor.PURPLE) {
             song.clip = clip2;
-        else if (color == BuildFloor.FloorColor.RED)
+            song.volume = 1f;
+        } 
+        else if (color == BuildFloor.FloorColor.RED) {
             song.clip = clip3;
-        song.Play();
+            song.volume = .56f;
+        }
+        if (temp == null || !temp.Equals(song.clip))
+            song.Play();
     }
     void Update() {
-        if (Input.GetKeyDown(KeyCode.F8))
-            nextFloor();
-        if (Input.GetKeyDown(KeyCode.F7))
-            for (int i = 0; i < 10; i++)
+        if (DataBetweenScenes.devMode) {
+            if (Input.GetKeyDown(KeyCode.F8))
                 nextFloor();
+            if (Input.GetKeyDown(KeyCode.F7))
+                for (int i = 0; i < 10; i++)
+                    nextFloor();
+            if (Input.GetKeyDown(KeyCode.F6)) {
+                floorScript.floorNumber = 0;
+                DataBetweenScenes.numFloors = 10;
+                SceneManager.LoadScene(1);
+            }
+            if (Input.GetKeyDown(KeyCode.F5)) {
+                DataBetweenScenes.godMode = true;
+            }
+        }
+        if (DataBetweenScenes.godMode)
+            player.GetComponent<PlayerController>().health = 100;
     }
 }
