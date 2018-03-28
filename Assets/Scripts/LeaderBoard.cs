@@ -41,9 +41,6 @@ public class LeaderBoard : MonoBehaviour {
         newScore = DataBetweenScenes.points;
         newFloor = DataBetweenScenes.floorLastOn;
 
-        print(newScore);
-        print(newFloor);
-
         // initialize Stream Reader and StreamWriter
         StreamReader sR = new StreamReader(path);
 
