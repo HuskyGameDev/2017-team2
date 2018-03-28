@@ -347,7 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051e3d9c569922540b9b5416a8f427e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  moveSpeed: 90
+  chaseSpeed: 0
+  playerGO: {fileID: 0}
   deathSound: {fileID: 8300000, guid: e89dddcf9da1a3c44bd91d9339344a8d, type: 3}
   bulletPrefab: {fileID: 1691409582893586, guid: fddf03220d1480c499cd79ebbdc54a85,
     type: 2}

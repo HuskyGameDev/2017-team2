@@ -497,7 +497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fde3b3aac4e2254f9eaf6054d63400b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  moveSpeed: 50
+  chaseSpeed: 50
+  playerGO: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
   meleeAttack: {fileID: 58216117876100090}
 --- !u!114 &114639944651411312

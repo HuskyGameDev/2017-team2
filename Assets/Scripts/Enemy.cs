@@ -5,7 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	protected float speedMax;
-	public float speed = 2f;
+	public float moveSpeed;
+    public float chaseSpeed;
+
+    public GameObject playerGO;
 
 	protected float xMax;
 	protected float yMax;
@@ -45,7 +48,7 @@ public class Enemy : MonoBehaviour {
 		xMin = transform.position.x - 10;
 		yMax = transform.position.y + 10;
 		yMin = transform.position.y - 10;
-		speedMax = speed / 30f;
+		speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -119,7 +122,7 @@ public class Enemy : MonoBehaviour {
 	protected virtual void Chase() {
 
 
-		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, moveSpeed * Time.deltaTime);
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle);

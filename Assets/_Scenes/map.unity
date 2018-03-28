@@ -462,7 +462,7 @@ Prefab:
     - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: m_Mass
-      value: 0.5410608
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 58365349617086968, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
@@ -494,6 +494,31 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 2074431841}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_UseFullKinematicContacts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_LinearDrag
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0

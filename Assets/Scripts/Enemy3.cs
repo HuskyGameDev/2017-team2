@@ -28,7 +28,7 @@ public class Enemy3 : Enemy {
         xMin = transform.position.x - 10;
         yMax = transform.position.y + 10;
         yMin = transform.position.y - 10;
-        speedMax = speed / 30f;
+        speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -41,28 +41,31 @@ public class Enemy3 : Enemy {
 
     protected override void MoveAtRandom() {
 
+        transform.Rotate(new Vector3(0, 0, rot - 45));
+        movement2 = transform.up * moveSpeed;
+
         rot += Random.Range(-1f, 1f);
         if (rot > 3) {
             rot = 3;
         } else if (rot < -3) {
             rot = -3;
         }
-        transform.Rotate(new Vector3(0, 0, rot));
-        movement2 = -transform.up * 300;
-        GetComponent<Rigidbody2D>().AddForce(movement2);
 
-        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+        GetComponent<Rigidbody2D>().AddForce(movement2);
+        transform.Rotate(new Vector3(0, 0, rot + 45));
     }
 
     protected override void Chase() {
 
 
-		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle - 45);
+        
+        Vector2 force = (player_pos.position - transform.position).normalized * chaseSpeed;
 
-		slash ();
+        GetComponent<Rigidbody2D>().AddForce(force);
+
+        slash ();
 	}
 
 	private void slash()

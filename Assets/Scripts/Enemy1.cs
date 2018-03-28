@@ -13,8 +13,7 @@ public class Enemy1 : Enemy {
     private Vector2 movement2;
     private float rot = 0;
 
-	protected override void Start() 
-	{
+	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
@@ -27,7 +26,7 @@ public class Enemy1 : Enemy {
         xMin = transform.position.x - 10;
         yMax = transform.position.y + 10;
         yMin = transform.position.y - 10;
-        speedMax = speed / 30f;
+        speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -48,31 +47,26 @@ public class Enemy1 : Enemy {
             rot = -3;
         }
         transform.Rotate(new Vector3(0, 0, rot));
-        movement2 = -transform.up * 300;
+        movement2 = -transform.up * moveSpeed;
         GetComponent<Rigidbody2D>().AddForce(movement2);
 
         Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
 
     }
 
-	protected override void Chase() 
-	{
+	protected override void Chase() {
 
-		time += Time.deltaTime;
+        angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
-		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
-            GetComponent<Rigidbody2D>().position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-            //transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-        }
+        Vector2 force = (player_pos.position - transform.position).normalized * chaseSpeed;
 
-		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
+        GetComponent<Rigidbody2D>().AddForce(force);
 
-		slash ();
+        slash ();
 	}
 
-	private void slash()
-	{
+	private void slash() {
 		float dist = Vector3.Distance (player_pos.position, transform.position);
 
 		if (dist < 2 && !attacking)
