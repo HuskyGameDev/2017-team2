@@ -14,52 +14,40 @@ using System.Collections.Generic;
 
 
 /* Structure for storing a bullet with the mouse position at the time the bullet is created */
-struct bulletStruct
-{
+struct bulletStruct {
     private GameObject bullet;
     private Vector3 pos;
     private Collider2D bulletAtk;
 
-    public void setObj(GameObject newBullet)
-    {
+    public void setObj(GameObject newBullet) {
         bullet = newBullet;
     }
 
-    public void setPos(Vector3 newPos)
-    {
+    public void setPos(Vector3 newPos) {
         pos = newPos;
     }
 
-    public GameObject getObj()
-    {
+    public GameObject getObj() {
         return bullet;
     }
 
-    public Vector3 getPos()
-    {
+    public Vector3 getPos() {
         return pos;
     }
 
-    public void setColliderVar(Collider2D col)
-    {
+    public void setColliderVar(Collider2D col) {
         bulletAtk = col;
     }
-    public void setCollider(bool set)
-    {
-        if(set)
-        {
+    public void setCollider(bool set) {
+        if (set) {
             bulletAtk.enabled = true;
-        }
-
-        else
-        {
+        } else {
             bulletAtk.enabled = false;
         }
     }
 }
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     // string array used to see if there is currently a controller plugged in
     private string[] controllers;
 
@@ -67,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     //Store life objects
     public GameObject[] lives;
+    public int numLives;
 
     // boolean to determine if there is currently a controller
     private bool gamePad;
@@ -117,7 +106,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip bulletSound;
     public AudioClip slashSound;
 
-	private AudioSource audioSource;
+    private AudioSource audioSource;
     //private AudioClip bulletSound;
 
     // if the player has the key for the level
@@ -127,8 +116,7 @@ public class PlayerController : MonoBehaviour
     public int points;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         if (DataBetweenScenes.isEndless) {
             Destroy(lives[0]);
             Destroy(lives[1]);
@@ -141,11 +129,13 @@ public class PlayerController : MonoBehaviour
         health = 100;
         controllers = Input.GetJoystickNames();
 
+        numLives = 3;
+
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
-		audioSource = GetComponent<AudioSource>();
-       
+        audioSource = GetComponent<AudioSource>();
+
 
         score = 0;
         floor = 1;
@@ -158,31 +148,25 @@ public class PlayerController : MonoBehaviour
         meleeAttack.enabled = false;
         attacking = false;
 
-       // anim.animation = U_Walking;
+        // anim.animation = U_Walking;
 
-		//Set bullet sound
-		bulletSound = Resources.Load("SFX/Plasma Gun") as AudioClip;
+        //Set bullet sound
+        bulletSound = Resources.Load("SFX/Plasma Gun") as AudioClip;
     }
 
     //Called every frame
-    void Update()
-    {
+    void Update() {
         // Check for controller in update by counting the number of frames
-        checkControl++;   
+        checkControl++;
 
-        if (checkControl >= 180)
-        {
+        if (checkControl >= 180) {
             // update the Joystick Names array
             controllers = Input.GetJoystickNames();
-            if (controllers.Length > 0)
-            {
-                if (!string.IsNullOrEmpty(controllers[0]))
-                {
+            if (controllers.Length > 0) {
+                if (!string.IsNullOrEmpty(controllers[0])) {
                     gamePad = true;
                     Cursor.visible = false;
-                }
-                else
-                {
+                } else {
                     gamePad = false;
                     Cursor.visible = true;
                 }
@@ -190,15 +174,13 @@ public class PlayerController : MonoBehaviour
 
             checkControl = 0;
         }
-        
 
-        if (gamePad == true)
-        {
+
+        if (gamePad == true) {
             rStick.x = Input.GetAxis("rStickX");
             rStick.y = Input.GetAxis("rStickY");
 
-            if (rStick.magnitude > 0.1f)
-            {
+            if (rStick.magnitude > 0.1f) {
                 // get new angle of the player based on position of the right analog stick
                 angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
 
@@ -224,7 +206,7 @@ public class PlayerController : MonoBehaviour
             //Rotate player
             transform.rotation = Quaternion.Euler(0, 0, angle + 90);
         }
-        
+
         //Stores horizontal and vertical coordinates
         float moveHorizontal = 0;
         float moveVertical = 0;
@@ -246,14 +228,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Method used to handle shooting projectiles
-    private void Shoot()
-    {
-        if (gamePad)
-        {
-            if (Input.GetAxis("primaryAtk") == 1)
-            {
-                if (ableToShoot == 0 && !attacking)
-                {
+    private void Shoot() {
+        if (gamePad) {
+            if (Input.GetAxis("primaryAtk") == 1) {
+                if (ableToShoot == 0 && !attacking) {
 
                     GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
@@ -262,13 +240,9 @@ public class PlayerController : MonoBehaviour
                     GetComponent<AudioSource>().PlayOneShot(bulletSound);
                 }
             }
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                if (ableToShoot == 0 && !attacking)
-                {
+        } else {
+            if (Input.GetKey(KeyCode.Mouse0)) {
+                if (ableToShoot == 0 && !attacking) {
 
                     GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
@@ -281,28 +255,29 @@ public class PlayerController : MonoBehaviour
         }
 
         // Create a new bullet with the current mouse position
-        
+
 
         // Used to limit the amount of bullets *Needs to update when animation implemented*
-        if (ableToShoot == 0 || ableToShoot == 10)
-        {
+        if (ableToShoot == 0 || ableToShoot == 10) {
             ableToShoot = 0;
-        }
-
-        else
-        {
+        } else {
             ableToShoot++;
 
         }
 
     }
 
-    private void Slash()
-    {
-        if (gamePad)
-        {
-            if (Input.GetAxis("secondaryAtk") == 1 && !attacking)
-            {
+    private void Slash() {
+        if (gamePad) {
+            if (Input.GetAxis("secondaryAtk") == 1 && !attacking) {
+                attacking = true;
+                meleeAttack.enabled = true;
+
+                GetComponent<AudioSource>().PlayOneShot(slashSound);
+
+            }
+        } else {
+            if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking) {
                 attacking = true;
                 meleeAttack.enabled = true;
 
@@ -310,30 +285,14 @@ public class PlayerController : MonoBehaviour
 
             }
         }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse1) && !attacking)
-            {
-                attacking = true;
-                meleeAttack.enabled = true;
 
-                GetComponent<AudioSource>().PlayOneShot(slashSound);
 
-            }
-        }
-        
+        if (attacking) {
 
-        if (attacking)
-        {
+            if (wait > 0) {
 
-            if (wait > 0)
-            {
-               
                 wait--;
-            }
-
-            else
-            {
+            } else {
                 attacking = false;
                 meleeAttack.enabled = false;
                 wait = 20;
@@ -342,8 +301,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void UpdateHP()
-    {
+    void UpdateHP() {
         /*
         // For testing purposes, the player's health can be controlled using keys to simulate being healed and damaged by each of the three enemy types
         // Player is hit by a small enemy
@@ -382,44 +340,37 @@ public class PlayerController : MonoBehaviour
         SetHealthText();
 
         // check for death
-        if (health <= 0)
-        {
-            if (lives[0] != null) {
-                Destroy(lives[0]);
-                lives[0] = null;
+        if (health <= 0) {
+            if (numLives == 3) {
+                lives[0].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI_empty_battery");
                 health = 100;
                 gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
-            }
-            else if (lives[1] != null) {
-                Destroy(lives[1]);
-                lives[1] = null;
+                numLives--;
+            } else if (numLives == 2) {
+                lives[1].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI_empty_battery");
                 health = 100;
                 gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
-            }
-            else if (lives[2] != null) {
-                Destroy(lives[2]);
-                lives[2] = null;
+                numLives--;
+            } else if (numLives == 1) {
+                lives[2].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI_empty_battery");
                 health = 100;
                 gameObject.transform.SetPositionAndRotation(gameManager.GetComponent<BuildRoom>().getStartingPos(), Quaternion.identity);
-            }
-            else
+                numLives--;
+            } else
                 GameOver();
         }
     }
 
-    void SetHealthText()
-    {
+    void SetHealthText() {
         healthText.text = "HP: " + health.ToString();
     }
 
     // This method is called when the player's HP is reduced to 0
-    void GameOver()
-    {
+    void GameOver() {
         DataBetweenScenes.points = points;
         SceneManager.LoadScene(2);
     }
-	void Hit(int dmg)
-	{
-		health -= dmg;
-	}
+    void Hit(int dmg) {
+        health -= dmg;
+    }
 }
