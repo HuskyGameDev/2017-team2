@@ -1,6 +1,6 @@
 # 2017-team2
-Programmers:                           Christina Anderson
-                                       Brandon Paupore
+Programmers:													 Christina Anderson
+																			 Brandon Paupore
                                        Anthony Stanley
                                        Codey Walker
                                        Paul Wrubel
