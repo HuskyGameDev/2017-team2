@@ -21,9 +21,6 @@ public class LeaderBoard : MonoBehaviour {
 
     Entry[] leaderboard = new Entry[10];
 
-    // variable to take player's input from an InputField
-    InputField iFieldName;
-
     // arrays to print values from virtual leaderboard to screen
     public Text[] names = new Text[10];
     public Text[] scores = new Text[10];
@@ -34,19 +31,21 @@ public class LeaderBoard : MonoBehaviour {
     int newScore;
     int newFloor;
 
-    // location of leaderboard text files
-    string path1 = "Assets/leaderboard.txt";
-    string path2 = "Assets/new_leaderboard.txt";
+    // location of leaderboard text file
+    string path = "Assets/leaderboard.txt";
 
 	// Use this for initialization
 	void Start () {
 
-        //newName =
-        //newScore = DataBetweenScenes.score;
-        //newFloor = DataBetweenScenes.floors;
+        newName = GetText.entryName;
+        newScore = DataBetweenScenes.points;
+        newFloor = DataBetweenScenes.floorLastOn;
+
+        print(newScore);
+        print(newFloor);
 
         // initialize Stream Reader and StreamWriter
-        StreamReader sR = new StreamReader(path1);
+        StreamReader sR = new StreamReader(path);
 
         // read the file until there is nothing left to read
         while (!sR.EndOfStream)
@@ -111,7 +110,7 @@ public class LeaderBoard : MonoBehaviour {
             floors[i].text = leaderboard[i].Floor.ToString();
         }
         
-        StreamWriter sW = new StreamWriter(path1, false);
+        StreamWriter sW = new StreamWriter(path, false);
 
         // begin writing new data to the text file
         for (int i = 0; i < leaderboard.Length; i++)

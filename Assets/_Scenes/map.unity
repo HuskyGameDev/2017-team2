@@ -152,6 +152,7 @@ MonoBehaviour:
   bulletSound: {fileID: 0}
   slashSound: {fileID: 0}
   hasKey: 1
+  points: 0
   scoreText: {fileID: 1854053517}
   floorText: {fileID: 2130633814}
 --- !u!114 &53205988
@@ -1220,7 +1221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -780, y: 290}
+  m_AnchoredPosition: {x: -780, y: 335}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836871707
@@ -1244,10 +1245,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3ae501c2bb832b64a97544eec2a0b38f, type: 3}
-    m_FontSize: 96
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1255,7 +1256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: HEALTH
+  m_Text: HP
 --- !u!222 &1836871708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1932,6 +1933,7 @@ MonoBehaviour:
   - {fileID: 1760989381857644, guid: 6faa8b577d8087d40998f89d7ddecdd5, type: 2}
   specialGrey:
   - {fileID: 1594472912240368, guid: 341fdd2eea9287048b0f2777cc5792f8, type: 2}
+  color: 0
   key: {fileID: 1933745972975348, guid: a0e2547859ab65943b11b1acbdbbf718, type: 2}
   exit: {fileID: 0}
 --- !u!114 &2074431841
