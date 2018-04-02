@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
     //Number of points the player has
     public int points;
 
+
     // Use this for initialization
     void Start()
     {
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour
             lives[1] = null;
             lives[2] = null;
         }
+
         points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();

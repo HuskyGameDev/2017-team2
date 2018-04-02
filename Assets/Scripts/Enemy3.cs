@@ -18,6 +18,7 @@ public class Enemy3 : Enemy {
         audioSource = GetComponent<AudioSource>();
 
         health = 80;
+		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));

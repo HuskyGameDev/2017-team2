@@ -717,6 +717,16 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2.3313546
       objectReference: {fileID: 0}
+    - target: {fileID: 212685554854238366, guid: d732ddfc339cc454fb4a0c963993cc77,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 726333831
+      objectReference: {fileID: 0}
+    - target: {fileID: 212685554854238366, guid: d732ddfc339cc454fb4a0c963993cc77,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d732ddfc339cc454fb4a0c963993cc77, type: 2}
   m_IsPrefabParent: 0
@@ -930,7 +940,25 @@ Prefab:
       propertyPath: m_Name
       value: Life (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 21.267405
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 20.945223
+      objectReference: {fileID: 0}
+    - target: {fileID: 212685542111918470, guid: 132881053fc9e25408bbab720bfcebea,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 726333831
+      objectReference: {fileID: 0}
+    - target: {fileID: 212685542111918470, guid: 132881053fc9e25408bbab720bfcebea,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+  m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1453818383 stripped
@@ -1007,6 +1035,14 @@ Prefab:
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 21.267405
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 20.945223
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
   m_IsPrefabParent: 0
@@ -1058,7 +1094,25 @@ Prefab:
       propertyPath: m_Name
       value: Life (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 21.267405
+      objectReference: {fileID: 0}
+    - target: {fileID: 4083243050446466, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 20.945223
+      objectReference: {fileID: 0}
+    - target: {fileID: 212685542111918470, guid: 132881053fc9e25408bbab720bfcebea,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 726333831
+      objectReference: {fileID: 0}
+    - target: {fileID: 212685542111918470, guid: 132881053fc9e25408bbab720bfcebea,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+  m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 132881053fc9e25408bbab720bfcebea, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &1646869701 stripped
@@ -1244,11 +1298,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 48
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1653,7 +1707,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 1183401687
+  m_SortingLayerID: 726333831
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1935052880
@@ -1731,17 +1785,17 @@ Prefab:
     - target: {fileID: 224827818425792816, guid: d9e33e7e0b821d6499ae98de2eba5255,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 280
+      value: 569.2999
       objectReference: {fileID: 0}
     - target: {fileID: 224827818425792816, guid: d9e33e7e0b821d6499ae98de2eba5255,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 279.5
       objectReference: {fileID: 0}
     - target: {fileID: 224827818425792816, guid: d9e33e7e0b821d6499ae98de2eba5255,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 29.9
       objectReference: {fileID: 0}
     - target: {fileID: 224827818425792816, guid: d9e33e7e0b821d6499ae98de2eba5255,
         type: 2}
