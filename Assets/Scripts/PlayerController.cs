@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
     //Number of points the player has
     public int points;
 
+
     // Use this for initialization
     void Start() {
         if (DataBetweenScenes.isEndless) {

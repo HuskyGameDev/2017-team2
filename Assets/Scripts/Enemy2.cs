@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 // Medium Enemies - Al Roboto
 
 public class Enemy2 : Enemy {
@@ -25,6 +26,7 @@ public class Enemy2 : Enemy {
         circleCollider = GetComponent<CircleCollider2D>();
 
         health = 160;
+		totalHealth = health;
 
         EnemyTransform = GetComponent<Transform>();
 

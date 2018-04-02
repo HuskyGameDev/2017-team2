@@ -25,8 +25,10 @@ public class CountDownTimer : MonoBehaviour {
 	void Update () {
         if (time > 0) {
             time -= Time.deltaTime;
+
             if (time < 0)
                 time = 0;
+
             minutes = (int)time / 60;
             seconds = (int)time % 60;
 
@@ -36,8 +38,10 @@ public class CountDownTimer : MonoBehaviour {
 
             milliseconds = time % 1;
             milliseconds = milliseconds * 100;
+
             if (milliseconds > 99)
                 milliseconds = 0;
+
             SetCountText();
         }
 	}
