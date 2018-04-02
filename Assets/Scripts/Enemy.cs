@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour {
 
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
-	protected GameObject player;
+	public GameObject player;
 	protected Transform player_pos;
 
     protected AudioSource audioSource;
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour {
 
     private int attention = 0;
 
-	public GameObject healthBar;
+  	public GameObject healthBar;
 
     // Use this for initialization
     protected virtual void Start () {
@@ -58,15 +58,11 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (player == null || attention == 0)
+        if (attention == 0)
             MoveAtRandom();
         else  {
 			Chase ();
-		}
 
-		if (health <= 0) {
-			Destroy(gameObject);
-            audioSource.PlayOneShot(deathSound);
 		}
         if (attention > 0)
             attention--;
@@ -107,6 +103,7 @@ public class Enemy : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 
 		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
+
 			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
             attention = 200;
@@ -133,9 +130,18 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-		if (health > 0) {
+        if (health <= 0) 
+            Die();
+		else {
 			healthBar.SetActive (true);
-		}
-		healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
+			healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
+		} 
+    } 
+
+	//Should be overridden by each enemy that inherits to handle awarding of points
+	public virtual void Die() {
+		Destroy(gameObject);
+		//audioSource.PlayOneShot(deathSound);
 	}
-}
+  }
+	

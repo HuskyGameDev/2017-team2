@@ -123,6 +123,10 @@ public class PlayerController : MonoBehaviour
     // if the player has the key for the level
     public bool hasKey;
 
+    //Number of points the player has
+    public int points;
+
+
     // Use this for initialization
     void Start()
     {
@@ -134,6 +138,8 @@ public class PlayerController : MonoBehaviour
             lives[1] = null;
             lives[2] = null;
         }
+
+        points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();
 
@@ -409,6 +415,7 @@ public class PlayerController : MonoBehaviour
     // This method is called when the player's HP is reduced to 0
     void GameOver()
     {
+        DataBetweenScenes.points = points;
         SceneManager.LoadScene(2);
     }
 	void Hit(int dmg)

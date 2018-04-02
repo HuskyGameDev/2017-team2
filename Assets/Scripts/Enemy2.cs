@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Medium Enemies - Al Roboto
+
 public class Enemy2 : Enemy {
 
     // Projectiles
@@ -86,5 +89,10 @@ public class Enemy2 : Enemy {
             ableToShoot++;
         }
 
+    }
+
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 5;
     }
 }

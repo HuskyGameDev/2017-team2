@@ -33,7 +33,7 @@ public class BuildRoom : MonoBehaviour {
     public GameObject charger;
 
     //Indices for each colored wall and corner 
-    private const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
+    public const int BLUE = 0, PURPLE = 1, RED = 2, GREY = 3;
     public GameObject[] wall; // Holds all wall types, access by color above
     public GameObject[] cornerWall; // Holds all corner types, access by color above
     public GameObject[] door; // Holds all corner types, access by color above
@@ -63,7 +63,7 @@ public class BuildRoom : MonoBehaviour {
 
     private Vector3 startingPos;
 
-    private int color;
+    public int color;
 
     private List<GameObject> gameObjects;
 
@@ -421,7 +421,9 @@ public class BuildRoom : MonoBehaviour {
             GameObject obj = Instantiate(exits[color], actualPos, rotation);
             obj.GetComponent<Exit>().gm = GetComponent<GameManager>();
             obj.GetComponent<Exit>().player = player;
-            obj.GetComponent<BoxCollider2D>().enabled = false;
+            if (!DataBetweenScenes.isEndless)
+                obj.GetComponent<BoxCollider2D>().enabled = false;
+
             exit = obj;
             gameObjects.Add(obj);
             if (!DataBetweenScenes.isEndless)
@@ -660,22 +662,30 @@ public class BuildRoom : MonoBehaviour {
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.75f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.75f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.25f + dx, (randomPos.y) + 0.25f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
             if (--countDec >= 0) {
                 actualPos = new Vector3((randomPos.x) + 0.75f + dx, (randomPos.y) + 0.25f + dy, 0f);
                 GameObject choice = smallEnemy;
-                gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+                GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+                go.GetComponent<Enemy>().player = player;
+                gameObjects.Add(go);
             }
 
             i += count;
@@ -694,7 +704,9 @@ public class BuildRoom : MonoBehaviour {
             available[(int)randomPos.x, (int)randomPos.y] = false;
 
             GameObject choice = mediumEnemy;
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+            go.GetComponent<Enemy>().player = player;
+            gameObjects.Add(go);
 
         }
     }
@@ -719,7 +731,9 @@ public class BuildRoom : MonoBehaviour {
             }
 
             GameObject choice = largeEnemy;
-            gameObjects.Add(Instantiate(choice, actualPos, Quaternion.identity));
+            GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+            go.GetComponent<Enemy>().player = player;
+            gameObjects.Add(go);
 
         }
     }
