@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject[] lives;
     public int numLives;
 
+    //Store Key UI element
+    public GameObject key;
+
     // boolean to determine if there is currently a controller
     private bool gamePad;
 
@@ -124,12 +127,16 @@ public class PlayerController : MonoBehaviour {
             lives[0] = null;
             lives[1] = null;
             lives[2] = null;
+            numLives = 0;
         }
+        else
+            numLives = 3;
+        key.SetActive(false);
         points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();
 
-        numLives = 3;
+        
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rb2d = GetComponent<Rigidbody2D>();
