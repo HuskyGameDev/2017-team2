@@ -130,10 +130,11 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-        if (health <= 0) 
+        if (health <= 0) { 
             Die();
-    } else {
-    			healthBar.SetActive (true);
+        } 
+        else {
+    	    healthBar.SetActive (true);
  		healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
     } 
   }
