@@ -19,6 +19,7 @@ public class CollisionDetection : MonoBehaviour {
             if (collider.gameObject.GetComponent<PlayerController>().hasKey) {
                 Destroy(this.gameObject);
                 collider.gameObject.GetComponent<PlayerController>().hasKey = false;
+                collider.gameObject.GetComponent<PlayerController>().key.SetActive(false);
                 collider.gameObject.GetComponent<PlayerController>().gameManager.boardScript.exit.GetComponent<BoxCollider2D>().enabled = true;
             }
             
@@ -26,6 +27,7 @@ public class CollisionDetection : MonoBehaviour {
         //Handle the Key
         if (this.gameObject.tag == "Key" && collider.gameObject.tag == "Player") {
             collider.gameObject.GetComponent<PlayerController>().hasKey = true;
+            collider.gameObject.GetComponent<PlayerController>().key.SetActive(true);
             Destroy(this.gameObject);
         }
 
