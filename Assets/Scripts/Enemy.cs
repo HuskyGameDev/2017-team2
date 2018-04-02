@@ -130,17 +130,17 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-        if (health <= 0) { 
-            Die();
-        } 
-        else {
-    	    healthBar.SetActive (true);
- 		healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
+    if (health <= 0) 
+      Die();
+		else {
+			healthBar.SetActive (true);
+			healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
+		} 
     } 
+
+	//Should be overridden by each enemy that inherits to handle awarding of points
+	public virtual void Die() {
+		Destroy(gameObject);
+		//audioSource.PlayOneShot(deathSound);
+	}
   }
-    //Should be overridden by each enemy that inherits to handle awarding of points
-    public virtual void Die() {
-        Destroy(gameObject);
-        //audioSource.PlayOneShot(deathSound);
-    }
-}
