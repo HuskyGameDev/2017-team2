@@ -686,13 +686,24 @@ public class BuildRoom : MonoBehaviour {
         else if (type == enemyType.MEDIUM)
             choice = mediumEnemy;
         GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+        //General Changes
+        if (color == PURPLE) {
+            //Set Speed * 1.2?
+        } else if (color == RED) {
+            //Set Speed * 1.4?
+        }
+        //Endless specific changes
         if (DataBetweenScenes.isEndless) {
             if (color == PURPLE) {
+                /*NOTE This seems to affect Bigguns attacking radius as well, and is probably a bad solution
+                    waiting on proper implementation of bigguns attacks before reworking to avoid this */
                 foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
                     if (cc.isTrigger) {
                         cc.radius *= 1.25f;
                     }
             } else if (color == RED) {
+                /*NOTE This seems to affect Bigguns attacking radius as well, and is probably a bad solution
+                   waiting on proper implementation of bigguns attacks before reworking to avoid this */
                 foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
                     if (cc.isTrigger) {
                         cc.radius *= 1.5f;
