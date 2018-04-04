@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class LoopForeground : MonoBehaviour {
 
-    int loopHeight = 2400;
-    int buildingHeight = 3456;
-        	
-	// Update is called once per frame
-	void Update () {
-        transform.Translate(0, 50 * Time.deltaTime, 0);
+    private Rigidbody2D rb2d;
+    private float buildingHeight = 3256;
 
-        if (transform.position.y > loopHeight)
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+
+        rb2d.velocity = new Vector2(0, -500);
+    }
+
+    // Update is called once per frame
+    void Update () {
+        
+        if (transform.position.y < -buildingHeight)
         {
-            Vector2 offset = new Vector2(0, buildingHeight);
-            transform.position = (Vector2)transform.position - offset;
+            Reposition();
         }
+    }
+
+    private void Reposition()
+    {
+        Vector2 offset = new Vector2(0, buildingHeight * 2f);
+
+        transform.position = (Vector2)transform.position + offset;
     }
 }

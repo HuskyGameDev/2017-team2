@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 96208106}
   - component: {fileID: 96208108}
   - component: {fileID: 96208107}
+  - component: {fileID: 96208109}
   m_Layer: 5
   m_Name: creditsTitle
   m_TagString: Untagged
@@ -482,6 +483,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 96208105}
+--- !u!50 &96208109
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 96208105}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &138927787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1218,7 @@ GameObject:
   - component: {fileID: 318287997}
   - component: {fileID: 318287999}
   - component: {fileID: 318287998}
+  - component: {fileID: 318288000}
   m_Layer: 5
   m_Name: leadMsg
   m_TagString: Untagged
@@ -1263,6 +1285,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 318287996}
+--- !u!50 &318288000
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318287996}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &322035992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,7 +1322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &322035993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2220,6 +2262,7 @@ GameObject:
   - component: {fileID: 649288243}
   - component: {fileID: 649288245}
   - component: {fileID: 649288244}
+  - component: {fileID: 649288246}
   m_Layer: 5
   m_Name: teamNum
   m_TagString: Untagged
@@ -2286,6 +2329,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 649288242}
+--- !u!50 &649288246
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 649288242}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &663257144
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,7 +2514,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &707489487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6225,6 +6288,7 @@ GameObject:
   - component: {fileID: 1743666873}
   - component: {fileID: 1743666875}
   - component: {fileID: 1743666874}
+  - component: {fileID: 1743666876}
   m_Layer: 5
   m_Name: soundMsg
   m_TagString: Untagged
@@ -6291,6 +6355,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1743666872}
+--- !u!50 &1743666876
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1743666872}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1766222582
 GameObject:
   m_ObjectHideFlags: 0
@@ -7175,6 +7259,7 @@ GameObject:
   - component: {fileID: 2119941868}
   - component: {fileID: 2119941870}
   - component: {fileID: 2119941869}
+  - component: {fileID: 2119941871}
   m_Layer: 5
   m_Name: programMsg
   m_TagString: Untagged
@@ -7245,3 +7330,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2119941867}
+--- !u!50 &2119941871
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2119941867}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
