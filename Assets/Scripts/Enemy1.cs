@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// BIG GUNS
+
+//Big Enemies - Big Guns
 public class Enemy1 : Enemy {
 
 	// Object for slashing
@@ -17,7 +18,7 @@ public class Enemy1 : Enemy {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
-		health = 50;
+		health = 480;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -91,4 +92,9 @@ public class Enemy1 : Enemy {
 			}
 		}
 	}
+    
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 10;
+    }
 }

@@ -40,6 +40,7 @@ public class BuildFloor : MonoBehaviour {
         public bool isEntrance = false;
         public bool isExit = false;
         public bool hasCharger;
+        public bool hasKey;
         public Direction finalDoor;
         public int doorNorth = -1;
         public int doorSouth = -1;
@@ -122,6 +123,11 @@ public class BuildFloor : MonoBehaviour {
         //set a room to have the charger
         if (floorColor == FloorColor.BLUE) {
             floor = addCharger(floor);
+        }
+
+        //set a room to have the key
+        if (!DataBetweenScenes.isEndless) {
+            floor = addKey(floor);
         }
         //Defines the last room built as the exit
         floor[currPos.x, currPos.y].isExit = true;
@@ -225,6 +231,20 @@ public class BuildFloor : MonoBehaviour {
             //if room exists and it's not the starting room
             if (floor[x, y] != null && x != startPosX && y != startPosY) {
                 floor[x, y].hasCharger = true;
+                return floor;
+            }
+        }
+    }
+    /**
+     * Adds a key to the floor randomly
+     */
+    private Room[,] addKey(Room[,] floor) {
+        while (true) {
+            int x = Random.Range(0, lengthOfFloor);
+            int y = Random.Range(0, heightOfFloor);
+            //if room exists and it's not the starting room
+            if (floor[x, y] != null && x != startPosX && y != startPosY) {
+                floor[x, y].hasKey = true;
                 return floor;
             }
         }

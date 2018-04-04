@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// SHOOTER
+
+// Medium Enemies - Al Roboto
 public class Enemy2 : Enemy {
 
     // Projectiles
@@ -22,7 +23,7 @@ public class Enemy2 : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 
-        health = 50;
+        health = 160;
 
         EnemyTransform = GetComponent<Transform>();
 
@@ -88,5 +89,10 @@ public class Enemy2 : Enemy {
             ableToShoot++;
         }
 
+    }
+
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 5;
     }
 }

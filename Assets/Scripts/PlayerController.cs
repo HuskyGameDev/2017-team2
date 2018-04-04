@@ -9,6 +9,7 @@ using System.Collections.Generic;
  * Codey Walker
  * Main controller for player behavior. Currently, it allows the player to move the sprite around and follows mouse direction
  * Added gun and melee attack functions to this script - Codey
+ * Added controller support to player actions (movement, attacking, aiming) - Andrew S
  */
 
 
@@ -117,28 +118,17 @@ public class PlayerController : MonoBehaviour
     public AudioClip slashSound;
 
 	private AudioSource audioSource;
-	//private AudioClip bulletSound;
+    //private AudioClip bulletSound;
+
+    // if the player has the key for the level
+    public bool hasKey;
+
+    //Number of points the player has
+    public int points;
 
     // Use this for initialization
     void Start()
     {
-        /*
-        controllers = Input.GetJoystickNames();
-        if (controllers.Length > 0)
-        {
-            if (!string.IsNullOrEmpty(controllers[0]))
-            {
-                print("Controller connected");
-                gamePad = true;
-                Cursor.visible = false;
-            }
-            else
-            {
-                print("No controller");
-                gamePad = false;
-            }
-        }
-        */
         if (DataBetweenScenes.isEndless) {
             Destroy(lives[0]);
             Destroy(lives[1]);
@@ -147,6 +137,7 @@ public class PlayerController : MonoBehaviour
             lives[1] = null;
             lives[2] = null;
         }
+        points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();
 
@@ -181,20 +172,17 @@ public class PlayerController : MonoBehaviour
 
         if (checkControl >= 180)
         {
-            print("Controller check");
             // update the Joystick Names array
             controllers = Input.GetJoystickNames();
             if (controllers.Length > 0)
             {
                 if (!string.IsNullOrEmpty(controllers[0]))
                 {
-                    print("Controller connected");
                     gamePad = true;
                     Cursor.visible = false;
                 }
                 else
                 {
-                    print("No controller");
                     gamePad = false;
                     Cursor.visible = true;
                 }
@@ -211,9 +199,10 @@ public class PlayerController : MonoBehaviour
 
             if (rStick.magnitude > 0.1f)
             {
+                // get new angle of the player based on position of the right analog stick
                 angle = Mathf.Atan2(rStick.y, rStick.x) * Mathf.Rad2Deg;
 
-                //Rotate player
+                // Rotate player based on angle, also keep player rotated in new direction until it is changed again
                 transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
             }
 
@@ -424,6 +413,7 @@ public class PlayerController : MonoBehaviour
     // This method is called when the player's HP is reduced to 0
     void GameOver()
     {
+        DataBetweenScenes.points = points;
         SceneManager.LoadScene(2);
     }
 	void Hit(int dmg)

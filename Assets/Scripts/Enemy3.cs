@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// ROOMBA
+
+//Small Enemies - Ankle Biter
 public class Enemy3 : Enemy {
 
 	// Object for slashing
@@ -19,7 +20,7 @@ public class Enemy3 : Enemy {
 		circleCollider = GetComponent<CircleCollider2D> ();
         audioSource = GetComponent<AudioSource>();
 
-        health = 50;
+        health = 80;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -95,4 +96,9 @@ public class Enemy3 : Enemy {
 			}
 		}
 	}
+
+    public override void Die() {
+        base.Die();
+        player.GetComponent<PlayerController>().points += 2;
+    }
 }
