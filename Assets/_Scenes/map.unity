@@ -500,7 +500,6 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 2074431841}
-<<<<<<< HEAD
     - target: {fileID: 50764712979538716, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: m_BodyType
@@ -526,7 +525,6 @@ Prefab:
       propertyPath: m_LinearDrag
       value: 10
       objectReference: {fileID: 0}
-=======
     - target: {fileID: 114912210624141848, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: dmg
@@ -537,7 +535,6 @@ Prefab:
       propertyPath: hasKey
       value: 0
       objectReference: {fileID: 0}
->>>>>>> master
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
