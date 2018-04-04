@@ -630,9 +630,9 @@ public class BuildRoom : MonoBehaviour {
             largeEnemyCount = largeEnemyCount * 5 / 3;
         }
         if (color == RED) { //large increase in enemy number
-            mediumEnemyCount = mediumEnemyCount * 5 / 2;
-            smallEnemyCount = smallEnemyCount * 5 / 2;
-            largeEnemyCount = largeEnemyCount * 5 / 2;
+            mediumEnemyCount = mediumEnemyCount * 7 / 3;
+            smallEnemyCount = smallEnemyCount * 7 / 3;
+            largeEnemyCount = largeEnemyCount * 7 / 3;
         }
         if (color == GREY) { //no enemies
             mediumEnemyCount = 0;
@@ -686,16 +686,18 @@ public class BuildRoom : MonoBehaviour {
         else if (type == enemyType.MEDIUM)
             choice = mediumEnemy;
         GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
-        if (color == PURPLE) {
-            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
-                if (cc.isTrigger) {
-                    cc.radius *= 1.25f;
-                }
-        } else if (color == RED) {
-            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
-                if (cc.isTrigger) {
-                    cc.radius *= 1.5f;
-                }
+        if (DataBetweenScenes.isEndless) {
+            if (color == PURPLE) {
+                foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                    if (cc.isTrigger) {
+                        cc.radius *= 1.25f;
+                    }
+            } else if (color == RED) {
+                foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                    if (cc.isTrigger) {
+                        cc.radius *= 1.5f;
+                    }
+            }
         }
         go.GetComponent<Enemy>().player = player;
         return go;
