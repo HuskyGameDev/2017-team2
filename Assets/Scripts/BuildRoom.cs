@@ -688,9 +688,19 @@ public class BuildRoom : MonoBehaviour {
         //General Changes
         if (color == PURPLE) {
             go.GetComponent<Enemy>().speed *= 1.15f;
+            if (!DataBetweenScenes.isEndless) {
+                //Neither of these work with the variables public in base class
+                //go.GetComponent<Enemy>().health += go.GetComponent<Enemy>().health / 4;
+               // go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 4;
+            }
         } 
         else if (color == RED) {
             go.GetComponent<Enemy>().speed *= 1.3f;
+            if (!DataBetweenScenes.isEndless) {
+                //Neither of these work with the variables public in base class
+                //go.GetComponent<Enemy>().health += go.GetComponent<Enemy>().health / 2;
+                //go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 2;
+            }
         }
         //Endless specific changes
         if (DataBetweenScenes.isEndless) {
