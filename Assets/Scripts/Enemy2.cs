@@ -24,6 +24,7 @@ public class Enemy2 : Enemy {
         circleCollider = GetComponent<CircleCollider2D>();
 
         health = 160;
+		totalHealth = health;
 
         EnemyTransform = GetComponent<Transform>();
 

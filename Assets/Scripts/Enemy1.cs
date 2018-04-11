@@ -20,6 +20,7 @@ public class Enemy1 : Enemy {
 
 		health = 480;
 
+		totalHealth = health;
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
@@ -40,6 +41,7 @@ public class Enemy1 : Enemy {
     }
 
 	protected override void MoveAtRandom() {
+
 
         rot += Random.Range(-1f, 1f);
         if (rot > 3) {
