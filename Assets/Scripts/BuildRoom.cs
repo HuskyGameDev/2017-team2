@@ -685,23 +685,39 @@ public class BuildRoom : MonoBehaviour {
         else if (type == enemyType.MEDIUM)
             choice = mediumEnemy;
         GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+        if (type == enemyType.LARGE)
+            go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH);
+        if (type == enemyType.MEDIUM)
+            go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH);
+        if (type == enemyType.SMALL)
+            go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH);
         //General Changes
         if (color == PURPLE) {
             go.GetComponent<Enemy>().speed *= 1.15f;
             if (!DataBetweenScenes.isEndless) {
                 //Neither of these work with the variables public in base class
-                //go.GetComponent<Enemy>().health += go.GetComponent<Enemy>().health / 4;
-               // go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 4;
+                if (type == enemyType.LARGE)
+                    go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH + Enemy1.DEFAULT_HEALTH / 4);
+                if (type == enemyType.MEDIUM)
+                    go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH + Enemy2.DEFAULT_HEALTH / 4);
+                if (type == enemyType.SMALL)
+                    go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH + Enemy3.DEFAULT_HEALTH / 4);
+                // go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 4;
             }
         } 
         else if (color == RED) {
             go.GetComponent<Enemy>().speed *= 1.3f;
             if (!DataBetweenScenes.isEndless) {
                 //Neither of these work with the variables public in base class
-                //go.GetComponent<Enemy>().health += go.GetComponent<Enemy>().health / 2;
+                if (type == enemyType.LARGE)
+                    go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH + Enemy1.DEFAULT_HEALTH / 2);
+                if (type == enemyType.MEDIUM)
+                    go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH + Enemy2.DEFAULT_HEALTH / 2);
+                if (type == enemyType.SMALL)
+                    go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH + Enemy3.DEFAULT_HEALTH / 2);
                 //go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 2;
             }
-        }
+        } 
         //Endless specific changes
         if (DataBetweenScenes.isEndless) {
             go.GetComponent<Enemy>().speed *= 1.15f;

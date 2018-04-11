@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
 	protected float time;
 	protected float angle;
 
-	protected int health;
+	public int health;
 	protected int totalHealth;
 
 	protected Rigidbody2D rb2d;
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour {
     public AudioClip deathSound;
 
     private int attention = 0;
-
+    public const int DEFAULT_HEALTH = 50; 
   	public GameObject healthBar;
 
     // Use this for initialization
@@ -37,9 +37,6 @@ public class Enemy : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 		audioSource = GetComponent<AudioSource> ();
-
-		health = 50;
-		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -109,6 +106,11 @@ public class Enemy : MonoBehaviour {
             attention = 200;
 		}
 	}
+    //for call by other
+    public void setHealth(int i) {
+        health = i;
+        totalHealth = i;
+    }
 
     //Should detect if the enemy can see the player currently or not
     bool hasLOS(Collider2D other) {
