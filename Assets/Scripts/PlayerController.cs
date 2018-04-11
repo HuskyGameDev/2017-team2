@@ -145,10 +145,6 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
 		audioSource = GetComponent<AudioSource>();
-       
-
-        score = 0;
-        floor = 1;
 
         // Set speed of bullet
         bulletSpeed = 20;

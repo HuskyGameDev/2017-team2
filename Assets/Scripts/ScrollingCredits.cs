@@ -14,14 +14,11 @@ public class ScrollingCredits : MonoBehaviour {
     public Button menuButton;
 
     float start;
-    float upperBound;
 
     // Use this for initialization
     void Start () {
         start = Time.time;
         menuButton.gameObject.SetActive(false);
-
-        upperBound = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0)).y;
 	}
     
 	// Update is called once per frame

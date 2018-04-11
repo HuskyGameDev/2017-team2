@@ -11,7 +11,7 @@ public class LoopForeground : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
 
-        rb2d.velocity = new Vector2(0, -500);
+        rb2d.velocity = new Vector2(0, -100);
     }
 
     // Update is called once per frame

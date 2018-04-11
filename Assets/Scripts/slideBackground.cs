@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class slideBackground : MonoBehaviour {
 
-    float savedTime;
+    private float savedTime;
+    private Rigidbody2D rb2d;
 
     // Use this for initialization
     void Start () {
         savedTime = Time.time;
+        rb2d = GetComponent<Rigidbody2D>();
+
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Time.time - savedTime <= 7)
         {
-            transform.Translate(10 * Time.deltaTime, 0, 0);
+            rb2d.velocity = new Vector2(10, 0);
         }
         else if (Time.time - savedTime >= 5 && Time.time - savedTime <= 14)
         {
-            transform.Translate(-10 * Time.deltaTime, 0, 0);
+            rb2d.velocity = new Vector2(-10, 0);
         }
         else if (Time.time - savedTime > 14)
         {
