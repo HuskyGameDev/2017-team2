@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
 	protected float angle;
 
 	protected int health;
+	protected int totalHealth;
 
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
@@ -29,6 +30,8 @@ public class Enemy : MonoBehaviour {
 
     private int attention = 0;
 
+  	public GameObject healthBar;
+
     // Use this for initialization
     protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
@@ -36,6 +39,7 @@ public class Enemy : MonoBehaviour {
 		audioSource = GetComponent<AudioSource> ();
 
 		health = 50;
+		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -58,6 +62,7 @@ public class Enemy : MonoBehaviour {
             MoveAtRandom();
         else  {
 			Chase ();
+
 		}
         if (attention > 0)
             attention--;
@@ -98,6 +103,8 @@ public class Enemy : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) {
 
 		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
+
+			player = other.gameObject;
 			player_pos = player.GetComponent<Transform> ();
             attention = 200;
 		}
@@ -123,12 +130,17 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-        if (health <= 0) 
-            Die();
-    }
-    //Should be overridden by each enemy that inherits to handle awarding of points
-    public virtual void Die() {
-        Destroy(gameObject);
-        //audioSource.PlayOneShot(deathSound);
-    }
-}
+    if (health <= 0) 
+      Die();
+		else {
+			healthBar.SetActive (true);
+			healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
+		} 
+    } 
+
+	//Should be overridden by each enemy that inherits to handle awarding of points
+	public virtual void Die() {
+		Destroy(gameObject);
+		//audioSource.PlayOneShot(deathSound);
+	}
+  }

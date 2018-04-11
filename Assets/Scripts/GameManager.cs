@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour {
         else {
             buildFloor();
             gameController.GetComponent<CountDownTimer>().time = 120;
+            gameController.GetComponent<CountDownTimer>().timerText.color = Color.white;
         }
     }
     private void awardPoints(float time) {
