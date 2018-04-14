@@ -1,45 +1,9 @@
 fileFormatVersion: 2
-guid: c2728832d9e20284abaceecff198ff55
-timeCreated: 1523744276
+guid: 6ce172486681a694887dfabbb19b825e
+timeCreated: 1523487663
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: big_guns_sheet_0
-    21300002: big_guns_sheet_1
-    21300004: big_guns_sheet_2
-    21300006: big_guns_sheet_3
-    21300008: big_guns_sheet_4
-    21300010: big_guns_sheet_5
-    21300012: big_guns_sheet_6
-    21300014: big_guns_sheet_7
-    21300016: big_guns_sheet_8
-    21300018: big_guns_sheet_9
-    21300020: big_guns_sheet_10
-    21300022: big_guns_sheet_11
-    21300024: big_guns_sheet_12
-    21300026: big_guns_sheet_13
-    21300028: big_guns_sheet_14
-    21300030: big_guns_sheet_15
-    21300032: big_guns_sheet_16
-    21300034: big_guns_sheet_17
-    21300036: big_guns_sheet_18
-    21300038: big_guns_sheet_19
-    21300040: big_guns_sheet_20
-    21300042: big_guns_sheet_21
-    21300044: big_guns_sheet_22
-    21300046: big_guns_sheet_23
-    21300048: big_guns_sheet_24
-    21300050: big_guns_sheet_25
-    21300052: big_guns_sheet_26
-    21300054: big_guns_sheet_27
-    21300056: big_guns_sheet_28
-    21300058: big_guns_sheet_29
-    21300060: big_guns_sheet_30
-    21300062: big_guns_sheet_31
-    21300064: big_guns_sheet_32
-    21300066: big_guns_sheet_33
-    21300068: big_guns_sheet_34
-    21300070: big_guns_sheet_35
+  fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -75,7 +39,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -99,6 +63,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1

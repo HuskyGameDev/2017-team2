@@ -10,17 +10,16 @@ public class Enemy3 : Enemy {
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
+
+  public new const int DEFAULT_HEALTH = 80;
 	private float animTime = 0.0f;
 
-	protected override void Start() {
+    protected override void Start() {
 		
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
         audioSource = GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
-
-        health = 80;
-		totalHealth = health;
 
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));

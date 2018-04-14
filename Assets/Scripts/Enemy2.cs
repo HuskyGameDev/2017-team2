@@ -17,7 +17,7 @@ public class Enemy2 : Enemy {
     private int ableToShoot = 0;
 
     private Vector2 movement2;
-
+    public new const int DEFAULT_HEALTH = 160;
     private float rot = 0;
 
     // Use this for initialization
@@ -25,9 +25,6 @@ public class Enemy2 : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 		animator = GetComponent<Animator> ();
-
-        health = 160;
-		totalHealth = health;
 
         EnemyTransform = GetComponent<Transform>();
 
