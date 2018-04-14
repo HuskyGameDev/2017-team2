@@ -14,13 +14,11 @@ public class Enemy1 : Enemy {
     private Vector2 movement2;
     private float rot = 0;
 
+    public new const int DEFAULT_HEALTH = 480;
 	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
-
-		health = 480;
-
-		totalHealth = health;
+        
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 

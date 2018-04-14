@@ -16,7 +16,6 @@ public class BuildRoom : MonoBehaviour {
             maximum = max;
         }
     }
-
     public int columns;
     public int rows;
     public Count smallCount = new Count(10, 20);
@@ -630,9 +629,9 @@ public class BuildRoom : MonoBehaviour {
             largeEnemyCount = largeEnemyCount * 5 / 3;
         }
         if (color == RED) { //large increase in enemy number
-            mediumEnemyCount = mediumEnemyCount * 5 / 2;
-            smallEnemyCount = smallEnemyCount * 5 / 2;
-            largeEnemyCount = largeEnemyCount * 5 / 2;
+            mediumEnemyCount = mediumEnemyCount * 7 / 3;
+            smallEnemyCount = smallEnemyCount * 7 / 3;
+            largeEnemyCount = largeEnemyCount * 7 / 3;
         }
         if (color == GREY) { //no enemies
             mediumEnemyCount = 0;
@@ -686,16 +685,61 @@ public class BuildRoom : MonoBehaviour {
         else if (type == enemyType.MEDIUM)
             choice = mediumEnemy;
         GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+        if (type == enemyType.LARGE)
+            go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH);
+        if (type == enemyType.MEDIUM)
+            go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH);
+        if (type == enemyType.SMALL)
+            go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH);
+        //General Changes
         if (color == PURPLE) {
-            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
-                if (cc.isTrigger) {
-                    cc.radius *= 1.25f;
-                }
-        } else if (color == RED) {
-            foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
-                if (cc.isTrigger) {
-                    cc.radius *= 1.5f;
-                }
+            go.GetComponent<Enemy>().moveSpeed *= 1.15f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.15f;
+            if (!DataBetweenScenes.isEndless) {
+                //Neither of these work with the variables public in base class
+                if (type == enemyType.LARGE)
+                    go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH + Enemy1.DEFAULT_HEALTH / 4);
+                if (type == enemyType.MEDIUM)
+                    go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH + Enemy2.DEFAULT_HEALTH / 4);
+                if (type == enemyType.SMALL)
+                    go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH + Enemy3.DEFAULT_HEALTH / 4);
+                // go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 4;
+            }
+        } 
+        else if (color == RED) {
+            go.GetComponent<Enemy>().moveSpeed *= 1.3f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.3f;
+            if (!DataBetweenScenes.isEndless) {
+                //Neither of these work with the variables public in base class
+                if (type == enemyType.LARGE)
+                    go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH + Enemy1.DEFAULT_HEALTH / 2);
+                if (type == enemyType.MEDIUM)
+                    go.GetComponent<Enemy>().setHealth(Enemy2.DEFAULT_HEALTH + Enemy2.DEFAULT_HEALTH / 2);
+                if (type == enemyType.SMALL)
+                    go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH + Enemy3.DEFAULT_HEALTH / 2);
+                //go.GetComponent<Enemy>().totalHealth += go.GetComponent<Enemy>().totalHealth / 2;
+            }
+        } 
+        //Endless specific changes
+        if (DataBetweenScenes.isEndless) {
+            go.GetComponent<Enemy>().moveSpeed *= 1.15f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.15f;
+            if (color == PURPLE) {
+                /*NOTE This seems to affect Bigguns attacking radius as well, and is probably a bad solution
+                    waiting on proper implementation of bigguns attacks before reworking to avoid this */
+                foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                    if (cc.isTrigger) {
+                        cc.radius *= 1.25f;
+                    }
+            } 
+            else if (color == RED) {
+                /*NOTE This seems to affect Bigguns attacking radius as well, and is probably a bad solution
+                   waiting on proper implementation of bigguns attacks before reworking to avoid this */
+                foreach (CircleCollider2D cc in go.GetComponents<CircleCollider2D>())
+                    if (cc.isTrigger) {
+                        cc.radius *= 1.5f;
+                    }
+            }
         }
         go.GetComponent<Enemy>().player = player;
         return go;

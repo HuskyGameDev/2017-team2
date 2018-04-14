@@ -14,17 +14,16 @@ public class Enemy2 : Enemy {
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
-
+    
     private Vector2 movement;
+    public new const int DEFAULT_HEALTH = 160;
+
     private float rot = 0;
 
     // Use this for initialization
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-
-        health = 160;
-		totalHealth = health;
 
         EnemyTransform = GetComponent<Transform>();
 
