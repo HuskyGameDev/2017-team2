@@ -312,41 +312,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHP() {
-        /*
-        // For testing purposes, the player's health can be controlled using keys to simulate being healed and damaged by each of the three enemy types
-        // Player is hit by a small enemy
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            health -= 5;
-        }
-
-        // Player is hit by medium-sized enemy or its bullet 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            health -= 10;
-        }
-
-        // Player is hit by large enemy or its beam
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            health -= 25;
-        }
-
-        // Player steps on/near a healing tile
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (100 - health <= 50)
-            {
-                health = 100;
-            }
-            // else clause makes sure player can't have more than 100 HP
-            else
-            {
-                health += 50;
-            }
-            
-        }*/
-
         SetHealthText();
 
         // check for death
