@@ -104,7 +104,14 @@ public class Enemy1 : Enemy {
 	}
     
     public override void Die() {
-        base.Die();
+		animator.SetTrigger ("BigGunsDeath");
+		speed = 0.0f;
+		speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
+		gameObject.tag = null;
         player.GetComponent<PlayerController>().points += 10;
     }
 }

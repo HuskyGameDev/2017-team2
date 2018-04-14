@@ -76,9 +76,12 @@ public class Enemy2 : Enemy {
 
     // Method used to handle shooting projectiles
     private void shoot() {
-		
+
+		animator.SetTrigger ("RobotoShoot");
+
 		// Create a new bullet with the current mouse position
 		if (ableToShoot == 0) {
+
 			GameObject ebullet = Instantiate (bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
 			ableToShoot++;
