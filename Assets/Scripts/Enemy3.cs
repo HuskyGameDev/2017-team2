@@ -10,12 +10,15 @@ public class Enemy3 : Enemy {
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
+	public Animation deathAnimation;
+	private float animTime = 0.0f;
 
 	protected override void Start() {
 		
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
         audioSource = GetComponent<AudioSource>();
+		animator = GetComponent<Animator> ();
 
         health = 80;
 		totalHealth = health;
@@ -40,7 +43,6 @@ public class Enemy3 : Enemy {
 	}
 
 	protected override void Chase() {
-
 
 		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
 
@@ -78,8 +80,14 @@ public class Enemy3 : Enemy {
 		}
 	}
 
-    public override void Die() {
-        base.Die();
+    public override void PlayAnimation() {
+		animator.SetTrigger ("Rhoomba_Death");
+		//base.Die();
+		speed = 0.0f;
+		speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		gameObject.tag = null;
         player.GetComponent<PlayerController>().points += 2;
     }
 }

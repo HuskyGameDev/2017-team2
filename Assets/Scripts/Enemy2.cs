@@ -24,6 +24,7 @@ public class Enemy2 : Enemy {
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+		animator = GetComponent<Animator> ();
 
         health = 160;
 		totalHealth = health;
@@ -91,8 +92,8 @@ public class Enemy2 : Enemy {
 
     }
 
-    public override void Die() {
-        base.Die();
+    public override void PlayAnimation() {
+//        base.Die();
         player.GetComponent<PlayerController>().points += 5;
     }
 }

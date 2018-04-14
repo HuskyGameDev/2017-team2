@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
 
 	protected float speedMax;
 	public float speed = 2f;
+	public bool canAttack = true;
 
 	protected float xMax;
 	protected float yMax;
@@ -32,11 +33,14 @@ public class Enemy : MonoBehaviour {
 
   	public GameObject healthBar;
 
+	public Animator animator;
+
     // Use this for initialization
     protected virtual void Start () {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 		audioSource = GetComponent<AudioSource> ();
+		animator = GetComponent<Animator> ();
 
 		health = 50;
 		totalHealth = health;
@@ -61,8 +65,9 @@ public class Enemy : MonoBehaviour {
         if (attention == 0)
             MoveAtRandom();
         else  {
-			Chase ();
-
+			if (canAttack) {
+				Chase ();
+			}
 		}
         if (attention > 0)
             attention--;
@@ -130,16 +135,17 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
-    if (health <= 0) 
-      Die();
-		else {
+		if (health <= 0) {
+			canAttack = false;
+			PlayAnimation ();
+		} else {
 			healthBar.SetActive (true);
 			healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
 		} 
     } 
 
 	//Should be overridden by each enemy that inherits to handle awarding of points
-	public virtual void Die() {
+	public virtual void PlayAnimation() {
 		Destroy(gameObject);
 		//audioSource.PlayOneShot(deathSound);
 	}
