@@ -103,8 +103,8 @@ public class Enemy1 : Enemy {
 		}
 	}
     
-    public override void PlayAnimation() {
-//        base.Die();
+    public override void Die() {
+        base.Die();
         player.GetComponent<PlayerController>().points += 10;
     }
 }

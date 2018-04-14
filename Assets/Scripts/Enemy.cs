@@ -62,74 +62,79 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (attention == 0)
-            MoveAtRandom();
-        else  {
-			if (canAttack) {
-				Chase ();
+		if (health > 0) {
+			if (attention == 0)
+				MoveAtRandom ();
+			else {
+				if (canAttack) {
+					Chase ();
+				}
 			}
+			if (attention > 0)
+				attention--;
 		}
-        if (attention > 0)
-            attention--;
 	}
 
 	protected virtual void MoveAtRandom() {
+
 		time += Time.deltaTime;
 
 		if (transform.localPosition.x > xMax) {
-			x = Random.Range(-speedMax, 0.0f);
+			x = Random.Range (-speedMax, 0.0f);
 			time = 0.0f; 
 		}
 		if (transform.localPosition.x < xMin) {
-			x = Random.Range(0.0f, speedMax);
+			x = Random.Range (0.0f, speedMax);
 			time = 0.0f; 
 		}
 		if (transform.localPosition.y > yMax) {
-			y = Random.Range(-speedMax, 0.0f);
+			y = Random.Range (-speedMax, 0.0f);
 			time = 0.0f; 
 		}
 		if (transform.localPosition.y < yMin) {
-			y = Random.Range(0.0f, speedMax);
+			y = Random.Range (0.0f, speedMax);
 			time = 0.0f; 
 		}
 
 		angle = Mathf.Atan2 (y, x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle-90);
+		transform.rotation = Quaternion.Euler (0, 0, angle - 90);
 
 		if (time > 1.0f) {
-			x = Random.Range(-speedMax, speedMax);
-			y = Random.Range(-speedMax, speedMax);
+			x = Random.Range (-speedMax, speedMax);
+			y = Random.Range (-speedMax, speedMax);
 			time = 0.0f;
 		}
 
-		transform.localPosition = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+		transform.localPosition = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player") && hasLOS(other)) {
+		if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
 
-			player = other.gameObject;
-			player_pos = player.GetComponent<Transform> ();
-            attention = 200;
+				player = other.gameObject;
+				player_pos = player.GetComponent<Transform> ();
+				attention = 200;
 		}
 	}
 
     //Should detect if the enemy can see the player currently or not
     bool hasLOS(Collider2D other) {
-        bool canSee = true;
+		bool canSee = false;
 
-        return canSee;
+		if (health > 0) {
+			canSee = true;
+		}
+
+		return canSee;
     }
 
 	protected virtual void Chase() {
 
+			transform.position = Vector2.MoveTowards (transform.position, player_pos.position, speed * Time.deltaTime);
 
-		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-
-		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
-
+			angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler (0, 0, angle);
 	}
 
 	void Hit(int dmg)
@@ -137,7 +142,7 @@ public class Enemy : MonoBehaviour {
 		health -= dmg;
 		if (health <= 0) {
 			canAttack = false;
-			PlayAnimation ();
+			Die ();
 		} else {
 			healthBar.SetActive (true);
 			healthBar.SendMessage ("Damage", (float)health / (float)totalHealth);
@@ -145,7 +150,7 @@ public class Enemy : MonoBehaviour {
     } 
 
 	//Should be overridden by each enemy that inherits to handle awarding of points
-	public virtual void PlayAnimation() {
+	public virtual void Die() {
 		Destroy(gameObject);
 		//audioSource.PlayOneShot(deathSound);
 	}

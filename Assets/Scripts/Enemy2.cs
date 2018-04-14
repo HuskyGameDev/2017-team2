@@ -49,51 +49,59 @@ public class Enemy2 : Enemy {
     }
 
     protected override void MoveAtRandom() {
-        rot += Random.Range(-1f, 1f);
-        if (rot > 3) {
-            rot = 3;
-        } else if (rot < -3) {
-            rot = -3;
-        }
-        transform.Rotate(new Vector3(0, 0, rot));
-        movement2 = -transform.up * 300;
-        GetComponent<Rigidbody2D>().AddForce(movement2);
+		rot += Random.Range (-1f, 1f);
+		if (rot > 3) {
+			rot = 3;
+		} else if (rot < -3) {
+			rot = -3;
+		}
+		transform.Rotate (new Vector3 (0, 0, rot));
+		movement2 = -transform.up * 300;
+		GetComponent<Rigidbody2D> ().AddForce (movement2);
 
-        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
+		Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
 
     }
 
     protected override void Chase() {
 
-        transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
+		transform.position = Vector2.MoveTowards (transform.position, player_pos.position, speed * Time.deltaTime);
 
-        angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle+90);
+		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
 
-        shoot();
+		shoot ();
     }
 
 
     // Method used to handle shooting projectiles
     private void shoot() {
-        // Create a new bullet with the current mouse position
-        if (ableToShoot == 0) {
-            GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+		
+		// Create a new bullet with the current mouse position
+		if (ableToShoot == 0) {
+			GameObject ebullet = Instantiate (bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
-            ableToShoot++;
-        }
+			ableToShoot++;
+		}
 
-        // Used to limit the amount of bullets *Needs to update when animation implemented*
-        if (ableToShoot == 0 || ableToShoot == 10) {
-            ableToShoot = 0;
-        } else {
-            ableToShoot++;
-        }
-
+		// Used to limit the amount of bullets *Needs to update when animation implemented*
+		if (ableToShoot == 0 || ableToShoot == 10) {
+			ableToShoot = 0;
+		} else {
+			ableToShoot++;
+		}
     }
 
-    public override void PlayAnimation() {
+    public override void Die() {
 //        base.Die();
-        player.GetComponent<PlayerController>().points += 5;
+		animator.SetTrigger ("RobotoDeath");
+		speed = 0.0f;
+		speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
+		gameObject.tag = null;
+		player.GetComponent<PlayerController>().points += 5;
     }
 }
