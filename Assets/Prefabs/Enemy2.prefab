@@ -316,7 +316,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -422,12 +422,15 @@ MonoBehaviour:
   moveSpeed: 90
   chaseSpeed: 0
   playerGO: {fileID: 0}
+  health: 0
+  player: {fileID: 0}
   deathSound: {fileID: 8300000, guid: e89dddcf9da1a3c44bd91d9339344a8d, type: 3}
   healthBar: {fileID: 1312073408121594}
   bulletPrefab: {fileID: 1691409582893586, guid: fddf03220d1480c499cd79ebbdc54a85,
     type: 2}
   EnemyTransform: {fileID: 4627289948047990}
   bulletSpawn: {fileID: 4954455743924554}
+  enemyBulletSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!212 &212116654755166586
 SpriteRenderer:
   m_ObjectHideFlags: 1

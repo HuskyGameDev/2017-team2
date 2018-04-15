@@ -11,9 +11,13 @@ public class Enemy2 : Enemy {
     public Transform EnemyTransform;
     public Transform bulletSpawn;
 
+    public AudioClip enemyBulletSound;
+
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
+
+    private AudioSource audioSource;
     
     private Vector2 movement;
     public new const int DEFAULT_HEALTH = 160;
@@ -24,6 +28,7 @@ public class Enemy2 : Enemy {
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
 
         EnemyTransform = GetComponent<Transform>();
 
@@ -78,6 +83,10 @@ public class Enemy2 : Enemy {
         // Create a new bullet with the current mouse position
         if (ableToShoot == 0) {
             GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+
+
+            audioSource.pitch = Random.Range(0.5f, 0.7f);
+            audioSource.PlayOneShot(enemyBulletSound);
 
             ableToShoot++;
         }
