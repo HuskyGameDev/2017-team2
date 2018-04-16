@@ -13,12 +13,11 @@ public class LoadSceneOnClick : MonoBehaviour
 
     //For loading back into the menus
     public void LoadMenu() {
-        //Fade();
         SceneManager.LoadScene(0);
     }
     //For reloading the game with previous parameters
     public void ReloadGame() {
-        Fade();
+        //Fade();
         SceneManager.LoadScene(1);
     }
     //Load game with a given number of floors
@@ -27,14 +26,14 @@ public class LoadSceneOnClick : MonoBehaviour
         DataBetweenScenes.isEndless = false;
         DataBetweenScenes.numFloors = numFloors;
 
-        Fade();
+        //Fade();
         SceneManager.LoadScene(1);
     }
     //Load game in endless mode
     public void LoadEndless() {
         DataBetweenScenes.isEndless = true;
 
-        Fade();
+        //Fade();
         SceneManager.LoadScene(1);
     }
 
@@ -43,6 +42,7 @@ public class LoadSceneOnClick : MonoBehaviour
             DataBetweenScenes.devMode = true;
     }
 
+    /*
     void Fade ()
     {
         StartCoroutine(Fading());
@@ -54,4 +54,5 @@ public class LoadSceneOnClick : MonoBehaviour
         yield return new WaitUntil(() => black.color.a == 1);
         fadingObject.SetActive(false);
     }
+    */
 }

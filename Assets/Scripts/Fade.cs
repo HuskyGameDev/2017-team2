@@ -13,7 +13,7 @@ public class Fade : MonoBehaviour {
 
     private void OnGUI()
     {
-        alpha += fadeDirection * fadeSpeed * Time.deltaTime;
+        alpha += fadeDirection * fadeSpeed * Time.unscaledDeltaTime;
         alpha = Mathf.Clamp01(alpha);
 
         GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);

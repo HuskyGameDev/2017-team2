@@ -1043,6 +1043,7 @@ GameObject:
   - component: {fileID: 298425047}
   - component: {fileID: 298425046}
   - component: {fileID: 298425045}
+  - component: {fileID: 298425048}
   m_Layer: 5
   m_Name: endlessLeaderboard
   m_TagString: Untagged
@@ -1155,6 +1156,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298425043}
+--- !u!114 &298425048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298425043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec38311c687c547b7d983f27285a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 554460053}
+  selectedObject: {fileID: 1129115982}
 --- !u!1 &317806225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1351,7 @@ GameObject:
   - component: {fileID: 322035995}
   - component: {fileID: 322035994}
   - component: {fileID: 322035996}
+  - component: {fileID: 322035997}
   m_Layer: 5
   m_Name: credits
   m_TagString: Untagged
@@ -1418,6 +1433,19 @@ MonoBehaviour:
   msg3: {fileID: 1743666874}
   msg4: {fileID: 2119941869}
   menuButton: {fileID: 1867709419}
+--- !u!114 &322035997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322035992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec38311c687c547b7d983f27285a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 554460053}
+  selectedObject: {fileID: 1867709417}
 --- !u!1 &399338434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1956,6 +1984,10 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22400004, guid: 05a81c3d5091440058129444d28322f3,
     type: 2}
   m_PrefabInternal: {fileID: 431156424}
+--- !u!1 &431156426 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: 05a81c3d5091440058129444d28322f3, type: 2}
+  m_PrefabInternal: {fileID: 431156424}
 --- !u!1 &492613207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,7 +2334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &602315989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2628,6 +2660,7 @@ GameObject:
   - component: {fileID: 707489489}
   - component: {fileID: 707489488}
   - component: {fileID: 707489490}
+  - component: {fileID: 707489491}
   m_Layer: 5
   m_Name: gameOverScreen
   m_TagString: Untagged
@@ -2705,6 +2738,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floors: {fileID: 1379806310}
   score: {fileID: 47223514}
+--- !u!114 &707489491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 707489486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec38311c687c547b7d983f27285a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 554460053}
+  selectedObject: {fileID: 1486974158}
 --- !u!1 &713138906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3582,7 @@ GameObject:
   - component: {fileID: 910998520}
   - component: {fileID: 910998519}
   - component: {fileID: 910998518}
+  - component: {fileID: 910998521}
   m_Layer: 5
   m_Name: gameWinScreen
   m_TagString: Untagged
@@ -3612,6 +3659,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910998516}
+--- !u!114 &910998521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 910998516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec38311c687c547b7d983f27285a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 554460053}
+  selectedObject: {fileID: 431156426}
 --- !u!1 &952445890
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5515,7 @@ GameObject:
   - component: {fileID: 1409169068}
   - component: {fileID: 1409169067}
   - component: {fileID: 1409169071}
+  - component: {fileID: 1409169072}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5556,6 +5617,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winScreen: {fileID: 910998516}
   loseScreen: {fileID: 707489486}
+--- !u!114 &1409169072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1409169066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9185b75f948144297db818906a1103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTexture: {fileID: 2800000, guid: 32847f11810443849aafbc9ec28faa3d, type: 3}
+  fadeSpeed: 0.25
 --- !u!1 &1413566929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5731,6 +5805,7 @@ GameObject:
   - component: {fileID: 1512454180}
   - component: {fileID: 1512454182}
   - component: {fileID: 1512454181}
+  - component: {fileID: 1512454183}
   m_Layer: 5
   m_Name: nameEntry
   m_TagString: Untagged
@@ -5792,6 +5867,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1512454179}
+--- !u!114 &1512454183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1512454179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec38311c687c547b7d983f27285a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 554460053}
+  selectedObject: {fileID: 569137962}
 --- !u!1 &1527076843
 GameObject:
   m_ObjectHideFlags: 0
