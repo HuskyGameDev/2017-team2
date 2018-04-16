@@ -12,12 +12,13 @@ public class Enemy2 : Enemy {
     public Transform bulletSpawn;
 
     public AudioClip enemyBulletSound;
+    public AudioClip deathSound;
 
     private List<bulletStruct> bullets = new List<bulletStruct>();
     private float bulletSpeed;
     private int ableToShoot = 0;
 
-    private AudioSource audioSource;
+    private AudioSource newAudioSource;
     
     private Vector2 movement;
     public new const int DEFAULT_HEALTH = 160;
@@ -28,7 +29,7 @@ public class Enemy2 : Enemy {
     protected override void Start() {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-        audioSource = GetComponent<AudioSource>();
+        newAudioSource = player.GetComponent<AudioSource>();
 
         EnemyTransform = GetComponent<Transform>();
 
@@ -85,8 +86,8 @@ public class Enemy2 : Enemy {
             GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
 
 
-            audioSource.pitch = Random.Range(0.5f, 0.7f);
-            audioSource.PlayOneShot(enemyBulletSound);
+            newAudioSource.pitch = Random.Range(0.5f, 0.7f);
+            newAudioSource.PlayOneShot(enemyBulletSound);
 
             ableToShoot++;
         }
@@ -101,6 +102,7 @@ public class Enemy2 : Enemy {
     }
 
     public override void Die() {
+        GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
         base.Die();
         player.GetComponent<PlayerController>().points += 5;
     }

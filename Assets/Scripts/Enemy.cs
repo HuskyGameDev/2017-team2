@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour {
 	protected Transform player_pos;
 
     protected AudioSource audioSource;
-    public AudioClip deathSound;
+    public GameObject gameManager;
 
     private int attention = 0;
     public const int DEFAULT_HEALTH = 50; 
@@ -145,7 +145,6 @@ public class Enemy : MonoBehaviour {
 
 	//Should be overridden by each enemy that inherits to handle awarding of points
 	public virtual void Die() {
-		Destroy(gameObject);
-		//audioSource.PlayOneShot(deathSound);
+        Destroy(gameObject);
 	}
   }

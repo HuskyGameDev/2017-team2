@@ -11,6 +11,9 @@ public class Enemy1 : Enemy {
 	private bool attacking;
 	public Collider2D meleeAttack;
 
+    private AudioSource newAudioSource;
+    public AudioClip deathSound;
+
     private Vector2 movement2;
     private float rot = 0;
 
@@ -18,9 +21,10 @@ public class Enemy1 : Enemy {
 	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
-        
-//		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
-//		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
+        newAudioSource = player.GetComponent<AudioSource>();
+
+        //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+        //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
         xMax = transform.position.x + 10;
         xMin = transform.position.x - 10;
@@ -94,6 +98,7 @@ public class Enemy1 : Enemy {
 	}
     
     public override void Die() {
+        GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
         base.Die();
         player.GetComponent<PlayerController>().points += 10;
     }
