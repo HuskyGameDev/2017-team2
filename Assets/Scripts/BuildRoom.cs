@@ -433,7 +433,7 @@ public class BuildRoom : MonoBehaviour {
             Vector3 vector = Vector3.zero;
             if (room.finalDoor == BuildFloor.Direction.WEST) {
                 rotation = Quaternion.AngleAxis(90, Vector3.back);
-                vector = new Vector3(dx - .0625f, dy + 6, 0);
+                vector = new Vector3(dx, dy + 6, 0);
                 room.doorWest = 5;
             }
             //       else if (room.finalDoor == BuildFloor.Direction.EAST) {
@@ -444,7 +444,7 @@ public class BuildRoom : MonoBehaviour {
             //   }
             else if (room.finalDoor == BuildFloor.Direction.NORTH) { 
                 rotation = Quaternion.AngleAxis(180, Vector3.back);
-                vector = new Vector3(dx + 6, dy + 10.0625f, 0);
+                vector = new Vector3(dx + 6, dy + 10f, 0);
                 room.doorNorth = 5;
             }
             //     else if (room.finalDoor == BuildFloor.Direction.SOUTH) {
