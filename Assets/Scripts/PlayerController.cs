@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour {
     //Number of points the player has
     public int points;
 
+    public Text pointsText;
 
     // Use this for initialization
     void Start() {
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour {
         points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();
-
+        pointsText.text = points.ToString() ;
         
 
         //Get and store a reference to the Rigidbody2D component so that we can access it.
@@ -164,6 +165,7 @@ public class PlayerController : MonoBehaviour {
 
     //Called every frame
     void Update() {
+        pointsText.text = points.ToString();
         // Check for controller in update by counting the number of frames
         checkControl++;
 

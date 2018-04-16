@@ -12,15 +12,18 @@ public class Enemy1 : Enemy {
 	public Collider2D meleeAttack;
     private Vector2 movement2;
     private float rot = 0;
-
+    public new const int DEFAULT_HEALTH = 480;
 	protected override void Start() 
 	{
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
+//		animator = GetComponent<Animator> ();
+
 		health = 480;
 
 		totalHealth = health;
+    
 //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
 //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
@@ -103,7 +106,14 @@ public class Enemy1 : Enemy {
 	}
     
     public override void Die() {
-        base.Die();
+		animator.SetTrigger ("BigGunsDeath");
+		speed = 0.0f;
+		speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
+		gameObject.tag = null;
         player.GetComponent<PlayerController>().points += 10;
     }
 }

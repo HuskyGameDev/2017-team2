@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cd0ed075a72ba459ee7850824f134a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
 --- !u!114 &114184101008970570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +178,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 2
   shooter: {fileID: 1443834167817138, guid: 9a0de385d7ad27048a98292e591ee63d, type: 2}
-  hitSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!114 &114557693748160060
 MonoBehaviour:
   m_ObjectHideFlags: 1
