@@ -85,4 +85,12 @@ public class AnimationSetter : MonoBehaviour
         /* Increment time to blink after 3 seconds of no activity */
         idleTime++;
 	}
+
+	public void Damage() {
+		anim.SetTrigger ("UDamage");
+	}
+
+	public void Die() {
+		anim.SetTrigger ("UDeath");
+	}
 }

@@ -120,6 +120,9 @@ public class PlayerController : MonoBehaviour {
 
     public Text pointsText;
 
+	//Animation script
+	private AnimationSetter anim;
+
     // Use this for initialization
     void Start() {
         if (DataBetweenScenes.isEndless) {
@@ -137,11 +140,11 @@ public class PlayerController : MonoBehaviour {
         points = 0;
         health = 100;
         controllers = Input.GetJoystickNames();
-        pointsText.text = points.ToString() ;
+		anim = GetComponent<AnimationSetter> ();
+//      pointsText.text = points.ToString() ;
         
-
-        //Get and store a reference to the Rigidbody2D component so that we can access it.
-        rb2d = GetComponent<Rigidbody2D>();
+		//Get and store a reference to the Rigidbody2D component so that we can access it.
+		rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
 
@@ -165,7 +168,6 @@ public class PlayerController : MonoBehaviour {
 
     //Called every frame
     void Update() {
-        pointsText.text = points.ToString();
         // Check for controller in update by counting the number of frames
         checkControl++;
 
@@ -378,9 +380,11 @@ public class PlayerController : MonoBehaviour {
     // This method is called when the player's HP is reduced to 0
     void GameOver() {
         DataBetweenScenes.points = points;
+		anim.SendMessage ("Die");
         SceneManager.LoadScene(2);
     }
     void Hit(int dmg) {
         health -= dmg;
+		anim.SendMessage ("Damage");
     }
 }
