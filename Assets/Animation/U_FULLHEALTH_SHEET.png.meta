@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f3092279407515f4da42535e2d90f212
-timeCreated: 1510705875
+timeCreated: 1523916857
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -36,6 +36,22 @@ TextureImporter:
     21300058: U_FULLHEALTH_SHEET_29
     21300060: U_FULLHEALTH_SHEET_30
     21300062: U_FULLHEALTH_SHEET_31
+    21300064: U_FULLHEALTH_SHEET_32
+    21300066: U_FULLHEALTH_SHEET_33
+    21300068: U_FULLHEALTH_SHEET_34
+    21300070: U_FULLHEALTH_SHEET_35
+    21300072: U_FULLHEALTH_SHEET_36
+    21300074: U_FULLHEALTH_SHEET_37
+    21300076: U_FULLHEALTH_SHEET_38
+    21300078: U_FULLHEALTH_SHEET_39
+    21300080: U_FULLHEALTH_SHEET_40
+    21300082: U_FULLHEALTH_SHEET_41
+    21300084: U_FULLHEALTH_SHEET_42
+    21300086: U_FULLHEALTH_SHEET_43
+    21300088: U_FULLHEALTH_SHEET_44
+    21300090: U_FULLHEALTH_SHEET_45
+    21300092: U_FULLHEALTH_SHEET_46
+    21300094: U_FULLHEALTH_SHEET_47
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -127,11 +143,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 165
-        y: 3569
+        y: 5972
         width: 472
         height: 428
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -141,11 +157,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 965
-        y: 3569
+        y: 5965
         width: 472
         height: 428
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,11 +171,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1768
-        y: 3568
+        y: 5968
         width: 469
         height: 432
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,11 +185,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2568
-        y: 3568
+        y: 5968
         width: 469
         height: 432
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -182,12 +198,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_4
       rect:
         serializedVersion: 2
-        x: 3363
-        y: 3566
+        x: 3374
+        y: 5972
         width: 475
         height: 428
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,12 +212,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_5
       rect:
         serializedVersion: 2
-        x: 4163
-        y: 3566
+        x: 4152
+        y: 5972
         width: 474
         height: 428
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,11 +227,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4959
-        y: 3566
+        y: 5979
         width: 482
         height: 421
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,12 +240,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_7
       rect:
         serializedVersion: 2
-        x: 5759
-        y: 3568
+        x: 5781
+        y: 5980
         width: 482
         height: 420
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,12 +254,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_8
       rect:
         serializedVersion: 2
-        x: 165
-        y: 2771
+        x: 187
+        y: 5179
         width: 475
         height: 430
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,11 +269,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 968
-        y: 2766
+        y: 5174
         width: 466
         height: 437
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -267,11 +283,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1768
-        y: 2769
+        y: 5177
         width: 466
         height: 437
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -280,12 +296,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_11
       rect:
         serializedVersion: 2
-        x: 2562
-        y: 2771
+        x: 2551
+        y: 5179
         width: 476
         height: 430
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,11 +311,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3362
-        y: 2771
+        y: 5201
         width: 476
         height: 430
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -309,11 +325,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4160
-        y: 2766
+        y: 5174
         width: 484
         height: 421
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -323,11 +339,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4959
-        y: 2763
+        y: 5159
         width: 482
         height: 421
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -336,12 +352,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_15
       rect:
         serializedVersion: 2
-        x: 190
-        y: 1965
+        x: 179
+        y: 4384
         width: 451
         height: 404
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -351,11 +367,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 997
-        y: 1884
+        y: 4336
         width: 438
         height: 476
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -364,12 +380,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_17
       rect:
         serializedVersion: 2
-        x: 1788
-        y: 1950
+        x: 1799
+        y: 4369
         width: 465
         height: 409
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -379,11 +395,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2584
-        y: 1956
+        y: 4375
         width: 456
         height: 409
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -393,11 +409,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3390
-        y: 1965
+        y: 4373
         width: 451
         height: 410
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -406,12 +422,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_20
       rect:
         serializedVersion: 2
-        x: 4197
-        y: 1884
+        x: 4219
+        y: 4303
         width: 438
         height: 476
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -421,11 +437,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4997
-        y: 1947
+        y: 4355
         width: 456
         height: 410
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -434,12 +450,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_22
       rect:
         serializedVersion: 2
-        x: 181
-        y: 884
+        x: 192
+        y: 3292
         width: 441
         height: 656
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -449,11 +465,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 978
-        y: 878
+        y: 3286
         width: 466
         height: 682
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -463,11 +479,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1769
-        y: 900
+        y: 3308
         width: 453
         height: 710
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -477,11 +493,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2560
-        y: 835
+        y: 3254
         width: 462
         height: 724
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -490,12 +506,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_26
       rect:
         serializedVersion: 2
-        x: 56
-        y: 369
+        x: 70
+        y: 2763
         width: 601
         height: 403
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -504,12 +520,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_27
       rect:
         serializedVersion: 2
-        x: 874
-        y: 349
+        x: 831
+        y: 2786
         width: 620
         height: 445
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -519,11 +535,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1803
-        y: 141
+        y: 2564
         width: 441
         height: 637
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -532,12 +548,12 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_29
       rect:
         serializedVersion: 2
-        x: 2578
-        y: 0
+        x: 2607
+        y: 2394
         width: 457
         height: 766
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -547,11 +563,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3250
-        y: 0
+        y: 2394
         width: 576
         height: 781
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -560,12 +576,236 @@ TextureImporter:
       name: U_FULLHEALTH_SHEET_31
       rect:
         serializedVersion: 2
-        x: 4100
-        y: 235
+        x: 4086
+        y: 2615
         width: 560
         height: 537
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_32
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 1843
+        width: 777
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_33
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 1745
+        width: 812
+        height: 581
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_34
+      rect:
+        serializedVersion: 2
+        x: 1595
+        y: 1738
+        width: 792
+        height: 609
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_35
+      rect:
+        serializedVersion: 2
+        x: 2394
+        y: 1801
+        width: 784
+        height: 546
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_36
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 1121
+        width: 560
+        height: 477
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_37
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 1023
+        width: 525
+        height: 463
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_38
+      rect:
+        serializedVersion: 2
+        x: 1784
+        y: 1002
+        width: 498
+        height: 449
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_39
+      rect:
+        serializedVersion: 2
+        x: 2534
+        y: 918
+        width: 560
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_40
+      rect:
+        serializedVersion: 2
+        x: 3275
+        y: 1128
+        width: 693
+        height: 421
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_41
+      rect:
+        serializedVersion: 2
+        x: 4066
+        y: 1030
+        width: 680
+        height: 456
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_42
+      rect:
+        serializedVersion: 2
+        x: 4851
+        y: 1002
+        width: 700
+        height: 449
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_43
+      rect:
+        serializedVersion: 2
+        x: 5705
+        y: 925
+        width: 595
+        height: 540
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_44
+      rect:
+        serializedVersion: 2
+        x: 6519
+        y: 965
+        width: 641
+        height: 567
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_45
+      rect:
+        serializedVersion: 2
+        x: 7237
+        y: 909
+        width: 741
+        height: 611
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_46
+      rect:
+        serializedVersion: 2
+        x: 8024
+        y: 853
+        width: 760
+        height: 749
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: U_FULLHEALTH_SHEET_47
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 50
+        width: 782
+        height: 752
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

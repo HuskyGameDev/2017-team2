@@ -23,6 +23,12 @@ public class Enemy1 : Enemy {
 		circleCollider = GetComponent<CircleCollider2D> ();
         newAudioSource = player.GetComponent<AudioSource>();
 
+		animator = GetComponent<Animator> ();
+
+		health = 480;
+
+		totalHealth = health;
+
         //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
         //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
@@ -72,6 +78,7 @@ public class Enemy1 : Enemy {
 	}
 
 	private void slash() {
+		animator.SetTrigger ("BigGunsSmash");
 		float dist = Vector3.Distance (player_pos.position, transform.position);
 
 		if (dist < 2 && !attacking)
@@ -99,7 +106,16 @@ public class Enemy1 : Enemy {
     
     public override void Die() {
         GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
-        base.Die();
+//		print ("So many regrets...");
+		animator.SetTrigger ("BigGunsDeath");
+		moveSpeed = 0.0f;
+        chaseSpeed = 0.0f;
+		speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
+		gameObject.tag = null;
         player.GetComponent<PlayerController>().points += 10;
     }
 }

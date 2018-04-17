@@ -10,7 +10,9 @@ public class Enemy3 : Enemy {
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
-    public new const int DEFAULT_HEALTH = 80;
+
+  public new const int DEFAULT_HEALTH = 80;
+	private float animTime = 0.0f;
 
     private AudioSource newAudioSource;
     public AudioClip deathSound;
@@ -22,6 +24,7 @@ public class Enemy3 : Enemy {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
         newAudioSource = player.GetComponent<AudioSource>();
+		animator = GetComponent<Animator> ();
 
         //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
         //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
@@ -59,7 +62,6 @@ public class Enemy3 : Enemy {
 
     protected override void Chase() {
 
-
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler (0, 0, angle - 45);
         
@@ -74,23 +76,17 @@ public class Enemy3 : Enemy {
 	{
 		float dist = Vector3.Distance (player_pos.position, transform.position);
 
-		if (dist < 1 && !attacking)
-		{
+		if (dist < 1 && !attacking) {
 			attacking = true;
 			meleeAttack.enabled = true;
 		}
 
-		if (attacking)
-		{
+		if (attacking) {
 
-			if (wait > 0)
-			{
+			if (wait > 0) {
 
 				wait--;
-			}
-
-			else
-			{
+			} else {
 				attacking = false;
 				meleeAttack.enabled = false;
 				wait = 10;
@@ -100,7 +96,16 @@ public class Enemy3 : Enemy {
 
     public override void Die() {
         GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
-        base.Die();
+		animator.SetTrigger ("Rhoomba_Death");
+        //base.Die();
+        moveSpeed = 0.0f;
+        chaseSpeed = 0.0f;
+        speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<CircleCollider2D> ());
+		gameObject.tag = null;
         player.GetComponent<PlayerController>().points += 2;
     }
 }

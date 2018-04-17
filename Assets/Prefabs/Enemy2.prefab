@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114988140603538004}
   - component: {fileID: 82020979984194250}
   - component: {fileID: 114975685104946498}
+  - component: {fileID: 95395007584834344}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Enemy
@@ -385,6 +386,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95395007584834344
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443834167817138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4477754fff60e0941a4257aced6c15a5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114708743617904340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,9 +441,11 @@ MonoBehaviour:
   chaseSpeed: 0
   playerGO: {fileID: 0}
   health: 0
+  canAttack: 1
   player: {fileID: 0}
   deathSound: {fileID: 8300000, guid: e89dddcf9da1a3c44bd91d9339344a8d, type: 3}
   healthBar: {fileID: 1312073408121594}
+  animator: {fileID: 0}
   bulletPrefab: {fileID: 1691409582893586, guid: fddf03220d1480c499cd79ebbdc54a85,
     type: 2}
   EnemyTransform: {fileID: 4627289948047990}

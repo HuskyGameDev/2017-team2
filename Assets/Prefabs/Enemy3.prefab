@@ -119,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1380226150802872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115.26968, y: -15.618444, z: 0}
+  m_LocalPosition: {x: 2.9735963, y: 0.5329026, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.5}
   m_Children:
   - {fileID: 4443532979775644}
@@ -319,7 +319,9 @@ MonoBehaviour:
   player: {fileID: 0}
   deathSound: {fileID: 8300000, guid: b3e74d8e20b45ad4fb8d0a1ed151e61a, type: 3}
   healthBar: {fileID: 1341091858352456}
+  animator: {fileID: 0}
   meleeAttack: {fileID: 58832408908249894}
+  deathAnimation: {fileID: 0}
 --- !u!114 &114219180725047908
 MonoBehaviour:
   m_ObjectHideFlags: 1

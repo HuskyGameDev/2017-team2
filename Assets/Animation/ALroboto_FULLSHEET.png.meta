@@ -1,9 +1,38 @@
 fileFormatVersion: 2
 guid: a4926797c7ff57c4ba29d20d36aed372
-timeCreated: 1519256928
+timeCreated: 1523738295
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: ALroboto_FULLSHEET_0
+    21300002: ALroboto_FULLSHEET_1
+    21300004: ALroboto_FULLSHEET_2
+    21300006: ALroboto_FULLSHEET_3
+    21300008: ALroboto_FULLSHEET_4
+    21300010: ALroboto_FULLSHEET_5
+    21300012: ALroboto_FULLSHEET_6
+    21300014: ALroboto_FULLSHEET_7
+    21300016: ALroboto_FULLSHEET_8
+    21300018: ALroboto_FULLSHEET_9
+    21300020: ALroboto_FULLSHEET_10
+    21300022: ALroboto_FULLSHEET_11
+    21300024: ALroboto_FULLSHEET_12
+    21300026: ALroboto_FULLSHEET_13
+    21300028: ALroboto_FULLSHEET_14
+    21300030: ALroboto_FULLSHEET_15
+    21300032: ALroboto_FULLSHEET_16
+    21300034: ALroboto_FULLSHEET_17
+    21300036: ALroboto_FULLSHEET_18
+    21300038: ALroboto_FULLSHEET_19
+    21300040: ALroboto_FULLSHEET_20
+    21300042: ALroboto_FULLSHEET_21
+    21300044: ALroboto_FULLSHEET_22
+    21300046: ALroboto_FULLSHEET_23
+    21300048: ALroboto_FULLSHEET_24
+    21300050: ALroboto_FULLSHEET_25
+    21300052: ALroboto_FULLSHEET_26
+    21300054: ALroboto_FULLSHEET_27
+    21300056: ALroboto_FULLSHEET_28
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,7 +68,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -63,9 +92,395 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_0
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 2530
+        width: 437
+        height: 613
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_1
+      rect:
+        serializedVersion: 2
+        x: 947
+        y: 2503
+        width: 438
+        height: 589
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_2
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 2477
+        width: 352
+        height: 608
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_3
+      rect:
+        serializedVersion: 2
+        x: 2482
+        y: 2468
+        width: 363
+        height: 613
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_4
+      rect:
+        serializedVersion: 2
+        x: 3338
+        y: 2488
+        width: 433
+        height: 585
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_5
+      rect:
+        serializedVersion: 2
+        x: 4205
+        y: 2530
+        width: 438
+        height: 613
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_7
+      rect:
+        serializedVersion: 2
+        x: 5005
+        y: 2554
+        width: 434
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_8
+      rect:
+        serializedVersion: 2
+        x: 5850
+        y: 2479
+        width: 382
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_9
+      rect:
+        serializedVersion: 2
+        x: 6645
+        y: 2471
+        width: 387
+        height: 522
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_11
+      rect:
+        serializedVersion: 2
+        x: 7434
+        y: 2546
+        width: 433
+        height: 522
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_12
+      rect:
+        serializedVersion: 2
+        x: 5769
+        y: 2801
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_13
+      rect:
+        serializedVersion: 2
+        x: 5805
+        y: 2786
+        width: 4
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_14
+      rect:
+        serializedVersion: 2
+        x: 5815
+        y: 2782
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_15
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 1604
+        width: 609
+        height: 733
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_16
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1601
+        width: 662
+        height: 746
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_17
+      rect:
+        serializedVersion: 2
+        x: 1736
+        y: 1647
+        width: 606
+        height: 707
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 1003
+        width: 721
+        height: 577
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_19
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 973
+        width: 713
+        height: 623
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_20
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 957
+        width: 687
+        height: 631
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_21
+      rect:
+        serializedVersion: 2
+        x: 2479
+        y: 869
+        width: 636
+        height: 696
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_22
+      rect:
+        serializedVersion: 2
+        x: 3334
+        y: 893
+        width: 582
+        height: 672
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_23
+      rect:
+        serializedVersion: 2
+        x: 4011
+        y: 790
+        width: 799
+        height: 814
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_24
+      rect:
+        serializedVersion: 2
+        x: 4811
+        y: 784
+        width: 783
+        height: 814
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_25
+      rect:
+        serializedVersion: 2
+        x: 5611
+        y: 814
+        width: 797
+        height: 778
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_26
+      rect:
+        serializedVersion: 2
+        x: 6225
+        y: 1499
+        width: 179
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_27
+      rect:
+        serializedVersion: 2
+        x: 5607
+        y: 805
+        width: 187
+        height: 139
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: ALroboto_FULLSHEET_28
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 18
+        width: 767
+        height: 772
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 

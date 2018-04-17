@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 114604224457239874}
   - component: {fileID: 82283589020179852}
   - component: {fileID: 114587273935860412}
+  - component: {fileID: 95062102966714318}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -535,6 +536,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95062102966714318
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587803288785038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b721fd4271958e45832b1817745111d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114587273935860412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -561,8 +579,12 @@ MonoBehaviour:
   moveSpeed: 50
   chaseSpeed: 50
   playerGO: {fileID: 0}
+  canAttack: 1
+  health: 0
+  player: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
   healthBar: {fileID: 1898905653390718}
+  animator: {fileID: 0}
   meleeAttack: {fileID: 58216117876100090}
 --- !u!114 &114639944651411312
 MonoBehaviour:

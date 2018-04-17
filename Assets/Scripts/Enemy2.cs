@@ -30,6 +30,7 @@ public class Enemy2 : Enemy {
         rb2d = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
         newAudioSource = player.GetComponent<AudioSource>();
+		animator = GetComponent<Animator> ();
 
         EnemyTransform = GetComponent<Transform>();
 
@@ -67,7 +68,6 @@ public class Enemy2 : Enemy {
     }
 
     protected override void Chase() {
-
         angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
@@ -75,35 +75,45 @@ public class Enemy2 : Enemy {
 
         GetComponent<Rigidbody2D>().AddForce(force);
 
-        shoot();
+		shoot ();
     }
 
 
     // Method used to handle shooting projectiles
     private void shoot() {
-        // Create a new bullet with the current mouse position
-        if (ableToShoot == 0) {
-            GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+		animator.SetTrigger ("RobotoShoot");
 
+		// Create a new bullet with the current mouse position
+		if (ableToShoot == 0) {
 
-            newAudioSource.pitch = Random.Range(0.5f, 0.7f);
+			GameObject ebullet = Instantiate (bulletPrefab, bulletSpawn.position, this.transform.rotation);
+			
+			newAudioSource.pitch = Random.Range(0.5f, 0.7f);
             newAudioSource.PlayOneShot(enemyBulletSound);
 
-            ableToShoot++;
-        }
+			ableToShoot++;
+		}
 
-        // Used to limit the amount of bullets *Needs to update when animation implemented*
-        if (ableToShoot == 0 || ableToShoot == 10) {
-            ableToShoot = 0;
-        } else {
-            ableToShoot++;
-        }
-
+		// Used to limit the amount of bullets *Needs to update when animation implemented*
+		if (ableToShoot == 0 || ableToShoot == 10) {
+			ableToShoot = 0;
+		} else {
+			ableToShoot++;
+		}
     }
 
     public override void Die() {
         GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
-        base.Die();
-        player.GetComponent<PlayerController>().points += 5;
+//        base.Die();
+		animator.SetTrigger ("RobotoDeath");
+		moveSpeed = 0.0f;
+        chaseSpeed = 0.0f;
+        speedMax = 0.0f;
+		healthBar.SetActive (false);
+		Destroy (rb2d);
+		Destroy (circleCollider);
+		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
+		gameObject.tag = null;
+		player.GetComponent<PlayerController>().points += 5;
     }
 }
