@@ -2,37 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Big Enemies - Big Guns
 
+//Big Enemies - Big Guns
 public class Enemy1 : Enemy {
 
 	// Object for slashing
 	private int wait = 10;
 	private bool attacking;
 	public Collider2D meleeAttack;
+
+    private AudioSource newAudioSource;
+    public AudioClip deathSound;
+
     private Vector2 movement2;
     private float rot = 0;
+
     public new const int DEFAULT_HEALTH = 480;
-	protected override void Start() 
-	{
+	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
+        newAudioSource = player.GetComponent<AudioSource>();
 
 		animator = GetComponent<Animator> ();
 
 		health = 480;
 
 		totalHealth = health;
-    
-//		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
-//		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
+        //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+        //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
         xMax = transform.position.x + 10;
         xMin = transform.position.x - 10;
         yMax = transform.position.y + 10;
         yMin = transform.position.y - 10;
-        speedMax = speed / 30f;
+        speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -44,8 +48,7 @@ public class Enemy1 : Enemy {
         movement2 = Vector2.up*100;
     }
 
-	protected override void MoveAtRandom() 
-	{
+	protected override void MoveAtRandom() {
 
 
         rot += Random.Range(-1f, 1f);
@@ -55,31 +58,26 @@ public class Enemy1 : Enemy {
             rot = -3;
         }
         transform.Rotate(new Vector3(0, 0, rot));
-        movement2 = -transform.up * 300;
+        movement2 = -transform.up * moveSpeed;
         GetComponent<Rigidbody2D>().AddForce(movement2);
 
-        Vector2 movement = new Vector2 (transform.localPosition.x + x, transform.localPosition.y + y);
+        Vector2 movement = new Vector2(transform.localPosition.x + x, transform.localPosition.y + y);
 
     }
 
-	protected override void Chase() 
-	{
+	protected override void Chase() {
 
-		time += Time.deltaTime;
+        angle = Mathf.Atan2(player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle + 90);
 
-		if (time - Mathf.Floor(time) <= 0.25 || (time - Mathf.Floor(time) > 0.5 && time - Mathf.Floor(time) < 0.75)) {
-            GetComponent<Rigidbody2D>().position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-            //transform.position = Vector2.MoveTowards(transform.position, player_pos.position, speed * Time.deltaTime);
-        }
+        Vector2 force = (player_pos.position - transform.position).normalized * chaseSpeed;
 
-		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle + 90);
+        GetComponent<Rigidbody2D>().AddForce(force);
 
-		slash ();
+        slash ();
 	}
 
-	private void slash()
-	{
+	private void slash() {
 		animator.SetTrigger ("BigGunsSmash");
 		float dist = Vector3.Distance (player_pos.position, transform.position);
 
@@ -107,9 +105,11 @@ public class Enemy1 : Enemy {
 	}
     
     public override void Die() {
+        GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
 //		print ("So many regrets...");
 		animator.SetTrigger ("BigGunsDeath");
-		speed = 0.0f;
+		moveSpeed = 0.0f;
+        chaseSpeed = 0.0f;
 		speedMax = 0.0f;
 		healthBar.SetActive (false);
 		Destroy (rb2d);

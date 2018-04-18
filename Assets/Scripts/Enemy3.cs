@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Small Enemies - Ankle Biter
 
+//Small Enemies - Ankle Biter
 public class Enemy3 : Enemy {
 
 	// Object for slashing
@@ -14,22 +14,26 @@ public class Enemy3 : Enemy {
   public new const int DEFAULT_HEALTH = 80;
 	private float animTime = 0.0f;
 
-    protected override void Start() {
-		
+    private AudioSource newAudioSource;
+    public AudioClip deathSound;
+
+    private Vector2 movement2;
+    private float rot = 0;
+
+	protected override void Start() {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
-        audioSource = GetComponent<AudioSource>();
+        newAudioSource = player.GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 
-//		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
-//		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
-
+        //		Vector3 screenMax = Camera.main.ScreenToWorldPoint (new Vector3 (Screen.width, Screen.height, Camera.main.nearClipPlane));
+        //		Vector3 screenMin = Camera.main.ScreenToWorldPoint (new Vector3 (0, 0, Camera.main.nearClipPlane));
 
         xMax = transform.position.x + 10;
         xMin = transform.position.x - 10;
         yMax = transform.position.y + 10;
         yMin = transform.position.y - 10;
-        speedMax = speed / 30f;
+        speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -40,14 +44,32 @@ public class Enemy3 : Enemy {
 
 	}
 
-	protected override void Chase() {
+    protected override void MoveAtRandom() {
 
-		transform.position = Vector2.MoveTowards (transform.position, player_pos.position, speed * Time.deltaTime);
+        transform.Rotate(new Vector3(0, 0, rot - 45));
+        movement2 = transform.up * moveSpeed;
+
+        rot += Random.Range(-1f, 1f);
+        if (rot > 3) {
+            rot = 3;
+        } else if (rot < -3) {
+            rot = -3;
+        }
+
+        GetComponent<Rigidbody2D>().AddForce(movement2);
+        transform.Rotate(new Vector3(0, 0, rot + 45));
+    }
+
+    protected override void Chase() {
 
 		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0, 0, angle);
+		transform.rotation = Quaternion.Euler (0, 0, angle - 45);
+        
+        Vector2 force = (player_pos.position - transform.position).normalized * chaseSpeed;
 
-		slash ();
+        GetComponent<Rigidbody2D>().AddForce(force);
+
+        slash ();
 	}
 
 	private void slash()
@@ -73,10 +95,12 @@ public class Enemy3 : Enemy {
 	}
 
     public override void Die() {
+        GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
 		animator.SetTrigger ("Rhoomba_Death");
-		//base.Die();
-		speed = 0.0f;
-		speedMax = 0.0f;
+        //base.Die();
+        moveSpeed = 0.0f;
+        chaseSpeed = 0.0f;
+        speedMax = 0.0f;
 		healthBar.SetActive (false);
 		Destroy (rb2d);
 		Destroy (circleCollider);

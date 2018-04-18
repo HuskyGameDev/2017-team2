@@ -31,14 +31,18 @@ public class meleeAttack : MonoBehaviour {
         {
 			isCol++;
             col.SendMessageUpwards("Hit", dmg);
-			audioSource.PlayOneShot (hitSound);
+
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot (hitSound);
 			isCol--;
         }
 
 		if (slasher.CompareTag("Enemy") && col.isTrigger != true && col.gameObject.CompareTag("Player"))
 		{
 			col.SendMessageUpwards("Hit", dmg);
-			audioSource.PlayOneShot (hitSound);
+
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot (hitSound);
 		}
     }
 }
