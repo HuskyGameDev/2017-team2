@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour {
 	protected CircleCollider2D circleCollider;
 	public GameObject player;
 	protected Transform player_pos;
+	public GameObject playerCheck;
 
     protected AudioSource audioSource;
     public AudioClip deathSound;
@@ -34,6 +35,8 @@ public class Enemy : MonoBehaviour {
   	public GameObject healthBar;
 
 	public Animator animator;
+
+	protected bool freeze = false;
 
     // Use this for initialization
     protected virtual void Start () {
@@ -59,7 +62,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (health > 0) {
+		if (health > 0 && !freeze) {
 			if (attention == 0)
 				MoveAtRandom ();
 			else {
@@ -69,6 +72,12 @@ public class Enemy : MonoBehaviour {
 			}
 			if (attention > 0)
 				attention--;
+		}
+
+		freeze = player.GetComponent<PlayerController> ().freeze;
+
+		if (freeze) {
+			animator.enabled = false;
 		}
 	}
 
@@ -107,11 +116,13 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
+		if (!freeze) {
+			if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
 
 				player = other.gameObject;
 				player_pos = player.GetComponent<Transform> ();
 				attention = 200;
+			}
 		}
 	}
     //for call by other
@@ -124,7 +135,7 @@ public class Enemy : MonoBehaviour {
     bool hasLOS(Collider2D other) {
 		bool canSee = false;
 
-		if (health > 0) {
+		if (health > 0 && !freeze) {
 			canSee = true;
 		}
 
@@ -156,4 +167,5 @@ public class Enemy : MonoBehaviour {
 		Destroy(gameObject);
 		//audioSource.PlayOneShot(deathSound);
 	}
+		
   }
