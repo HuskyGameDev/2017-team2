@@ -693,7 +693,8 @@ public class BuildRoom : MonoBehaviour {
             go.GetComponent<Enemy>().setHealth(Enemy3.DEFAULT_HEALTH);
         //General Changes
         if (color == PURPLE) {
-            go.GetComponent<Enemy>().speed *= 1.15f;
+            go.GetComponent<Enemy>().moveSpeed *= 1.15f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.15f;
             if (!DataBetweenScenes.isEndless) {
                 //Neither of these work with the variables public in base class
                 if (type == enemyType.LARGE)
@@ -706,7 +707,8 @@ public class BuildRoom : MonoBehaviour {
             }
         } 
         else if (color == RED) {
-            go.GetComponent<Enemy>().speed *= 1.3f;
+            go.GetComponent<Enemy>().moveSpeed *= 1.3f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.3f;
             if (!DataBetweenScenes.isEndless) {
                 //Neither of these work with the variables public in base class
                 if (type == enemyType.LARGE)
@@ -720,7 +722,8 @@ public class BuildRoom : MonoBehaviour {
         } 
         //Endless specific changes
         if (DataBetweenScenes.isEndless) {
-            go.GetComponent<Enemy>().speed *= 1.15f;
+            go.GetComponent<Enemy>().moveSpeed *= 1.15f;
+            go.GetComponent<Enemy>().chaseSpeed *= 1.15f;
             if (color == PURPLE) {
                 /*NOTE This seems to affect Bigguns attacking radius as well, and is probably a bad solution
                     waiting on proper implementation of bigguns attacks before reworking to avoid this */

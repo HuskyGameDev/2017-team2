@@ -317,7 +317,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -437,7 +437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 051e3d9c569922540b9b5416a8f427e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  moveSpeed: 90
+  chaseSpeed: 0
+  playerGO: {fileID: 0}
+  health: 0
   canAttack: 1
   health: 0
   player: {fileID: 0}
@@ -449,6 +452,7 @@ MonoBehaviour:
     type: 2}
   EnemyTransform: {fileID: 4627289948047990}
   bulletSpawn: {fileID: 4954455743924554}
+  enemyBulletSound: {fileID: 8300000, guid: a513b820c645ddb4f8a345fd1511c04e, type: 3}
 --- !u!212 &212116654755166586
 SpriteRenderer:
   m_ObjectHideFlags: 1

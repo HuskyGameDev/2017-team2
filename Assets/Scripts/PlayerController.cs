@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip bulletSound;
     public AudioClip slashSound;
+    public AudioClip damageSound;
 
     private AudioSource audioSource;
     //private AudioClip bulletSound;
@@ -253,6 +254,7 @@ public class PlayerController : MonoBehaviour {
 
                     ableToShoot++;
 
+                    GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
                     GetComponent<AudioSource>().PlayOneShot(bulletSound);
                 }
             }
@@ -264,6 +266,7 @@ public class PlayerController : MonoBehaviour {
 
                     ableToShoot++;
 
+                    GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
                     GetComponent<AudioSource>().PlayOneShot(bulletSound);
                 }
             }
@@ -289,6 +292,7 @@ public class PlayerController : MonoBehaviour {
                 attacking = true;
                 meleeAttack.enabled = true;
 
+                GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
                 GetComponent<AudioSource>().PlayOneShot(slashSound);
 
             }
@@ -297,6 +301,7 @@ public class PlayerController : MonoBehaviour {
                 attacking = true;
                 meleeAttack.enabled = true;
 
+                GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
                 GetComponent<AudioSource>().PlayOneShot(slashSound);
 
             }
@@ -354,6 +359,8 @@ public class PlayerController : MonoBehaviour {
 		anim.SendMessage ("Die");
     }
     void Hit(int dmg) {
+        GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+        GetComponent<AudioSource>().PlayOneShot(damageSound);
         health -= dmg;
 		anim.SendMessage ("Damage");
     }

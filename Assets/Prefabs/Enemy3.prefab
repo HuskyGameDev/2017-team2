@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 58627157195089356}
   - component: {fileID: 114191145349404612}
   - component: {fileID: 82774919983224040}
+  - component: {fileID: 114339855288727316}
   - component: {fileID: 114219180725047908}
   m_Layer: 0
   m_Name: Enemy3
@@ -90,13 +91,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1220638795482344}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6, y: -0.2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4639296688352456}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!4 &4443532979775644
 Transform:
   m_ObjectHideFlags: 1
@@ -201,7 +202,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 1.25, y: 0}
   serializedVersion: 2
   m_Radius: 0.65
 --- !u!82 &82774919983224040
@@ -312,7 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0d4a69970d6f241a3876321ca66f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  moveSpeed: 120
+  chaseSpeed: 150
+  playerGO: {fileID: 1771575999197046, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   canAttack: 1
   health: 0
   player: {fileID: 0}
@@ -333,6 +336,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RoomSize: 0
+--- !u!114 &114339855288727316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1380226150802872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cd0ed075a72ba459ee7850824f134a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!114 &114428999078780778
 MonoBehaviour:
   m_ObjectHideFlags: 1
