@@ -316,12 +316,14 @@ MonoBehaviour:
   moveSpeed: 120
   chaseSpeed: 150
   playerGO: {fileID: 1771575999197046, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
+  canAttack: 1
+  health: 0
   player: {fileID: 0}
+  playerCheck: {fileID: 0}
   deathSound: {fileID: 8300000, guid: b3e74d8e20b45ad4fb8d0a1ed151e61a, type: 3}
   healthBar: {fileID: 1341091858352456}
   animator: {fileID: 0}
   meleeAttack: {fileID: 58832408908249894}
-  deathAnimation: {fileID: 0}
 --- !u!114 &114219180725047908
 MonoBehaviour:
   m_ObjectHideFlags: 1

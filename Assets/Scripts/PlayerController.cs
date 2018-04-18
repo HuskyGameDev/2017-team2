@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour {
     public Text healthText;
 
     public float speed;
+	public bool freeze;
 
     // Projectiles
     public GameObject bulletPrefab;
@@ -124,6 +125,8 @@ public class PlayerController : MonoBehaviour {
 	//Animation script
 	private AnimationSetter anim;
 
+	private bool canAttack = true;
+
     // Use this for initialization
     void Start() {
         if (DataBetweenScenes.isEndless) {
@@ -140,6 +143,7 @@ public class PlayerController : MonoBehaviour {
         key.SetActive(false);
         points = 0;
         health = 100;
+		freeze = false;
         controllers = Input.GetJoystickNames();
 		anim = GetComponent<AnimationSetter> ();
 //      pointsText.text = points.ToString() ;
@@ -350,8 +354,9 @@ public class PlayerController : MonoBehaviour {
     // This method is called when the player's HP is reduced to 0
     void GameOver() {
         DataBetweenScenes.points = points;
+		freeze = true;
+		speed = 0.0f;
 		anim.SendMessage ("Die");
-        SceneManager.LoadScene(2);
     }
     void Hit(int dmg) {
         GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
@@ -359,4 +364,8 @@ public class PlayerController : MonoBehaviour {
         health -= dmg;
 		anim.SendMessage ("Damage");
     }
+
+	void Done() {
+		SceneManager.LoadScene (2);
+	}
 }

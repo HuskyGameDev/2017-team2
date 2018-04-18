@@ -582,6 +582,7 @@ MonoBehaviour:
   canAttack: 1
   health: 0
   player: {fileID: 0}
+  playerCheck: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
   healthBar: {fileID: 1898905653390718}
   animator: {fileID: 0}

@@ -26,40 +26,13 @@ public class AddToCount : PlayerController {
 
     void UpdateProgress()
     {
-        // Player defeated a small enemy
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            score += 100;
-        }
-
-        // Player defeated a medium enemy
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            score += 250;
-        }
-
-        // Player defeated a large enemy
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            score += 500;
-        }
-
-        // Player cleared a floor
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            floor += 1;
-            score += 1000;
-            SetFloorText();
-        }
-
         // Update text displayed to show player's progress
         SetScoreText();
+        SetFloorText();
     }
 
     void SetScoreText()
-    {
-        //scoreText.text = "Score: " + score.ToString();
-        
+    {        
         if (health <= 0)
         {
             scoreText.text = "Your final score was " + score.ToString();
@@ -68,14 +41,10 @@ public class AddToCount : PlayerController {
         {
             scoreText.text = "Score: " + score.ToString();
         }
-        
-        
     }
 
     void SetFloorText()
     {
-        //floorText.text = "Floor: " + floor.ToString();
-        
         if (health <= 0)
         {
             floorText.text = "You completed " + floor.ToString() + " floor(s)"; 
@@ -84,7 +53,5 @@ public class AddToCount : PlayerController {
         {
             floorText.text = "Floor: " + floor.ToString();
         }
-        
-        
     }
 }
