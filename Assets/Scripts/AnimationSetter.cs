@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /*
  * Codey Walker
@@ -15,10 +16,11 @@ public class AnimationSetter : MonoBehaviour
     private int cd = 0;
     private int idleTime = 0;
     private bool idle = true;
+	public Animation deathAnim;
 
     void Start()
     {
-
+		deathAnim = GetComponent<Animation> ();
     }
 
     // Update is called once per frame
@@ -27,9 +29,8 @@ public class AnimationSetter : MonoBehaviour
         /* Shooting */
         if (Input.GetKey(KeyCode.Mouse0) || (Input.GetAxis("primaryAtk") > 0) && cd == 0)
         {
-            
-            anim.SetTrigger("UShoot");
-            idleTime = 0;
+			anim.SetTrigger ("UShoot");
+			idleTime = 0;
         }
 
         else
@@ -88,6 +89,7 @@ public class AnimationSetter : MonoBehaviour
 
 	public void Damage() {
 		anim.SetTrigger ("UDamage");
+		idleTime = 0;
 	}
 
 	public void Die() {

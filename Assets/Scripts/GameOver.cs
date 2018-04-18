@@ -8,7 +8,8 @@ public class GameOver : MonoBehaviour {
     public GameObject loseScreen;
 
 	void Start () {
-		if (DataBetweenScenes.completedGame) {
+        Cursor.visible = true;
+        if (DataBetweenScenes.completedGame) {
             loseScreen.SetActive(false);
             winScreen.SetActive(true);
         }

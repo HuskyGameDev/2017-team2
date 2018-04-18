@@ -5,7 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
 	protected float speedMax;
-	public float speed = 2f;
+	public float moveSpeed;
+    public float chaseSpeed;
+
+    public GameObject playerGO;
 	public bool canAttack = true;
 
 	protected float xMax;
@@ -25,15 +28,18 @@ public class Enemy : MonoBehaviour {
 	protected CircleCollider2D circleCollider;
 	public GameObject player;
 	protected Transform player_pos;
+	public GameObject playerCheck;
 
     protected AudioSource audioSource;
-    public AudioClip deathSound;
+    public GameObject gameManager;
 
     private int attention = 0;
     public const int DEFAULT_HEALTH = 50; 
   	public GameObject healthBar;
 
 	public Animator animator;
+
+	protected bool freeze = false;
 
     // Use this for initialization
     protected virtual void Start () {
@@ -50,7 +56,7 @@ public class Enemy : MonoBehaviour {
 		xMin = transform.position.x - 10;
 		yMax = transform.position.y + 10;
 		yMin = transform.position.y - 10;
-		speedMax = speed / 30f;
+		speedMax = moveSpeed / 30f;
 
 		x = Random.Range(-speedMax, speedMax);
 		y = Random.Range(-speedMax, speedMax);
@@ -59,7 +65,7 @@ public class Enemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (health > 0) {
+		if (health > 0 && !freeze) {
 			if (attention == 0)
 				MoveAtRandom ();
 			else {
@@ -69,6 +75,12 @@ public class Enemy : MonoBehaviour {
 			}
 			if (attention > 0)
 				attention--;
+		}
+
+		freeze = player.GetComponent<PlayerController> ().freeze;
+
+		if (freeze) {
+			animator.enabled = false;
 		}
 	}
 
@@ -107,11 +119,13 @@ public class Enemy : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other) {
 
-		if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
+		if (!freeze) {
+			if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
 
 				player = other.gameObject;
 				player_pos = player.GetComponent<Transform> ();
 				attention = 200;
+			}
 		}
 	}
     //for call by other
@@ -124,7 +138,7 @@ public class Enemy : MonoBehaviour {
     bool hasLOS(Collider2D other) {
 		bool canSee = false;
 
-		if (health > 0) {
+		if (health > 0 && !freeze) {
 			canSee = true;
 		}
 
@@ -133,10 +147,10 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void Chase() {
 
-			transform.position = Vector2.MoveTowards (transform.position, player_pos.position, speed * Time.deltaTime);
+		transform.position = Vector2.MoveTowards(transform.position, player_pos.position, moveSpeed * Time.deltaTime);
 
-			angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
-			transform.rotation = Quaternion.Euler (0, 0, angle);
+		angle = Mathf.Atan2 (player_pos.position.y - transform.position.y, player_pos.position.x - transform.position.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.Euler (0, 0, angle);
 	}
 
 	void Hit(int dmg)
@@ -153,7 +167,7 @@ public class Enemy : MonoBehaviour {
 
 	//Should be overridden by each enemy that inherits to handle awarding of points
 	public virtual void Die() {
-		Destroy(gameObject);
-		//audioSource.PlayOneShot(deathSound);
+        Destroy(gameObject);
 	}
+		
   }
