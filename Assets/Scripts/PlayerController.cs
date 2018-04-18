@@ -124,6 +124,8 @@ public class PlayerController : MonoBehaviour {
 	//Animation script
 	private AnimationSetter anim;
 
+	private bool canAttack = true;
+
     // Use this for initialization
     void Start() {
         if (DataBetweenScenes.isEndless) {

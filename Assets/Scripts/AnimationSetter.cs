@@ -29,9 +29,8 @@ public class AnimationSetter : MonoBehaviour
         /* Shooting */
         if (Input.GetKey(KeyCode.Mouse0) || (Input.GetAxis("primaryAtk") > 0) && cd == 0)
         {
-            
-            anim.SetTrigger("UShoot");
-            idleTime = 0;
+			anim.SetTrigger ("UShoot");
+			idleTime = 0;
         }
 
         else
@@ -90,6 +89,7 @@ public class AnimationSetter : MonoBehaviour
 
 	public void Damage() {
 		anim.SetTrigger ("UDamage");
+		idleTime = 0;
 	}
 
 	public void Die() {
