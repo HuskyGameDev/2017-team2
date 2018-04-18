@@ -148,6 +148,7 @@ MonoBehaviour:
   floor: 0
   healthText: {fileID: 1836871707}
   speed: 0
+  freeze: 0
   bulletPrefab: {fileID: 0}
   meleeAttack: {fileID: 0}
   bulletSpawn: {fileID: 0}
@@ -528,9 +529,29 @@ Prefab:
       propertyPath: pointsText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114808828962847294, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 708122335}
+    - target: {fileID: 114416319438952282, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: dmg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114416319438952282, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: shooter
+      value: 
+      objectReference: {fileID: 1494077015}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &708122335 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95428654227190316, guid: be241fb72e093974fae97d7a0e3c06e4,
+    type: 2}
+  m_PrefabInternal: {fileID: 708122334}
 --- !u!1 &804940624
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +807,7 @@ RectTransform:
   m_LocalScale: {x: 0.9999879, y: 0.9999879, z: 0.9999879}
   m_Children: []
   m_Father: {fileID: 1879883563}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1153,6 +1174,20 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 708122334}
   m_Script: {fileID: 11500000, guid: bf791434b83922a478e4df216d42d98b, type: 3}
+--- !u!111 &1494077018
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1494077015}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d70b9bcf92725b541a768f020f08697c, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1586996932
 Prefab:
   m_ObjectHideFlags: 0
@@ -1730,7 +1765,9 @@ RectTransform:
   - {fileID: 1646869701}
   - {fileID: 1453818383}
   - {fileID: 1002964837}
+  - {fileID: 1105630159}
   - {fileID: 1901469767}
+  - {fileID: 1128685997}
   m_Father: {fileID: 1935052880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1835,7 +1872,7 @@ RectTransform:
   m_LocalScale: {x: 0.9999879, y: 0.9999879, z: 0.9999879}
   m_Children: []
   m_Father: {fileID: 1879883563}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2447,4 +2484,4 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-m_GameObject: {fileID: 2130633812}
+  m_GameObject: {fileID: 2130633812}

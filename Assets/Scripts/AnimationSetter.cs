@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 /*
  * Codey Walker
@@ -15,10 +16,11 @@ public class AnimationSetter : MonoBehaviour
     private int cd = 0;
     private int idleTime = 0;
     private bool idle = true;
+	public Animation deathAnim;
 
     void Start()
     {
-
+		deathAnim = GetComponent<Animation> ();
     }
 
     // Update is called once per frame
