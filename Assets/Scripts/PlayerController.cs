@@ -237,6 +237,8 @@ public class PlayerController : MonoBehaviour {
         //Change position of player
         rb2d.position += speed * movement * Time.fixedDeltaTime;
 
+        pointsText.text = points.ToString();
+
         UpdateHP();
 
         /* Call methods to handle shooting and slashing */
