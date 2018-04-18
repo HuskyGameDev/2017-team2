@@ -18,7 +18,7 @@ public class Enemy1 : Enemy {
 		rb2d = GetComponent<Rigidbody2D> ();
 		circleCollider = GetComponent<CircleCollider2D> ();
 
-//		animator = GetComponent<Animator> ();
+		animator = GetComponent<Animator> ();
 
 		health = 480;
 
@@ -80,6 +80,7 @@ public class Enemy1 : Enemy {
 
 	private void slash()
 	{
+		animator.SetTrigger ("BigGunsSmash");
 		float dist = Vector3.Distance (player_pos.position, transform.position);
 
 		if (dist < 2 && !attacking)
@@ -106,6 +107,7 @@ public class Enemy1 : Enemy {
 	}
     
     public override void Die() {
+//		print ("So many regrets...");
 		animator.SetTrigger ("BigGunsDeath");
 		speed = 0.0f;
 		speedMax = 0.0f;
