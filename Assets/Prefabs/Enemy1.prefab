@@ -545,7 +545,7 @@ Animator:
   m_GameObject: {fileID: 1587803288785038}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 422c9a5d1694f704b82522429ceff6f0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b721fd4271958e45832b1817745111d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -578,7 +578,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   canAttack: 1
+  health: 0
   player: {fileID: 0}
+  playerCheck: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
   healthBar: {fileID: 1898905653390718}
   animator: {fileID: 0}

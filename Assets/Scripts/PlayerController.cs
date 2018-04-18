@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour {
     public Text healthText;
 
     public float speed;
+	public bool freeze;
 
     // Projectiles
     public GameObject bulletPrefab;
@@ -120,6 +121,11 @@ public class PlayerController : MonoBehaviour {
 
     public Text pointsText;
 
+	//Animation script
+	private AnimationSetter anim;
+
+	private bool canAttack = true;
+
     // Use this for initialization
     void Start() {
         if (DataBetweenScenes.isEndless) {
@@ -136,12 +142,13 @@ public class PlayerController : MonoBehaviour {
         key.SetActive(false);
         points = 0;
         health = 100;
+		freeze = false;
         controllers = Input.GetJoystickNames();
-        pointsText.text = points.ToString() ;
+		anim = GetComponent<AnimationSetter> ();
+//      pointsText.text = points.ToString() ;
         
-
-        //Get and store a reference to the Rigidbody2D component so that we can access it.
-        rb2d = GetComponent<Rigidbody2D>();
+		//Get and store a reference to the Rigidbody2D component so that we can access it.
+		rb2d = GetComponent<Rigidbody2D>();
         Player = GetComponent<Transform>();
         audioSource = GetComponent<AudioSource>();
 
@@ -165,7 +172,6 @@ public class PlayerController : MonoBehaviour {
 
     //Called every frame
     void Update() {
-        pointsText.text = points.ToString();
         // Check for controller in update by counting the number of frames
         checkControl++;
 
@@ -312,41 +318,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHP() {
-        /*
-        // For testing purposes, the player's health can be controlled using keys to simulate being healed and damaged by each of the three enemy types
-        // Player is hit by a small enemy
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            health -= 5;
-        }
-
-        // Player is hit by medium-sized enemy or its bullet 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            health -= 10;
-        }
-
-        // Player is hit by large enemy or its beam
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            health -= 25;
-        }
-
-        // Player steps on/near a healing tile
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            if (100 - health <= 50)
-            {
-                health = 100;
-            }
-            // else clause makes sure player can't have more than 100 HP
-            else
-            {
-                health += 50;
-            }
-            
-        }*/
-
         SetHealthText();
 
         // check for death
@@ -378,9 +349,16 @@ public class PlayerController : MonoBehaviour {
     // This method is called when the player's HP is reduced to 0
     void GameOver() {
         DataBetweenScenes.points = points;
-        SceneManager.LoadScene(2);
+		freeze = true;
+		speed = 0.0f;
+		anim.SendMessage ("Die");
     }
     void Hit(int dmg) {
         health -= dmg;
+		anim.SendMessage ("Damage");
     }
+
+	void Done() {
+		SceneManager.LoadScene (2);
+	}
 }

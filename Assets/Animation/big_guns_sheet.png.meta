@@ -1,9 +1,45 @@
 fileFormatVersion: 2
-guid: 83aed12eda4ffdd44a04b90a8a39f3f6
-timeCreated: 1523917143
+guid: 9da741e681ea7d248a92ef6091d16d9a
+timeCreated: 1523749412
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: big_guns_sheet_0
+    21300002: big_guns_sheet_1
+    21300004: big_guns_sheet_2
+    21300006: big_guns_sheet_3
+    21300008: big_guns_sheet_4
+    21300010: big_guns_sheet_5
+    21300012: big_guns_sheet_6
+    21300014: big_guns_sheet_7
+    21300016: big_guns_sheet_8
+    21300018: big_guns_sheet_9
+    21300020: big_guns_sheet_10
+    21300022: big_guns_sheet_11
+    21300024: big_guns_sheet_12
+    21300026: big_guns_sheet_13
+    21300028: big_guns_sheet_14
+    21300030: big_guns_sheet_15
+    21300032: big_guns_sheet_16
+    21300034: big_guns_sheet_17
+    21300036: big_guns_sheet_18
+    21300038: big_guns_sheet_19
+    21300040: big_guns_sheet_20
+    21300042: big_guns_sheet_21
+    21300044: big_guns_sheet_22
+    21300046: big_guns_sheet_23
+    21300048: big_guns_sheet_24
+    21300050: big_guns_sheet_25
+    21300052: big_guns_sheet_26
+    21300054: big_guns_sheet_27
+    21300056: big_guns_sheet_28
+    21300058: big_guns_sheet_29
+    21300060: big_guns_sheet_30
+    21300062: big_guns_sheet_31
+    21300064: big_guns_sheet_32
+    21300066: big_guns_sheet_33
+    21300068: big_guns_sheet_34
+    21300070: big_guns_sheet_35
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -39,13 +75,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 75
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -63,9 +99,521 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: big_guns_sheet_0
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 4109
+        width: 1158
+        height: 622
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 4009
+        width: 1170
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2452
+        y: 3935
+        width: 1145
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3697
+        y: 3922
+        width: 1057
+        height: 784
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_4
+      rect:
+        serializedVersion: 2
+        x: 4854
+        y: 3922
+        width: 1083
+        height: 784
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_5
+      rect:
+        serializedVersion: 2
+        x: 6049
+        y: 3922
+        width: 1120
+        height: 797
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_6
+      rect:
+        serializedVersion: 2
+        x: 7256
+        y: 3885
+        width: 1083
+        height: 871
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_7
+      rect:
+        serializedVersion: 2
+        x: 8414
+        y: 4034
+        width: 1145
+        height: 722
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_8
+      rect:
+        serializedVersion: 2
+        x: 9646
+        y: 4071
+        width: 1170
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_9
+      rect:
+        serializedVersion: 2
+        x: 10853
+        y: 4009
+        width: 1133
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_10
+      rect:
+        serializedVersion: 2
+        x: 12073
+        y: 3922
+        width: 1070
+        height: 822
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_11
+      rect:
+        serializedVersion: 2
+        x: 13236
+        y: 3959
+        width: 1120
+        height: 797
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_12
+      rect:
+        serializedVersion: 2
+        x: 14431
+        y: 3910
+        width: 1108
+        height: 834
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_13
+      rect:
+        serializedVersion: 2
+        x: 15626
+        y: 3872
+        width: 1108
+        height: 884
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_14
+      rect:
+        serializedVersion: 2
+        x: 16821
+        y: 3872
+        width: 1132
+        height: 859
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_15
+      rect:
+        serializedVersion: 2
+        x: 18041
+        y: 4009
+        width: 1132
+        height: 747
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_16
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 2877
+        width: 1157
+        height: 659
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_17
+      rect:
+        serializedVersion: 2
+        x: 1256
+        y: 2665
+        width: 1070
+        height: 896
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_18
+      rect:
+        serializedVersion: 2
+        x: 2426
+        y: 2690
+        width: 1157
+        height: 908
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_19
+      rect:
+        serializedVersion: 2
+        x: 3670
+        y: 2765
+        width: 1021
+        height: 821
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_20
+      rect:
+        serializedVersion: 2
+        x: 4877
+        y: 2615
+        width: 984
+        height: 996
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_21
+      rect:
+        serializedVersion: 2
+        x: 6023
+        y: 2403
+        width: 1070
+        height: 1108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_22
+      rect:
+        serializedVersion: 2
+        x: 7317
+        y: 2404
+        width: 996
+        height: 933
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_23
+      rect:
+        serializedVersion: 2
+        x: 8474
+        y: 2466
+        width: 1046
+        height: 921
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_24
+      rect:
+        serializedVersion: 2
+        x: 9644
+        y: 2391
+        width: 1009
+        height: 996
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_25
+      rect:
+        serializedVersion: 2
+        x: 10830
+        y: 2428
+        width: 1120
+        height: 971
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_26
+      rect:
+        serializedVersion: 2
+        x: 12025
+        y: 2864
+        width: 1195
+        height: 660
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_27
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 1458
+        width: 1096
+        height: 908
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 1557
+        width: 1107
+        height: 772
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_29
+      rect:
+        serializedVersion: 2
+        x: 2488
+        y: 1383
+        width: 1120
+        height: 996
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_30
+      rect:
+        serializedVersion: 2
+        x: 3620
+        y: 1184
+        width: 1195
+        height: 1232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_31
+      rect:
+        serializedVersion: 2
+        x: 4828
+        y: 1196
+        width: 1207
+        height: 1208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_32
+      rect:
+        serializedVersion: 2
+        x: 6024
+        y: 1196
+        width: 1170
+        height: 1170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_33
+      rect:
+        serializedVersion: 2
+        x: 7268
+        y: 1221
+        width: 1145
+        height: 1158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_34
+      rect:
+        serializedVersion: 2
+        x: 8500
+        y: 1171
+        width: 1121
+        height: 1195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: big_guns_sheet_35
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 39
+        width: 1146
+        height: 1132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
