@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour {
     public const int DEFAULT_HEALTH = 50; 
   	public GameObject healthBar;
 
+    private bool lostSight = true;
+
 	public Animator animator;
 
 	protected bool freeze = false;
@@ -66,7 +68,7 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 
 		if (health > 0 && !freeze) {
-			if (attention == 0)
+			if (attention == 0 && lostSight)
 				MoveAtRandom ();
 			else {
 				if (canAttack) {
@@ -122,12 +124,21 @@ public class Enemy : MonoBehaviour {
 		if (!freeze) {
 			if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
 
-				player = other.gameObject;
+                lostSight = false;
+                player = other.gameObject;
 				player_pos = player.GetComponent<Transform> ();
 				attention = 200;
 			}
 		}
 	}
+
+    void OnTriggerExit2D(Collider2D collision) {
+        if (!freeze) {
+            if (collision.gameObject.CompareTag("Player")) {
+                lostSight = true;
+            }
+        }
+    }
     //for call by other
     public void setHealth(int i) {
         health = i;
