@@ -28,6 +28,8 @@ public class ScrollingCredits : MonoBehaviour {
         {
             thanks.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 100);
             msg1.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 100);
+
+            menuButton.gameObject.SetActive(true);
         }
         
         if (Time.time - start >= 6)
@@ -43,11 +45,6 @@ public class ScrollingCredits : MonoBehaviour {
         if (Time.time - start >= 12.5)
         {
             msg4.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 100);
-        }
-
-        if (Time.time - start >= 25)
-        {
-            menuButton.gameObject.SetActive(true);
         }
     }
 }
