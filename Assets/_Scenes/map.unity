@@ -528,7 +528,7 @@ Prefab:
     - target: {fileID: 58941655681328982, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
       propertyPath: m_Radius
-      value: 0.65
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114534501254361720, guid: be241fb72e093974fae97d7a0e3c06e4,
         type: 2}
@@ -662,6 +662,16 @@ Prefab:
     - target: {fileID: 4096611928419294, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 58941655681328982, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 58941655681328982, guid: be241fb72e093974fae97d7a0e3c06e4,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be241fb72e093974fae97d7a0e3c06e4, type: 2}
@@ -1774,9 +1784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10711b5ed1615604393d604df9e916e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadingObject: {fileID: 0}
-  black: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!114 &1865747862
 MonoBehaviour:
   m_ObjectHideFlags: 0
