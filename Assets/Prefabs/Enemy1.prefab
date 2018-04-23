@@ -583,10 +583,11 @@ MonoBehaviour:
   health: 0
   player: {fileID: 0}
   playerCheck: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
+  gameManager: {fileID: 0}
   healthBar: {fileID: 1898905653390718}
   animator: {fileID: 0}
   meleeAttack: {fileID: 58216117876100090}
+  deathSound: {fileID: 8300000, guid: 3d9ea33b3cdbf0541b7478ee0661fc88, type: 3}
 --- !u!114 &114639944651411312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -598,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419e42217b4471f45872e25760059a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 15
+  dmg: 30
   slasher: {fileID: 1587803288785038}
   hitSound: {fileID: 0}
   missSound: {fileID: 0}
