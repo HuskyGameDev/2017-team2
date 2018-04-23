@@ -146,7 +146,6 @@ public class PlayerController : MonoBehaviour {
 		freeze = false;
         controllers = Input.GetJoystickNames();
 		anim = GetComponent<AnimationSetter> ();
-//      pointsText.text = points.ToString() ;
         
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
 		rb2d = GetComponent<Rigidbody2D>();
@@ -175,6 +174,8 @@ public class PlayerController : MonoBehaviour {
     void Update() {
         // Check for controller in update by counting the number of frames
         checkControl++;
+
+		pointsText.text = points.ToString();
 
         if (checkControl >= 180) {
             // update the Joystick Names array
@@ -236,6 +237,8 @@ public class PlayerController : MonoBehaviour {
 
         //Change position of player
         rb2d.position += speed * movement * Time.fixedDeltaTime;
+
+        pointsText.text = points.ToString();
 
         UpdateHP();
 

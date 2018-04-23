@@ -389,7 +389,7 @@ public class BuildRoom : MonoBehaviour {
     * Place the key in the room
     */
     private void LayoutKey(BuildFloor.Room room) {
-        float rotDegrees = Random.Range(0, 3) * 90f;
+        float rotDegrees = 0;
         Quaternion rotation = Quaternion.AngleAxis(rotDegrees, Vector3.back);
         int randomIndex = RandomPosition();
         Vector3 randomPos = gridPositions[randomIndex];
