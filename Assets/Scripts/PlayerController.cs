@@ -359,6 +359,7 @@ public class PlayerController : MonoBehaviour {
         DataBetweenScenes.points = points;
 		freeze = true;
 		speed = 0.0f;
+		Player.position = new Vector3 (-500, -500, 0);
 		anim.SendMessage ("Die");
     }
     void Hit(int dmg) {
