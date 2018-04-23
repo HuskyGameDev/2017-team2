@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DataBetweenScenes {
+    public static bool gamePad = false;
     public static int numFloors = 20;
     public static bool isEndless = false;
     public static bool completedGame = false;
