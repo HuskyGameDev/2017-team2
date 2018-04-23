@@ -32,10 +32,12 @@ public class LeaderBoard : MonoBehaviour {
     int newFloor;
 
     // location of leaderboard text file
-    string path = "Assets/leaderboard.txt";
+    string path;
 
 	// Use this for initialization
 	void Start () {
+
+        path = Application.dataPath + "/StreamingAssets/leaderboard.txt";
 
         newName = GetText.entryName;
         newScore = DataBetweenScenes.points;
