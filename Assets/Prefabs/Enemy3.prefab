@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419e42217b4471f45872e25760059a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 5
+  dmg: 2
   slasher: {fileID: 1380226150802872}
   hitSound: {fileID: 8300000, guid: d2c8f109c94b927469182a556ac11e55, type: 3}
   missSound: {fileID: 0}

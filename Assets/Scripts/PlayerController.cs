@@ -60,9 +60,6 @@ public class PlayerController : MonoBehaviour {
     //Store Key UI element
     public GameObject key;
 
-    // boolean to determine if there is currently a controller
-    private bool gamePad;
-
     // float to determine when to check if there is a controller connected or not
     private int checkControl = 180;
 
@@ -182,11 +179,10 @@ public class PlayerController : MonoBehaviour {
             controllers = Input.GetJoystickNames();
             if (controllers.Length > 0) {
                 if (!string.IsNullOrEmpty(controllers[0])) {
-                    gamePad = true;
-                    Cursor.visible = false;
+                    DataBetweenScenes.gamePad = true;
+                    
                 } else {
-                    gamePad = false;
-                    Cursor.visible = true;
+                    DataBetweenScenes.gamePad = false;
                 }
             }
 
@@ -194,7 +190,9 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        if (gamePad == true) {
+        if (DataBetweenScenes.gamePad == true) {
+            Cursor.visible = false;
+
             rStick.x = Input.GetAxis("rStickX");
             rStick.y = Input.GetAxis("rStickY");
 
@@ -207,6 +205,8 @@ public class PlayerController : MonoBehaviour {
             }
 
         } else {
+            Cursor.visible = true;
+
             //Enter mouse mosition
             mouse_pos = Input.mousePosition;
             mouse_pos.z = -10;
@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour {
 
     // Method used to handle shooting projectiles
     private void Shoot() {
-        if (gamePad) {
+        if (DataBetweenScenes.gamePad) {
             if (Input.GetAxis("primaryAtk") == 1) {
                 if (ableToShoot == 0 && !attacking) {
 
@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Slash() {
-        if (gamePad) {
+        if (DataBetweenScenes.gamePad) {
             if (Input.GetAxis("secondaryAtk") == 1 && !attacking) {
                 attacking = true;
                 meleeAttack.enabled = true;
