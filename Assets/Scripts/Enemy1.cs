@@ -13,7 +13,7 @@ public class Enemy1 : Enemy {
 
     private AudioSource newAudioSource;
     public AudioClip deathSound;
-
+    private bool animationDone = true;
     private Vector2 movement2;
     private float rot = 0;
 
@@ -74,9 +74,17 @@ public class Enemy1 : Enemy {
 
         GetComponent<Rigidbody2D>().AddForce(force);
 
-        slash ();
+        if (animationDone) {
+            animationDone = false;
+            StartCoroutine(attack());
+        }
 	}
-
+    private IEnumerator attack() {
+        yield return new WaitForSeconds(1.5f);
+        if ((player_pos.position - transform.position).magnitude < 2)
+           slash();
+        animationDone = true;
+    }
 	private void slash() {
 		animator.SetTrigger ("BigGunsSmash");
 		float dist = Vector3.Distance (player_pos.position, transform.position);

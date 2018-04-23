@@ -125,7 +125,6 @@ public class Enemy : MonoBehaviour {
 			if (other.gameObject.CompareTag ("Player") && hasLOS (other)) {
 
                 lostSight = false;
-                player = other.gameObject;
 				player_pos = player.GetComponent<Transform> ();
 				attention = 200;
 			}
@@ -167,6 +166,7 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
+        player_pos = player.GetComponent<Transform>();
         attention = 200;
 		if (health <= 0) {
 			canAttack = false;
