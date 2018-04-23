@@ -685,6 +685,8 @@ public class BuildRoom : MonoBehaviour {
         else if (type == enemyType.MEDIUM)
             choice = mediumEnemy;
         GameObject go = Instantiate(choice, actualPos, Quaternion.identity);
+        go.GetComponent<Enemy>().player = player;
+        go.GetComponent<Enemy>().player_pos = player.transform;
         if (type == enemyType.LARGE)
             go.GetComponent<Enemy>().setHealth(Enemy1.DEFAULT_HEALTH);
         if (type == enemyType.MEDIUM)

@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour {
 	protected Rigidbody2D rb2d;
 	protected CircleCollider2D circleCollider;
 	public GameObject player;
-	protected Transform player_pos;
+	public Transform player_pos;
 	public GameObject playerCheck;
 
     protected AudioSource audioSource;
@@ -167,6 +167,7 @@ public class Enemy : MonoBehaviour {
 	void Hit(int dmg)
 	{
 		health -= dmg;
+        attention = 200;
 		if (health <= 0) {
 			canAttack = false;
 			Die ();
