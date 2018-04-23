@@ -756,13 +756,16 @@ MonoBehaviour:
   floor: 0
   healthText: {fileID: 0}
   speed: 0
+  freeze: 0
   bulletPrefab: {fileID: 0}
   meleeAttack: {fileID: 0}
   bulletSpawn: {fileID: 0}
   bulletSound: {fileID: 0}
   slashSound: {fileID: 0}
+  damageSound: {fileID: 0}
   hasKey: 0
   points: 0
+  pointsText: {fileID: 0}
   scoreText: {fileID: 847558611}
   floorText: {fileID: 1076784187}
 --- !u!1 &1076784185
