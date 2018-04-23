@@ -104,8 +104,11 @@ public class Enemy3 : Enemy {
 		healthBar.SetActive (false);
 		Destroy (rb2d);
 		Destroy (circleCollider);
-		Destroy (gameObject.GetComponent<CircleCollider2D> ());
-		gameObject.tag = null;
+        foreach (CircleCollider2D col in gameObject.GetComponents<CircleCollider2D>()) {
+            Destroy(col);
+        }
+        meleeAttack.enabled = false;
+		gameObject.tag = "Untagged";
         player.GetComponent<PlayerController>().points += 2;
     }
 }

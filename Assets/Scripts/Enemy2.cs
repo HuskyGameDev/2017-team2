@@ -113,7 +113,7 @@ public class Enemy2 : Enemy {
 		Destroy (rb2d);
 		Destroy (circleCollider);
 		Destroy (gameObject.GetComponent<PolygonCollider2D> ());
-		gameObject.tag = null;
+		gameObject.tag = "Untagged";
 		player.GetComponent<PlayerController>().points += 5;
     }
 }
