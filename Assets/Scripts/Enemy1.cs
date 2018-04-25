@@ -74,10 +74,11 @@ public class Enemy1 : Enemy {
 
         GetComponent<Rigidbody2D>().AddForce(force);
 
-        if (animationDone) {
-            animationDone = false;
-            StartCoroutine(attack());
-        }
+        slash();
+      //  if (animationDone) { //Something with all of this stuff needs to be done
+        //    animationDone = false;
+       //     StartCoroutine(attack());
+      //  }
 	}
     private IEnumerator attack() {
         yield return new WaitForSeconds(1.5f);
@@ -88,7 +89,8 @@ public class Enemy1 : Enemy {
 	private void slash() {
 		animator.SetTrigger ("BigGunsSmash");
 		float dist = Vector3.Distance (player_pos.position, transform.position);
-
+        wait = 100;
+        attacking = true;
 		if (dist < 2 && !attacking)
 		{
 			attacking = true;
