@@ -74,46 +74,52 @@ public class Enemy1 : Enemy {
 
         GetComponent<Rigidbody2D>().AddForce(force);
 
-        slash();
-      //  if (animationDone) { //Something with all of this stuff needs to be done
-        //    animationDone = false;
-       //     StartCoroutine(attack());
-      //  }
-	}
-    private IEnumerator attack() {
-        yield return new WaitForSeconds(1.5f);
         if ((player_pos.position - transform.position).magnitude < 2)
-           slash();
-        animationDone = true;
-    }
-	private void slash() {
-		animator.SetTrigger ("BigGunsSmash");
-		float dist = Vector3.Distance (player_pos.position, transform.position);
-        wait = 100;
-        attacking = true;
-		if (dist < 2 && !attacking)
-		{
-			attacking = true;
-			meleeAttack.enabled = true;
-		}
-
-		if (attacking)
-		{
-
-			if (wait > 0)
-			{
-				wait--;
-			}
-
-			else
-			{
-				attacking = false;
-				meleeAttack.enabled = false;
-				wait = 100;
-			}
-		}
+            slash();
 	}
-    
+    //private IEnumerator attack() {
+     //   yield return new WaitForSeconds(.87f);
+      //  meleeAttack.enabled = true;
+       // meleeAttack.GetComponent<CircleCollider2D>().enabled = true;
+       // yield return new WaitForEndOfFrame();
+     // / / meleeAttack.enabled = false;
+      //  meleeAttack.GetComponent<CircleCollider2D>().enabled = false;
+       // yield return new WaitForSeconds(.83f);
+   // }
+	private void slash() {
+        animator.SetTrigger("BigGunsSmash");
+        //float dist = Vector3.Distance (player_pos.position, transform.position);
+        //StartCoroutine(attack());
+
+        //print(dist);
+       // attacking = true;
+		//if (dist < 2 && !attacking)
+		//{
+		//	attacking = true;
+		//	meleeAttack.enabled = true;
+		//}
+
+		//if (attacking)
+		//{
+
+		//	if (wait > 0)
+		//	{
+		//		wait--;
+	//		}
+
+		//	else
+		//	{
+		//		attacking = false;
+		//		meleeAttack.enabled = false;
+		//		wait = 100;
+		//	}
+		//}
+	}
+    public void dealDamage() {
+        if ((player_pos.position - transform.position).magnitude < 1.4) {
+            player.SendMessageUpwards("Hit", meleeAttack.GetComponent<meleeAttack>().dmg);
+        }
+    }
     public override void Die() {
         GameObject.Find("GameManager").GetComponent<AudioSource>().PlayOneShot(deathSound);
 //		print ("So many regrets...");
