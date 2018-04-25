@@ -86,10 +86,15 @@ public class Enemy2 : Enemy {
 		// Create a new bullet with the current mouse position
 		if (ableToShoot == 0) {
 
+            /*
+
 			GameObject ebullet = Instantiate (bulletPrefab, bulletSpawn.position, this.transform.rotation);
 			
 			newAudioSource.pitch = Random.Range(0.5f, 0.7f);
             newAudioSource.PlayOneShot(enemyBulletSound);
+
+
+    */
 
 			ableToShoot++;
 		}
@@ -100,6 +105,13 @@ public class Enemy2 : Enemy {
 		} else {
 			ableToShoot++;
 		}
+    }
+
+    public void ShootEvent() {
+        GameObject ebullet = Instantiate(bulletPrefab, bulletSpawn.position, this.transform.rotation);
+
+        newAudioSource.pitch = Random.Range(0.5f, 0.7f);
+        newAudioSource.PlayOneShot(enemyBulletSound);
     }
 
     public override void Die() {
