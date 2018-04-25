@@ -95,7 +95,7 @@ public class Enemy2 : Enemy {
 		}
 
 		// Used to limit the amount of bullets *Needs to update when animation implemented*
-		if (ableToShoot == 0 || ableToShoot == 100) {
+		if (ableToShoot == 0 || ableToShoot == 25) {
 			ableToShoot = 0;
 		} else {
 			ableToShoot++;
