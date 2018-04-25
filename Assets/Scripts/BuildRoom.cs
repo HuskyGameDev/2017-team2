@@ -624,19 +624,24 @@ public class BuildRoom : MonoBehaviour {
         smallEnemyCount /= 4;
 
         if (color == PURPLE) { //moderate increase in enemy number
+            mediumEnemyCount = mediumEnemyCount * 4 / 3;
+            smallEnemyCount = smallEnemyCount * 4 / 3;
+            largeEnemyCount = largeEnemyCount * 4 / 3;
+        }
+        if (color == RED) { //large increase in enemy number
             mediumEnemyCount = mediumEnemyCount * 5 / 3;
             smallEnemyCount = smallEnemyCount * 5 / 3;
             largeEnemyCount = largeEnemyCount * 5 / 3;
-        }
-        if (color == RED) { //large increase in enemy number
-            mediumEnemyCount = mediumEnemyCount * 7 / 3;
-            smallEnemyCount = smallEnemyCount * 7 / 3;
-            largeEnemyCount = largeEnemyCount * 7 / 3;
         }
         if (color == GREY) { //no enemies
             mediumEnemyCount = 0;
             smallEnemyCount = 0;
             largeEnemyCount = 0;
+        }
+        if (DataBetweenScenes.hardMode) {
+            mediumEnemyCount *= 2;
+            smallEnemyCount *= 2;
+            largeEnemyCount *= 2;
         }
     }
 

@@ -582,6 +582,7 @@ MonoBehaviour:
   canAttack: 1
   health: 0
   player: {fileID: 0}
+  player_pos: {fileID: 0}
   playerCheck: {fileID: 0}
   gameManager: {fileID: 0}
   healthBar: {fileID: 1898905653390718}
@@ -599,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419e42217b4471f45872e25760059a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 30
+  dmg: 60
   slasher: {fileID: 1587803288785038}
   hitSound: {fileID: 0}
   missSound: {fileID: 0}

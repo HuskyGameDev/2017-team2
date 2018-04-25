@@ -148,6 +148,9 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.F4)) {
                 player.GetComponent<PlayerController>().speed  *= 4;
             }
+            if (Input.GetKeyDown(KeyCode.F3)) {
+                DataBetweenScenes.hardMode = true;
+            }
         }
         if (DataBetweenScenes.godMode)
             player.GetComponent<PlayerController>().health = 100;
