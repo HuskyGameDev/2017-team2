@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 50
-  chaseSpeed: 50
+  chaseSpeed: 100
   playerGO: {fileID: 0}
   canAttack: 1
   health: 0
