@@ -9,6 +9,7 @@ public class LoadSceneOnClick : MonoBehaviour
 
     //For loading back into the menus
     public void LoadMenu() {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
 

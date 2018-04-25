@@ -7,6 +7,7 @@ public class PauseOnButtonPress : MonoBehaviour
 
     public Transform canvas;
     public GameObject player;
+
     // Update is called once per frame
     void Update()
     {
