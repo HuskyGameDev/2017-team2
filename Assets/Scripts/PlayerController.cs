@@ -48,8 +48,6 @@ struct bulletStruct {
 }
 
 public class PlayerController : MonoBehaviour {
-    // string array used to see if there is currently a controller plugged in
-    private string[] controllers;
 
     public GameManager gameManager;
 
@@ -59,9 +57,6 @@ public class PlayerController : MonoBehaviour {
 
     //Store Key UI element
     public GameObject key;
-
-    // float to determine when to check if there is a controller connected or not
-    private int checkControl = 180;
 
     //Stores a reference to the Rigidbody2D component required to use 2D Physics.
     public Rigidbody2D rb2d;
@@ -141,7 +136,6 @@ public class PlayerController : MonoBehaviour {
         points = 0;
         health = 100;
 		freeze = false;
-        controllers = Input.GetJoystickNames();
 		anim = GetComponent<AnimationSetter> ();
         
 		//Get and store a reference to the Rigidbody2D component so that we can access it.
@@ -169,26 +163,8 @@ public class PlayerController : MonoBehaviour {
 
     //Called every frame
     void Update() {
-        // Check for controller in update by counting the number of frames
-        checkControl++;
 
 		pointsText.text = points.ToString();
-
-        if (checkControl >= 180) {
-            // update the Joystick Names array
-            controllers = Input.GetJoystickNames();
-            if (controllers.Length > 0) {
-                if (!string.IsNullOrEmpty(controllers[0])) {
-                    DataBetweenScenes.gamePad = true;
-                    
-                } else {
-                    DataBetweenScenes.gamePad = false;
-                }
-            }
-
-            checkControl = 0;
-        }
-
 
         if (DataBetweenScenes.gamePad == true) {
             Cursor.visible = false;

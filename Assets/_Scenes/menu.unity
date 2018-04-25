@@ -372,7 +372,6 @@ GameObject:
   - component: {fileID: 101087358}
   - component: {fileID: 101087361}
   - component: {fileID: 101087362}
-  - component: {fileID: 101087363}
   m_Layer: 5
   m_Name: mainMenuPanel
   m_TagString: Untagged
@@ -481,18 +480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 2145338793}
   selectedObject: {fileID: 1926329007}
---- !u!114 &101087363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 101087356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a475fcb37bd47b44a95c983bc03ba349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultButton: {fileID: 1926329007}
 --- !u!1 &165113303
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,6 +2662,8 @@ GameObject:
   - component: {fileID: 1657172221}
   - component: {fileID: 1657172220}
   - component: {fileID: 1657172224}
+  - component: {fileID: 1657172225}
+  - component: {fileID: 1657172226}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2780,6 +2769,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTexture: {fileID: 2800000, guid: 32847f11810443849aafbc9ec28faa3d, type: 3}
   fadeSpeed: 0.25
+--- !u!114 &1657172225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1657172219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df598bc4875291748872934da75f36db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1657172226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1657172219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a8259c65155a074993f9f1386d83999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1674792009
 GameObject:
   m_ObjectHideFlags: 0
